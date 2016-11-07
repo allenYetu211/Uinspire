@@ -7,6 +7,7 @@
         button{
         border:none;
         background-color:transparent;
+        cursor: pointer;
         &:focus{
           outline:none;
         }
@@ -58,7 +59,9 @@
     </div>
 
     <div class="navigation-fiv">
-      <div class="filter">FILTER</div>
+      <div class="filter">
+      <button>FILTER</button>
+      </div>
       <div class="phone">
         <button>iPhone</button>
         <button>iPad</button>
@@ -66,7 +69,7 @@
         <button>Web</button>
       </div>
       <div class="view">
-        VIEW
+        <button>VIEW</button>
       </div>
     </div>
 
