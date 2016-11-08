@@ -115,7 +115,7 @@ $color:#FFFF00;
           }
         }
         &-list{
-          background-color:rgba(255,255,255,.5);
+          background-color:rgba(255,255,255,.98);
           padding:15px;
           &-search{
             padding-bottom:20px;

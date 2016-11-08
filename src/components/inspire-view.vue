@@ -29,6 +29,7 @@ export default {
         {url: '../../static/Rectangle.jpg'},
         {url: '../../static/Rectangle.jpg'},
         {url: '../../static/Rectangle.jpg'},
+        {url: '../../static/Rectangle.jpg'},
         {url: '../../static/Rectangle.jpg'}
       ]
     }

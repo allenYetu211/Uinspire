@@ -1,12 +1,16 @@
 import {
   SIDE,
   LISTARRANGE,
-  LISTARRANGETWO
+  LISTARRANGETWO,
+  ADDLIKE,
+  LESSLIKE
 } from '../actions'
 
 const state = {
   side: false,
-  listArrange: false
+  listArrange: false,
+  like: 0,
+  linkinfor: false
 }
 const mutations = {
   [SIDE] (state) {
@@ -17,6 +21,14 @@ const mutations = {
   },
   [LISTARRANGETWO] (state) {
     state.listArrange = true
+  },
+  [ADDLIKE] (state) {
+    state.like++
+    if (state.like > 0) state.linkinfor = true
+  },
+  [LESSLIKE] (state) {
+    state.like--
+    if (state.like === 0) state.linkinfor = false
   }
 }
 
