@@ -1,13 +1,22 @@
 import {
-  SIDE
+  SIDE,
+  LISTARRANGE,
+  LISTARRANGETWO
 } from '../actions'
 
 const state = {
-  side: false
+  side: false,
+  listArrange: false
 }
 const mutations = {
   [SIDE] (state) {
     state.side = !state.side
+  },
+  [LISTARRANGE] (state) {
+    state.listArrange = false
+  },
+  [LISTARRANGETWO] (state) {
+    state.listArrange = true
   }
 }
 
