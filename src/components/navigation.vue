@@ -53,7 +53,6 @@
         <button>Sing up</button>
         /
         <button>Log in</button>
-        
       </div>
     </div>
 
