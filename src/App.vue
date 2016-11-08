@@ -6,7 +6,7 @@
         bottom: 0;
         left: 0;
         right:0;
-        z-index:8;
+        z-index:7;
         display:flex;
         justify-content: center;
         align-itmes:center;
