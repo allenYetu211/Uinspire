@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+$color:#FFFF00;
   .navigation{
     padding:0 15px;
     background-color:#EFEFEF;
@@ -91,27 +92,30 @@
     .side-columns{
       position:absolute;
       left: 0;
+      height: calc(100vh - 135px);
       top:calc(100% - 44px);
       z-index:8;
       width:25%;
       min-width:200px;
       transform:translate3d(-100%, 0, 0);
       transition:transform 0.5s;
+      /* Rectangle 7: */
+      opacity: 0.99;
       &.open{
            transform:translate3d(0, 0, 0);
-           box-shadow: 10px 1px 15px rgba(0,0,0,.6);
+           box-shadow: 0px -2px 14px 0px rgba(0,0,0,0.09);
       }
         &-header{
-          background-color:#D0D0D0;
+          background-color:$color;
           height:44px;
           button{
             padding:0 15px;
             float: right;
-            background-color:#BBBBBB;
+            background-color:$color;
           }
         }
         &-list{
-          background-color:rgba(255,255,255,.5);
+          background-color:rgba(255,255,255,.98);
           padding:15px;
           &-search{
             padding-bottom:20px;
@@ -205,7 +209,7 @@
       </div>
       <div class="view col-sm-4 hidden-xs">
          VIEW
-          <button>
+          <button @click="listArrange">
             <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
                 <title>Shape</title>
@@ -218,7 +222,7 @@
                 </g>
             </svg>
           </button>
-         <button>
+         <button @click="listArrangetwo">
             <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
               <title>Shape</title>
@@ -235,7 +239,7 @@
     </div>
     <div class="side-columns" :class="{open: sideopen}">
       <div class="side-columns-header clearfix">
-        <button>---</button>
+        <button @click="side">---</button>
       </div>
       <div class="side-columns-list">
           <div class="side-columns-list-search">
@@ -299,7 +303,9 @@ export default{
   },
   methods: {
     ...mapActions([
-      'side'
+      'side',
+      'listArrange',
+      'listArrangetwo'
     ])
   },
   data () {
