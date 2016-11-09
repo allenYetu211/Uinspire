@@ -1,11 +1,15 @@
 const filter = {
-  newdata: {},
-  addfilter (contrastles, data) {
-    this.newdata.push(this.addset(data))
-    console.log(this.newdata)
+  newdata: [],
+  addfilter (data) {
+    this.newdata.push({'conimg': this.addset(data)})
+    return this.newdata
   },
   lessfilter (contrastles, data) {
-    console.log(22)
+    for (let i in contrastles) {
+      if (contrastles[i] === data) {
+        contrastles[i].remove
+      }
+    }
   },
   addset (_d) {
     let adds = this.newdata['contras'] = _d

@@ -6,12 +6,3 @@ export const listArrange = ({commit}) => { commit(LISTARRANGE) }
 
 export const LISTARRANGETWO = 'listArrangetwo'
 export const listArrangetwo = ({commit}) => { commit(LISTARRANGETWO) }
-
-export const ADDLIKE = 'addlike'
-export const addlike = ({commit}) => { commit(ADDLIKE) }
-
-export const LESSLIKE = 'lesslike'
-export const lesslike = ({commit}) => { commit(LESSLIKE) }
-
-export const COMTRAST = 'comtrast'
-export const comtrast = ({commit}) => { commit(COMTRAST) }
