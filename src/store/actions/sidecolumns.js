@@ -12,3 +12,6 @@ export const addlike = ({commit}) => { commit(ADDLIKE) }
 
 export const LESSLIKE = 'lesslike'
 export const lesslike = ({commit}) => { commit(LESSLIKE) }
+
+export const COMTRAST = 'comtrast'
+export const comtrast = ({commit}) => { commit(COMTRAST) }

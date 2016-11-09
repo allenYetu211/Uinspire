@@ -25,7 +25,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
-  font-family: Arial;
+  font-family: 'Roboto', Helvetica , PingFang SC,Source Sans Pro,Segoe UI,Heiti SC,Microsoft Yahei, sans-serif;
+  color:#222222;
   font-size: 13.3333px;
 }
 ol, ul {
@@ -42,4 +43,7 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+a,button,input{
+  outline:0;
 }

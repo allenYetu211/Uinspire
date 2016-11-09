@@ -1,27 +1,21 @@
 <style lang="scss" scoped>
     li {
       float: left;
-      width:16.66666%;
-      // height:0;
-      // padding-bottom:27%;
-      padding: 10px 10px;      
-      // background-color:#ccc;
+      width:calc(100% / 6 - 20px);
+      margin: 10px 10px;
       position:relative;
-      // overflow:hidden;
-      .imagesShow-box-shadow{
-        transition: box-shadow 0.3s;
-        &.active{
-           box-shadow: 0px 2px 14px 0px rgba(0,0,0,0.39);
+      overflow:hidden;
+      transition: box-shadow 0.3s;
+      
+       &.active{
+           box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.25);
         }
-      }
+    
       img{
         width:100%;
       }
       &.lists{
-        width:11.111111%;
-        padding-bottom:17%;
-        padding-left: 5px;
-        padding-right: 5px;
+        width:calc(100% / 9 - 20px);
       }
       .imagesShow-paypal{
           position:absolute;
@@ -30,17 +24,17 @@
           height:40px;
           line-height:40px;
           background-color:#fff;
-          width:calc(100% - 20px);
-          transition:transform 0.3s, opacity 0.3s;
+          width:100%;
+          transition:transform 0.3s, opacity 0.3s 0.1s;
           padding:0 10px;
-          opacity: 0;
+          // opacity: 0;
           pointer-events: none;
           transform:translateY(100%);
           // &.active{
           //   transform:translateY(100%);
           // }
           &.active{
-             transform:translateY(-25%);
+             transform:translateY(0%);
              opacity: 1;
              pointer-events: all;
           }
@@ -62,7 +56,7 @@
     }
 </style>
 <template>
-        <li :class="{lists: listArrangestate}" @mouseover="_mouseover"  @mouseout="_mouseout">
+        <li :class="{lists: listArrangestate ,active : hover}" @mouseover="_mouseover"  @mouseout="_mouseout">
           <div class="imagesShow-box-shadow" :class="{active : hover}">
             <img :src="itmes.url">
               <div class="imagesShow-paypal"  :class="{active : hover}">
@@ -82,7 +76,7 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default{
-  props: ['itmes'],
+  props: ['itmes', 'index'],
   data () {
     return {
       like: false,
@@ -92,19 +86,25 @@ export default{
   computed: {
     ...mapGetters([
       'listArrangestate',
-      'addlessstate'
+      'addlessstate',
+      'likecount'
     ])
   },
   methods: {
     ...mapActions([
       'addlike',
-      'lesslike'
+      'lesslike',
+      'contrasts',
+      'lesscontrasts'
     ]),
     _like (e) {
       if (this.like === true) {
         this.lesslike()
+        this.lesscontrasts(this.itmes.url)
       } else {
+        if (this.likecount > 5) return
         this.addlike()
+        this.contrasts(this.itmes.url)
       }
       this.like = !this.like
     },

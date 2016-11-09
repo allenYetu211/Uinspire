@@ -6,7 +6,7 @@
         bottom: 0;
         left: 0;
         right:0;
-        z-index:7;
+        z-index:999;
         display:flex;
         justify-content: center;
         align-itmes:center;
@@ -21,10 +21,14 @@
         button{
           margin: 0 20px;
           padding:5px 20px;
-          border:none;
           border-radius:50px;
           border:1px solid #222;
           background:transparent;
+          transition:background-color 0.5s, border-color 0.3s;
+          &:hover {
+            background-color:#FFFF00;
+            border-color:transparent;
+          }
         }
       }
     }
@@ -33,8 +37,9 @@
   <div id="app">
     <navigation></navigation>
     <router-view></router-view>
+    <contrast-page></contrast-page>
     <div class="screenDownload" :class="{open : addlessstate}">
-        <button class="screen">Ful-screen</button>
+        <button class="screen" @click="comtrast">Ful-screen</button>
         <button class="download">Download</button>
     </div>
   </div>
@@ -42,15 +47,23 @@
 
 <script>
 import Navigation from './components/navigation'
-import { mapGetters } from 'vuex'
+import ContrastPage from './components/contrastPage'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
-    Navigation
+    Navigation,
+    ContrastPage
   },
   computed: {
     ...mapGetters([
-      'addlessstate'
+      'addlessstate',
+      'comtrastpopup'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'comtrast'
     ])
   }
 }

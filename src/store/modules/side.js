@@ -3,14 +3,16 @@ import {
   LISTARRANGE,
   LISTARRANGETWO,
   ADDLIKE,
-  LESSLIKE
+  LESSLIKE,
+  COMTRAST
 } from '../actions'
 
 const state = {
   side: false,
   listArrange: false,
   like: 0,
-  linkinfor: false
+  linkinfor: false,
+  comtrast: false
 }
 const mutations = {
   [SIDE] (state) {
@@ -29,6 +31,12 @@ const mutations = {
   [LESSLIKE] (state) {
     state.like--
     if (state.like === 0) state.linkinfor = false
+  },
+  [COMTRAST] (state) {
+    state.comtrast = !state.comtrast
+    // let body = document.getElementsByTagName('body')
+    // body.style.Overflow = 'hidden'
+    // console.log(body)
   }
 }
 

@@ -5,8 +5,8 @@ import App from './App'
 import routes from './router'
 import store from './store'
 
-import './style/reset.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './style/reset.css'
 
 Vue.use(VueRouter)
 const router = new VueRouter({
