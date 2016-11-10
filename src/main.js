@@ -6,6 +6,8 @@ import routes from './router'
 import store from './store'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'animate.css/animate.min.css'
+
 import './style/reset.css'
 
 Vue.use(VueRouter)

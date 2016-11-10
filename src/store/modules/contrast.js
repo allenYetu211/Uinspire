@@ -17,9 +17,11 @@ const state = {
 const mutations = {
   [CONTRASTS] (state, types) {
     state.contrastles = filtermono.addfilter(types)
+    // console.log(state.contrastles)
   },
   [LESSCONTRASTS] (state, types) {
-    filtermono.lessfilter(state.contrastles, types)
+    state.contrastles = filtermono.lessfilter(state.contrastles, types)
+    // console.log(state.contrastles)
   },
   [ADDLIKE] (state) {
     state.like++

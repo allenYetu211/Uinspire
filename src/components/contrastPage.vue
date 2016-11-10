@@ -66,22 +66,62 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        overflow: hidden;
       }
       &-li{
         margin: 10px;
         text-align: center;
+        position:relative;
+        img{
+          width:100%;
+          vertical-align: middle;
+          box-shadow: 0 2px 18px 0 rgba(0,0,0,0.25);
+        }
+        &:hover .delete{
+          opacity: 1;
+        }
+        .delete{
+          position:absolute;
+          width:1.5rem;
+          height:1.5rem;
+          right:-10px;
+          top:-10px;
+          border:none;
+          border-radius:50%;
+          background-color:#fff;
+          box-shadow: 0 2px 4px 0 rgba(0,0,0,0.15);
+          opacity:0;
+          transition: opacity 0.5s;
+        }
       }
     }
   }
 </style>
 <template>
 <div class="comtrast-poups">
-  <div class="comtrast" :class="{open: comtrastpopup}">
-      <div class="close"> <button @click="comtrast"></button> </div>
+
+  <div :style="{transitionDelay: upDelay}" class="comtrast"
+   :class="{open: comtrastpopup}"
+   >
+      <div class="close"> <button @click="comtrastOpenCount"></button> </div>
       <div class="comtrast-popup">
         <ul class="comtrast-popup-ul">
-          <li :style="{width:mathWidth}" class="comtrast-popup-li" v-for="itms in contrastins">
-            <img :src="itms.conimg" alt="">
+          <li :style="{width:mathWidth}" class="comtrast-popup-li" v-for="(itms, index) in contrastins">
+            <button class="delete">
+              X
+            </button>
+            <transition
+              name="custom-classes-transition"
+              enter-active-class="animated slideInDown"
+              leave-active-class="animated slideOutUp"
+              @before-enter= "beforeEnter"
+              > 
+               <!-- :style="{animationDelay: trans_dalay}" -->
+              <img v-show="comtrastpopup"
+               :data-index="index"
+               :src="itms" alt="">
+            </transition>
+
           </li>
         </ul>
       </div>
@@ -99,9 +139,7 @@ export default {
   data () {
     return {
       mathWidth: '',
-      stlyeWidth: {
-        width: this.mathWidth
-      }
+      upDelay: ''
     }
   },
   watch: {
@@ -120,8 +158,20 @@ export default {
     ]),
     comtrastOpenCount () {
       this.comtrast()
-      this.mathWidth = 'calc(100% / ' + this.likecount + ' + 20px)'
-      console.log(this.mathWidth)
+      if (this.likecount === 1 || 2 || 3) {
+        this.mathWidth = '25%'
+      } else {
+        this.mathWidth = 'calc(100% / ' + this.likecount + ' + 20px)'
+      }
+      if (this.comtrastpopup !== true) {
+        this.upDelay = '240ms'
+      } else {
+        this.upDelay = '0ms'
+      }
+    },
+    beforeEnter: function (el) {
+      var delay = el.dataset.index * 40
+      el.style.animationDelay = delay + 'ms'
     }
   }
 }

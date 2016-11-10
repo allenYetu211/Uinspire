@@ -26,15 +26,18 @@ export default {
   data () {
     return {
       infor: [
-        {url: '../../static/Rectangle.jpg'},
-        {url: '../../static/Rectangle.jpg'},
-        {url: '../../static/Rectangle.jpg'},
-        {url: '../../static/Rectangle.jpg'},
-        {url: '../../static/Rectangle.jpg'},
-        {url: '../../static/Rectangle.jpg'},
-        {url: '../../static/Rectangle.jpg'},
-        {url: '../../static/Rectangle.jpg'},
-        {url: '../../static/Rectangle.jpg'}
+        {url: '../../static/img1.jpg'},
+        {url: '../../static/img2.jpg'},
+        {url: '../../static/img3.jpg'},
+        {url: '../../static/img4.jpg'},
+        {url: '../../static/img5.jpg'},
+        {url: '../../static/img6.jpg'},
+        {url: '../../static/img7.jpg'},
+        {url: '../../static/img8.jpg'},
+        {url: '../../static/img9.jpg'},
+        {url: '../../static/img10.jpg'},
+        {url: '../../static/img11.jpg'},
+        {url: '../../static/img12.jpg'}
       ]
     }
   }
