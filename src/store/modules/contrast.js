@@ -1,19 +1,38 @@
 import filtermono from '../../Publicjs/filter'
 import {
   CONTRASTS,
-  LESSCONTRASTS
+  LESSCONTRASTS,
+  ADDLIKE,
+  LESSLIKE,
+  COMTRAST
 } from '../actions'
 
 const state = {
-  contrastles: []
+  contrastles: [],
+  like: 0,
+  linkinfor: false,
+  comtrast: false
 }
 
 const mutations = {
   [CONTRASTS] (state, types) {
-    filtermono.addfilter(state.contrastles, types)
+    state.contrastles = filtermono.addfilter(types)
+    // console.log(state.contrastles)
   },
   [LESSCONTRASTS] (state, types) {
-    filtermono.lessfilter(state.contrastles)
+    state.contrastles = filtermono.lessfilter(state.contrastles, types)
+    // console.log(state.contrastles)
+  },
+  [ADDLIKE] (state) {
+    state.like++
+    if (state.like > 0) state.linkinfor = true
+  },
+  [LESSLIKE] (state) {
+    state.like--
+    if (state.like === 0) state.linkinfor = false
+  },
+  [COMTRAST] (state) {
+    state.comtrast = !state.comtrast
   }
 }
 
