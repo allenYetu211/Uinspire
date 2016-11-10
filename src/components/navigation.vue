@@ -46,6 +46,9 @@ $bold: 'Roboto-bold';
         &.view{
           font-size:16px;
           font-family: $bold;
+          button{
+            padding:0;
+          }
         }
         &.phone{
             @media(max-width: 767px){
@@ -125,8 +128,15 @@ $bold: 'Roboto-bold';
         &-list{
           background-color:rgba(255,255,255,.98);
           padding:15px;
+          i{
+            margin-right:5px;
+          }
+          h4{
+            padding:10px 0;
+          }
           &-search{
             padding-bottom:20px;
+            position:relative;
             input{
               height:40px;
               border:none;
@@ -167,6 +177,53 @@ $bold: 'Roboto-bold';
         }
     }
   }
+  .sprite_login{
+    width:30px;
+    height:30px;
+    display:inline-block;
+    background:url('../../static/css_sprite.png') no-repeat;
+    background-position:-45px -55px;
+    vertical-align: -10px;
+  }
+  .sprite_view-1{
+    @extend .sprite_login;
+    width:20px;
+    height:20px;
+    background-position: -35px -95px;
+    vertical-align: -3px;
+  }
+  .sprite_view-2{
+    @extend .sprite_view-1;
+    background-position: -65px -95px;
+  }
+  .sprite_filter{
+    @extend .sprite_login;
+    background-position: 0px -90px;
+  }
+  .sprite_side{
+    @extend .sprite_login;
+    background-position: 0px -90px;
+  }
+  .sprite_find{
+    @extend .sprite_login;
+    background-position: -150px -90px;
+    position:absolute;
+    top:5px;  
+    left:8px;
+  }
+  .sprite_category{
+    @extend .sprite_view-1;
+    background-position:-185px -95px;
+  }
+  .sprite_tags{
+    @extend .sprite_view-1;
+    background-position:-215px -95px;
+  }
+  .sprite_color{
+    @extend .sprite_view-1;
+    background-position:-245px -95px;
+  }
+  
 </style>
 <template>
   <div class="navigation">
@@ -187,24 +244,10 @@ $bold: 'Roboto-bold';
         <button>Sing up</button>
         /
         <button>Log in</button>
-          <svg width="29px" height="29px" viewBox="0 0 29 29" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-            <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-            <title>Group</title>
-            <desc>Created with Sketch.</desc>
-            <defs></defs>
-            <g id="Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                <g id="index" transform="translate(-1539.000000, -25.000000)">
-                    <g id="Group" transform="translate(1537.000000, 23.000000)">
-                        <path d="M16.5,2.75 C8.903125,2.75 2.75,8.903125 2.75,16.5 C2.75,24.096875 8.903125,30.25 16.5,30.25 C24.096875,30.25 30.25,24.096875 30.25,16.5 C30.25,8.903125 24.096875,2.75 16.5,2.75 L16.5,2.75 Z M16.5,6.875 C18.775625,6.875 20.625,8.724375 20.625,11 C20.625,13.2825 18.775625,15.125 16.5,15.125 C14.224375,15.125 12.375,13.2825 12.375,11 C12.375,8.724375 14.224375,6.875 16.5,6.875 L16.5,6.875 Z M16.5,26.4 C13.055625,26.4 10.030625,24.64 8.25,21.9725 C8.284375,19.243125 13.756875,17.7375 16.5,17.7375 C19.243125,17.7375 24.70875,19.243125 24.75,21.9725 C22.969375,24.64 19.944375,26.4 16.5,26.4 L16.5,26.4 Z" id="Shape" fill="#000000"></path>
-                        <polygon id="Shape" points="0 0 33 0 33 33 0 33"></polygon>
-                    </g>
-                </g>
-            </g>
-          </svg>
+          <i class="sprite_login"></i>
     </div>
     </div>
     <div class="navigation-fiv clearfix">
-      
       <div class="phone text-center col-sm-offset-4 col-sm-4 ">
           <ul>
             <li><button>iPhone</button></li>
@@ -216,57 +259,42 @@ $bold: 'Roboto-bold';
       <div class="view col-sm-4 hidden-xs">
          VIEW
           <button @click="listArrange">
-            <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-                <title>Shape</title>
-                <desc>Created with Sketch.</desc>
-                <defs></defs>
-                <g id="Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <g id="index" transform="translate(-1505.000000, -138.000000)" fill="#222222">
-                        <path d="M1505,146 L1513,146 L1513,138 L1505,138 L1505,146 L1505,146 Z M1505,158 L1513,158 L1513,150 L1505,150 L1505,158 L1505,158 Z M1517,158 L1525,158 L1525,150 L1517,150 L1517,158 L1517,158 Z M1517,146 L1525,146 L1525,138 L1517,138 L1517,146 L1517,146 Z" id="Shape"></path>
-                    </g>
-                </g>
-            </svg>
+            <span class="sprite_view-1"></span>
           </button>
          <button @click="listArrangetwo">
-            <svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-              <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-              <title>Shape</title>
-              <desc>Created with Sketch.</desc>
-              <defs></defs>
-              <g id="Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <g id="index" transform="translate(-1545.000000, -138.000000)" fill="#CDCDCD">
-                      <path d="M1545,143 L1550,143 L1550,138 L1545,138 L1545,143 L1545,143 Z M1552.5,158 L1557.5,158 L1557.5,153 L1552.5,153 L1552.5,158 L1552.5,158 Z M1545,158 L1550,158 L1550,153 L1545,153 L1545,158 L1545,158 Z M1545,150.5 L1550,150.5 L1550,145.5 L1545,145.5 L1545,150.5 L1545,150.5 Z M1552.5,150.5 L1557.5,150.5 L1557.5,145.5 L1552.5,145.5 L1552.5,150.5 L1552.5,150.5 Z M1560,138 L1560,143 L1565,143 L1565,138 L1560,138 L1560,138 Z M1552.5,143 L1557.5,143 L1557.5,138 L1552.5,138 L1552.5,143 L1552.5,143 Z M1560,150.5 L1565,150.5 L1565,145.5 L1560,145.5 L1560,150.5 L1560,150.5 Z M1560,158 L1565,158 L1565,153 L1560,153 L1560,158 L1560,158 Z" id="Shape"></path>
-                  </g>
-              </g>
-            </svg>
+            <span class="sprite_view-2"></span>
          </button>
       </div>
     </div>
     <div class="side-columns" :class="{open: sideopen}">
       <div class="side-columns-header clearfix">
-        <button @click="side">---</button>
+        <button @click="side">
+          <i class="sprite_side"></i>
+        </button>
       </div>
       <div class="side-columns-list">
           <div class="side-columns-list-search">
+          <i class="sprite_find"></i>
             <input type="text" placeholder="Search Pattern" name="">
           </div>
 
           <div class="side-columns-list-Category" >
-            <h4>Category</h4>
+            <h4>
+            <i class="sprite_category"></i>
+            Category</h4>
             <div class="side-columns-list-Category-tabulation" >
               <p v-for="list in Category">{{list.titler}}</p>
             </div>
           </div>
 
           <div class="side-columns-list-Tags">
-           <h4>Tags</h4>
+           <h4><i class="sprit_-tags"></i>Tags</h4>
             <div class="side-columns-list-Tags-tabulation clearfix">
               <span v-for="itms in Tags">{{itms.titler}}</span>
             </div>
           </div>
           <div class="side-columns-list-color">
-            <h4>Color</h4>
+            <h4><i class="sprite_color"></i>Color</h4>
             <div class="side-columns-list-color-tabulation">
               <!-- <span v-for="itmes in Color" :style="background-color:{{itmes.color}}"></span> -->
             </div>
@@ -278,18 +306,7 @@ $bold: 'Roboto-bold';
 
    <div class="filter">
       <button @click="side">
-  
-<svg width="30px" height="30px" viewBox="30 133 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="ic-clear-all-48-px" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(30.000000, 133.000000)">
-        <g id="Group">
-            <path d="M6.25,16.25 L23.75,16.25 L23.75,13.75 L6.25,13.75 L6.25,16.25 L6.25,16.25 Z M3.75,21.25 L21.25,21.25 L21.25,18.75 L3.75,18.75 L3.75,21.25 L3.75,21.25 Z M8.75,8.75 L8.75,11.25 L26.25,11.25 L26.25,8.75 L8.75,8.75 L8.75,8.75 Z" id="Shape" fill="#000000"></path>
-            <polygon id="Shape" points="0 0 30 0 30 30 0 30"></polygon>
-        </g>
-    </g>
-</svg>
+          <span class="sprite_filter"></span>
         FILTER
       </button>
     </div>

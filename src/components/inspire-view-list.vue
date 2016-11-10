@@ -26,7 +26,7 @@
           background-color:#fff;
           width:100%;
           transition:transform 0.3s, opacity 0.3s 0.1s;
-          padding:0 10px;
+          padding:0 5px;
           // opacity: 0;
           pointer-events: none;
           transform:translateY(100%);
@@ -40,9 +40,13 @@
           }
           &>div{
             flex:1;
+            &:last-child{
+              flex:5;
+            }
             button{
               border:none;
               background-color:transparent;
+              padding:0;
               opacity:0.5;
               &._like{
                 opacity: 1;
@@ -54,6 +58,22 @@
           }
       }
     }
+    .sprite_lights{
+        width:20px;
+        height:20px;
+        display:inline-block;
+        background:url('../../static/css_sprite.png') no-repeat;
+        background-position:0px -120px;
+        vertical-align:middle;
+    }
+    .sprite_like{
+      @extend .sprite_lights;
+      background-position:-20px -120px;
+    }
+    .sprite_correct{
+      @extend .sprite_lights;
+      background-position:-40px -120px;
+    }
 </style>
 <template>
         <li :class="{lists: listArrangestate ,active : hover}" @mouseover="_mouseover"  @mouseout="_mouseout">
@@ -64,9 +84,9 @@
                     Paypal
                 </div>
                 <div class="imagesShow-paypal-fn">
-                    <button>--</button>
-                    <button @click="_like" :class="{_like: like}">--</button>
-                    <button>--</button>
+                    <button><i class="sprite_lights"></i></button>
+                    <button @click="_like" :class="{_like: like}"><i class="sprite_like"></i></button>
+                    <button><i class="sprite_correct"></i></button>
                 </div>
               </div>
             </div>
