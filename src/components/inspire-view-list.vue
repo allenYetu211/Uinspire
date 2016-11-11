@@ -10,7 +10,6 @@
        &.active{
            box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.25);
         }
-    
       img{
         width:100%;
       }
@@ -76,25 +75,24 @@
     }
 </style>
 <template>
-        <li :class="{lists: listArrangestate ,active : hover}" @mouseover="_mouseover"  @mouseout="_mouseout">
-          <div class="imagesShow-box-shadow" :class="{active : hover}">
-            <img :src="itmes.url">
-              <div class="imagesShow-paypal"  :class="{active : hover}">
-                <div class="imagesShow-paypal-py">
-                    Paypal
-                </div>
-                <div class="imagesShow-paypal-fn">
-                    <button><i class="sprite_lights"></i></button>
-                    <button @click="_like" :class="{_like: like}"><i class="sprite_like"></i></button>
-                    <button><i class="sprite_correct"></i></button>
-                </div>
-              </div>
-            </div>
-          </li>
+  <li :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
+    <div class="imagesShow-box-shadow" :class="{active : hover}">
+      <img :src="itmes.url">
+        <div class="imagesShow-paypal"  :class="{active : hover}">
+          <div class="imagesShow-paypal-py">
+              Paypal
+          </div>
+          <div class="imagesShow-paypal-fn">
+              <button><i class="sprite_lights"></i></button>
+              <button @click.stop="_like" :class="{_like: like}"><i class="sprite_like"></i></button>
+              <button><i class="sprite_correct"></i></button>
+          </div>
+        </div>
+      </div>
+    </li>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-
 export default{
   props: ['itmes', 'index'],
   data () {
@@ -115,7 +113,8 @@ export default{
       'addlike',
       'lesslike',
       'contrasts',
-      'lesscontrasts'
+      'lesscontrasts',
+      'filmslide'
     ]),
     _like (e) {
       if (this.like === true) {
@@ -134,6 +133,10 @@ export default{
     _mouseout () {
       if (this.like === true) return
       this.hover = false
+    },
+    _postData () {
+      this.filmslide(this.index)
+      // console.log(this.itmes)
     }
   }
 }

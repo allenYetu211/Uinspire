@@ -48,6 +48,13 @@ $bold: 'Roboto-bold';
           font-family: $bold;
           button{
             padding:0;
+            i{
+              margin: 0 5px;
+                opacity:0.5;
+              &.open{
+                opacity:1;
+              }
+            }
           }
         }
         &.phone{
@@ -259,10 +266,10 @@ $bold: 'Roboto-bold';
       <div class="view col-sm-4 hidden-xs">
          VIEW
           <button @click="listArrange">
-            <span class="sprite_view-1"></span>
+            <i class="sprite_view-1" :class="{open: !listArrangestate}"></i>
           </button>
-         <button @click="listArrangetwo">
-            <span class="sprite_view-2"></span>
+         <button @click="listArrangetwo" >
+            <i class="sprite_view-2" :class="{open: listArrangestate}"></i>
          </button>
       </div>
     </div>
@@ -319,7 +326,8 @@ import {mapGetters, mapActions} from 'vuex'
 export default{
   computed: {
     ...mapGetters([
-      'sideopen'
+      'sideopen',
+      'listArrangestate'
     ])
   },
   methods: {

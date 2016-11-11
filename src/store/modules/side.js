@@ -8,8 +8,7 @@ const state = {
   side: false,
   listArrange: false,
   like: 0,
-  linkinfor: false,
-  comtrast: false
+  linkinfor: false
 }
 const mutations = {
   [SIDE] (state) {
