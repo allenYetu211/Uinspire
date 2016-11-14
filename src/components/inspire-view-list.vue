@@ -14,11 +14,12 @@
         width:100%;
       }
       &.lists{
-        width:calc(100% / 9 - 20px);
+        width:calc(100% / 8 - 20px);
       }
       .imagesShow-paypal{
           position:absolute;
           bottom:0px;
+          z-index:99;
           display:flex;
           height:40px;
           line-height:40px;
@@ -26,12 +27,8 @@
           width:100%;
           transition:transform 0.3s, opacity 0.3s 0.1s;
           padding:0 5px;
-          // opacity: 0;
           pointer-events: none;
           transform:translateY(100%);
-          // &.active{
-          //   transform:translateY(100%);
-          // }
           &.active{
              transform:translateY(0%);
              opacity: 1;
@@ -46,7 +43,7 @@
               border:none;
               background-color:transparent;
               padding:0;
-              opacity:0.5;
+              opacity:0.15;
               &._like{
                 opacity: 1;
               }
@@ -84,8 +81,8 @@
           </div>
           <div class="imagesShow-paypal-fn">
               <button><i class="sprite_lights"></i></button>
-              <button @click.stop="_like" :class="{_like: like}"><i class="sprite_like"></i></button>
-              <button><i class="sprite_correct"></i></button>
+              <button ><i class="sprite_like"></i></button>
+              <button @click.stop="_like" :class="{_like: like}"><i class="sprite_correct"></i></button>
           </div>
         </div>
       </div>

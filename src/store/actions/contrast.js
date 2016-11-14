@@ -18,3 +18,9 @@ export const comtrastopen = ({commit}) => { commit(COMTRASTOPEN) }
 
 export const FILMSLIDE = 'filmslide'
 export const filmslide = ({commit}, inx) => { commit(FILMSLIDE, inx) }
+
+export const ADDFILMSLIDE = 'addfilmsilde'
+export const addfilmsilde = ({commit}) => { commit(ADDFILMSLIDE) }
+
+export const LESSFILMSLIDE = 'lessfilmsilde'
+export const lessfilmsilde = ({commit}) => { commit(LESSFILMSLIDE) }

@@ -6,7 +6,9 @@ import {
   LESSLIKE,
   COMTRAST,
   FILMSLIDE,
-  COMTRASTOPEN
+  COMTRASTOPEN,
+  ADDFILMSLIDE,
+  LESSFILMSLIDE
 } from '../actions'
 
 const state = {
@@ -61,6 +63,12 @@ const mutations = {
   },
   [COMTRASTOPEN] (state) {
     state.comtrast = !state.comtrast
+  },
+  [ADDFILMSLIDE] (state) {
+    state.actionindex++
+  },
+  [LESSFILMSLIDE] (state) {
+    state.actionindex--
   }
 }
 
