@@ -71,6 +71,7 @@
       background-position:-40px -120px;
     }
 </style>
+
 <template>
   <li :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
     <div class="imagesShow-box-shadow" :class="{active : hover}">
@@ -88,6 +89,7 @@
       </div>
     </li>
 </template>
+
 <script>
 import { mapGetters, mapActions } from 'vuex'
 export default{
