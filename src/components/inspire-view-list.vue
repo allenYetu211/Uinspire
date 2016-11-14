@@ -10,16 +10,16 @@
        &.active{
            box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.25);
         }
-    
       img{
         width:100%;
       }
       &.lists{
-        width:calc(100% / 9 - 20px);
+        width:calc(100% / 8 - 20px);
       }
       .imagesShow-paypal{
           position:absolute;
           bottom:0px;
+          z-index:99;
           display:flex;
           height:40px;
           line-height:40px;
@@ -27,12 +27,8 @@
           width:100%;
           transition:transform 0.3s, opacity 0.3s 0.1s;
           padding:0 5px;
-          // opacity: 0;
           pointer-events: none;
           transform:translateY(100%);
-          // &.active{
-          //   transform:translateY(100%);
-          // }
           &.active{
              transform:translateY(0%);
              opacity: 1;
@@ -47,7 +43,7 @@
               border:none;
               background-color:transparent;
               padding:0;
-              opacity:0.5;
+              opacity:0.15;
               &._like{
                 opacity: 1;
               }
@@ -76,25 +72,24 @@
     }
 </style>
 <template>
-        <li :class="{lists: listArrangestate ,active : hover}" @mouseover="_mouseover"  @mouseout="_mouseout">
-          <div class="imagesShow-box-shadow" :class="{active : hover}">
-            <img :src="itmes.url">
-              <div class="imagesShow-paypal"  :class="{active : hover}">
-                <div class="imagesShow-paypal-py">
-                    Paypal
-                </div>
-                <div class="imagesShow-paypal-fn">
-                    <button><i class="sprite_lights"></i></button>
-                    <button @click="_like" :class="{_like: like}"><i class="sprite_like"></i></button>
-                    <button><i class="sprite_correct"></i></button>
-                </div>
-              </div>
-            </div>
-          </li>
+  <li :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
+    <div class="imagesShow-box-shadow" :class="{active : hover}">
+      <img :src="itmes.url">
+        <div class="imagesShow-paypal"  :class="{active : hover}">
+          <div class="imagesShow-paypal-py">
+              Paypal
+          </div>
+          <div class="imagesShow-paypal-fn">
+              <button><i class="sprite_lights"></i></button>
+              <button ><i class="sprite_like"></i></button>
+              <button @click.stop="_like" :class="{_like: like}"><i class="sprite_correct"></i></button>
+          </div>
+        </div>
+      </div>
+    </li>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
-
 export default{
   props: ['itmes', 'index'],
   data () {
@@ -115,7 +110,8 @@ export default{
       'addlike',
       'lesslike',
       'contrasts',
-      'lesscontrasts'
+      'lesscontrasts',
+      'filmslide'
     ]),
     _like (e) {
       if (this.like === true) {
@@ -134,6 +130,10 @@ export default{
     _mouseout () {
       if (this.like === true) return
       this.hover = false
+    },
+    _postData () {
+      this.filmslide(this.index)
+      // console.log(this.itmes)
     }
   }
 }

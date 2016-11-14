@@ -1,4 +1,4 @@
-<style lang="scss" scoped>
+<style lang="scss">
 $color:#FFFF00;
 $bold: 'Roboto-bold';
   .navigation{
@@ -48,6 +48,13 @@ $bold: 'Roboto-bold';
           font-family: $bold;
           button{
             padding:0;
+            i{
+              margin: 0 5px;
+                opacity:0.5;
+              &.open{
+                opacity:1;
+              }
+            }
           }
         }
         &.phone{
@@ -60,6 +67,15 @@ $bold: 'Roboto-bold';
           ul{
             margin: 0;
             min-height:inherit;
+            position: relative;
+            .navi-title-bottom{
+              position:absolute;
+              bottom:0;
+              width:100%;
+              height:2px;
+              background-color:#000;
+              transition: transform 0.2s, width 0.3s;
+            }
             @media(max-width: 767px){
                   box-shadow: inset 0 -2px 0 #41307c;
                   background-color:#fff;
@@ -110,7 +126,6 @@ $bold: 'Roboto-bold';
       min-width:200px;
       transform:translate3d(-100%, 0, 0);
       transition:transform 0.5s;
-      /* Rectangle 7: */
       opacity: 0.99;
       &.open{
            transform:translate3d(0, 0, 0);
@@ -202,7 +217,7 @@ $bold: 'Roboto-bold';
   }
   .sprite_side{
     @extend .sprite_login;
-    background-position: 0px -90px;
+    background-position: -330px -90px;
   }
   .sprite_find{
     @extend .sprite_login;
@@ -223,7 +238,7 @@ $bold: 'Roboto-bold';
     @extend .sprite_view-1;
     background-position:-245px -95px;
   }
-  
+
 </style>
 <template>
   <div class="navigation">
@@ -250,19 +265,17 @@ $bold: 'Roboto-bold';
     <div class="navigation-fiv clearfix">
       <div class="phone text-center col-sm-offset-4 col-sm-4 ">
           <ul>
-            <li><button>iPhone</button></li>
-            <li><button>iPad</button></li>
-            <li><button>Andriod</button></li>
-            <li><button>Web</button></li>
+            <navi-gation-title v-for="(title, index) in Title" :title='title' :index="index"></navi-gation-title>
+            <div class="navi-title-bottom" :style="{transform: 'translateX(' +  navposLeft + 'px)', width: navposWidth + 'px'}"></div>
           </ul>
       </div>
       <div class="view col-sm-4 hidden-xs">
          VIEW
           <button @click="listArrange">
-            <span class="sprite_view-1"></span>
+            <i class="sprite_view-1" :class="{open: !listArrangestate}"></i>
           </button>
-         <button @click="listArrangetwo">
-            <span class="sprite_view-2"></span>
+         <button @click="listArrangetwo" >
+            <i class="sprite_view-2" :class="{open: listArrangestate}"></i>
          </button>
       </div>
     </div>
@@ -293,13 +306,13 @@ $bold: 'Roboto-bold';
               <span v-for="itms in Tags">{{itms.titler}}</span>
             </div>
           </div>
-          <div class="side-columns-list-color">
-            <h4><i class="sprite_color"></i>Color</h4>
-            <div class="side-columns-list-color-tabulation">
-              <!-- <span v-for="itmes in Color" :style="background-color:{{itmes.color}}"></span> -->
-            </div>
-          </div>
-
+           <div class="side-columns-list-color">
+               <h4><i class="sprite_color"></i>Color</h4>
+               <div class="side-columns-list-color-tabulation">
+                  <navi-gation-color v-for="color in Color" :color="color"></navi-gation-color>
+                  <!-- <span v-for="color in Color" :style="seeColor"></span> -->
+               </div>
+           </div>
       </div>
     </div>
 
@@ -315,11 +328,20 @@ $bold: 'Roboto-bold';
 
 <script>
 import {mapGetters, mapActions} from 'vuex'
-
+import NaviGationColor from './navigation-color'
+import NaviGationTitle from './navigation-title'
 export default{
+  components: {
+    NaviGationColor,
+    NaviGationTitle
+  },
   computed: {
     ...mapGetters([
-      'sideopen'
+      'sideopen',
+      'listArrangestate',
+      'navposWidth',
+      'navposLeft',
+      'navposIndex'
     ])
   },
   methods: {
@@ -331,6 +353,16 @@ export default{
   },
   data () {
     return {
+      transformObj: {
+        'transform': 'translateX(' + this.navposLeft + 'px)',
+        'width': this.navposWidth + 'px'
+      },
+      Title: [
+      {tle: 'iPhone'},
+      {tle: 'iPad'},
+      {tle: 'Andriod'},
+      {tle: 'Web'}
+      ],
       Category: [
       {titler: 'Category'},
       {titler: 'Category'},
@@ -356,14 +388,14 @@ export default{
       {titler: 'tagstags'}
       ],
       Color: [
-      {color: '#000'},
-      {color: '#000'},
-      {color: '#000'},
-      {color: '#000'},
-      {color: '#000'},
-      {color: '#000'},
-      {color: '#000'},
-      {color: '#000'}
+      {cs: '#255'},
+      {cs: '#000'},
+      {cs: '#022'},
+      {cs: '#000'},
+      {cs: '#000'},
+      {cs: '#000'},
+      {cs: '#000'},
+      {cs: '#000'}
       ]
     }
   }

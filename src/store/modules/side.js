@@ -1,7 +1,8 @@
 import {
   SIDE,
   LISTARRANGE,
-  LISTARRANGETWO
+  LISTARRANGETWO,
+  NAVIGATIONTITLE
 } from '../actions'
 
 const state = {
@@ -9,7 +10,10 @@ const state = {
   listArrange: false,
   like: 0,
   linkinfor: false,
-  comtrast: false
+  navposWidth: '',
+  navposLeft: '',
+  navposIndex: 0
+
 }
 const mutations = {
   [SIDE] (state) {
@@ -20,6 +24,11 @@ const mutations = {
   },
   [LISTARRANGETWO] (state) {
     state.listArrange = true
+  },
+  [NAVIGATIONTITLE] (state, slide) {
+    state.navposLeft = slide.left
+    state.navposWidth = slide.width
+    state.navposIndex = slide.index
   }
 }
 
