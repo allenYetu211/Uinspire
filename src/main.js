@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+// import Axions from 'axios'
+import VueResource from 'vue-resource'
 
 import App from './App'
 import routes from './router'
@@ -10,6 +12,8 @@ import 'animate.css/animate.min.css'
 
 import './style/reset.css'
 
+// Vue.use(Axions)
+Vue.use(VueResource)
 Vue.use(VueRouter)
 const router = new VueRouter({
   routes

@@ -238,13 +238,12 @@ $bold: 'Roboto-bold';
     @extend .sprite_view-1;
     background-position:-245px -95px;
   }
-
 </style>
+
 <template>
   <div class="navigation">
     <div class="navigation-headlines clearfix">
     <div class="logo col-xs-6">
-      
 <svg width="170px" height="25px" viewBox="30 20 170 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
     <desc>Created with Sketch.</desc>
@@ -330,7 +329,21 @@ $bold: 'Roboto-bold';
 import {mapGetters, mapActions} from 'vuex'
 import NaviGationColor from './navigation-color'
 import NaviGationTitle from './navigation-title'
+// import axions from 'axios'
 export default{
+  mounted () {
+    // let self = this
+    this.$nextTick(() => {
+      this.$http.get('sing').then((respons) => {
+        this.getData = JSON.parse(respons.data)
+        // console.log(this.getData.)
+        if (this.getData.code === '10040') { console.log(this.getData.message) }
+      }, (respone) => {
+        console.log('error')
+      })
+      // self.axions.get('http://inspire-api.stoyard.com/api/index/apitest')
+    })
+  },
   components: {
     NaviGationColor,
     NaviGationTitle
@@ -353,6 +366,7 @@ export default{
   },
   data () {
     return {
+      getData: '',
       transformObj: {
         'transform': 'translateX(' + this.navposLeft + 'px)',
         'width': this.navposWidth + 'px'
