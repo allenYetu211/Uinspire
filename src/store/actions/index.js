@@ -1,4 +1,5 @@
 module.exports = {
   ...require('./sidecolumns'),
-  ...require('./contrast')
+  ...require('./contrast'),
+  ...require('./upload')
 }

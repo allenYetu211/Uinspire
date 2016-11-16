@@ -5,6 +5,7 @@ import * as getters from './getters'
 
 import sides from './modules/side'
 import contrast from './modules/contrast'
+import upload from './modules/upload'
 
 Vue.use(Vuex)
 export default new Vuex.Store({
@@ -12,6 +13,7 @@ export default new Vuex.Store({
   getters,
   modules: {
     sides,
-    contrast
+    contrast,
+    upload
   }
 })

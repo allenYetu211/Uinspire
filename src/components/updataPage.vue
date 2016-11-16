@@ -156,8 +156,6 @@ $color:#EFEFEF;
               top:0;
               left:0;
               opacity:0;
-              // width:100%;
-              // height:100%;
             }
           }
         }
@@ -218,53 +216,8 @@ $color:#EFEFEF;
               </div>
             </div>
         </div>
-
-    <template v-if="imgInformations.length !== 0">
-    <form>
-    <div class="informations-uploade" v-for="ic in imgInformations">
-        <div class="upload-img">
-          <img :src="ic.url">
-        </div>
-
-        <div class="upload-information">
-            <div class="upload-form-gurop">
-              <label>Name</label>
-              <input type="text" name="">
-            </div>
-
-            <div class="upload-form-gurop">
-              <label>Link</label>
-              <input type="text" name="">
-            </div>
-
-            <div class="upload-form-gurop ">
-              <h5>Platform</h5>
-              <div class="gurop-radio">
-                <div class="platform-laber" v-for="(ic, index) in Platform">
-                  <label :for="'icinfor' + index" :class="{active: index === index}">{{ic.infor}}</label>
-                  <input :id="'icinfor' + index" type="radio" name="icinfor">
-                </div>
-              </div>
-            </div>
-
-            <div class="upload-form-gurop">
-              <h5>Category</h5>
-              <div>
-                <label></label>
-                <input type="checkbox" name="">
-              </div>
-            </div>
-
-            <div class="upload-form-gurop">
-              <h5>Tag</h5>
-              <div></div>
-            </div>
-        </div>
-      </div>
-    </form>
-    <button>upLoad</button>
-    </template>
-
+      <up-data-page-information  v-for="(ic, index) in imgInformations" :index="index" :ic="ic" v-if="imgInformations.length !== 0"></up-data-page-information>
+    <button @click="_uplosings">upLoad</button>
 
     <!-- <div class="upload-btn">
         <button>Upload</button>
@@ -275,20 +228,30 @@ $color:#EFEFEF;
 </template>
 
 <script>
+  import upDataPageInformation from '../view/updataPage-inforamtion'
+  import { mapActions, mapGetters } from 'vuex'
   export default {
+    components: {
+      upDataPageInformation
+    },
     data () {
       return {
         imgInformations: '',
-        imgIn: [],
-        Platform: [
-          {infor: 'iPhone'},
-          {infor: 'iPad'},
-          {infor: 'Android'},
-          {infor: 'Web'}
-        ]
+        imgIn: []
       }
     },
+    computed: {
+      ...mapGetters([
+        'loadtexts'
+      ])
+    },
     methods: {
+      ...mapActions([
+        'loadtext'
+      ]),
+      _uplosings () {
+        this.loadtext()
+      },
       handleRemove (file, fileList) {
         console.log(file, fileList)
       },
