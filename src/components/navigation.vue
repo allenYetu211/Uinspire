@@ -1,4 +1,4 @@
-<style lang="scss" scoped>
+<style lang="scss">
 $color:#FFFF00;
 $bold: 'Roboto-bold';
   .navigation{
@@ -97,6 +97,10 @@ $bold: 'Roboto-bold';
             li{
               min-height:inherit;
               display: inline-block;
+              // button {
+              //   border:none;
+              //   background-color: transparent;
+              // }
                 @media(max-width: 767px){
                   display: block;
                   height:50px;
@@ -371,13 +375,13 @@ export default{
   mounted () {
     // let self = this
     this.$nextTick(() => {
-      this.$http.get('sing').then((respons) => {
-        this.getData = JSON.parse(respons.data)
-        // console.log(this.getData.)
-        if (this.getData.code === '10040') { console.log(this.getData.message) }
-      }, (respone) => {
-        console.log('error')
-      })
+      // this.$http.get('sing').then((respons) => {
+      //   this.getData = JSON.parse(respons.data)
+      //   // console.log(this.getData.)
+      //   if (this.getData.code === '10040') { console.log(this.getData.message) }
+      // }, (respone) => {
+      //   console.log('error')
+      // })
       // self.axions.get('http://inspire-api.stoyard.com/api/index/apitest')
     })
   },

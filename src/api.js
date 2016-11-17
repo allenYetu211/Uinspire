@@ -12,9 +12,12 @@ let sing = ''
 export default {
   loadProjectTextData () {
     sing = stamp + token
-    let sings = md(sing)
-    let singsz = md(sings)
-    Vue.http.post('http://inspire-api.stoyard.com/index.php/api/inspire/adddata' + '?stamp=' + stamp + '&token=' + token + '&sign=' + singsz).then((response) => {
+    let singsz = md(md(sing))
+    console.log(singsz)
+
+    var color = '\'#343434\''
+    // color = encodeURI(color)
+    Vue.http.get(encodeURI('http://inspire-api.stoyard.com/index.php/api/inspire/adddata?platform=1&category=2&name=allen&color=' + color)).then((response) => {
       console.log(json.parse(response.data))
       if (response.data.code === 0) {
         console.log(222)

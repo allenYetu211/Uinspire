@@ -138,7 +138,7 @@
                   <i class="sprite_checkbox"></i>
                   <label @click.stop="_categoryActive" :for="'ckcategory' + index + ins ">{{ck.infor}}</label>
                 </div> -->
-                <mation-checkbox v-for="(ck, ins) in category" :index="index" :ck="ck" :ins="ins"></mation-checkbox>
+                <mation-checkbox v-for="(ck, ins) in category" v-on:change="checkboxChange" :checkedList="checkedList" :index="index" :ck="ck" :ins="ins"></mation-checkbox>
               </div>
             </div>
 
@@ -187,12 +187,21 @@ export default {
         {infor: 'Android'},
         {infor: 'Web'}
       ],
-      actionsInx: ''
+      actionsInx: '',
+      checkedList: []
     }
   },
   methods: {
     _getindex (el) {
       this.actionsInx = window.Number(el.target.dataset.inx)
+    },
+    checkboxChange (ev) {
+      console.log('event', ev)
+      if (ev.checked && !this.ckeckedList.indexOf(ev.name)) {
+        console.log('checked', ev.name)
+      } else {
+        console.log('uncheck', ev.name)
+      }
     }
   }
 }

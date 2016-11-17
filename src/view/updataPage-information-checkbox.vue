@@ -35,18 +35,16 @@
 
 <template>
   <div class="category-checkbox" :class="{active: categoryActive}">
-  {{checkedNames}}
-  
-      <input :value="ck.infor" v-model="checkedNames" :id="'ckcategory' + index + ins " style="display:none"  type="checkbox" name="">
+
+      <input :value="ck.infor" v-model="checkedNames" @change="checkChange" :id="'ckcategory' + index + ins " style="display:none"  type="checkbox" name="">
       <i class="sprite_checkbox"></i>
       <label  @click.stop="_categoryActive" :for="'ckcategory' + index + ins " >{{ck.infor}}</label>
-
   </div>
 </template>
 
 <script>
 export default {
-  props: ['ins', 'ck', 'index'],
+  props: ['checkedList', 'ins', 'ck', 'index'],
   data () {
     return {
       categoryActive: false,
@@ -57,6 +55,9 @@ export default {
     _categoryActive () {
       this.categoryActive = !this.categoryActive
       console.log(this.categoryActive)
+    },
+    checkChange () {
+      this.$emit('change', {name: this.ck.infor, checked: this.checkedNames.length === 1})
     }
   }
 }
