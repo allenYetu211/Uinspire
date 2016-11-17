@@ -30,7 +30,7 @@
             display:inline-block;
             width:20px;
             height:20px;
-            background:url('../../static/css_sprite.png')no-repeat;
+            background:url('../../static/svg_sprite.svg')no-repeat;
             background-position:-95px -95px;
             margin-right:10px;
             vertical-align:middle;
