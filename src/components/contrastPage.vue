@@ -68,7 +68,7 @@
           display:block;
           width:30px;
           height:30px;
-          background:url('../../static/css_sprite.png');
+          background:url('../../static/svg_sprite.svg');
           background-position:-5px -55px;
         }
       }
@@ -116,7 +116,7 @@
             display:block;
             width:20px;
             height:20px;
-            background:url('../../static/css_sprite.png')no-repeat;
+            background:url('../../static/svg_sprite.svg')no-repeat;
             background-position:-58px -120px;
           }
         }
@@ -166,7 +166,7 @@
       display:inline-block;
       width:25px;
       height:50px;
-      background:url('../../static/css_sprite.png')no-repeat;
+      background:url('../../static/svg_sprite.svg')no-repeat;
       &.sprite_next{
         background-position: -35px 0;
       }

@@ -58,7 +58,7 @@
         width:20px;
         height:20px;
         display:inline-block;
-        background:url('../../static/css_sprite.png') no-repeat;
+        background:url('../../static/svg_sprite.svg') no-repeat;
         background-position:0px -120px;
         vertical-align:middle;
     }

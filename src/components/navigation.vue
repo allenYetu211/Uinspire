@@ -199,7 +199,7 @@ $bold: 'Roboto-bold';
     width:30px;
     height:30px;
     display:inline-block;
-    background:url('../../static/css_sprite.png') no-repeat;
+    background:url('../../static/svg_sprite.svg') no-repeat;
     background-position:-45px -55px;
     vertical-align: -10px;
   }
