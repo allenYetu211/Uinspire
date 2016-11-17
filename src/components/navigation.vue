@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 $color:#FFFF00;
 $bold: 'Roboto-bold';
   .navigation{

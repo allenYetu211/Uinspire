@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
 $color:#EFEFEF;
   // .updata{
   //   text-align:center;
@@ -50,6 +50,7 @@ $color:#EFEFEF;
     margin-top:80px;
     .upload-btn{
       text-align:center;
+      padding:20px;
       button{
           color:#222;
           font-size: 20px;
@@ -95,79 +96,21 @@ $color:#EFEFEF;
         &.file-imginfromation{
           padding:0 10px;
           p.fileimge-name{
-            font-size: 20px;
+            font-size: 16px;
             color: #222222;
             letter-spacing: 0.2px;
             margin-bottom:10px;
           }
           p.fileimge-size{
-            font-size: 16px;
+            font-size: 12px;
             color: #CDCDCD;
             letter-spacing: 0.16px;
           }
         }
      }
   }
-  .informations-uploade{
-    display: flex;
-    flex:row;
-    padding: 20px 0;
-    & > div.upload-img{
-      flex:4;
-      margin-right:50px;
-      img{
-        width:100%;
-      }
-    }
-    & > div.upload-information{
-      flex:6;
-      .upload-form-gurop{
-        margin-bottom:20px;
-        &>label,&>h5{
-          display:block;
-          padding:0 0 5px 0;
-          font-family: Roboto-Bold;
-          font-size: 14px;
-          color: #222222;
-          letter-spacing: -0.09px;
-        }
-        .gurop-radio{
-          background: #EFEFEF;
-          border-radius:5px;
-          display: flex;
-          padding:1px;
-            .platform-laber{
-              position:relative;
-              flex:1;
-              line-height:40px;
-              padding:1px;
-              label{
-                width: 100%;
-                padding:0 1px;
-                background-color:#fff;
-                text-align:center;
-                cursor: pointer;
-                &.active{
-                  background-color: transparent;
-                }
-              }
-            input[type="radio"] {
-              position:absolute;
-              top:0;
-              left:0;
-              opacity:0;
-            }
-          }
-        }
-        input[type="text"] {
-          width:100%;
-          border:none;
-          background: #EFEFEF;
-          border-radius: 5px;
-          padding:10px 15px;
-        }
-      }
-    }
+  .container{
+    width:670px;
   }
   .container-img{
 
@@ -216,12 +159,13 @@ $color:#EFEFEF;
               </div>
             </div>
         </div>
-      <up-data-page-information  v-for="(ic, index) in imgInformations" :index="index" :ic="ic" v-if="imgInformations.length !== 0"></up-data-page-information>
-    <button @click="_uplosings">upLoad</button>
-
-    <!-- <div class="upload-btn">
-        <button>Upload</button>
-    </div> -->
+        <form>
+          <up-data-page-information  v-for="(ic, index) in imgInformations" :index="index" :ic="ic" v-if="imgInformations.length !== 0"></up-data-page-information>
+      </form>
+    
+    <div class="upload-btn">
+        <button @click="_uplosings">Upload</button>
+    </div>
   </div>
 </div>
 
@@ -274,7 +218,28 @@ $color:#EFEFEF;
             reader.onload = function (oireader) {
               imgase['url'] = oireader.target.result
               imgase['name'] = file.name
-              imgase['size'] = file.size
+              imgase['size'] = Math.round(file.size / 1024)
+
+              let imc = new window.Image()
+              imc.src = oireader.target.result
+              imgase['width'] = imc.naturalWidth
+              imgase['height'] = imc.naturalHeight
+              let matching = '0' + imc.naturalWidth + imc.naturalHeight
+              matching = matching.toString()
+              switch (matching) {
+                case '0640960': case '06401136': case '07501334': case '012422208':
+                  imgase['Platform'] = 'iPhone'
+                  break
+                case '01024768': case '020481536': case '027322048': case '07681024': case '015362048': case '020482732':
+                  imgase['Platform'] = 'iPad'
+                  break
+                case '07201280': case '010801920':
+                  imgase['Platform'] = 'Android'
+                  break
+                default:
+                  imgase['Platform'] = 'WEB'
+                  break
+              }
               self.imgIn.push(imgase)
               self.imgInformations = self.imgIn
               i++
@@ -282,6 +247,7 @@ $color:#EFEFEF;
             }
             reader.readAsDataURL(file)
           }
+          console.log(self.imgInformations)
         }
         funApp()
       }

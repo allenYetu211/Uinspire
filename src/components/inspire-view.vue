@@ -1,4 +1,4 @@
-<style lang="scss">
+<style lang="scss" scoped>
   .imagesShow{
     padding:20px 20px 80px;
     ul{
