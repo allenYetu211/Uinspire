@@ -112,7 +112,7 @@
             display: block;
             width: 20px;
             height: 20px;
-            background: url(/static/img/svg_sprite.svg) no-repeat;
+            background:url('../../static/svg_sprite.svg')no-repeat;
             &.sprite_checkbox{
               background-position: -140px -120px;
             }
@@ -184,7 +184,7 @@
                         <h5>Category</h5>
                         <div class="clearfix">
                            <div class="category-checkbox" v-for="(ck, ins) in category">
-                              <input  v-model="ic.Category" :value="ins"  :id="'ckcategory_' + index + ins " type="checkbox" name="">
+                              <input  v-model="ic.Category" :value="ins"  :id="'ckcategory_' + index + ins " type="checkbox" name="" style="display:none">
                               <i class="sprite_checkbox"></i>
                               <label @click="showcheck" :for="'ckcategory_' + index + ins " >{{ck}}</label>
                           </div>
@@ -223,14 +223,14 @@ export default {
   },
   methods: {
     ...mapActions([
-      'loadtext'
+      'loadtext',
+      'postimgdata'
     ]),
     showcheck () {
       console.log(this.checkedNames)
     },
     _uplosings () {
-      console.log(this.ic)
-      // this.loadtext()
+      this.postimgdata(this.ic)
     }
   }
 }

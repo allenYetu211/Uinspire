@@ -27,5 +27,26 @@ export default {
     }).then((response) => {
       console.log(333)
     })
+  },
+  uploadProject (_data) {
+    Vue.http({
+      url: 'http://inspire-api.stoyard.com/index.php/api/inspire/adddata',
+      method: 'POST',
+      emulateJSON: true,
+      data: {
+        file: _data.url,
+        platform: _data.PlatformIndex,
+        category: _data.category,
+        name: _data.name,
+        link: _data.link,
+        color: '\'#343434\''
+      }
+    }).then((response) => {
+      let respon = json.parse(response.data)
+      console.log('data:', _data)
+      console.log(respon)
+    }, (response) => {
+      console.log('error')
+    })
   }
 }

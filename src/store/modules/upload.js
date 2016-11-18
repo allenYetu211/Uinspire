@@ -1,6 +1,7 @@
 import API from '../../api.js'
 import {
-  LOADTEXT
+  LOADTEXT,
+  POSTIMGDATA
 } from '../actions'
 
 const state = {
@@ -11,6 +12,9 @@ const mutations = {
   [LOADTEXT] (state) {
     state.text = API.loadProjectTextData()
     console.log(state.text)
+  },
+  [POSTIMGDATA] (state, _data) {
+    API.uploadProject(_data)
   }
 }
 

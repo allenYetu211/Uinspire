@@ -196,15 +196,19 @@ $color:#EFEFEF;
               switch (matching) {
                 case '0640960': case '06401136': case '07501334': case '012422208':
                   imgase['Platform'] = 'iPhone'
+                  imgase['PlatformIndex'] = 1
                   break
                 case '01024768': case '020481536': case '027322048': case '07681024': case '015362048': case '020482732':
                   imgase['Platform'] = 'iPad'
+                  imgase['PlatformIndex'] = 2
                   break
                 case '07201280': case '010801920':
                   imgase['Platform'] = 'Android'
+                  imgase['PlatformIndex'] = 3
                   break
                 default:
                   imgase['Platform'] = 'WEB'
+                  imgase['PlatformIndex'] = 4
                   break
               }
               imgase['Category'] = []
