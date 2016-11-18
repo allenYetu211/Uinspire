@@ -116,7 +116,7 @@ $color:#EFEFEF;
               </div>
 
               <div class="file-imginfromation">
-                <p class="fileimge-name">{{ic.name}}</p>
+                <p class="fileimge-name">{{ic.imgname}}</p>
                 <p class="fileimge-size">{{ic.size}}KB</p>
               </div>
             </div>
@@ -178,43 +178,44 @@ $color:#EFEFEF;
         let files = evt.dataTransfer.files
         let self = this
         let funApp = function () {
-          let imgase = {}
+          let images = {}
           let file = files[i]
           if (file) {
             var reader = new window.FileReader()
             reader.onload = function (oireader) {
-              imgase['url'] = oireader.target.result
-              imgase['name'] = file.name
-              imgase['size'] = Math.round(file.size / 1024)
+              images['file'] = file
+              images['url'] = oireader.target.result
+              images['imgname'] = file.name
+              images['size'] = Math.round(file.size / 1024)
 
               let imc = new window.Image()
               imc.src = oireader.target.result
-              imgase['width'] = imc.naturalWidth
-              imgase['height'] = imc.naturalHeight
+              images['width'] = imc.naturalWidth
+              images['height'] = imc.naturalHeight
               let matching = '0' + imc.naturalWidth + imc.naturalHeight
               matching = matching.toString()
               switch (matching) {
                 case '0640960': case '06401136': case '07501334': case '012422208':
-                  imgase['Platform'] = 'iPhone'
-                  imgase['PlatformIndex'] = 1
+                  images['Platform'] = 'iPhone'
+                  images['PlatformIndex'] = 1
                   break
                 case '01024768': case '020481536': case '027322048': case '07681024': case '015362048': case '020482732':
-                  imgase['Platform'] = 'iPad'
-                  imgase['PlatformIndex'] = 2
+                  images['Platform'] = 'iPad'
+                  images['PlatformIndex'] = 2
                   break
                 case '07201280': case '010801920':
-                  imgase['Platform'] = 'Android'
-                  imgase['PlatformIndex'] = 3
+                  images['Platform'] = 'Android'
+                  images['PlatformIndex'] = 3
                   break
                 default:
-                  imgase['Platform'] = 'WEB'
-                  imgase['PlatformIndex'] = 4
+                  images['Platform'] = 'WEB'
+                  images['PlatformIndex'] = 4
                   break
               }
-              imgase['Category'] = []
-              imgase['name'] = ''
-              imgase['link'] = ''
-              self.imgIn.push(imgase)
+              images['Category'] = []
+              images['name'] = ''
+              images['link'] = ''
+              self.imgIn.push(images)
               self.imgInformations = self.imgIn
               i++
               funApp()

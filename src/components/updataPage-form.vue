@@ -30,6 +30,21 @@
       flex:7;
       .upload-form-gurop{
         margin-bottom:15px;
+        position:relative;
+        button.search{
+            position:absolute;
+            right:5px;
+            top:30px;
+            border:none;
+            background-color:transparent;
+            width:30px;
+            height:30px;
+            padding: 0;
+            i{
+              top:0;
+              left: 0;
+            }
+        }
         &>label,&>h5{
           display:block;
           padding:0 0 5px 0;
@@ -81,6 +96,48 @@
           font-family: Roboto-Light;
         }
       }
+    }
+    ._Apps{
+      background:#f4f4f4;
+      border-radius: 5px;
+      margin:5px 0;
+      max-height: 210px;
+      overflow:scroll; 
+      ._AppItem{
+          display:flex;
+          flex:row;
+          border-bottom:1px solid #dcdcdc;
+          height:60px;
+          padding: 5px 0;
+          padding:10px 12px;
+          &:last-child{
+            border:none;
+          }
+          &>div{
+            &:first-child{
+              width:40px;
+              margin-right:12px;
+            }
+            &:last-child{
+              flex:7;
+               .appName{
+                font-size:14px;
+                font-family: Roboto-Bold;
+                line-height:1.5;
+              }
+              .artistName{
+                font-size:12px;
+                font-family: Roboto-lignt;
+                line-height:1.5;
+                color:#aaa;
+              }
+            }
+          }
+          img{
+            width:40px;
+            border-radius:9px;
+          }
+        }
     }
   }
     .category-checkbox{
@@ -165,22 +222,38 @@
                   </div>
 
                   <div class="upload-information">
-                  {{ic.name}}
                       <div class="upload-form-gurop">
                         <label>Name</label>
-                        <input type="text" v-model="ic.name"  name="" placeholder="Input APP Name Search">
+                        <input type="text"  v-model="ic.name"  name="" placeholder="Input APP Name Search">
+                        <button @click="_AppStoar" class="search"><i class="sprite_find"></i></button>
+                        <!-- https://itunes.apple.com/search?term=xxx&country=CN&media=software&limit=10 -->
+                 
+                           <div class="_Apps">
+                            <ul>
+
+                                <li class="_AppItem" v-for="ics in getAppStore">
+                                  <div class="appIcon">
+                                    <img :src="ics.artworkUrl512">
+                                  </div>
+                                  <div> 
+                                    <p class="appName">{{ics.trackName}}</p>
+                                    <p class="artistName">{{ics.artistName}}</p>
+                                  </div>
+                                </li>
+
+                              </ul>
+                          </div>
+                   
+
                       </div>
+                     
 
                       <div class="upload-form-gurop">
-                  {{ic.link}}
-
                         <label>Link</label>
                         <input type="text" v-model="ic.link" name="">
                       </div>
 
                       <div class="upload-form-gurop">
-                           {{ic.Category}}
-
                         <h5>Category</h5>
                         <div class="clearfix">
                            <div class="category-checkbox" v-for="(ck, ins) in category">
@@ -199,7 +272,7 @@
                       </div>
 
                       <div class="upload-btn">
-                        <button type="submit" @click="_uplosings">Upload</button>
+                        <button type="button" @click="_uplosings">Upload</button>
                       </div>
 
                   </div>
@@ -213,7 +286,8 @@ export default {
   props: ['ic', 'index', 'category'],
   data () {
     return {
-      checkedNames: []
+      checkedNames: [],
+      getAppStore: []
     }
   },
   computed: {
@@ -226,6 +300,16 @@ export default {
       'loadtext',
       'postimgdata'
     ]),
+    _AppStoar () {
+      this._searchShow = !this._searchShow
+      let self = this
+      self.$http.get('https://itunes.apple.com/search?term=' + self.ic.name + '&country=CN&media=software&limit=10')
+      .then((response) => {
+        let _results = JSON.parse(response.data)
+        self.getAppStore = _results.results
+      }).then((response) => {
+      })
+    },
     showcheck () {
       console.log(this.checkedNames)
     },
