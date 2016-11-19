@@ -187,7 +187,6 @@ $color:#EFEFEF;
               images['url'] = oireader.target.result
               images['imgname'] = file.name
               images['size'] = Math.round(file.size / 1024)
-
               let imc = new window.Image()
               imc.src = oireader.target.result
               images['width'] = imc.naturalWidth
