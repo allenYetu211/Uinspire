@@ -48,9 +48,10 @@ $color:#EFEFEF;
   
 
   .drop_zone{
-    padding:35px 10px;
+    padding:20px 10px;
     // width:300px;
-    // height:300px;
+    height:300px;
+    overflow-y:scroll;
     margin: 0 auto;
     background: #FCFCFC;
     border: 3px dashed #EFEFEF;
@@ -134,7 +135,7 @@ $color:#EFEFEF;
 
 <script>
   import UpDataPageForm from './updataPage-form'
-
+  // import ColorThief from '../../static/color-thief'
   import { mapActions, mapGetters } from 'vuex'
   export default {
     components: {
@@ -145,7 +146,8 @@ $color:#EFEFEF;
         imgInformations: '',
         imgIn: [],
         category: [],
-        checkbox_model: []
+        checkbox_model: [],
+        file: '../../static/css_sprite.png'
       }
     },
     mounted () {
@@ -155,7 +157,6 @@ $color:#EFEFEF;
           for (let i = 0; i < this.categ.data.length; i++) {
             this.category.push(this.categ.data[i].name_zh)
           }
-          console.log(this.category)
         }).then((repones) => {
         })
       })
@@ -213,7 +214,11 @@ $color:#EFEFEF;
               }
               images['Category'] = []
               images['name'] = ''
+              images['tag'] = ''
               images['link'] = ''
+              images['icon_link'] = ''
+              images['app_category'] = ''
+              images['version'] = ''
               self.imgIn.push(images)
               self.imgInformations = self.imgIn
               i++
@@ -221,7 +226,6 @@ $color:#EFEFEF;
             }
             reader.readAsDataURL(file)
           }
-          console.log(self.imgInformations)
         }
         funApp()
       }

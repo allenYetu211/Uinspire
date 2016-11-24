@@ -38,15 +38,36 @@ export default {
     return new window.Blob([ab], { type: 'image/jpeg' })
   },
   uploadProject (_data) {
-    console.log(_data.file)
     const fdata = new window.FormData()
+    // let Category = json.stringify(_data.Category)
+    // console.log( json.stringify(_data.Category))
+    // console.log('_data.Category_1:', _data.Category)
+    // console.log('_data.Category_2:', _data.Category.join(','))
+    // let Category = ''
+    // for (var i = 0; i < _data.Category.length; i++) {
+    //    if( i != _data.Category.length - 1){
+    //         Category = Category + _data.Category[i] + ",";
+    //    }else{
+    //        Category = Category + _data.Category[i];
+    //    }
+    // }
+    // let Category = _data.Category.join(',')
+    // console.log('Category:', Category)
     fdata.append('file', _data.file)
     fdata.append('platform', _data.PlatformIndex)
-    fdata.append('category', _data.category)
+    fdata.append('category', _data.Category.join(','))
     fdata.append('name', _data.name)
+    fdata.append('tag', _data.tag.join(','))
     fdata.append('link', _data.link)
+    fdata.append('icon_link', _data.icon_link)
+    fdata.append('developer', _data.developer)
+    fdata.append('developer_link', _data.developer_link)
+    fdata.append('app_category', _data.app_category)
+    fdata.append('version', _data.version)
+    fdata.append('screen_width', _data.width)
+    fdata.append('screen_height', _data.height)
     fdata.append('color', '\'#343434\'')
-
+    console.log(fdata)
     Vue.http({
       url: 'http://inspire-api.stoyard.com/index.php/api/inspire/adddata',
       method: 'POST',
