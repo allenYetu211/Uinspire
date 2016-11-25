@@ -37,22 +37,8 @@ export default {
     }
     return new window.Blob([ab], { type: 'image/jpeg' })
   },
-  uploadProject (_data) {
+  uploadProject (_data, callback) {
     const fdata = new window.FormData()
-    // let Category = json.stringify(_data.Category)
-    // console.log( json.stringify(_data.Category))
-    // console.log('_data.Category_1:', _data.Category)
-    // console.log('_data.Category_2:', _data.Category.join(','))
-    // let Category = ''
-    // for (var i = 0; i < _data.Category.length; i++) {
-    //    if( i != _data.Category.length - 1){
-    //         Category = Category + _data.Category[i] + ",";
-    //    }else{
-    //        Category = Category + _data.Category[i];
-    //    }
-    // }
-    // let Category = _data.Category.join(',')
-    // console.log('Category:', Category)
     fdata.append('file', _data.file)
     fdata.append('platform', _data.PlatformIndex)
     fdata.append('category', _data.Category.join(','))
@@ -67,23 +53,21 @@ export default {
     fdata.append('screen_width', _data.width)
     fdata.append('screen_height', _data.height)
     fdata.append('color', '\'#343434\'')
-    console.log(fdata)
     Vue.http({
       url: 'http://inspire-api.stoyard.com/index.php/api/inspire/adddata',
       method: 'POST',
       emulateJSON: true,
       body: fdata
-      // params: {
-      //   platform: _data.PlatformIndex,
-      //   category: _data.category,
-      //   name: _data.name,
-      //   link: _data.link,
-      //   color: '\'#343434\''
-      // }
     }).then((response) => {
-      let respon = json.parse(response.data)
-      console.log('data:', _data)
-      console.log(respon)
+      if ( json.parse(response.data).code === '0') {
+        console.log('返回成功')
+        if (typeof callback === 'function') {
+          callback(json.parse(response.data).data.thumb_img_url)
+        }
+        // return self.returnData
+      } else {
+        console.log('data:', json.parse(response.data))
+      }
     }, (response) => {
       console.log('error')
     })

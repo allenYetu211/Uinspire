@@ -106,31 +106,74 @@ $color:#EFEFEF;
  .file-upload{
     margin-top:80px;
   }
+  .updataSuccess-line{
+    margin: 20px 0;
+    position: relative;
+    &:after{
+          position: absolute;
+          bottom: 1px;
+          content: "";
+          height: 1px;
+          width: 100%;
+          background: #222;
+    }
+  }
+  .updataSuccess{
+    width: 100%;
+    overflow-x: scroll;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    .updataInsparent{
+      display:inline-block;
+      margin:0 5px;
+      width: 70px;
+      height: 60px;
+      overflow: hidden;
+      position:relative;
+        img{
+          position:absolute;
+          top:0;
+          width: 100%;
+          max-height:180px;
+      }
+    }
+    
+  }
 </style>
 <template>
-<div class="al-container">
-  <div class="file-upload">
-        <div @dragover.stop.prevent="handleDragOver" @drop.stop.prevent="handleFilSelect" class="drop_zone">
-            <div class="informations" v-for="ic in imgInformations">
-              <div class="file-img">
-                <img :src="ic.url">
-              </div>
-
-              <div class="file-imginfromation">
-                <p class="fileimge-name">{{ic.imgname}}</p>
-                <p class="fileimge-size">{{ic.size}}KB</p>
-              </div>
+<div class="loaderPage">
+  
+    <div class="al-container">
+        <div class="updataSuccess-line">
+          <div class="updataSuccess">
+            <div class="updataInsparent" v-for=" itms in getRetruenData" >
+              <img :src="itms" alt="">
             </div>
         </div>
-        <div v-if="imgInformations.length !== 0">
-            <up-data-page-form  v-for="(ic, index) in imgInformations" :category='category' :ic='ic' :index="index"></up-data-page-form>
-       </div>
+      </div>
 
-    
+      <div class="file-upload">
+            <div @dragover.stop.prevent="handleDragOver" @drop.stop.prevent="handleFilSelect" class="drop_zone">
+                <div class="informations" v-for="ic in imgInformations">
+                  <div class="file-img">
+                    <img :src="ic.url">
+                  </div>
 
-  </div>
+                  <div class="file-imginfromation">
+                    <p class="fileimge-name">{{ic.imgname}}</p>
+                    <p class="fileimge-size">{{ic.size}}KB</p>
+                  </div>
+                </div>
+            </div>
+            <div v-if="imgInformations.length !== 0">
+                <up-data-page-form  v-for="(ic, index) in imgInformations" :category='category' :ic='ic' :index="index"></up-data-page-form>
+           </div>
+
+        
+
+      </div>
+    </div>
 </div>
-
 </template>
 
 <script>
@@ -163,7 +206,8 @@ $color:#EFEFEF;
     },
     computed: {
       ...mapGetters([
-        'loadtexts'
+        'loadtexts',
+        'getRetruenData'
       ])
     },
     methods: {

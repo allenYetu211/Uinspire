@@ -5,7 +5,8 @@ import {
 } from '../actions'
 
 const state = {
-  text: ''
+  text: '',
+  returnData: []
 }
 
 const mutations = {
@@ -14,7 +15,9 @@ const mutations = {
     console.log(state.text)
   },
   [POSTIMGDATA] (state, _data) {
-    API.uploadProject(_data)
+    API.uploadProject(_data, (url) => {
+      state.returnData.push(url)
+    })
   }
 }
 
