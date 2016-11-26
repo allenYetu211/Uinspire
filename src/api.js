@@ -37,32 +37,37 @@ export default {
     }
     return new window.Blob([ab], { type: 'image/jpeg' })
   },
-  uploadProject (_data) {
-    console.log(_data.file)
+  uploadProject (_data, callback) {
     const fdata = new window.FormData()
     fdata.append('file', _data.file)
     fdata.append('platform', _data.PlatformIndex)
-    fdata.append('category', _data.category)
+    fdata.append('category', _data.Category.join(','))
     fdata.append('name', _data.name)
+    fdata.append('tag', _data.tag.join(','))
     fdata.append('link', _data.link)
+    fdata.append('icon_link', _data.icon_link)
+    fdata.append('developer', _data.developer)
+    fdata.append('developer_link', _data.developer_link)
+    fdata.append('app_category', _data.app_category)
+    fdata.append('version', _data.version)
+    fdata.append('screen_width', _data.width)
+    fdata.append('screen_height', _data.height)
     fdata.append('color', '\'#343434\'')
-
     Vue.http({
       url: 'http://inspire-api.stoyard.com/index.php/api/inspire/adddata',
       method: 'POST',
       emulateJSON: true,
       body: fdata
-      // params: {
-      //   platform: _data.PlatformIndex,
-      //   category: _data.category,
-      //   name: _data.name,
-      //   link: _data.link,
-      //   color: '\'#343434\''
-      // }
     }).then((response) => {
-      let respon = json.parse(response.data)
-      console.log('data:', _data)
-      console.log(respon)
+      if ( json.parse(response.data).code === '0') {
+        console.log('返回成功')
+        if (typeof callback === 'function') {
+          callback(json.parse(response.data).data.thumb_img_url)
+        }
+        // return self.returnData
+      } else {
+        console.log('data:', json.parse(response.data))
+      }
     }, (response) => {
       console.log('error')
     })
