@@ -37,8 +37,25 @@ export default {
     }
     return new window.Blob([ab], { type: 'image/jpeg' })
   },
+  progressbar (_progress, callback) {
+    // const progress = new window.FormData()
+    let times = setInterval (()=> {
+      Vue.http({url}).then((response) => {
+        if(response.data <= 100) {
+          if(typeof callback === 'function') {
+            callback(response.data)
+          }
+        } else {
+           clearInterval(times)
+        }
+      }).then((response) => {
+        clearInterval(times)
+      })
+    },500)
+  },
   uploadProject (_data, callback) {
     const fdata = new window.FormData()
+    fdata.append('PHP_SESSION_UPLOAD_PROGRESS', _data.PHP_SESSION_UPLOAD_PROGRESS)
     fdata.append('file', _data.file)
     fdata.append('platform', _data.PlatformIndex)
     fdata.append('category', _data.Category.join(','))
@@ -59,6 +76,7 @@ export default {
       emulateJSON: true,
       body: fdata
     }).then((response) => {
+
       if ( json.parse(response.data).code === '0') {
         console.log('返回成功')
         if (typeof callback === 'function') {

@@ -142,7 +142,7 @@ $color:#EFEFEF;
 </style>
 <template>
 <div class="loaderPage">
-  
+    {{getprogress}}
     <div class="al-container">
         <div class="updataSuccess-line">
           <div class="updataSuccess">
@@ -154,7 +154,7 @@ $color:#EFEFEF;
 
       <div class="file-upload">
             <div @dragover.stop.prevent="handleDragOver" @drop.stop.prevent="handleFilSelect" class="drop_zone">
-                <div class="informations" v-for="ic in imgInformations">
+                <div class="informations" v-for="ic in outintimagedata">
                   <div class="file-img">
                     <img :src="ic.url">
                   </div>
@@ -165,8 +165,8 @@ $color:#EFEFEF;
                   </div>
                 </div>
             </div>
-            <div v-if="imgInformations.length !== 0">
-                <up-data-page-form  v-for="(ic, index) in imgInformations" :category='category' :ic='ic' :index="index"></up-data-page-form>
+            <div v-if="outintimagedata.length !== 0">
+                <up-data-page-form  v-for="(ic, index) in outintimagedata" :category='category' :ic='ic' :index="index"></up-data-page-form>
            </div>
 
         
@@ -207,12 +207,15 @@ $color:#EFEFEF;
     computed: {
       ...mapGetters([
         'loadtexts',
-        'getRetruenData'
+        'getRetruenData',
+        'outintimagedata',
+        'getprogress'
       ])
     },
     methods: {
       ...mapActions([
-        'loadtext'
+        'loadtext',
+        'storeimagedata'
       ]),
       _dragover () {
       },
@@ -228,6 +231,13 @@ $color:#EFEFEF;
           if (file) {
             var reader = new window.FileReader()
             reader.onload = function (oireader) {
+              // if (i != 0) {
+              //   for (let j = 0; j < self.imgInformations.length; j++) {
+              //     console.log(11)
+              //     console.log(self.imgInformations[i].flie)
+              //   }
+              // }
+              images['PHP_SESSION_UPLOAD_PROGRESS'] = 'abc'
               images['file'] = file
               images['url'] = oireader.target.result
               images['imgname'] = file.name
@@ -265,6 +275,7 @@ $color:#EFEFEF;
               images['version'] = ''
               self.imgIn.push(images)
               self.imgInformations = self.imgIn
+              self.storeimagedata(self.imgInformations)
               i++
               funApp()
             }

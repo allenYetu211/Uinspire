@@ -279,163 +279,218 @@
           border: none;
           border-radius: 3px;
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+          margin-right:10px;
+          &.upload-cancel{
+            background-color:#f4f4f4;
+          }
         }
     }
   
 </style>
-  <template>
-       <div class="informations-uploade">
-         <form>
-                   <div class="file-img-information">
-                      <div class="upload-img">
-                        <img :src="ic.url">
-                      </div>
+<template>
+ <div class="informations-uploade">
+   <form>
+             <div class="file-img-information">
+                <div class="upload-img">
+                  <img :src="ic.url">
+                </div>
 
-                      <div class="file-img-imfor">
-                        <p class="Platform">
-                        Platform
-                          <span class="infoamtions-r">{{ic.Platform}}</span>
-                        </p>
-                        <p class="Dimension">
-                          Dimension
-                          <span class="infoamtions-r">{{ic.width}} * {{ic.height}}</span>
-                        </p>
-                        <p class="Size">
-                          Size
-                          <span class="infoamtions-r">{{ic.size}}KB</span>
-                        </p>
-                        <!-- <p class="Colors">
-                        Colors
-                          <span class="infoamtions-r"></span>
-                        </p> -->
-                      </div>
-                    </div>
+                <div class="file-img-imfor">
+                  <p class="Platform">
+                  Platform
+                    <span class="infoamtions-r">{{ic.Platform}}</span>
+                  </p>
+                  <p class="Dimension">
+                    Dimension
+                    <span class="infoamtions-r">{{ic.width}} * {{ic.height}}</span>
+                  </p>
+                  <p class="Size">
+                    Size
+                    <span class="infoamtions-r">{{ic.size}}KB</span>
+                  </p>
+                </div>
+              </div>
 
-                    <div class="upload-information" v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
-                        <div class="upload-form-gurop">
-                          <label>iPhone-Name</label>
-                          <input type="text"  v-model="ic.name"  name="" placeholder="Input APP Name Search">
-                          <button @click="_AppStoar" class="search"><i class="sprite_find"></i></button>
-                          <!-- https://itunes.apple.com/search?term=xxx&country=CN&media=software&limit=10 -->
-                             <div class="_Apps">
-                              <ul>
-                                  <li  @click.stop="_getAppData" class="_AppItem" v-for="(ics, imoc) in getAppStore" :data-Gnd="imoc">
-                                    <div class="appIcon">
-                                      <img :src="ics.artworkUrl512">
-                                    </div>
-                                    <div> 
-                                      <p class="appName">{{ics.trackName}}</p>
-                                      <p class="artistName">{{ics.artistName}} {{imoc}}</p>
-                                    </div>
-                                  </li>
-                                </ul>
-                            </div>
-                        </div>
-                       
-
-                        <!-- <div class="upload-form-gurop">
-                          <label>Link</label>
-                          <input type="text" v-model="ic.link" name="">
-                        </div> -->
-
-                        <div class="upload-form-gurop">
-                          <h5>Category</h5>
-                          <div class="clearfix">
-                             <div class="category-checkbox" v-for="(ck, ins) in category">
-                                <input  v-model="ic.Category" :value="ins"  :id="'ckcategory_' + index + ins " type="checkbox" name="" style="display:none">
-                                <i class="sprite_checkbox"></i>
-                                <label @click="showcheck" :for="'ckcategory_' + index + ins " >{{ck}}</label>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="upload-form-gurop">
-                          <h5>Tags</h5>
-                          <div>
-                          <!--   <input v-model="ic.tag" type="text" name=""> -->
-                            <div class="upload-tag">
-                              <span class="tag-laber" v-for="(tag, tagindex) in updataTga">
-                                {{tag}}
-                                <i :data-tag="tagindex" @click="_deleteTag">x</i>
-                              </span>
-                              <button @click="_popupShow" class="updata-Tag">添加标签</button>
-                              <div class="popup-tag" v-if="updataTga.length < 3 && popup">
-                                <input v-model="inputTag" type="text" name="">
-                                <button @click="_addPushTag" class="popup-addTag">添加</button>
+              <div class="upload-information" v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
+                  <div class="upload-form-gurop">
+                    <label>Name</label>
+                    <input type="text"  v-model="ic.name"  name="" placeholder="Input APP Name Search">
+                    <input type="hidden" name="PHP_SESSION_UPLOAD_PROGRESS" value="filename" />
+                    <button @click="_AppStore" data-platform='ios' class="search"><i class="sprite_find"></i></button>
+                    <!-- https://itunes.apple.com/search?term=xxx&country=CN&media=software&limit=10 -->
+                       <div class="_Apps">
+                        <ul>
+                            <li  @click.stop="_getAppData" class="_AppItem" v-for="(ics, imoc) in getAppStore" :data-Gnd="imoc"  data-platform='ios'>
+                              <div class="appIcon">
+                                <img :src="ics.artworkUrl512">
                               </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="upload-btn">
-                          <button type="button" @click="_uplosings">Upload</button>
-                        </div>
-                    </div>
-
-                    <div class="upload-information" v-else>
-                        <div class="upload-form-gurop">
-                          <label>Web-Name</label>
-                          <input type="text"  v-model="ic.name"  name="" placeholder="Input Name Search">
-                          <!-- <button @click="_AppStoar" class="search"><i class="sprite_find"></i></button> -->
-                          <!-- https://itunes.apple.com/search?term=xxx&country=CN&media=software&limit=10 -->
-                   
-                             <div class="_Apps">
-                              <ul>
-                                  <li  @click.stop="_getAppData" class="_AppItem" v-for="(ics, imoc) in getAppStore" :data-Gnd="imoc">
-                                    <div class="appIcon">
-                                      <img :src="ics.artworkUrl512">
-                                    </div>
-                                    <div> 
-                                      <p class="appName">{{ics.trackName}}</p>
-                                      <p class="artistName">{{ics.artistName}} {{imoc}}</p>
-                                    </div>
-                                  </li>
-                                </ul>
-                            </div>
-                        </div>
-                       
-
-                        <div class="upload-form-gurop">
-                          <label>Link</label>
-                          <input type="text" v-model="ic.link" name="">
-                        </div>
-
-                        <div class="upload-form-gurop">
-                          <h5>Category</h5>
-                          <div class="clearfix">
-                             <div class="category-checkbox" v-for="(ck, ins) in category">
-                                <input  v-model="ic.Category" :value="ins"  :id="'ckcategory_' + index + ins " type="checkbox" name="" style="display:none">
-                                <i class="sprite_checkbox"></i>
-                                <label @click="showcheck" :for="'ckcategory_' + index + ins " >{{ck}}</label>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="upload-form-gurop">
-                          <h5>Tags</h5>
-                          <div>
-                          <!--   <input v-model="ic.tag" type="text" name=""> -->
-                            <div class="upload-tag">
-                              <span class="tag-laber" v-for="(tag, tagindex) in updataTga">
-                                {{tag}}
-                                <i :data-tag="tagindex" @click="_deleteTag">x</i>
-                              </span>
-                              <button @click="_popupShow" class="updata-Tag">添加标签</button>
-                              <div class="popup-tag" v-if="popup">
-                                <input v-model="inputTag" type="text" name="">
-                                <button @click="_addPushTag" class="popup-addTag">添加</button>
+                              <div> 
+                                <p class="appName">{{ics.trackName}}</p>
+                                <p class="artistName">{{ics.artistName}} {{imoc}}</p>
                               </div>
-                            </div>
-                          </div>
-                        </div>
+                            </li>
+                          </ul>
+                      </div>
+                  </div>
+                 
 
-                        <div class="upload-btn">
-                          <button type="button" @click="_uplosings">Upload</button>
+                  <!-- <div class="upload-form-gurop">
+                    <label>Link</label>
+                    <input type="text" v-model="ic.link" name="">
+                  </div> -->
+
+                  <div class="upload-form-gurop">
+                    <h5>Category</h5>
+                    <div class="clearfix">
+                       <div class="category-checkbox" v-for="(ck, ins) in category">
+                          <input  v-model="ic.Category" :value="ins"  :id="'ckcategory_' + index + ins " type="checkbox" name="" style="display:none">
+                          <i class="sprite_checkbox"></i>
+                          <label :for="'ckcategory_' + index + ins " >{{ck}}</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="upload-form-gurop">
+                    <h5>Tags</h5>
+                    <div>
+                    <!--   <input v-model="ic.tag" type="text" name=""> -->
+                      <div class="upload-tag">
+                        <span class="tag-laber" v-for="(tag, tagindex) in updataTga">
+                          {{tag}}
+                          <i :data-tag="tagindex" @click="_deleteTag">x</i>
+                        </span>
+                        <button @click="_popupShow" class="updata-Tag">添加标签</button>
+                        <div class="popup-tag" v-if="updataTga.length < 3 && popup">
+                          <input v-model="inputTag" type="text" name="">
+                          <button @click="_addPushTag" class="popup-addTag">添加</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="upload-btn">
+                    <button type="button" @click="_uplosings">Upload</button>
+                    {{index}}
+                    <button type="button" :data-cancelIndex = 'index' @click="_upcancel" class="upload-cancel">Cancel</button>
+                  </div>
+              </div>
+
+              <div class="upload-information" v-if="ic.Platform === 'Android'">
+                  <div class="upload-form-gurop">
+                    <label>Name</label>
+                    <input type="text"  v-model="ic.name"  name="" placeholder="Input Name Search">
+                    <button @click="_AppStore"  data-platform='android' class="search"><i class="sprite_find"></i></button>
+             
+                       <div class="_Apps">
+                        <ul>
+                            <li  @click.stop="_getAppData" class="_AppItem" v-for="(ics, imoc) in getAppStore" :data-Gnd="imoc"  data-platform='android'>
+                              <div class="appIcon">
+                                <img :src="ics.icons.px256">
+                              </div>
+                              <div> 
+                                <p class="appName" v-html="ics.title"></p>
+                                <p class="artistName"  v-for = 'infor in ics.apks'>{{infor.versionName}} </p>
+                              </div>
+                            </li>
+                          </ul>
+                      </div>
+                  </div>
+                  <div class="upload-form-gurop">
+                    <h5>Category</h5>
+                    <div class="clearfix">
+                       <div class="category-checkbox" v-for="(ck, ins) in category">
+                          <input  v-model="ic.Category" :value="ins"  :id="'ckcategory_' + index + ins " type="checkbox" name="" style="display:none">
+                          <i class="sprite_checkbox"></i>
+                          <label :for="'ckcategory_' + index + ins " >{{ck}}</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="upload-form-gurop">
+                    <h5>Tags</h5>
+                    <div>
+                    <!--   <input v-model="ic.tag" type="text" name=""> -->
+                      <div class="upload-tag">
+                        <span class="tag-laber" v-for="(tag, tagindex) in updataTga">
+                          {{tag}}
+                          <i :data-tag="tagindex" @click="_deleteTag">x</i>
+                        </span>
+                        <button @click="_popupShow" class="updata-Tag">添加标签</button>
+                        <div class="popup-tag" v-if="popup">
+                          <input v-model="inputTag" type="text" name="">
+                          <button @click="_addPushTag" class="popup-addTag">添加</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="upload-btn">
+                    <button type="button" @click="_uplosings">Upload</button>
+                    {{index}}
+                    <button type="button" :data-cancelIndex = 'index' @click="_upcancel" class="upload-cancel">Cancel</button>
+                  </div>
+              </div>
+
+              <div class="upload-information" v-if="ic.Platform === 'WEB'">
+                    <div class="upload-form-gurop">
+                      <label>Name</label>
+                      <input type="text"  v-model="ic.name"  name="" placeholder="Input Name Search">
+                         <div class="_Apps">
+                          <ul>
+                              <li  @click.stop="_getAppData" class="_AppItem" v-for="(ics, imoc) in getAppStore" :data-Gnd="imoc"  data-platform='android'>
+                                <div class="appIcon">
+                                  <img :src="ics.icons.px256">
+                                </div>
+                                <div> 
+                                  <p class="appName" v-html="ics.title"></p>
+                                  <p class="artistName"  v-for = 'infor in ics.apks'>{{infor.versionName}} </p>
+                                </div>
+                              </li>
+                            </ul>
                         </div>
                     </div>
-                </form>
-          </div>
-  </template>
+                    <div class="upload-form-gurop">
+                      <label>Link</label>
+                      <input type="text" v-model="ic.link" name="">
+                    </div>
+                    <div class="upload-form-gurop">
+                      <h5>Category</h5>
+                      <div class="clearfix">
+                         <div class="category-checkbox" v-for="(ck, ins) in category">
+                            <input  v-model="ic.Category" :value="ins"  :id="'ckcategory_' + index + ins " type="checkbox" name="" style="display:none">
+                            <i class="sprite_checkbox"></i>
+                            <label :for="'ckcategory_' + index + ins " >{{ck}}</label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="upload-form-gurop">
+                      <h5>Tags</h5>
+                      <div>
+                      <!--   <input v-model="ic.tag" type="text" name=""> -->
+                        <div class="upload-tag">
+                          <span class="tag-laber" v-for="(tag, tagindex) in updataTga">
+                            {{tag}}
+                            <i :data-tag="tagindex" @click="_deleteTag">x</i>
+                          </span>
+                          <button @click="_popupShow" class="updata-Tag">添加标签</button>
+                          <div class="popup-tag" v-if="popup">
+                            <input v-model="inputTag" type="text" name="">
+                            <button @click="_addPushTag" class="popup-addTag">添加</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="upload-btn">
+                      <button type="button" @click="_uplosings">Upload</button>
+                      {{index}}
+                      <button type="button" :data-cancelIndex = 'index' @click="_upcancel" class="upload-cancel">Cancel</button>
+                    </div>
+              </div>
+        </form>
+  </div>
+</template>
 
 
 <script>
@@ -455,26 +510,40 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'loadtexts'
+      'loadtexts',
+      'outintimagedata'
     ])
   },
   methods: {
     ...mapActions([
       'loadtext',
-      'postimgdata'
+      'postimgdata',
+      'deleteimagedata'
     ]),
-    _AppStoar () {
+    _AppStore (el) {
+      let __url__ = ''
+      if (el.target.dataset.platform === 'ios') {
+       __url__ = 'https://itunes.apple.com/search?term=' + this.ic.name + '&country=CN&media=software&limit=10'
+      } else {
+       __url__ = 'http://apps.wandoujia.com/api/v1/search/$'+ this.ic.name +'?opt_fields=title,icons.px256,packageName,apks.versionName'
+      }
       this._searchShow = !this._searchShow
       let self = this
-      self.$http.get('https://itunes.apple.com/search?term=' + self.ic.name + '&country=CN&media=software&limit=10')
-      .then((response) => {
-        let _results = JSON.parse(response.data)
-        self.getAppStore = _results.results
-      }).then((response) => {
+      self.$http.get(__url__).then((response) => {
+      if (el.target.dataset.platform === 'ios') {
+          let _results = JSON.parse(response.data)
+          self.getAppStore = _results.results
+        } else {
+          self.getAppStore = response.data.appList
+        }
+        
+        }).then((response) => {
       })
-    },
-    showcheck () {
-      console.log(this.checkedNames)
+   },
+    _upcancel (el) {
+      // console.log(el.target.dataset.cancelindex)
+      console.log(this.outintimagedata)
+      this.deleteimagedata(el.target.dataset.cancelindex)
     },
     _uplosings () {
       this.postimgdata(this.ic)
@@ -493,15 +562,31 @@ export default {
     },
     _getAppData (event) {
       let filter = {}
-      this.ic.name = filter['trackName'] = this.getAppStore[event.target.dataset.gnd].trackName
-      this.ic.link = filter['trackViewUrl'] =  this.getAppStore[event.target.dataset.gnd].trackViewUrl
-      this.ic.icon_link = filter['artworkUrl512'] =  this.getAppStore[event.target.dataset.gnd].artworkUrl512
-      this.ic.developer  = filter['artistName'] =  this.getAppStore[event.target.dataset.gnd].artistName
-      this.ic.developer_link = filter['artistViewUrl'] =  this.getAppStore[event.target.dataset.gnd].artistViewUrl
-      this.ic.app_category = filter['genres'] =  this.getAppStore[event.target.dataset.gnd].genres
-      this.ic.version = filter['version'] =  this.getAppStore[event.target.dataset.gnd].version
+      let target = this.getAppStore[event.target.dataset.gnd]
+      if (event.target.dataset.platform === 'ios') {
+        this.ic.link = filter['trackViewUrl'] =  target.trackViewUrl
+        this.ic.icon_link = filter['artworkUrl512'] =  target.artworkUrl512
+        this.ic.developer  = filter['artistName'] =  target.artistName
+        this.ic.developer_link = filter['artistViewUrl'] =  target.artistViewUrl
+        this.ic.app_category = filter['genres'] =  target.genres
+        this.ic.version = filter['version'] =  target.version
+        this.ic.name = filter['trackName'] = target.trackName
+      } else {
+        this.ic.link = filter['trackViewUrl'] = 'http://www.wandoujia.com/apps/' + target.packageName
+        let blibli = {}
+        blibli['px256'] = target.icons.px256
+        this.ic.icon_link = filter['icons'] =  blibli
+        let nullArray = {}
+        nullArray['versionName'] = target.apks[0].versionName
+        filter['apks'] =  [nullArray]
+        let newString = target.title.replace('<em>', '').replace('</em>', '')
+        this.ic.name = filter['title'] = newString
+      }
       this.getAppStore = []
       this.getAppStore.push(filter)
+    },
+    _androidFilter () {
+
     }
   }
 }
