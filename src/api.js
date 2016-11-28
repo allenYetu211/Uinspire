@@ -39,19 +39,19 @@ export default {
   },
   progressbar (_progress, callback) {
     // const progress = new window.FormData()
-    let times = setInterval (()=> {
-      Vue.http({url}).then((response) => {
-        if(response.data <= 100) {
-          if(typeof callback === 'function') {
-            callback(response.data)
-          }
-        } else {
-           clearInterval(times)
-        }
-      }).then((response) => {
-        clearInterval(times)
-      })
-    },500)
+    // let times = setInterval(() => {
+    //   Vue.http({}).then((response) => {
+    //     if (response.data <= 100) {
+    //       if (typeof callback === 'function') {
+    //         callback(response.data)
+    //       }
+    //     } else {
+    //       clearInterval(times)
+    //     }
+    //   }).then((response) => {
+    //     clearInterval(times)
+    //   })
+    // }, 500)
   },
   uploadProject (_data, callback) {
     const fdata = new window.FormData()
@@ -76,8 +76,7 @@ export default {
       emulateJSON: true,
       body: fdata
     }).then((response) => {
-
-      if ( json.parse(response.data).code === '0') {
+      if (json.parse(response.data).code === '0') {
         console.log('返回成功')
         if (typeof callback === 'function') {
           callback(json.parse(response.data).data.thumb_img_url)

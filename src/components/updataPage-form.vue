@@ -116,24 +116,27 @@
             }
             &:hover i {
               opacity: 1;
-              right:5px;
+              transform: translate(0%,-50%);
+              // display:block;
               z-index:9;
             }
             i{
               position:absolute;
               top: 50%;
-              transform: translateY(-50%);
+              transform: translate(150%,-50%) rotate(180deg);
               border-radius:50%;
-              right:-30px;
+              right:0px;
               display: block;
               width: 15px;
               height:15px;
               line-height:15px;
               text-align:center;
               background-color:#FFFA00;
+              // display:none;
+              // pointer-events: none;
               opacity: 0;
               z-index:-99;
-              transition:opacity 1s, right 0.5s;
+              transition:opacity 0.5s, transform 0.5s;
               cursor:pointer;
             }
           }
@@ -310,7 +313,6 @@
                   </p>
                 </div>
               </div>
-
               <div class="upload-information" v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
                   <div class="upload-form-gurop">
                     <label>Name</label>
@@ -370,7 +372,6 @@
 
                   <div class="upload-btn">
                     <button type="button" @click="_uplosings">Upload</button>
-                    {{index}}
                     <button type="button" :data-cancelIndex = 'index' @click="_upcancel" class="upload-cancel">Cancel</button>
                   </div>
               </div>
@@ -426,7 +427,6 @@
 
                   <div class="upload-btn">
                     <button type="button" @click="_uplosings">Upload</button>
-                    {{index}}
                     <button type="button" :data-cancelIndex = 'index' @click="_upcancel" class="upload-cancel">Cancel</button>
                   </div>
               </div>
@@ -484,7 +484,6 @@
 
                     <div class="upload-btn">
                       <button type="button" @click="_uplosings">Upload</button>
-                      {{index}}
                       <button type="button" :data-cancelIndex = 'index' @click="_upcancel" class="upload-cancel">Cancel</button>
                     </div>
               </div>
@@ -523,23 +522,22 @@ export default {
     _AppStore (el) {
       let __url__ = ''
       if (el.target.dataset.platform === 'ios') {
-       __url__ = 'https://itunes.apple.com/search?term=' + this.ic.name + '&country=CN&media=software&limit=10'
+        __url__ = 'https://itunes.apple.com/search?term=' + this.ic.name + '&country=CN&media=software&limit=10'
       } else {
-       __url__ = 'http://apps.wandoujia.com/api/v1/search/$'+ this.ic.name +'?opt_fields=title,icons.px256,packageName,apks.versionName'
+        __url__ = 'http://apps.wandoujia.com/api/v1/search/$' + this.ic.name + '?opt_fields=title,icons.px256,packageName,apks.versionName'
       }
       this._searchShow = !this._searchShow
       let self = this
       self.$http.get(__url__).then((response) => {
-      if (el.target.dataset.platform === 'ios') {
+        if (el.target.dataset.platform === 'ios') {
           let _results = JSON.parse(response.data)
           self.getAppStore = _results.results
         } else {
           self.getAppStore = response.data.appList
         }
-        
-        }).then((response) => {
+      }).then((response) => {
       })
-   },
+    },
     _upcancel (el) {
       // console.log(el.target.dataset.cancelindex)
       console.log(this.outintimagedata)
@@ -564,21 +562,21 @@ export default {
       let filter = {}
       let target = this.getAppStore[event.target.dataset.gnd]
       if (event.target.dataset.platform === 'ios') {
-        this.ic.link = filter['trackViewUrl'] =  target.trackViewUrl
-        this.ic.icon_link = filter['artworkUrl512'] =  target.artworkUrl512
-        this.ic.developer  = filter['artistName'] =  target.artistName
-        this.ic.developer_link = filter['artistViewUrl'] =  target.artistViewUrl
-        this.ic.app_category = filter['genres'] =  target.genres
-        this.ic.version = filter['version'] =  target.version
+        this.ic.link = filter['trackViewUrl'] = target.trackViewUrl
+        this.ic.icon_link = filter['artworkUrl512'] = target.artworkUrl512
+        this.ic.developer = filter['artistName'] = target.artistName
+        this.ic.developer_link = filter['artistViewUrl'] = target.artistViewUrl
+        this.ic.app_category = filter['genres'] = target.genres
+        this.ic.version = filter['version'] = target.version
         this.ic.name = filter['trackName'] = target.trackName
       } else {
         this.ic.link = filter['trackViewUrl'] = 'http://www.wandoujia.com/apps/' + target.packageName
         let blibli = {}
         blibli['px256'] = target.icons.px256
-        this.ic.icon_link = filter['icons'] =  blibli
+        this.ic.icon_link = filter['icons'] = blibli
         let nullArray = {}
         nullArray['versionName'] = target.apks[0].versionName
-        filter['apks'] =  [nullArray]
+        filter['apks'] = [nullArray]
         let newString = target.title.replace('<em>', '').replace('</em>', '')
         this.ic.name = filter['title'] = newString
       }

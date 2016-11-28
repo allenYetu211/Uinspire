@@ -99,9 +99,11 @@ $color:#EFEFEF;
     margin:0 auto;
   }
  .informations-uploade{
-   border-bottom:1px solid #EFEFEF;
+    border-bottom:1px solid #EFEFEF;
     padding: 50px 0;
-
+    height: 0;
+    padding: 0;
+    overflow:hidden;
   }
  .file-upload{
     margin-top:80px;
@@ -137,7 +139,9 @@ $color:#EFEFEF;
           max-height:180px;
       }
     }
-    
+  }
+  .Initialize-information-enter-active,.Initeialize-leave-active{
+    transition: height 0.5s;
   }
 </style>
 <template>
@@ -166,11 +170,18 @@ $color:#EFEFEF;
                 </div>
             </div>
             <div v-if="outintimagedata.length !== 0">
-                <up-data-page-form  v-for="(ic, index) in outintimagedata" :category='category' :ic='ic' :index="index"></up-data-page-form>
+               <transition-group
+               name="Initialize-information"
+                  > 
+                <up-data-page-form  
+                v-for="(ic, index) in outintimagedata" 
+                :category='category' 
+                :ic='ic' 
+                :index="index"
+                :key= "'formdata'+ index"
+                ></up-data-page-form>
+              </transition>
            </div>
-
-        
-
       </div>
     </div>
 </div>
@@ -190,7 +201,7 @@ $color:#EFEFEF;
         imgIn: [],
         category: [],
         checkbox_model: [],
-        file: '../../static/css_sprite.png'
+        targetHeight: ''
       }
     },
     mounted () {
@@ -217,6 +228,9 @@ $color:#EFEFEF;
         'loadtext',
         'storeimagedata'
       ]),
+      watchHeight (el) {
+        console.log(el)
+      },
       _dragover () {
       },
       handleDragOver () {
@@ -231,12 +245,6 @@ $color:#EFEFEF;
           if (file) {
             var reader = new window.FileReader()
             reader.onload = function (oireader) {
-              // if (i != 0) {
-              //   for (let j = 0; j < self.imgInformations.length; j++) {
-              //     console.log(11)
-              //     console.log(self.imgInformations[i].flie)
-              //   }
-              // }
               images['PHP_SESSION_UPLOAD_PROGRESS'] = 'abc'
               images['file'] = file
               images['url'] = oireader.target.result

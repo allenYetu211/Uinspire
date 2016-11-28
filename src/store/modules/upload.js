@@ -30,7 +30,7 @@ const mutations = {
     state.storeimagedata = _imagesinformation
   },
   [DELETEIMAGEDATA] (state, _deleteIndex) {
-      state.storeimagedata.splice(_deleteIndex, 1)
+    state.storeimagedata.splice(_deleteIndex, 1)
   }
 }
 
