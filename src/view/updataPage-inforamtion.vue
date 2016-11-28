@@ -17,7 +17,7 @@
       .file-img-imfor{
         p{
           padding:5px 0;
-          font-family: Roboto-Bold;
+          font-weight:700;
           font-size: 12px;
           color: #222222;
           letter-spacing: 0.12px;
@@ -35,7 +35,7 @@
         &>label,&>h5{
           display:block;
           padding:0 0 5px 0;
-          font-family: Roboto-Bold;
+          font-weight:700;
           font-size: 14px;
           color: #222222;
           letter-spacing: -0.09px;

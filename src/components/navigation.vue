@@ -1,6 +1,5 @@
 <style lang="scss">
 $color:#FFFF00;
-$bold: 'Roboto-bold';
   .navigation{
     padding:0 15px;
     background-color:#EFEFEF;
@@ -17,7 +16,7 @@ $bold: 'Roboto-bold';
         border:none;
         background-color:transparent;
         cursor: pointer;
-        font-family: $bold;
+        font-weight:700;
         font-size: 16px;
         &:focus{
           outline:none;
@@ -48,7 +47,7 @@ $bold: 'Roboto-bold';
         min-height:inherit;
         &.view{
           font-size:16px;
-          font-family: $bold;
+          font-weight:700;
           button{
             padding:0;
             i{

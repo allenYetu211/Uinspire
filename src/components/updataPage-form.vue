@@ -17,7 +17,7 @@
       .file-img-imfor{
         p{
           padding:5px 0;
-          font-family: Roboto-Bold;
+          font-weight:700;
           font-size: 12px;
           color: #222222;
           letter-spacing: 0.12px;
@@ -51,7 +51,7 @@
         &>label,&>h5{
           display:block;
           padding:0 0 8px 0;
-          font-family: Roboto-Bold;
+          font-weight:700;
           font-size: 14px;
           line-height: 1.5;
           color: #222222;
@@ -96,7 +96,7 @@
         }
         input::placeholder{
           color:#D7D7D7;
-          font-family: Roboto-Light;
+          font-weight:300;
         }
       .upload-tag{
           width:100%;
@@ -222,14 +222,14 @@
               }
               .appName{
                 font-size:14px;
-                font-family: Roboto-Bold;
+                font-weight:700;
                 line-height:1.5;
                 word-break:keep-all;     
                
               }
               .artistName{
                 font-size:12px;
-                font-family: Roboto-lignt;
+                font-weight:700;
                 line-height:1.5;
                 color:#aaa;
               }
