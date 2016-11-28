@@ -101,9 +101,9 @@ $color:#EFEFEF;
  .informations-uploade{
     border-bottom:1px solid #EFEFEF;
     padding: 50px 0;
-    height: 0;
-    padding: 0;
-    overflow:hidden;
+    // height: 0;
+    // padding: 0;
+    // overflow:hidden;
   }
  .file-upload{
     margin-top:80px;
@@ -245,7 +245,6 @@ $color:#EFEFEF;
           if (file) {
             var reader = new window.FileReader()
             reader.onload = function (oireader) {
-              images['PHP_SESSION_UPLOAD_PROGRESS'] = 'abc'
               images['file'] = file
               images['url'] = oireader.target.result
               images['imgname'] = file.name

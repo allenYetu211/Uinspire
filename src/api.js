@@ -55,7 +55,6 @@ export default {
   },
   uploadProject (_data, callback) {
     const fdata = new window.FormData()
-    fdata.append('PHP_SESSION_UPLOAD_PROGRESS', _data.PHP_SESSION_UPLOAD_PROGRESS)
     fdata.append('file', _data.file)
     fdata.append('platform', _data.PlatformIndex)
     fdata.append('category', _data.Category.join(','))

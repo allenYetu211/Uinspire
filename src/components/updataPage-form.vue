@@ -6,10 +6,12 @@
       flex:3;
       margin-right:40px;
       div.upload-img{
-        margin-bottom:20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #000;
+        margin-bottom: 12px;
         img{
           width:100%;
-          box-shadow: 0 2px 18px 0 rgba(0, 0, 0, 0.25);
+          // box-shadow: 0 2px 18px 0 rgba(0, 0, 0, 0.25);
         }
       }
       .file-img-imfor{
@@ -29,7 +31,7 @@
     &>div.upload-information{
       flex:7;
       .upload-form-gurop{
-        margin-bottom:15px;
+        margin-bottom:20px;
         position:relative;
         button.search{
             position:absolute;
@@ -43,11 +45,12 @@
             i{
               top:0;
               left: 0;
+              pointer-events: none;
             }
         }
         &>label,&>h5{
           display:block;
-          padding:0 0 5px 0;
+          padding:0 0 8px 0;
           font-family: Roboto-Bold;
           font-size: 14px;
           line-height: 1.5;
@@ -192,6 +195,11 @@
           border-bottom:1px solid #dcdcdc;
           height:60px;
           padding:10px 12px;
+          &.consent-information{
+            justify-content: center;
+            align-items: center;
+            color:#aaa;
+          }
           &:last-child{
             border:none;
           }
@@ -292,7 +300,7 @@
 </style>
 <template>
  <div class="informations-uploade">
-   <form>
+   <form @submit.prevent="">
              <div class="file-img-information">
                 <div class="upload-img">
                   <img :src="ic.url">
@@ -317,21 +325,42 @@
                   <div class="upload-form-gurop">
                     <label>Name</label>
                     <input type="text"  v-model="ic.name"  name="" placeholder="Input APP Name Search">
-                    <input type="hidden" name="PHP_SESSION_UPLOAD_PROGRESS" value="filename" />
-                    <button @click="_AppStore" data-platform='ios' class="search"><i class="sprite_find"></i></button>
+                    <!-- <input type="hidden" name="PHP_SESSION_UPLOAD_PROGRESS" value="filename" /> -->
+                    <button  @click="_AppStore" data-platform='ios' class="search"><i class="sprite_find"></i></button>
                     <!-- https://itunes.apple.com/search?term=xxx&country=CN&media=software&limit=10 -->
                        <div class="_Apps">
-                        <ul>
-                            <li  @click.stop="_getAppData" class="_AppItem" v-for="(ics, imoc) in getAppStore" :data-Gnd="imoc"  data-platform='ios'>
-                              <div class="appIcon">
-                                <img :src="ics.artworkUrl512">
-                              </div>
-                              <div> 
-                                <p class="appName">{{ics.trackName}}</p>
-                                <p class="artistName">{{ics.artistName}} {{imoc}}</p>
-                              </div>
-                            </li>
-                          </ul>
+                           <transition
+                                name="custom-classes-transition"
+                                leave-active-class="animated slideOutUp"
+                                tag="div"
+                                > 
+                                  <li class="_AppItem consent-information" v-if="clickAppStore">Input App Name</li>
+                            </transition>
+                            
+                            <ul>
+                            <transition-group 
+                            name="list"
+                             leave-active-class="animated slideOutUp" 
+                             @before-enter= "beforeEnter">
+                              <li   
+                              @click.stop="_getAppData" 
+                              class="_AppItem" 
+                              v-for="(ics, imoc) in getAppStore" 
+                              :data-Gnd="imoc"  
+                              data-platform='ios' 
+                              :key="'itmes' + imoc"
+                              :data-index="imoc"
+                              :style="{animationDelay: animationDelay}">
+                                <div class="appIcon">
+                                  <img :src="ics.artworkUrl512">
+                                </div>
+                                <div> 
+                                  <p class="appName">{{ics.trackName}}</p>
+                                  <p class="artistName">{{ics.artistName}} {{imoc}}</p>
+                                </div>
+                              </li>
+                            </transition-group>
+                            </ul>
                       </div>
                   </div>
                  
@@ -361,7 +390,7 @@
                           {{tag}}
                           <i :data-tag="tagindex" @click="_deleteTag">x</i>
                         </span>
-                        <button @click="_popupShow" class="updata-Tag">添加标签</button>
+                        <button @click="_popupShow" class="updata-Tag" type="button">添加标签</button>
                         <div class="popup-tag" v-if="updataTga.length < 3 && popup">
                           <input v-model="inputTag" type="text" name="">
                           <button @click="_addPushTag" class="popup-addTag">添加</button>
@@ -380,7 +409,7 @@
                   <div class="upload-form-gurop">
                     <label>Name</label>
                     <input type="text"  v-model="ic.name"  name="" placeholder="Input Name Search">
-                    <button @click="_AppStore"  data-platform='android' class="search"><i class="sprite_find"></i></button>
+                    <button   @click="_AppStore"  data-platform='android' class="search"><i class="sprite_find"></i></button>
              
                        <div class="_Apps">
                         <ul>
@@ -395,6 +424,7 @@
                             </li>
                           </ul>
                       </div>
+
                   </div>
                   <div class="upload-form-gurop">
                     <h5>Category</h5>
@@ -416,10 +446,10 @@
                           {{tag}}
                           <i :data-tag="tagindex" @click="_deleteTag">x</i>
                         </span>
-                        <button @click="_popupShow" class="updata-Tag">添加标签</button>
+                        <button @click="_popupShow" class="updata-Tag" type="button">添加标签</button>
                         <div class="popup-tag" v-if="popup">
                           <input v-model="inputTag" type="text" name="">
-                          <button @click="_addPushTag" class="popup-addTag">添加</button>
+                          <button  type="button" @click="_addPushTag" class="popup-addTag">添加</button>
                         </div>
                       </div>
                     </div>
@@ -473,10 +503,10 @@
                             {{tag}}
                             <i :data-tag="tagindex" @click="_deleteTag">x</i>
                           </span>
-                          <button @click="_popupShow" class="updata-Tag">添加标签</button>
+                          <button @click="_popupShow" class="updata-Tag" type="button">添加标签</button>
                           <div class="popup-tag" v-if="popup">
                             <input v-model="inputTag" type="text" name="">
-                            <button @click="_addPushTag" class="popup-addTag">添加</button>
+                            <button  type="button" @click="_addPushTag" class="popup-addTag">添加</button>
                           </div>
                         </div>
                       </div>
@@ -504,7 +534,9 @@ export default {
       getAppStore: [],
       updataTga: [],
       inputTag: '',
-      popup: false
+      popup: false,
+      clickAppStore: true,
+      animationDelay: ''
     }
   },
   computed: {
@@ -519,11 +551,18 @@ export default {
       'postimgdata',
       'deleteimagedata'
     ]),
+    beforeEnter (el) {
+      var delay = el.dataset.imoc * 40
+      el.style.animationDelay = delay + 'ms'
+    },
     _AppStore (el) {
       let __url__ = ''
+      this.clickAppStore = false
       if (el.target.dataset.platform === 'ios') {
+        console.log('ios')
         __url__ = 'https://itunes.apple.com/search?term=' + this.ic.name + '&country=CN&media=software&limit=10'
       } else {
+        console.log('Android')
         __url__ = 'http://apps.wandoujia.com/api/v1/search/$' + this.ic.name + '?opt_fields=title,icons.px256,packageName,apks.versionName'
       }
       this._searchShow = !this._searchShow
@@ -562,6 +601,7 @@ export default {
       let filter = {}
       let target = this.getAppStore[event.target.dataset.gnd]
       if (event.target.dataset.platform === 'ios') {
+        console.log('ios-2')
         this.ic.link = filter['trackViewUrl'] = target.trackViewUrl
         this.ic.icon_link = filter['artworkUrl512'] = target.artworkUrl512
         this.ic.developer = filter['artistName'] = target.artistName
@@ -570,6 +610,7 @@ export default {
         this.ic.version = filter['version'] = target.version
         this.ic.name = filter['trackName'] = target.trackName
       } else {
+        console.log('Android-2')
         this.ic.link = filter['trackViewUrl'] = 'http://www.wandoujia.com/apps/' + target.packageName
         let blibli = {}
         blibli['px256'] = target.icons.px256
