@@ -1,64 +1,16 @@
 <style lang="scss" scoped>
 $color:#EFEFEF;
-  // .updata{
-  //   text-align:center;
-  //   padding: 50px 0;
-  //   .el-upload{
-  //       margin: 0 auto;
-  //       width: 60%;
-  //       min-width: 40%;
-  //       position:relative;
-  //       // ul{
-  //       //   position:absolute;
-  //       //   top: 0;
-  //       //   left:0;
-  //       //   width:100%;
-  //       //   height:100%;
-  //       //   border-top:0;
-  //       // }
-  //       .el-dragger{
-  //             width:100%;
-  //             height:auto;
-  //             padding: 100px 0;
-  //             border: 2px dashed $color;
-  //             background-color:#FCFCFC;
-  //             &:hover{
-  //               border-color:$color;
-  //             }
-  //         }
-  //        .el-icon-upload{
-  //           color:$color;
-  //        }
-  //       .el-upload__input{
-  //         opacity:0;
-  //       }
-  //       .el-dragger__text{
-  //         color:#CDCDCD;
-  //           p{
-  //             padding: 10px 0;
-  //           }
-  //         }
-  //     }
-  //     .el-upload__inner{
-  //       padding:20px;
-    
-  //     }
-  // }
-  // 
-  
-
   .drop_zone{
     padding:20px 10px;
-    // width:300px;
     height:300px;
     overflow-y:scroll;
     margin: 0 auto;
     background: #FCFCFC;
     border: 3px dashed #EFEFEF;
     border-radius: 7px;
+    position:relative;
   }
   .informations{
-    // width: calc(100% / 2 -10px);
     width: calc(100% / 2 - 20px);
     display: inline-block;
     padding:15px 15px;
@@ -143,48 +95,85 @@ $color:#EFEFEF;
   .Initialize-information-enter-active,.Initeialize-leave-active{
     transition: height 0.5s;
   }
+  .list-complete-m-item {
+  transition: all 1s;
+  display: inline-block;
+  margin-right: 10px;
+  }
+  .list-complete-m-enter {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  .list-complete-m-leave-active{
+    opacity: 0;
+    transform: translateX(-30px);
+    position: absolute;
+  }
+  .Initialize-information{
+    transition:all 1s;
+    display:inline-block;
+  }
+  .Initialize-information-enter {
+    height:600px;
+  }
+  .Initialize-information-leave-active{
+    height:0;
+    position: absolute;
+  }
+
 </style>
 <template>
 <div class="loaderPage">
     {{getprogress}}
     <div class="al-container">
         <div class="updataSuccess-line">
-          <div class="updataSuccess">
-            <div class="updataInsparent" v-for=" itms in getRetruenData" >
-              <img :src="itms" alt="">
+            <div class="updataSuccess">
+              
+                    <div class="updataInsparent" v-for=" itms in getRetruenData">
+                        <img :src="itms" alt="">
+                    </div>
             </div>
         </div>
-      </div>
-
-      <div class="file-upload">
-            <div @dragover.stop.prevent="handleDragOver" @drop.stop.prevent="handleFilSelect" class="drop_zone">
-                <div class="informations" v-for="ic in outintimagedata">
-                  <div class="file-img">
-                    <img :src="ic.url">
-                  </div>
-
-                  <div class="file-imginfromation">
-                    <p class="fileimge-name">{{ic.imgname}}</p>
-                    <p class="fileimge-size">{{ic.size}}KB</p>
-                  </div>
-                </div>
+        <div class="file-upload">
+            <div 
+            @dragover.stop.prevent="handleDragOver" 
+            @drop.stop.prevent="handleFilSelect" 
+            class="drop_zone">
+               <transition-group 
+                             name="list-complete-m"
+                             tag="p"
+                             >
+                    <div class="informations  list-complete-m-item" 
+                    v-for="(ic,indexcount) in outintimagedata"  
+                    :key="indexcount">
+                        <div class="file-img">
+                            <img :src="ic.url">
+                        </div>
+                        <div class="file-imginfromation">
+                            <p class="fileimge-name">{{ic.imgname}}</p>
+                            <p class="fileimge-size">{{ic.size}}KB</p>
+                        </div>
+                    </div>
+                </transition-group>
             </div>
             <div v-if="outintimagedata.length !== 0">
-               <transition-group
-               name="Initialize-information"
-                  > 
-                <up-data-page-form  
-                v-for="(ic, index) in outintimagedata" 
-                :category='category' 
-                :ic='ic' 
-                :index="index"
-                :key= "'formdata'+ index"
-                ></up-data-page-form>
-              </transition>
-           </div>
-      </div>
+                <transition-group 
+                name="Initialize-information"
+                tag="p">
+                    <up-data-page-form
+                     v-for="(ic, index) in outintimagedata"
+                     :category='category' 
+                     :ic='ic' 
+                     :index="index"
+                     :key="index" 
+                     class="Initialize-information-item">
+                     </up-data-page-form>
+                </transition>
+            </div>
+        </div>
     </div>
 </div>
+
 </template>
 
 <script>
