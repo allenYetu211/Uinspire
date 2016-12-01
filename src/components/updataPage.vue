@@ -100,40 +100,40 @@ $color:#EFEFEF;
   display: inline-block;
   margin-right: 10px;
   }
-  .list-complete-m-enter {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  .list-complete-m-leave-active{
-    opacity: 0;
-    transform: translateX(-30px);
-    position: absolute;
-  }
-  .Initialize-information{
-    transition:all 1s;
-    display:inline-block;
-  }
-  .Initialize-information-enter {
-    height:600px;
-  }
-  .Initialize-information-leave-active{
-    height:0;
-    position: absolute;
-  }
+  // .list-complete-m-enter {
+  //   transition:all 1s;
+  //   opacity: 0;
+  //   transform: translateY(30px);
+  // }
+  // .list-complete-m-leave-active{
+  //   opacity: 0;
+  //   transform: translateX(-30px);
+  //   position: absolute;
+  // }
+  // .Initialize-information{
+  //   display:inline-block;
+  // }
+  // .Initialize-information-enter {
+  //   height:600px;
+  // }
+  // .Initialize-information-leave-active{
+  //   height:0;
+  //   position: absolute;
+  // }
 
 </style>
 <template>
 <div class="loaderPage">
-    {{getprogress}}
+    <!-- {{getprogress}} -->
     <div class="al-container">
-        <div class="updataSuccess-line">
+       <!--  <div class="updataSuccess-line">
             <div class="updataSuccess">
               
                     <div class="updataInsparent" v-for=" itms in getRetruenData">
                         <img :src="itms" alt="">
                     </div>
             </div>
-        </div>
+        </div> -->
         <div class="file-upload">
             <div 
             @dragover.stop.prevent="handleDragOver" 
