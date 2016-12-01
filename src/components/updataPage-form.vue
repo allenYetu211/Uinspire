@@ -303,20 +303,7 @@ form{
       }
     }
 }
-.list-complete-item {
-  transition: all 1s;
-  display: inline-block;
-  margin-right: 10px;
-}
-.list-complete-enter {
-  opacity: 0;
-  transform: translateY(-50%);
-}
-.list-complete-leave-active{
-  opacity: 0;
-  transform: translateY(50%);
-  position: absolute;
-}
+
 
   
 </style>

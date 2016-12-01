@@ -3,16 +3,18 @@ import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 // import Axions from 'axios'
 // import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
+import './lib/theme-default/index.css'
+import './lib/theme-default/animationStyle.css'
+import './lib/init-css/reset.css'
 
 import App from './App'
 import routes from './router'
 import store from './store'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import 'animate.css/animate.min.css'
 
-import './style/reset.css'
+// import './style/reset.css'
 
 // Vue.use(Axions)
 // Vue.use(ElementUI)

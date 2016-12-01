@@ -128,7 +128,6 @@ $color:#EFEFEF;
     <div class="al-container">
        <!--  <div class="updataSuccess-line">
             <div class="updataSuccess">
-              
                     <div class="updataInsparent" v-for=" itms in getRetruenData">
                         <img :src="itms" alt="">
                     </div>

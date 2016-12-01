@@ -1,4 +1,6 @@
-<style lang="scss"></style>
+<style lang="scss">
+  
+</style>
 <template>
   <div id="app">
     <navigation></navigation>
