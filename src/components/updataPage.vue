@@ -92,56 +92,15 @@ $color:#EFEFEF;
       }
     }
   }
-  .Initialize-information-enter-active,.Initeialize-leave-active{
-    transition: height 0.5s;
-  }
-  .list-complete-m-item {
-  transition: all 1s;
-  display: inline-block;
-  margin-right: 10px;
-  }
-  // .list-complete-m-enter {
-  //   transition:all 1s;
-  //   opacity: 0;
-  //   transform: translateY(30px);
-  // }
-  // .list-complete-m-leave-active{
-  //   opacity: 0;
-  //   transform: translateX(-30px);
-  //   position: absolute;
-  // }
-  // .Initialize-information{
-  //   display:inline-block;
-  // }
-  // .Initialize-information-enter {
-  //   height:600px;
-  // }
-  // .Initialize-information-leave-active{
-  //   height:0;
-  //   position: absolute;
-  // }
-
 </style>
 <template>
 <div class="loaderPage">
-    <!-- {{getprogress}} -->
     <div class="al-container">
-       <!--  <div class="updataSuccess-line">
-            <div class="updataSuccess">
-                    <div class="updataInsparent" v-for=" itms in getRetruenData">
-                        <img :src="itms" alt="">
-                    </div>
-            </div>
-        </div> -->
         <div class="file-upload">
             <div 
             @dragover.stop.prevent="handleDragOver" 
             @drop.stop.prevent="handleFilSelect" 
             class="drop_zone">
-               <transition-group 
-                             name="list-complete-m"
-                             tag="p"
-                             >
                     <div class="informations  list-complete-m-item" 
                     v-for="(ic,indexcount) in outintimagedata"  
                     :key="indexcount">
@@ -153,12 +112,8 @@ $color:#EFEFEF;
                             <p class="fileimge-size">{{ic.size}}KB</p>
                         </div>
                     </div>
-                </transition-group>
             </div>
             <div v-if="outintimagedata.length !== 0">
-                <transition-group 
-                name="Initialize-information"
-                tag="p">
                     <up-data-page-form
                      v-for="(ic, index) in outintimagedata"
                      :category='category' 
@@ -167,7 +122,6 @@ $color:#EFEFEF;
                      :key="index" 
                      class="Initialize-information-item">
                      </up-data-page-form>
-                </transition>
             </div>
         </div>
     </div>

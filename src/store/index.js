@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import * as actions from './actions'
 import * as getters from './getters'
 
-import sides from './modules/side'
+import sides from './modules/sidecolumns'
 import contrast from './modules/contrast'
 import upload from './modules/upload'
 

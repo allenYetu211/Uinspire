@@ -4,7 +4,6 @@ import VueResource from 'vue-resource'
 // import Axions from 'axios'
 // import ElementUI from 'element-ui'
 import './lib/theme-default/index.css'
-import './lib/theme-default/animationStyle.css'
 import './lib/init-css/reset.css'
 
 import App from './App'

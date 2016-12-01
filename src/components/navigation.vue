@@ -372,16 +372,7 @@ import NaviGationTitle from './navigation-title'
 // import axions from 'axios'
 export default{
   mounted () {
-    // let self = this
     this.$nextTick(() => {
-      // this.$http.get('sing').then((respons) => {
-      //   this.getData = JSON.parse(respons.data)
-      //   // console.log(this.getData.)
-      //   if (this.getData.code === '10040') { console.log(this.getData.message) }
-      // }, (respone) => {
-      //   console.log('error')
-      // })
-      // self.axions.get('http://inspire-api.stoyard.com/api/index/apitest')
     })
   },
   components: {

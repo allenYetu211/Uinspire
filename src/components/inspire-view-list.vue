@@ -1,7 +1,7 @@
 <style lang="scss" scoped>
     li {
-      float: left;
       width:calc(100% / 6 - 20px);
+      float: left;
       margin: 10px 10px;
       position:relative;
       overflow:hidden;
@@ -73,7 +73,7 @@
 </style>
 
 <template>
-  <li :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
+  <li  :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
     <div class="imagesShow-box-shadow" :class="{active : hover}">
       <img :src="itmes.url">
         <div class="imagesShow-paypal"  :class="{active : hover}">

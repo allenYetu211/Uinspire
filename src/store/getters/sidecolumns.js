@@ -1,4 +1,4 @@
-export const sideopen = state => state.sides.side
+export const sideopen = state => state.sides.inspirtnavsidebar
 
 export const listArrangestate = state => state.sides.listArrange
 

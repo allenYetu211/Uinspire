@@ -1,5 +1,5 @@
-export const SIDE = 'side'
-export const side = ({commit}) => { commit(SIDE) }
+export const INSPIRTNAVSIDEBAR = 'inspirtnavsidebar'
+export const inspirtnavsidebar = ({commit}) => { commit(INSPIRTNAVSIDEBAR) }
 
 export const LISTARRANGE = 'listArrange'
 export const listArrange = ({commit}) => { commit(LISTARRANGE) }
