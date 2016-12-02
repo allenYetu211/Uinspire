@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="inspirt-nav gl-bgcolor-white">
       <div class="inspirt-nav-l">
         <div class="inspirt-nav-sidebar inspirt-nav-fliter">
@@ -6,7 +7,6 @@
               <span class="sprite_filter"></span>
           </button>
         </div>
-
         <div class="inspirt-nav-search">
           <i class="sprite_login"></i>
           <input type="text" placeholder="Search for inspire" name="">
@@ -30,12 +30,18 @@
         </div>
       </div>
   </div>
+  <side-bar-filter></side-bar-filter>
+</div>
 </template>
 
 <script>
 import {mapGetters, mapActions} from 'vuex'
+import SideBarFilter from './sidebar-filter'
 
 export default {
+  components: {
+    SideBarFilter
+  },
   computed: {
     ...mapGetters([
       'listArrangestate'
@@ -69,6 +75,7 @@ export default {
     height: 60px;
     line-height: 60px;
     text-align: center;
+    border-bottom: 1px solid #e0e0e0;
     & > div {
       float: left;
     }

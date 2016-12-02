@@ -4,8 +4,11 @@ export const loadtext = ({commit}) => { commit(LOADTEXT) }
 export const POSTIMGDATA = 'postimgdata'
 export const postimgdata = ({commit}, updata) => { commit(POSTIMGDATA, updata) }
 
-//  存储浏览器拖拽显示图片， 用于删除显示
+//  初始化 category 数据
+export const CATEGORY = 'category'
+export const category = ({commit}) => { commit(CATEGORY) }
 
+//  存储浏览器拖拽显示图片， 用于删除显示
 export const STOREIMAGEDATA = 'storeimagedata'
 export const storeimagedata = ({commit}, imagesinformation) => { commit(STOREIMAGEDATA, imagesinformation) }
 

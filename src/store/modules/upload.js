@@ -3,14 +3,16 @@ import {
   LOADTEXT,
   POSTIMGDATA,
   STOREIMAGEDATA,
-  DELETEIMAGEDATA
+  DELETEIMAGEDATA,
+  CATEGORY
 } from '../actions'
 
 const state = {
   text: '',
   returnData: [],
   storeimagedata: '',
-  progress: ''
+  progress: '',
+  categoryDate: ''
 }
 
 const mutations = {
@@ -32,6 +34,12 @@ const mutations = {
   [DELETEIMAGEDATA] (state, _deleteIndex) {
     state.storeimagedata.splice(_deleteIndex, 1)
     console.log(state.storeimagedata)
+  },
+  [CATEGORY] (state) {
+    API.initCategory((categorydata) => {
+      state.categoryDate = categorydata
+      console.log(state.categoryDate)
+    })
   }
 }
 

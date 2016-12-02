@@ -51,7 +51,7 @@
   right:0;
   left: 0;
   bottom:0px;
-  z-index:998;
+  z-index:9998;
   background-color:rgba(255,255,255,.97);
   transform:translate3d(0, -100%, 0);
   transition:transform 0.5s;

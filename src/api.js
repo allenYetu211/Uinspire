@@ -13,14 +13,12 @@ export default {
   loadProjectTextData () {
     sing = stamp + token
     let singsz = md(md(sing))
-    console.log(singsz)
-
     var color = '\'#343434\''
-    // color = encodeURI(color)
+    console.log(singsz)
+    color = encodeURI(color)
     Vue.http.get(encodeURI('http://inspire-api.stoyard.com/index.php/api/inspire/adddata?platform=1&category=2&name=allen&color=' + color)).then((response) => {
       console.log(json.parse(response.data))
       if (response.data.code === 0) {
-        console.log(222)
       } else {
         console.log(response.data)
       }
@@ -36,22 +34,6 @@ export default {
       ia[i] = bytes.charCodeAt(i)
     }
     return new window.Blob([ab], { type: 'image/jpeg' })
-  },
-  progressbar (_progress, callback) {
-    // const progress = new window.FormData()
-    // let times = setInterval(() => {
-    //   Vue.http({}).then((response) => {
-    //     if (response.data <= 100) {
-    //       if (typeof callback === 'function') {
-    //         callback(response.data)
-    //       }
-    //     } else {
-    //       clearInterval(times)
-    //     }
-    //   }).then((response) => {
-    //     clearInterval(times)
-    //   })
-    // }, 500)
   },
   uploadProject (_data, callback) {
     const fdata = new window.FormData()
@@ -86,6 +68,19 @@ export default {
       }
     }, (response) => {
       console.log('error')
+    })
+  },
+  initCategory (callback) {
+    Vue.http.get('http://inspire-api.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
+      let categorydata = JSON.parse(response.data)
+      let category = []
+      for (let i = 0; i < categorydata.data.length; i++) {
+        category.push(categorydata.data[i].name_zh)
+      }
+      if (typeof callback === 'function') {
+        callback(category)
+      }
+    }).then((repones) => {
     })
   }
 }
