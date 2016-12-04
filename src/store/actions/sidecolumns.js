@@ -1,3 +1,4 @@
+// 右侧栏展开收起
 export const INSPIRTNAVSIDEBAR = 'inspirtnavsidebar'
 export const inspirtnavsidebar = ({commit}) => { commit(INSPIRTNAVSIDEBAR) }
 

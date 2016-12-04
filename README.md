@@ -27,6 +27,13 @@ css初始化文件放置在 **lib/init-css/reset.css**
 css命名 各个全局组件需要使用 `gl-` 来命名,如:`gl-checkbox`
 
 
+### position 层级关系
+输入框     1000
+顶部       999
+侧边栏     998
+底部       997
+弹出框     99
+浮层       98
 
 
 

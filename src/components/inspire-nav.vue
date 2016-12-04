@@ -1,50 +1,60 @@
 <template>
 <div>
-  <div class="inspirt-nav gl-bgcolor-white">
-      <div class="inspirt-nav-l">
-        <div class="inspirt-nav-sidebar inspirt-nav-fliter">
-          <button @click="inspirtnavsidebar">
-              <span class="sprite_filter"></span>
-          </button>
+    <div class="inspirt-nav gl-bgcolor-white">
+        <div class="inspirt-nav-l">
+            <div class="inspirt-nav-sidebar inspirt-nav-fliter">
+                <button @click="inspirtnavsidebar">
+                    <span class="sprite_filter"></span>
+                </button>
+            </div>
+            <div class="inspirt-nav-search">
+                <i class="sprite_login"></i>
+                <input type="text" placeholder="Search for inspire" name="">
+            </div>
         </div>
-        <div class="inspirt-nav-search">
-          <i class="sprite_login"></i>
-          <input type="text" placeholder="Search for inspire" name="">
+        <div class="logo gl-size-24"><span class="gl-ftcolor-theme">UI</span>nspire.io</div>
+        <div class="inspirt-nav-r">
+            <div class="inspirt-nav-layout">
+                <button @click="listArrange">
+                    <i class="sprite_view-1" :class="{open: !listArrangestate}"></i>
+                </button>
+                <button @click="listArrangetwo">
+                    <i class="sprite_view-2" :class="{open: listArrangestate}"></i>
+                </button>
+            </div>
+            <div class="inspirt-nav-sidebar inspirt-nav-personal-infoamtion">
+                <i class="sprite_login"></i>
+            </div>
         </div>
-      </div>
+    </div>
+    <!-- 左侧边栏 -->
+    <side-bar-filter></side-bar-filter>
 
-      <div class="logo gl-size-24"><span class="inspire-color">UI</span>nspire.io</div>
-
-      <div class="inspirt-nav-r">
-        <div class="inspirt-nav-layout">
-           <button @click="listArrange">
-              <i class="sprite_view-1" :class="{open: !listArrangestate}"></i>
-            </button>
-           <button @click="listArrangetwo" >
-              <i class="sprite_view-2" :class="{open: listArrangestate}"></i>
-           </button>
-        </div>
-
-        <div class="inspirt-nav-sidebar inspirt-nav-personal-infoamtion">
-          <i class="sprite_login"></i>
-        </div>
-      </div>
-  </div>
-  <side-bar-filter></side-bar-filter>
+    <!-- 右侧边栏与登录窗口 -->
+    <side-bar-infor-mation></side-bar-infor-mation>
 </div>
+
 </template>
 
 <script>
 import {mapGetters, mapActions} from 'vuex'
 import SideBarFilter from './sidebar-filter'
+import SideBarInforMation from './sidebar-information'
 
 export default {
+  data () {
+    return {
+      category: []
+    }
+  },
   components: {
-    SideBarFilter
+    SideBarFilter,
+    SideBarInforMation
   },
   computed: {
     ...mapGetters([
-      'listArrangestate'
+      'listArrangestate',
+      'categoryDate'
     ])
   },
   methods: {

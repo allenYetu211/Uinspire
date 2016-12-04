@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import json from 'jsonify'
 import md from 'md5'
+import axios from 'axios'
 
 const stamp = Date.parse(new Date())
 const token = 'stoyard'
@@ -70,17 +71,29 @@ export default {
       console.log('error')
     })
   },
+  // uploadProject (_data, callback) {
+  //   axios({
+  //     ulr: 'http://inspire-api.stoyard.com/index.php/api/inspire/adddata',
+  //     methods: 'POST',
+  //     data: {
+  //       fistName: _data
+  //     }
+  //   }).then((response) => {
+  //     console.log(response)
+  //   })
+  // },
   initCategory (callback) {
-    Vue.http.get('http://inspire-api.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
-      let categorydata = JSON.parse(response.data)
+    axios.get('http://inspire-api.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
+      let categorydata = response.data.data
       let category = []
-      for (let i = 0; i < categorydata.data.length; i++) {
-        category.push(categorydata.data[i].name_zh)
+      for (let i = 0; i < categorydata.length; i++) {
+        category.push(categorydata[i].name_zh)
       }
       if (typeof callback === 'function') {
         callback(category)
       }
-    }).then((repones) => {
+    }).catch((error) => {
+      console.log(error)
     })
   }
 }

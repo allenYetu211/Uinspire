@@ -191,7 +191,7 @@ form{
       top:0;
       left:0;
       right:0;
-      z-index:999;
+      z-index:99;
       overflow-y:scroll; 
       max-height: 225px;
       height: 0;
@@ -334,7 +334,12 @@ form{
                 <label>Name</label>
                 <div v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
                     <input type="text" v-model="ic.name" name="" placeholder="Input APP Name Search">
-                    <button @click="_AppStore" data-platform='ios' class="search"><i class="sprite_find"></i></button>
+                    <button 
+                    @click="_AppStore" 
+                    data-platform='ios' 
+                    class="search">
+                    <i class="sprite_find"></i>
+                    </button>
                     <div class="_Apps clearfix">
                         <li class="_AppItem consent-information">Input App Name</li>
                         <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
@@ -342,7 +347,15 @@ form{
                              name="list-complete"
                              tag="p"
                              >
-                            <li @click.stop="_getAppData" class="_AppItem list-complete-item" v-for="(ics, imoc) in getAppStore" :data-Gnd="imoc" data-platform='ios' :key="imoc" :data-index="imoc" :style="{animationDelay: animationDelay}">
+                            <li 
+                            @click.stop="_getAppData" 
+                            class="_AppItem list-complete-item" 
+                            v-for="(ics, imoc) in getAppStore" 
+                            :data-Gnd="imoc" 
+                            data-platform='ios' 
+                            :key="imoc" 
+                            :data-index="imoc" 
+                            :style="{animationDelay: animationDelay}">
                                 <div class="appIcon">
                                     <img :src="ics.artworkUrl512">
                                 </div>
@@ -365,13 +378,20 @@ form{
                              name="list-complete"
                              tag="p"
                              >
-                            <li @click.stop="_getAppData" class="_AppItem list-complete-item" v-for="(ics, imoc) in getAppStore" :key="imoc" :data-Gnd="imoc" data-platform='android'>
+                            <li 
+                            @click.stop="_getAppData" 
+                            class="_AppItem list-complete-item" 
+                            v-for="(ics, imoc) in getAppStore" 
+                            :key="imoc" 
+                            :data-Gnd="imoc" data-platform='android'>
                                 <div class="appIcon">
                                     <img :src="ics.icons.px256">
                                 </div>
                                 <div>
                                     <p class="appName" v-html="ics.title"></p>
-                                    <p class="artistName" v-for='infor in ics.apks'>{{infor.versionName}} </p>
+                                    <p 
+                                    class="artistName" 
+                                    v-for='infor in ics.apks'>{{infor.versionName}}</p>
                                 </div>
                             </li>
                             </transition-group>
@@ -382,7 +402,12 @@ form{
                     <input type="text" v-model="ic.name" name="" placeholder="Input Name Search">
                     <div class="_Apps">
                         <ul>
-                            <li @click.stop="_getAppData" class="_AppItem" v-for="(ics, imoc) in getAppStore" :data-Gnd="imoc" data-platform='android'>
+                            <li 
+                            @click.stop="_getAppData" 
+                            class="_AppItem" 
+                            v-for="(ics, imoc) in getAppStore" 
+                            :data-Gnd="imoc" 
+                            data-platform='android'>
                                 <div class="appIcon">
                                     <img :src="ics.icons.px256">
                                 </div>
@@ -404,7 +429,13 @@ form{
                 <h5>Category</h5>
                 <div class="clearfix">
                     <div class="category-checkbox" v-for="(ck, ins) in category">
-                        <input v-model="ic.Category" :value="ins" :id="'ckcategory_' + index + ins " type="checkbox" name="" style="display:none">
+                        <input 
+                        v-model="ic.Category" 
+                        :value="ins" 
+                        :id="'ckcategory_' + index + ins " 
+                        type="checkbox" 
+                        name="" 
+                        style="display:none">
                         <i class="sprite_checkbox"></i>
                         <label :for="'ckcategory_' + index + ins ">{{ck}}</label>
                     </div>
@@ -418,8 +449,13 @@ form{
                           {{tag}}
                           <i :data-tag="tagindex" @click="_deleteTag">x</i>
                         </span>
-                        <button @click="_popupShow" class="updata-Tag" type="button">添加标签</button>
-                        <div class="popup-tag" v-if="updataTga.length < 3 && popup">
+                        <button 
+                        @click="_popupShow" 
+                        class="updata-Tag" 
+                        type="button">添加标签</button>
+                        <div 
+                        class="popup-tag" 
+                        v-if="updataTga.length < 3 && popup">
                             <input v-model="inputTag" type="text" name="">
                             <button @click="_addPushTag" class="popup-addTag">添加</button>
                         </div>

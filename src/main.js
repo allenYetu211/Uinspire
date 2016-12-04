@@ -18,6 +18,7 @@ import 'animate.css/animate.min.css'
 // Vue.use(Axions)
 // Vue.use(ElementUI)
 Vue.use(VueResource)
+// Vue.use(Axios)
 Vue.use(VueRouter)
 const router = new VueRouter({
   routes

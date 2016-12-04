@@ -7,7 +7,7 @@
       bottom: 0;
       left: 0;
       right:0;
-      z-index:999;
+      z-index:997;
       display:flex;
       justify-content: center;
       align-itmes:center;
@@ -51,7 +51,7 @@
   right:0;
   left: 0;
   bottom:0px;
-  z-index:9998;
+  z-index:1000;
   background-color:rgba(255,255,255,.97);
   transform:translate3d(0, -100%, 0);
   transition:transform 0.5s;

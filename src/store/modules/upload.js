@@ -4,7 +4,10 @@ import {
   POSTIMGDATA,
   STOREIMAGEDATA,
   DELETEIMAGEDATA,
-  CATEGORY
+  CATEGORY,
+  ADDFILTERCATEGORY,
+  LESSFILTERCATEGORY,
+  IMPORTEMAIL
 } from '../actions'
 
 const state = {
@@ -12,7 +15,9 @@ const state = {
   returnData: [],
   storeimagedata: '',
   progress: '',
-  categoryDate: ''
+  categoryDate: '',
+  filtercategory: [],
+  importemail: false
 }
 
 const mutations = {
@@ -24,22 +29,30 @@ const mutations = {
     API.uploadProject(_data, (url) => {
       state.returnData.push(url)
     })
-    API.progressbar(_data.PHP_SESSION_UPLOAD_PROGRESS, (progress) => {
-      state.progress = progress
-    })
   },
   [STOREIMAGEDATA] (state, _imagesinformation) {
     state.storeimagedata = _imagesinformation
   },
   [DELETEIMAGEDATA] (state, _deleteIndex) {
     state.storeimagedata.splice(_deleteIndex, 1)
-    console.log(state.storeimagedata)
   },
   [CATEGORY] (state) {
     API.initCategory((categorydata) => {
       state.categoryDate = categorydata
-      console.log(state.categoryDate)
     })
+  },
+  [ADDFILTERCATEGORY] (state, categoryIndex) {
+    state.filtercategory.push(categoryIndex)
+  },
+  [LESSFILTERCATEGORY] (state, categoryIndex) {
+    for (let i = 0; i < state.filtercategory.length; i++) {
+      if (state.filtercategory[i] === categoryIndex) {
+        state.filtercategory.splice(i, 1)
+      }
+    }
+  },
+  [IMPORTEMAIL] (state) {
+    state.importemail = !state.importemail
   }
 }
 

@@ -15,3 +15,15 @@ export const storeimagedata = ({commit}, imagesinformation) => { commit(STOREIMA
 // 删除存储与Vuex 中存储的图片信息状态
 export const DELETEIMAGEDATA = 'deleteimagedata'
 export const deleteimagedata = ({commit}, _deleteIndex) => { commit(DELETEIMAGEDATA, _deleteIndex) }
+
+// 左边侧边栏筛选category数据 添加
+export const ADDFILTERCATEGORY = 'addfiltercategory'
+export const addfiltercategory = ({commit}, categoryIndex) => { commit(ADDFILTERCATEGORY, categoryIndex) }
+
+// 左边侧边栏筛选category数据 删除
+export const LESSFILTERCATEGORY = 'lessfiltercategory'
+export const lessfiltercategory = ({commit}, categoryIndex) => { commit(LESSFILTERCATEGORY, categoryIndex) }
+
+// 处理用户输入邮箱
+export const IMPORTEMAIL = 'importemail'
+export const importemail = ({commit}) => { commit(IMPORTEMAIL) }

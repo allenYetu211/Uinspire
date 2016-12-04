@@ -25,7 +25,19 @@
   *
   *  Use place :
   *  -->
-  *     updataPage-from
+  *     sidebar-information
   *     
  */
+
+.loginlogon-enter-active {
+  transition: opacity .5s
+}
+.loginlogon-leave-active{
+  position:absolute;
+  left: 50%;
+  transform:translateX(-50%);
+}
+.loginlogon-enter, .loginlogon-leave-active {
+  opacity: 0
+}
 

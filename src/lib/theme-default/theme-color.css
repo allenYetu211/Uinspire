@@ -1,6 +1,31 @@
-.inspire-color{
+.gl-ftcolor-theme{
   color:#2EF037;
 }
+
+.gl-ftcolor-black{
+  color:#333;
+}
+
+.gl-ftcolor-white{
+  color:#fff;
+}
+
+.gl-ftcolor-gray{
+  color:#bbb;
+}
+
+.gl-ftcolor-gray-99{
+  color: #999;
+}
+
 .gl-bgcolor-white {
   background-color: #fff;
+}
+
+.gl-bgcolor-black {
+  background-color: #333;
+}
+
+.gl-bgcolor-gray-ed {
+  background-color:#EDEDED;
 }
