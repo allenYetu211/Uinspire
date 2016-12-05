@@ -1,64 +1,63 @@
 <template>
   <div>
 
-  <!--   <div class="startlogin">
-      <div class="import-email gl-bgcolor-white" :class="{login:returnimportemail}">
-        <transition name="loginlogon" tag="div">
-          <div v-if='!returnimportemail'>
-            <h2>Join <span class="gl-ftcolor-theme">UI</span>nspire.io</h2>
-            <p class="gl-ftcolor-gray">Input your E-mail, It’s will auto validation your account.</p>
-            <input 
-            class="gl-bgcolor-gray-ed gl-ftcolor-black" 
-            placeholder="E-mail" 
-            type="email" 
-            name="">
-            <div class="login-registered">
-              <button 
-              @click="_loginLogon" 
-              class="gl-bgcolor-black gl-ftcolor-white" >Validation</button>
-            </div>
-          </div>
-        </transition>
+    <transition name="sidebar-right">
+    <div class="sidebar-information gl-bgcolor-white" 
+    :class="{open : sidebarrightopenclose}" 
+    v-show="sidebarrightopenclose">
 
-        <transition name="loginlogon" tag="div">
-          <div v-if="returnimportemail">
-            <div class="headerportrait gl-bgcolor-gray-ed">
-              <img src="">
-            </div>
-            <div class="username gl-ftcolor-black" :class="{'gl-bgcolor-gray-ed': !returnimportemail}">Allen</div>
-            <div class="userinformation gl-ftcolor-gray">have  artistic breath Programmers </div>
-            
-            <div class="useremail gl-bgcolor-gray-ed"></div>
-
-            <div class="importPassword">
-              <input class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Password"   type="password" name="">
-              <a class="gl-ftcolor-gray" href="#">Forgot?</a>
-            </div>
-
-            <div class="login-registered">
-                <button 
-                @click="_loginLogon" 
-                class="gl-bgcolor-black gl-ftcolor-white" >Sing in</button>
-              </div>
-          </div>
-          </transition>
-
-      </div>
-    </div> -->
-    <!-- <div class="sidebar-information gl-bgcolor-white">
       <div class="log-userinformation">
-        <div class="log-userheaderportrait">
-        
+        <div class="log-userheaderportrait clearfix">
+
+          <div class="header-portarait gl-bgcolor-gray-ed">
+            <img src="">
+          </div>
+
+          <div class="log-userinformations">
+            <p class="log-userName gl-bgcolor-gray-ed"></p>
+            <p class="log-introduce gl-bgcolor-gray-ed"></p>
+          </div>
         </div>
 
-        <div class="log-func">
+        <div class="log-func gl-fb">
          <a href="#">Inspire</a>
          <a href="#">Moodboard</a>
          <a href="#">Profile</a>
          <router-link :to="{ name: 'updatePage'}">Upload</router-link>
         </div>
       </div>
-    </div> -->
+
+      <div class="log-search-moodboard">
+        <i>Ｘ</i>
+        <input placeholder="Search moodboard" type="text" name="">
+        <button class="gl-bgcolor-gray-dc"></button>
+      </div>
+
+      <div class="log-drawing-board">
+        <div class="drawing-board gl-bgcolor-gray-ed"></div>
+        <div class="drawing-information">
+          <div class="drawing-name gl-bgcolor-gray-ed"></div>
+          <div class="drawing-infor gl-bgcolor-gray-ed"></div>
+        </div>
+      </div>
+
+      <div class="about-G_Lab">
+        <ul class="G_Lab-introduce">
+          <li><a href="">About</a></li>
+          <li><a href="">Help</a></li>
+          <li><a href="">Support</a></li>
+          <li><a href="">Feedback</a></li>
+        </ul>
+
+        <p class="gl-ftcolor-gray-99">
+          Copyright © <span class="gl-ftcolor-theme">G_Lab Stoyard</span>
+        </p>
+        <p class="gl-ftcolor-gray-99">
+          UInspire.io  2016
+        </p>
+      </div>
+    </div>
+    </transition>
   </div>
 </template>
 
@@ -68,112 +67,163 @@ import {mapGetters, mapActions} from 'vuex'
 export default {
   computed: {
     ...mapGetters([
-      'returnimportemail'
+      'sidebarrightopenclose'
     ])
   },
   methods: {
     ...mapActions([
-      'importemail'
-    ]),
-    _loginLogon () {
-      this.importemail()
-    }
+    ])
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.startlogin{
-  position:fixed;
-  top:0;
-  right:0;
-  left:0;
-  bottom:0;
-  z-index:1000;
-  .import-email{
-      width:600px;
-      height:350px;
-      padding:40px 100px;
-      position:absolute;
-      z-index:998;
-      top:50%;
-      left:50%;
-      transform:translate(-50%, -50%);
-      text-align:center;
-      box-shadow:0 5px 15px rgba(0,0,0,.5);
-      transition:height 0.5s;
-      &.login{
-        height:570px;
-      }
-      h2{
-        font-size:36px;
-        margin-bottom:15px;
-      }
-      p {
-          font-size:14px;
-          margin-bottom:50px;
-        }
-      input {
-        border:none;
-        width:100%;
-        height:60px;
-        margin-bottom:50px;
-        padding:10px 15px;
-        font-size:20px;
-        &::-webkit-input-placeholder {
-          color:#BBBBBB;
-          font-size:20px;
-        }
-      }
-      button {
-        width:150px;
-        height:50px;
-        border:none;
-        font-size:20px;
-        cursor:pointer;
-      }
-
-      .headerportrait{
-        width:100px;
-        height:100px;
-        margin: 0 auto;
-        border-radius: 50%;
-        margin-bottom:10px;
-      }
-      .username{
-        min-height: 25px;
-        min-width: 60px;
-        font-size:20px;
-        margin-bottom: 8px;
-      }
-      .userinformation{
-        @extend .username;
-        font-size:16px;
-        margin-bottom:20px;
-
-      }
-      .useremail{
-        @extend .username;
-      }
-      .importPassword{
-        position:relative;
-        a{
-          position:absolute;
-          right: 15px;
-          top: 20px;
-          text-decoration: none;
-          font-size: 20px;
-        }
-      }
-    }
-}
 .sidebar-information{
   position:fixed;
   right: 0;
   top: 60px;
   bottom: 0;
   z-index:998;
-  width: 350px;
+  width: 320px;
+  padding: 20px 20px 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,.1);
+  overflow-y:auto;
+  &.open{
+    transform: translateX(20px);
+  }
+  .log-userheaderportrait{
+    margin-bottom: 20px;
+  }
+  .header-portarait{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+    float: left;
+  }
+  .log-userinformations{
+    float: left;
+     p.log-userName {
+        height:24px;
+        width: 150px;
+        margin: 5px 0 8px;
+      }
+     p.log-introduce {
+      height:16px;
+      width: 100px;
+    }
+  }
+  .log-func{
+    a{
+      display: block;
+      padding: 8px 0;
+      font-size: 28px;
+      text-decoration:none;
+      color:#DCDCDC;
+      padding-left: 10px;
+      &.router-link-active{
+        color: #222;
+      }
+    }
+  }
+
+  .log-search-moodboard{
+    border-top: 1px solid #DCDCDC;
+    border-bottom: 1px solid #DCDCDC;
+    height: 40px;
+    margin: 20px 0 20px -20px;
+    position: relative;
+    i{
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    input{
+      width: 100%;
+      height: 100%;
+      border: none;
+      padding:0 60px 0 35px;
+      &::-webkit-input-placeholder{
+           color:#DCDCDC;
+           font-size:16px;
+        } 
+    }
+    button{
+      height: 100%;
+      width: 65px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      border:none;
+    }
+  }
+  .log-drawing-board {
+    height: 40%;
+    overflow-y:auto;
+    margin-right: -20px;
+    .drawing-board{
+      width: 60px;
+      height: 60px;
+      margin-right: 12px;
+      float:left;
+    }
+    .drawing-information{
+      float: left;
+      .drawing-name{
+        width: 156px;
+        height: 24px;
+        margin-bottom: 8px;
+      }
+      .drawing-infor{
+        width: 120px;
+        height: 16px;
+      }
+    }
+  }
+  .about-G_Lab{
+    text-align: center;
+    border-top: 1px solid #DCDCDC;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 20px;
+    height: 120px;
+    padding: 20px;
+     .G_Lab-introduce{
+      margin-bottom: 15px;
+        li{
+          display: inline-block;
+          // float:left;
+          margin: 0 5px;
+          a{
+            text-decoration: none;
+          }
+        }
+      }
+    p{
+      font-size: 14px;
+      line-height: 1.6;
+    }
+  }
 }
+// @keyframes slideInRightss {
+//   from {
+//     animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+//     transform: translate3d(320px, 0, 0);
+//   }
+//   60%{
+//     transform: translate3d(18px, 0, 0);
+//   }
+//   75%{
+//     transform: translate3d(22px, 0, 0);
+//   }
+//   90%{
+//     transform: translate3d(19px, 0, 0);
+//   }
+//   to {
+//     transform: translate3d(20px, 0, 0);
+//   }
+// }
 
 </style>

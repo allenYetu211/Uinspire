@@ -27,3 +27,11 @@ export const lessfiltercategory = ({commit}, categoryIndex) => { commit(LESSFILT
 // 处理用户输入邮箱
 export const IMPORTEMAIL = 'importemail'
 export const importemail = ({commit}) => { commit(IMPORTEMAIL) }
+
+// 验证码
+export const SETRETURNCODE = 'setreturncode'
+export const setreturncode = ({commit}) => { commit(SETRETURNCODE) }
+
+// 注册用户
+export const LOGONUSER = 'logonuser'
+export const logonuser = ({commit}) => { commit(LOGONUSER) }

@@ -29,8 +29,56 @@
   *     
  */
 
+
+.sidebar-right-leave-active{
+ animation:slideInRightssOut .6s forwards;
+}
+.sidebar-right-enter-active{
+  animation:slideInRightss .8s forwards;
+}
+@keyframes slideInRightssOut {
+  from {
+    transform: translate3d(20px, 0, 0);
+  }
+  15%{
+    transform: translate3d(22px, 0, 0);
+  }
+  30%{
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    transform: translate3d(17px, 0, 0);
+  }
+  to {
+    
+    transform: translate3d(320px, 0, 0);
+  }
+}
+
+
+@keyframes slideInRightss {
+  from {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transform: translate3d(320px, 0, 0);
+  }
+  60%{
+    transform: translate3d(18px, 0, 0);
+  }
+  80%{
+    transform: translate3d(22px, 0, 0);
+  }
+  to {
+    transform: translate3d(20px, 0, 0);
+  }
+}
+
+/*
+  *
+  *  Use place :
+  *  -->
+  *     loginlogon.vue
+  *     
+ */
 .loginlogon-enter-active {
-  transition: opacity .5s
+  transition: opacity 0.5s 0.2s 
 }
 .loginlogon-leave-active{
   position:absolute;
@@ -40,4 +88,5 @@
 .loginlogon-enter, .loginlogon-leave-active {
   opacity: 0
 }
+
 

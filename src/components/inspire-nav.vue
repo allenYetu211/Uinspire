@@ -12,7 +12,7 @@
                 <input type="text" placeholder="Search for inspire" name="">
             </div>
         </div>
-        <div class="logo gl-size-24"><span class="gl-ftcolor-theme">UI</span>nspire.io</div>
+        <div class="logo gl-size-24 gl-fb"><span class="gl-ftcolor-theme">UI</span>nspire.io</div>
         <div class="inspirt-nav-r">
             <div class="inspirt-nav-layout">
                 <button @click="listArrange">
@@ -22,7 +22,7 @@
                     <i class="sprite_view-2" :class="{open: listArrangestate}"></i>
                 </button>
             </div>
-            <div class="inspirt-nav-sidebar inspirt-nav-personal-infoamtion">
+            <div class="inspirt-nav-sidebar inspirt-nav-personal-infoamtion" @click="sidebarright">
                 <i class="sprite_login"></i>
             </div>
         </div>
@@ -30,8 +30,11 @@
     <!-- 左侧边栏 -->
     <side-bar-filter></side-bar-filter>
 
-    <!-- 右侧边栏与登录窗口 -->
+    <!-- 右侧边栏 -->
     <side-bar-infor-mation></side-bar-infor-mation>
+
+    <!-- 登录窗口 -->
+    <login-logon></login-logon>
 </div>
 
 </template>
@@ -40,6 +43,7 @@
 import {mapGetters, mapActions} from 'vuex'
 import SideBarFilter from './sidebar-filter'
 import SideBarInforMation from './sidebar-information'
+import LoginLogon from './loginlogon'
 
 export default {
   data () {
@@ -49,7 +53,8 @@ export default {
   },
   components: {
     SideBarFilter,
-    SideBarInforMation
+    SideBarInforMation,
+    LoginLogon
   },
   computed: {
     ...mapGetters([
@@ -61,7 +66,8 @@ export default {
     ...mapActions([
       'inspirtnavsidebar',
       'listArrange',
-      'listArrangetwo'
+      'listArrangetwo',
+      'sidebarright'
     ])
   }
 }

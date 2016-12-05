@@ -1,98 +1,3 @@
-<style lang="scss" scoped>
-$color:#EFEFEF;
-  .drop_zone{
-    padding:20px 10px;
-    height:300px;
-    overflow-y:scroll;
-    margin: 0 auto;
-    background: #FCFCFC;
-    border: 3px dashed #EFEFEF;
-    border-radius: 7px;
-    position:relative;
-  }
-  .informations{
-    width: calc(100% / 2 - 20px);
-    display: inline-block;
-    padding:15px 15px;
-    min-height:100px;
-    background: #FFFFFF;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.20);
-    border-radius: 2px;
-    margin:10px 10px;
-    &>div{
-      float: left;
-      &.file-img{
-          width: 20%;
-          height: 0;
-          overflow: hidden;
-          padding-bottom: 20%;
-          img{
-            max-width:100%;
-        }
-      }
-        &.file-imginfromation{
-          padding:0 10px;
-          p.fileimge-name{
-            font-size: 16px;
-            color: #222222;
-            letter-spacing: 0.2px;
-            margin-bottom:10px;
-          }
-          p.fileimge-size{
-            font-size: 12px;
-            color: #CDCDCD;
-            letter-spacing: 0.16px;
-          }
-        }
-     }
-  }
-  .al-container{
-    width:640px;
-    margin:0 auto;
-  }
- .informations-uploade{
-    border-bottom:1px solid #EFEFEF;
-    padding: 50px 0;
-    // height: 0;
-    // padding: 0;
-    // overflow:hidden;
-  }
- .file-upload{
-    margin-top:80px;
-  }
-  .updataSuccess-line{
-    margin: 20px 0;
-    position: relative;
-    &:after{
-          position: absolute;
-          bottom: 1px;
-          content: "";
-          height: 1px;
-          width: 100%;
-          background: #222;
-    }
-  }
-  .updataSuccess{
-    width: 100%;
-    overflow-x: scroll;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    .updataInsparent{
-      display:inline-block;
-      margin:0 5px;
-      width: 70px;
-      height: 60px;
-      overflow: hidden;
-      position:relative;
-        img{
-          position:absolute;
-          top:0;
-          width: 100%;
-          max-height:180px;
-      }
-    }
-  }
-</style>
 <template>
 <div class="loaderPage">
     <div class="al-container">
@@ -236,3 +141,99 @@ $color:#EFEFEF;
     }
   }
 </script>
+
+<style lang="scss" scoped>
+$color:#EFEFEF;
+  .drop_zone{
+    padding:20px 10px;
+    height:300px;
+    overflow-y:scroll;
+    margin: 0 auto;
+    background: #FCFCFC;
+    border: 3px dashed #EFEFEF;
+    border-radius: 7px;
+    position:relative;
+  }
+  .informations{
+    width: calc(100% / 2 - 20px);
+    display: inline-block;
+    padding:15px 15px;
+    min-height:100px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.20);
+    border-radius: 2px;
+    margin:10px 10px;
+    &>div{
+      float: left;
+      &.file-img{
+          width: 20%;
+          height: 0;
+          overflow: hidden;
+          padding-bottom: 20%;
+          img{
+            max-width:100%;
+        }
+      }
+        &.file-imginfromation{
+          padding:0 10px;
+          p.fileimge-name{
+            font-size: 16px;
+            color: #222222;
+            letter-spacing: 0.2px;
+            margin-bottom:10px;
+          }
+          p.fileimge-size{
+            font-size: 12px;
+            color: #CDCDCD;
+            letter-spacing: 0.16px;
+          }
+        }
+     }
+  }
+  .al-container{
+    width:640px;
+    margin:0 auto;
+  }
+ .informations-uploade{
+    border-bottom:1px solid #EFEFEF;
+    padding: 50px 0;
+    // height: 0;
+    // padding: 0;
+    // overflow:hidden;
+  }
+ .file-upload{
+    margin-top:80px;
+  }
+  .updataSuccess-line{
+    margin: 20px 0;
+    position: relative;
+    &:after{
+          position: absolute;
+          bottom: 1px;
+          content: "";
+          height: 1px;
+          width: 100%;
+          background: #222;
+    }
+  }
+  .updataSuccess{
+    width: 100%;
+    overflow-x: scroll;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    .updataInsparent{
+      display:inline-block;
+      margin:0 5px;
+      width: 70px;
+      height: 60px;
+      overflow: hidden;
+      position:relative;
+        img{
+          position:absolute;
+          top:0;
+          width: 100%;
+          max-height:180px;
+      }
+    }
+  }
+</style>

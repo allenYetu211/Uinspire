@@ -27,9 +27,12 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
-  font-family: Roboto, Helvetica , PingFang SC,Source Sans Pro,Segoe UI,Heiti SC,Microsoft Yahei, sans-serif;
+  font-family: 'Gotham-Book', PingFang SC,Source Sans Pro,Segoe UI,Heiti SC,Microsoft Yahei, sans-serif;
   color:#222222;
   font-size: 13.3333px;
+  text-rendering: optimizeLegibility;  
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 ol, ul {
   list-style: none;

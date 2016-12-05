@@ -7,7 +7,9 @@ import {
   CATEGORY,
   ADDFILTERCATEGORY,
   LESSFILTERCATEGORY,
-  IMPORTEMAIL
+  IMPORTEMAIL,
+  SETRETURNCODE,
+  LOGONUSER
 } from '../actions'
 
 const state = {
@@ -17,7 +19,9 @@ const state = {
   progress: '',
   categoryDate: '',
   filtercategory: [],
-  importemail: false
+  importemail: false,
+  setreturncode: false,
+  logonuser: false
 }
 
 const mutations = {
@@ -53,6 +57,14 @@ const mutations = {
   },
   [IMPORTEMAIL] (state) {
     state.importemail = !state.importemail
+    state.logonuser = true
+  },
+  [SETRETURNCODE] (state) {
+    state.setreturncode = !state.setreturncode
+    state.logonuser = false
+  },
+  [LOGONUSER] (state) {
+    state.logonuser = !state.logonuser
   }
 }
 

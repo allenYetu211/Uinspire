@@ -2,7 +2,8 @@ import {
   INSPIRTNAVSIDEBAR,
   LISTARRANGE,
   LISTARRANGETWO,
-  NAVIGATIONTITLE
+  NAVIGATIONTITLE,
+  SIDEBARRIGHT
 } from '../actions'
 
 const state = {
@@ -12,7 +13,8 @@ const state = {
   linkinfor: false,
   navposWidth: '',
   navposLeft: '',
-  navposIndex: 0
+  navposIndex: 0,
+  sidebarright: false
 
 }
 const mutations = {
@@ -29,6 +31,9 @@ const mutations = {
     state.navposLeft = slide.left
     state.navposWidth = slide.width
     state.navposIndex = slide.index
+  },
+  [SIDEBARRIGHT] (state) {
+    state.sidebarright = !state.sidebarright
   }
 }
 

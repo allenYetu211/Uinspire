@@ -24,3 +24,4 @@ export const addfilmsilde = ({commit}) => { commit(ADDFILMSLIDE) }
 
 export const LESSFILMSLIDE = 'lessfilmsilde'
 export const lessfilmsilde = ({commit}) => { commit(LESSFILMSLIDE) }
+

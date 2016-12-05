@@ -1,3 +1,277 @@
+
+<template>
+<div class="informations-uploade">
+    <form @submit.prevent="">
+        <div class="file-img-information">
+            <div class="upload-img">
+                <img :src="ic.url">
+            </div>
+            <div class="file-img-imfor">
+                <p class="Platform">
+                    Platform
+                    <span class="infoamtions-r">{{ic.Platform}}</span>
+                </p>
+                <p class="Dimension">
+                    Dimension
+                    <span class="infoamtions-r">{{ic.width}} * {{ic.height}}</span>
+                </p>
+                <p class="Size">
+                    Size
+                    <span class="infoamtions-r">{{ic.size}}KB</span>
+                </p>
+            </div>
+        </div>
+        <div class="upload-information">
+            <div class="upload-form-gurop">
+                <label>Name</label>
+                <div v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
+                    <input type="text" v-model="ic.name" name="" placeholder="Input APP Name Search">
+                    <button 
+                    @click="_AppStore" 
+                    data-platform='ios' 
+                    class="search">
+                    <i class="sprite_find"></i>
+                    </button>
+                    <div class="_Apps clearfix">
+                        <li class="_AppItem consent-information">Input App Name</li>
+                        <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
+                             <transition-group 
+                             name="list-complete"
+                             tag="p"
+                             >
+                            <li 
+                            @click.stop="_getAppData" 
+                            class="_AppItem list-complete-item" 
+                            v-for="(ics, imoc) in getAppStore" 
+                            :data-Gnd="imoc" 
+                            data-platform='ios' 
+                            :key="imoc" 
+                            :data-index="imoc" 
+                            :style="{animationDelay: animationDelay}">
+                                <div class="appIcon">
+                                    <img :src="ics.artworkUrl512">
+                                </div>
+                                <div>
+                                    <p class="appName">{{ics.trackName}}</p>
+                                    <p class="artistName">{{ics.artistName}} {{imoc}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                        </transition-group>
+                    </div>
+                </div>
+                <div v-if="ic.Platform === 'Android'">
+                    <input type="text" v-model="ic.name" name="" placeholder="Input Name Search">
+                    <button @click="_AppStore" data-platform='android' class="search"><i class="sprite_find"></i></button>
+                    <div class="_Apps">
+                       <li class="_AppItem consent-information">Input App Name</li>
+                         <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
+                         <transition-group 
+                             name="list-complete"
+                             tag="p"
+                             >
+                            <li 
+                            @click.stop="_getAppData" 
+                            class="_AppItem list-complete-item" 
+                            v-for="(ics, imoc) in getAppStore" 
+                            :key="imoc" 
+                            :data-Gnd="imoc" data-platform='android'>
+                                <div class="appIcon">
+                                    <img :src="ics.icons.px256">
+                                </div>
+                                <div>
+                                    <p class="appName" v-html="ics.title"></p>
+                                    <p 
+                                    class="artistName" 
+                                    v-for='infor in ics.apks'>{{infor.versionName}}</p>
+                                </div>
+                            </li>
+                            </transition-group>
+                        </ul>
+                    </div>
+                </div>
+                <div v-if="ic.Platform === 'WEB'">
+                    <input type="text" v-model="ic.name" name="" placeholder="Input Name Search">
+                    <div class="_Apps">
+                        <ul>
+                            <li 
+                            @click.stop="_getAppData" 
+                            class="_AppItem" 
+                            v-for="(ics, imoc) in getAppStore" 
+                            :data-Gnd="imoc" 
+                            data-platform='android'>
+                                <div class="appIcon">
+                                    <img :src="ics.icons.px256">
+                                </div>
+                                <div>
+                                    <p class="appName" v-html="ics.title"></p>
+                                    <p class="artistName" v-for='infor in ics.apks'>{{infor.versionName}} </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                <div class="upload-form-gurop">
+                    <label>Link</label>
+                    <input type="text" v-model="ic.link" name="">
+                </div>
+                </div>
+
+            </div>
+            <div class="upload-form-gurop">
+                <h5>Category</h5>
+                <div class="clearfix">
+                    <div class="category-checkbox" v-for="(ck, ins) in category">
+                        <input 
+                        v-model="ic.Category" 
+                        :value="ins" 
+                        :id="'ckcategory_' + index + ins " 
+                        type="checkbox" 
+                        name="" 
+                        style="display:none">
+                        <i class="sprite_checkbox"></i>
+                        <label :for="'ckcategory_' + index + ins ">{{ck}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="upload-form-gurop">
+                <h5>Tags</h5>
+                <div>
+                    <div class="upload-tag">
+                        <span class="tag-laber" v-for="(tag, tagindex) in updataTga">
+                          {{tag}}
+                          <i :data-tag="tagindex" @click="_deleteTag">x</i>
+                        </span>
+                        <button 
+                        @click="_popupShow" 
+                        class="updata-Tag" 
+                        type="button">添加标签</button>
+                        <div 
+                        class="popup-tag" 
+                        v-if="updataTga.length < 3 && popup">
+                            <input v-model="inputTag" type="text" name="">
+                            <button @click="_addPushTag" class="popup-addTag">添加</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="upload-btn">
+                <button type="button" @click="_uplosings">Upload</button>
+                <button type="button" :data-cancelIndex='index' @click="_upcancel" class="upload-cancel">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>
+</template>
+
+<script>
+import { mapActions, mapGetters } from 'vuex'
+import '../Publicjs/filter.js'
+
+export default {
+  props: ['ic', 'index', 'category'],
+  data () {
+    return {
+      checkedNames: [],
+      getAppStore: [],
+      updataTga: [],
+      inputTag: '',
+      popup: false,
+      clickAppStore: true,
+      animationDelay: '',
+      searchHeight: false,
+      theSelecteds: false
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'loadtexts',
+      'outintimagedata'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'loadtext',
+      'postimgdata',
+      'deleteimagedata'
+    ]),
+    beforeEnter (el) {
+      var delay = el.dataset.imoc * 40
+      el.style.animationDelay = delay + 'ms'
+    },
+    _AppStore (el) {
+      let __url__ = ''
+      this.searchHeight = true
+      this.theSelecteds = false
+      this.clickAppStore = false
+      if (el.target.dataset.platform === 'ios') {
+        __url__ = 'https://itunes.apple.com/search?term=' + this.ic.name + '&country=CN&media=software&limit=10'
+      } else {
+        __url__ = 'http://apps.wandoujia.com/api/v1/search/$' + this.ic.name + '?opt_fields=title,icons.px256,packageName,apks.versionName'
+      }
+      this._searchShow = !this._searchShow
+      let self = this
+      self.$http.get(__url__).then((response) => {
+        if (el.target.dataset.platform === 'ios') {
+          let _results = JSON.parse(response.data)
+          self.getAppStore = _results.results
+        } else {
+          self.getAppStore = response.data.appList
+        }
+      }).then((response) => {
+      })
+    },
+    _upcancel (el) {
+      this.deleteimagedata(el.target.dataset.cancelindex)
+    },
+    _uplosings () {
+      this.postimgdata(this.ic)
+    },
+    _popupShow () {
+      this.popup = true
+    },
+    _addPushTag () {
+      this.updataTga.push(this.inputTag)
+      this.ic['tag'] = this.updataTga
+      this.popup = false
+    },
+    _deleteTag (el) {
+      this.updataTga.splice(el.target.dataset.tag, 1)
+      this.ic['tag'] = this.updataTga
+    },
+    _getAppData (event) {
+      this.searchHeight = false
+      this.theSelecteds = true
+      let filter = {}
+      let target = this.getAppStore[event.target.dataset.gnd]
+      if (event.target.dataset.platform === 'ios') {
+        this.ic.link = filter['trackViewUrl'] = target.trackViewUrl
+        this.ic.icon_link = filter['artworkUrl512'] = target.artworkUrl512
+        this.ic.developer = filter['artistName'] = target.artistName
+        this.ic.developer_link = filter['artistViewUrl'] = target.artistViewUrl
+        this.ic.app_category = filter['genres'] = target.genres
+        this.ic.version = filter['version'] = target.version
+        this.ic.name = filter['trackName'] = target.trackName
+      } else {
+        this.ic.link = filter['trackViewUrl'] = 'http://www.wandoujia.com/apps/' + target.packageName
+        let blibli = {}
+        blibli['px256'] = target.icons.px256
+        this.ic.icon_link = filter['icons'] = blibli
+        let nullArray = {}
+        nullArray['versionName'] = target.apks[0].versionName
+        filter['apks'] = [nullArray]
+        let newString = target.title.replace('<em>', '').replace('</em>', '')
+        this.ic.name = filter['title'] = newString
+      }
+      this.getAppStore = []
+      this.getAppStore.push(filter)
+    },
+    _androidFilter () {
+
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 form{
   flex: row;
@@ -303,279 +577,5 @@ form{
       }
     }
 }
-
-
   
 </style>
-<template>
-<div class="informations-uploade">
-    <form @submit.prevent="">
-        <div class="file-img-information">
-            <div class="upload-img">
-                <img :src="ic.url">
-            </div>
-            <div class="file-img-imfor">
-                <p class="Platform">
-                    Platform
-                    <span class="infoamtions-r">{{ic.Platform}}</span>
-                </p>
-                <p class="Dimension">
-                    Dimension
-                    <span class="infoamtions-r">{{ic.width}} * {{ic.height}}</span>
-                </p>
-                <p class="Size">
-                    Size
-                    <span class="infoamtions-r">{{ic.size}}KB</span>
-                </p>
-            </div>
-        </div>
-        <div class="upload-information">
-            <div class="upload-form-gurop">
-                <label>Name</label>
-                <div v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
-                    <input type="text" v-model="ic.name" name="" placeholder="Input APP Name Search">
-                    <button 
-                    @click="_AppStore" 
-                    data-platform='ios' 
-                    class="search">
-                    <i class="sprite_find"></i>
-                    </button>
-                    <div class="_Apps clearfix">
-                        <li class="_AppItem consent-information">Input App Name</li>
-                        <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
-                             <transition-group 
-                             name="list-complete"
-                             tag="p"
-                             >
-                            <li 
-                            @click.stop="_getAppData" 
-                            class="_AppItem list-complete-item" 
-                            v-for="(ics, imoc) in getAppStore" 
-                            :data-Gnd="imoc" 
-                            data-platform='ios' 
-                            :key="imoc" 
-                            :data-index="imoc" 
-                            :style="{animationDelay: animationDelay}">
-                                <div class="appIcon">
-                                    <img :src="ics.artworkUrl512">
-                                </div>
-                                <div>
-                                    <p class="appName">{{ics.trackName}}</p>
-                                    <p class="artistName">{{ics.artistName}} {{imoc}}</p>
-                                </div>
-                            </li>
-                        </ul>
-                        </transition-group>
-                    </div>
-                </div>
-                <div v-if="ic.Platform === 'Android'">
-                    <input type="text" v-model="ic.name" name="" placeholder="Input Name Search">
-                    <button @click="_AppStore" data-platform='android' class="search"><i class="sprite_find"></i></button>
-                    <div class="_Apps">
-                       <li class="_AppItem consent-information">Input App Name</li>
-                         <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
-                         <transition-group 
-                             name="list-complete"
-                             tag="p"
-                             >
-                            <li 
-                            @click.stop="_getAppData" 
-                            class="_AppItem list-complete-item" 
-                            v-for="(ics, imoc) in getAppStore" 
-                            :key="imoc" 
-                            :data-Gnd="imoc" data-platform='android'>
-                                <div class="appIcon">
-                                    <img :src="ics.icons.px256">
-                                </div>
-                                <div>
-                                    <p class="appName" v-html="ics.title"></p>
-                                    <p 
-                                    class="artistName" 
-                                    v-for='infor in ics.apks'>{{infor.versionName}}</p>
-                                </div>
-                            </li>
-                            </transition-group>
-                        </ul>
-                    </div>
-                </div>
-                <div v-if="ic.Platform === 'WEB'">
-                    <input type="text" v-model="ic.name" name="" placeholder="Input Name Search">
-                    <div class="_Apps">
-                        <ul>
-                            <li 
-                            @click.stop="_getAppData" 
-                            class="_AppItem" 
-                            v-for="(ics, imoc) in getAppStore" 
-                            :data-Gnd="imoc" 
-                            data-platform='android'>
-                                <div class="appIcon">
-                                    <img :src="ics.icons.px256">
-                                </div>
-                                <div>
-                                    <p class="appName" v-html="ics.title"></p>
-                                    <p class="artistName" v-for='infor in ics.apks'>{{infor.versionName}} </p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                <div class="upload-form-gurop">
-                    <label>Link</label>
-                    <input type="text" v-model="ic.link" name="">
-                </div>
-                </div>
-
-            </div>
-            <div class="upload-form-gurop">
-                <h5>Category</h5>
-                <div class="clearfix">
-                    <div class="category-checkbox" v-for="(ck, ins) in category">
-                        <input 
-                        v-model="ic.Category" 
-                        :value="ins" 
-                        :id="'ckcategory_' + index + ins " 
-                        type="checkbox" 
-                        name="" 
-                        style="display:none">
-                        <i class="sprite_checkbox"></i>
-                        <label :for="'ckcategory_' + index + ins ">{{ck}}</label>
-                    </div>
-                </div>
-            </div>
-            <div class="upload-form-gurop">
-                <h5>Tags</h5>
-                <div>
-                    <div class="upload-tag">
-                        <span class="tag-laber" v-for="(tag, tagindex) in updataTga">
-                          {{tag}}
-                          <i :data-tag="tagindex" @click="_deleteTag">x</i>
-                        </span>
-                        <button 
-                        @click="_popupShow" 
-                        class="updata-Tag" 
-                        type="button">添加标签</button>
-                        <div 
-                        class="popup-tag" 
-                        v-if="updataTga.length < 3 && popup">
-                            <input v-model="inputTag" type="text" name="">
-                            <button @click="_addPushTag" class="popup-addTag">添加</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="upload-btn">
-                <button type="button" @click="_uplosings">Upload</button>
-                <button type="button" :data-cancelIndex='index' @click="_upcancel" class="upload-cancel">Cancel</button>
-            </div>
-        </div>
-    </form>
-</div>
-</template>
-
-<script>
-import { mapActions, mapGetters } from 'vuex'
-import '../Publicjs/filter.js'
-
-export default {
-  props: ['ic', 'index', 'category'],
-  data () {
-    return {
-      checkedNames: [],
-      getAppStore: [],
-      updataTga: [],
-      inputTag: '',
-      popup: false,
-      clickAppStore: true,
-      animationDelay: '',
-      searchHeight: false,
-      theSelecteds: false
-    }
-  },
-  computed: {
-    ...mapGetters([
-      'loadtexts',
-      'outintimagedata'
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'loadtext',
-      'postimgdata',
-      'deleteimagedata'
-    ]),
-    beforeEnter (el) {
-      var delay = el.dataset.imoc * 40
-      el.style.animationDelay = delay + 'ms'
-    },
-    _AppStore (el) {
-      let __url__ = ''
-      this.searchHeight = true
-      this.theSelecteds = false
-      this.clickAppStore = false
-      if (el.target.dataset.platform === 'ios') {
-        __url__ = 'https://itunes.apple.com/search?term=' + this.ic.name + '&country=CN&media=software&limit=10'
-      } else {
-        __url__ = 'http://apps.wandoujia.com/api/v1/search/$' + this.ic.name + '?opt_fields=title,icons.px256,packageName,apks.versionName'
-      }
-      this._searchShow = !this._searchShow
-      let self = this
-      self.$http.get(__url__).then((response) => {
-        if (el.target.dataset.platform === 'ios') {
-          let _results = JSON.parse(response.data)
-          self.getAppStore = _results.results
-        } else {
-          self.getAppStore = response.data.appList
-        }
-      }).then((response) => {
-      })
-    },
-    _upcancel (el) {
-      this.deleteimagedata(el.target.dataset.cancelindex)
-    },
-    _uplosings () {
-      this.postimgdata(this.ic)
-    },
-    _popupShow () {
-      this.popup = true
-    },
-    _addPushTag () {
-      this.updataTga.push(this.inputTag)
-      this.ic['tag'] = this.updataTga
-      this.popup = false
-    },
-    _deleteTag (el) {
-      this.updataTga.splice(el.target.dataset.tag, 1)
-      this.ic['tag'] = this.updataTga
-    },
-    _getAppData (event) {
-      this.searchHeight = false
-      this.theSelecteds = true
-      let filter = {}
-      let target = this.getAppStore[event.target.dataset.gnd]
-      if (event.target.dataset.platform === 'ios') {
-        this.ic.link = filter['trackViewUrl'] = target.trackViewUrl
-        this.ic.icon_link = filter['artworkUrl512'] = target.artworkUrl512
-        this.ic.developer = filter['artistName'] = target.artistName
-        this.ic.developer_link = filter['artistViewUrl'] = target.artistViewUrl
-        this.ic.app_category = filter['genres'] = target.genres
-        this.ic.version = filter['version'] = target.version
-        this.ic.name = filter['trackName'] = target.trackName
-      } else {
-        this.ic.link = filter['trackViewUrl'] = 'http://www.wandoujia.com/apps/' + target.packageName
-        let blibli = {}
-        blibli['px256'] = target.icons.px256
-        this.ic.icon_link = filter['icons'] = blibli
-        let nullArray = {}
-        nullArray['versionName'] = target.apks[0].versionName
-        filter['apks'] = [nullArray]
-        let newString = target.title.replace('<em>', '').replace('</em>', '')
-        this.ic.name = filter['title'] = newString
-      }
-      this.getAppStore = []
-      this.getAppStore.push(filter)
-    },
-    _androidFilter () {
-
-    }
-  }
-}
-</script>

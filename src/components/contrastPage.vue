@@ -1,3 +1,145 @@
+
+<template>
+<div class="comtrast-poups">
+    <div :style="{transitionDelay: upDelay}" class="comtrast" :class="{open: comtrastpopup}">
+        <template v-if="!filmslidestate">
+            <div class="close">
+                <button @click="comtrastOpenCount"><i class="sprite_close"></i></button>
+            </div>
+            <div class="comtrast-popup">
+                <ul class="comtrast-popup-ul">
+                    <li :style="{width:mathWidth}" class="comtrast-popup-li" v-for="(itms, index) in contrastins">
+                        <button class="delete">
+                            <i class="sprite_delete"></i>
+                        </button>
+                        <transition name="custom-classes-transition" enter-active-class="animated slideInDown" leave-active-class="animated slideOutUp" @before-enter="beforeEnter">
+                            <!-- :style="{animationDelay: trans_dalay}" -->
+                            <img v-show="comtrastpopup" :data-index="index" :src="itms" alt="">
+                        </transition>
+                    </li>
+                </ul>
+            </div>
+        </template>
+        <template v-else>
+            <div class="close">
+                <button @click="comtrastopen"><i class="sprite_close"></i></button>
+            </div>
+            <ul class="films-parent clearfix" :style="filmswidth">
+                <li v-for="(itmes,index) in showDataList" class="films-li" :class="{action: actionindex === index}">
+                    <img :src="itmes.url">
+                </li>
+                <div class="arrow">
+                    <div class="arrow-prev">
+                        <button @click="_prev"><i class="sprite_prev"></i></button>
+                    </div>
+                    <div class="arrow-next">
+                        <button @click="_next"><i class="sprite_next"></i></button>
+                    </div>
+                </div>
+            </ul>
+        </template>
+    </div>
+    <div class="screenDownload" :class="{open : addlessstate}">
+        <button class="screen" @click="comtrastOpenCount">
+            <i class="sprite_screen"></i> Ful-screen
+        </button>
+        <button class="download">
+            <i class="sprite_download"></i> Download
+        </button>
+    </div>
+</div>
+
+</template>
+
+<script>
+import { mapGetters, mapActions } from 'vuex'
+export default {
+  data () {
+    return {
+      mathWidth: '',
+      upDelay: '',
+      filmswidth: ''
+    }
+  },
+  watch: {
+  },
+  computed: {
+    ...mapGetters([
+      'comtrastpopup',
+      'contrastins',
+      'likecount',
+      'addlessstate',
+      'filmslidestate',
+      'showDataList',
+      'actionindex'
+    ])
+  },
+  mounted () {
+    // this.$nextTick(function () {
+    //   console.log('next:' + this.actionindex)
+    // })
+  },
+  updated () {
+    let lateLi = document.querySelectorAll('li.films-li')
+    this.transformUpdata(lateLi, this.actionindex)
+  },
+  beforeUpdate () {
+    // console.log('next:' + this.actionindex)
+    // this.transformUpdata()
+    // let lateLi = document.querySelectorAll('li.films-li')
+    // console.log(lateLi)
+  },
+  methods: {
+    ...mapActions([
+      'comtrast',
+      'comtrastopen',
+      'addfilmsilde',
+      'lessfilmsilde'
+    ]),
+    comtrastOpenCount () {
+      this.comtrast()
+      if (this.likecount === 1 || 2 || 3) {
+        this.mathWidth = '25%'
+      } else {
+        this.mathWidth = 'calc(100% / ' + this.likecount + ' + 20px)'
+      }
+      if (this.comtrastpopup !== true) {
+        this.upDelay = '240ms'
+      } else {
+        this.upDelay = '0ms'
+      }
+    },
+    beforeEnter (el) {
+      var delay = el.dataset.index * 40
+      el.style.animationDelay = delay + 'ms'
+    },
+    _prev () {
+      let lateLi = document.querySelectorAll('li.films-li')
+      if (this.actionindex <= 0) {
+        return
+      }
+      this.lessfilmsilde()
+      this.transformUpdata(lateLi, this.actionindex)
+    },
+    _next () {
+      let lateLi = document.querySelectorAll('li.films-li')
+      if (this.actionindex >= lateLi.length - 1) {
+        return
+      }
+      this.addfilmsilde()
+      this.transformUpdata(lateLi, this.actionindex)
+    },
+    transformUpdata (arrays, _late) {
+      let count = _late = _late - 1
+      let tlate = -count * 100
+      for (let i = 0; i < arrays.length; i++) {
+        arrays[i].style.webkitTransform = 'translateX(' + tlate + '%)'
+      }
+    }
+  }
+}
+</script>
+
 <style lang="scss" scoped>
 .comtrast-poups{
   position:relative;
@@ -177,143 +319,3 @@
 }
  
 </style>
-<template>
-<div class="comtrast-poups">
-    <div :style="{transitionDelay: upDelay}" class="comtrast" :class="{open: comtrastpopup}">
-        <template v-if="!filmslidestate">
-            <div class="close">
-                <button @click="comtrastOpenCount"><i class="sprite_close"></i></button>
-            </div>
-            <div class="comtrast-popup">
-                <ul class="comtrast-popup-ul">
-                    <li :style="{width:mathWidth}" class="comtrast-popup-li" v-for="(itms, index) in contrastins">
-                        <button class="delete">
-                            <i class="sprite_delete"></i>
-                        </button>
-                        <transition name="custom-classes-transition" enter-active-class="animated slideInDown" leave-active-class="animated slideOutUp" @before-enter="beforeEnter">
-                            <!-- :style="{animationDelay: trans_dalay}" -->
-                            <img v-show="comtrastpopup" :data-index="index" :src="itms" alt="">
-                        </transition>
-                    </li>
-                </ul>
-            </div>
-        </template>
-        <template v-else>
-            <div class="close">
-                <button @click="comtrastopen"><i class="sprite_close"></i></button>
-            </div>
-            <ul class="films-parent clearfix" :style="filmswidth">
-                <li v-for="(itmes,index) in showDataList" class="films-li" :class="{action: actionindex === index}">
-                    <img :src="itmes.url">
-                </li>
-                <div class="arrow">
-                    <div class="arrow-prev">
-                        <button @click="_prev"><i class="sprite_prev"></i></button>
-                    </div>
-                    <div class="arrow-next">
-                        <button @click="_next"><i class="sprite_next"></i></button>
-                    </div>
-                </div>
-            </ul>
-        </template>
-    </div>
-    <div class="screenDownload" :class="{open : addlessstate}">
-        <button class="screen" @click="comtrastOpenCount">
-            <i class="sprite_screen"></i> Ful-screen
-        </button>
-        <button class="download">
-            <i class="sprite_download"></i> Download
-        </button>
-    </div>
-</div>
-
-</template>
-
-<script>
-import { mapGetters, mapActions } from 'vuex'
-export default {
-  data () {
-    return {
-      mathWidth: '',
-      upDelay: '',
-      filmswidth: ''
-    }
-  },
-  watch: {
-  },
-  computed: {
-    ...mapGetters([
-      'comtrastpopup',
-      'contrastins',
-      'likecount',
-      'addlessstate',
-      'filmslidestate',
-      'showDataList',
-      'actionindex'
-    ])
-  },
-  mounted () {
-    // this.$nextTick(function () {
-    //   console.log('next:' + this.actionindex)
-    // })
-  },
-  updated () {
-    let lateLi = document.querySelectorAll('li.films-li')
-    this.transformUpdata(lateLi, this.actionindex)
-  },
-  beforeUpdate () {
-    // console.log('next:' + this.actionindex)
-    // this.transformUpdata()
-    // let lateLi = document.querySelectorAll('li.films-li')
-    // console.log(lateLi)
-  },
-  methods: {
-    ...mapActions([
-      'comtrast',
-      'comtrastopen',
-      'addfilmsilde',
-      'lessfilmsilde'
-    ]),
-    comtrastOpenCount () {
-      this.comtrast()
-      if (this.likecount === 1 || 2 || 3) {
-        this.mathWidth = '25%'
-      } else {
-        this.mathWidth = 'calc(100% / ' + this.likecount + ' + 20px)'
-      }
-      if (this.comtrastpopup !== true) {
-        this.upDelay = '240ms'
-      } else {
-        this.upDelay = '0ms'
-      }
-    },
-    beforeEnter (el) {
-      var delay = el.dataset.index * 40
-      el.style.animationDelay = delay + 'ms'
-    },
-    _prev () {
-      let lateLi = document.querySelectorAll('li.films-li')
-      if (this.actionindex <= 0) {
-        return
-      }
-      this.lessfilmsilde()
-      this.transformUpdata(lateLi, this.actionindex)
-    },
-    _next () {
-      let lateLi = document.querySelectorAll('li.films-li')
-      if (this.actionindex >= lateLi.length - 1) {
-        return
-      }
-      this.addfilmsilde()
-      this.transformUpdata(lateLi, this.actionindex)
-    },
-    transformUpdata (arrays, _late) {
-      let count = _late = _late - 1
-      let tlate = -count * 100
-      for (let i = 0; i < arrays.length; i++) {
-        arrays[i].style.webkitTransform = 'translateX(' + tlate + '%)'
-      }
-    }
-  }
-}
-</script>
