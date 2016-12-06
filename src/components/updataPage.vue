@@ -1,11 +1,19 @@
 <template>
 <div class="loaderPage">
     <div class="al-container">
+        <div class="upload-screenshot">
+            <h2 class="gl-fb">Upload <span class="gl-ftcolor-theme">Screenshot</span></h2>
+            <p class="gl-ftcolor-gray">Drag or select screenshot file in this box</p>
+        </div>
         <div class="file-upload">
+            
             <div 
             @dragover.stop.prevent="handleDragOver" 
             @drop.stop.prevent="handleFilSelect" 
-            class="drop_zone">
+            class="drop_zone gl-bgcolor-gray-f7">
+                    <div class="upload-images" v-if='outintimagedata.length === 0'>
+                        <img src="../../static/upload-images-icon.png">
+                    </div>  
                     <div class="informations  list-complete-m-item" 
                     v-for="(ic,indexcount) in outintimagedata"  
                     :key="indexcount">
@@ -15,6 +23,8 @@
                         <div class="file-imginfromation">
                             <p class="fileimge-name">{{ic.imgname}}</p>
                             <p class="fileimge-size">{{ic.size}}KB</p>
+                            <p class="file-progress-bar gl-bgcolor-gray-f7" 
+                            v-if="ic.progressbar">xx</p>
                         </div>
                     </div>
             </div>
@@ -94,7 +104,16 @@
             reader.onload = function (oireader) {
               images['file'] = file
               images['url'] = oireader.target.result
+              if (file.name.slice(-4) !== '.jpg' && file.name.slice(-4) !== '.png') {
+                window.alert('Support JPG & PNG file. ')
+                return
+              }
               images['imgname'] = file.name
+              console.log(file.size)
+              if (file.size > 1024 * 1024 * 2) {
+                window.alert(' A file size in less than 2MB.')
+                return
+              }
               images['size'] = Math.round(file.size / 1024)
               let imc = new window.Image()
               imc.src = oireader.target.result
@@ -127,6 +146,7 @@
               images['icon_link'] = ''
               images['app_category'] = ''
               images['version'] = ''
+              images['progressbar'] = false
               self.imgIn.push(images)
               self.imgInformations = self.imgIn
               self.storeimagedata(self.imgInformations)
@@ -144,15 +164,30 @@
 
 <style lang="scss" scoped>
 $color:#EFEFEF;
+  .upload-screenshot{
+    text-align: center;
+    margin-top:100px;
+    h2{
+      font-size:36px;
+      margin-bottom: 15px;
+    }
+    p{
+      font-size: 14px;
+    }
+  }
   .drop_zone{
     padding:20px 10px;
     height:300px;
     overflow-y:scroll;
     margin: 0 auto;
-    background: #FCFCFC;
-    border: 3px dashed #EFEFEF;
     border-radius: 7px;
     position:relative;
+    .upload-images{
+      position:absolute;
+      left: 50%;
+      top: 50%;
+      transform:translate(-50%, -50%);
+    }
   }
   .informations{
     width: calc(100% / 2 - 20px);
@@ -176,6 +211,7 @@ $color:#EFEFEF;
       }
         &.file-imginfromation{
           padding:0 10px;
+          width: 80%;
           p.fileimge-name{
             font-size: 16px;
             color: #222222;
@@ -186,6 +222,10 @@ $color:#EFEFEF;
             font-size: 12px;
             color: #CDCDCD;
             letter-spacing: 0.16px;
+          }
+          p.file-progress-bar {
+            width: 100%;
+            height: 6px;
           }
         }
      }

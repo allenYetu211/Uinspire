@@ -16,7 +16,7 @@ $color:#FFFF00;
         border:none;
         background-color:transparent;
         cursor: pointer;
-        font-weight:700;
+       font-weight:normal;
         font-size: 16px;
         &:focus{
           outline:none;
@@ -47,7 +47,7 @@ $color:#FFFF00;
         min-height:inherit;
         &.view{
           font-size:16px;
-          font-weight:700;
+         font-weight:normal;
           button{
             padding:0;
             i{

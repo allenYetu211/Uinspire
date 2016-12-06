@@ -34,7 +34,7 @@
     <side-bar-infor-mation></side-bar-infor-mation>
 
     <!-- 登录窗口 -->
-    <login-logon></login-logon>
+    <!-- <login-logon></login-logon> -->
 </div>
 
 </template>

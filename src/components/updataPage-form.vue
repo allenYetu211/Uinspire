@@ -7,38 +7,45 @@
                 <img :src="ic.url">
             </div>
             <div class="file-img-imfor">
-                <p class="Platform">
+                <p class="gl-fb Platform">
                     Platform
-                    <span class="infoamtions-r">{{ic.Platform}}</span>
+                    <span class="gl-fn infoamtions-r">{{ic.Platform}}</span>
                 </p>
-                <p class="Dimension">
+                <p class="gl-fb Dimension">
                     Dimension
-                    <span class="infoamtions-r">{{ic.width}} * {{ic.height}}</span>
+                    <span class="gl-fn infoamtions-r">{{ic.width}} * {{ic.height}}</span>
                 </p>
-                <p class="Size">
+                <p class="gl-fb Size">
                     Size
-                    <span class="infoamtions-r">{{ic.size}}KB</span>
+                    <span class="gl-fn infoamtions-r">{{ic.size}}KB</span>
                 </p>
             </div>
         </div>
         <div class="upload-information">
             <div class="upload-form-gurop">
-                <label>Name</label>
+                <h5 
+                class="gl-fb" 
+                :class="{ pleaseinput: appname }">Name
+                <span 
+                v-show="appname" 
+                class="gl-fn">Please input the website name
+                </span>
+                </h5>
                 <div v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
                     <input type="text" v-model="ic.name" name="" placeholder="Input APP Name Search">
                     <button 
                     @click="_AppStore" 
                     data-platform='ios' 
                     class="search">
-                    <i class="sprite_find"></i>
+                    <i class="sprite_find"></i> 
                     </button>
                     <div class="_Apps clearfix">
                         <li class="_AppItem consent-information">Input App Name</li>
                         <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
-                             <transition-group 
-                             name="list-complete"
-                             tag="p"
-                             >
+                          <div class="waitingdata" v-if= "getAppStore.length === 0">
+                            In the search...
+                          </div>
+                            
                             <li 
                             @click.stop="_getAppData" 
                             class="_AppItem list-complete-item" 
@@ -57,7 +64,6 @@
                                 </div>
                             </li>
                         </ul>
-                        </transition-group>
                     </div>
                 </div>
                 <div v-if="ic.Platform === 'Android'">
@@ -66,6 +72,9 @@
                     <div class="_Apps">
                        <li class="_AppItem consent-information">Input App Name</li>
                          <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
+                         <div class="waitingdata" v-if= "getAppStore.length === 0">
+                            In the search...
+                          </div>
                          <transition-group 
                              name="list-complete"
                              tag="p"
@@ -111,17 +120,31 @@
                         </ul>
                     </div>
                 <div class="upload-form-gurop">
-                    <label>Link</label>
+                    <h5 
+                    class="gl-fb" 
+                    :class="{pleaseinput: applink}">Link
+                    <span 
+                    v-show="applink" 
+                    class="gl-fn">Please input the website link
+                    </span>
+                    </h5>
                     <input type="text" v-model="ic.link" name="">
                 </div>
                 </div>
 
             </div>
             <div class="upload-form-gurop">
-                <h5>Category</h5>
+                <h5 
+                class="gl-fb" 
+                :class="{ pleaseinput: appcategory}">Category
+                <span 
+                v-show="appcategory && ic.Category.length === 0" 
+                class="gl-fn">Please Select Category</span></h5>
                 <div class="clearfix">
-                    <div class="category-checkbox" v-for="(ck, ins) in category">
-                        <input 
+                    <div 
+                    class="category-checkbox" 
+                    v-for="(ck, ins) in category">
+                        <input
                         v-model="ic.Category" 
                         :value="ins" 
                         :id="'ckcategory_' + index + ins " 
@@ -134,7 +157,7 @@
                 </div>
             </div>
             <div class="upload-form-gurop">
-                <h5>Tags</h5>
+                <h5 class="gl-fb">Tags</h5>
                 <div>
                     <div class="upload-tag">
                         <span class="tag-laber" v-for="(tag, tagindex) in updataTga">
@@ -147,7 +170,7 @@
                         type="button">添加标签</button>
                         <div 
                         class="popup-tag" 
-                        v-if="updataTga.length < 3 && popup">
+                        v-if="updataTga.length < 5 && popup">
                             <input v-model="inputTag" type="text" name="">
                             <button @click="_addPushTag" class="popup-addTag">添加</button>
                         </div>
@@ -155,8 +178,17 @@
                 </div>
             </div>
             <div class="upload-btn">
-                <button type="button" @click="_uplosings">Upload</button>
-                <button type="button" :data-cancelIndex='index' @click="_upcancel" class="upload-cancel">Cancel</button>
+                <button 
+                class="gl-fb gl-bgcolor-black gl-ftcolor-white" 
+                type="button" 
+                @click="_uplosings">UPLOAD
+                </button>
+                <button 
+                type="button gl-ftcolor-white" 
+                :data-cancelIndex='index' 
+                @click="_upcancel" 
+                class="gl-fb upload-cancel">CANCEL
+                </button>
             </div>
         </div>
     </form>
@@ -179,7 +211,11 @@ export default {
       clickAppStore: true,
       animationDelay: '',
       searchHeight: false,
-      theSelecteds: false
+      theSelecteds: false,
+      appname: false,
+      applink: false,
+      appcategory: false,
+      searchStore: false
     }
   },
   computed: {
@@ -195,11 +231,13 @@ export default {
       'deleteimagedata'
     ]),
     beforeEnter (el) {
-      var delay = el.dataset.imoc * 40
+      var delay = el.dataset.imoc * 20
       el.style.animationDelay = delay + 'ms'
     },
     _AppStore (el) {
       let __url__ = ''
+      this.getAppStore = []
+      this.searchStore = true
       this.searchHeight = true
       this.theSelecteds = false
       this.clickAppStore = false
@@ -224,7 +262,18 @@ export default {
       this.deleteimagedata(el.target.dataset.cancelindex)
     },
     _uplosings () {
-      this.postimgdata(this.ic)
+      if (this.ic.name.trim() === '') {
+        this.appname = true
+      } else if (this.ic.link.trim() === '') {
+        this.applink = true
+        if (!this.searchStore) {
+          this.appname = true
+        }
+      } else if (this.ic.Category.length === 0) {
+        this.appcategory = true
+      } else {
+        this.postimgdata(this.ic)
+      }
     },
     _popupShow () {
       this.popup = true
@@ -239,6 +288,7 @@ export default {
       this.ic['tag'] = this.updataTga
     },
     _getAppData (event) {
+      this.appname = false
       this.searchHeight = false
       this.theSelecteds = true
       let filter = {}
@@ -265,8 +315,9 @@ export default {
       this.getAppStore = []
       this.getAppStore.push(filter)
     },
-    _androidFilter () {
-
+    _beforeEnter (el) {
+      let delay = el.dataset.index * 40
+      el.style.animationDelay = delay + 'ms'
     }
   }
 }
@@ -290,14 +341,13 @@ form{
     .file-img-imfor{
       p{
         padding:5px 0;
-        font-weight:700;
+       font-weight:normal;
         font-size: 12px;
         color: #222222;
         letter-spacing: 0.12px;
       }
     }
   span.infoamtions-r{
-    font-family: Roboto;
     float: right;
   }
 }
@@ -306,10 +356,17 @@ form{
   .upload-form-gurop{
     margin-bottom:20px;
     position:relative;
+    h5{
+      span{
+        float:right;
+        color:#ff2727;
+        font-size: 12px;
+      }
+    }
     button.search{
         position:absolute;
         right:5px;
-        top:30px;
+        top:35px;
         border:none;
         background-color:transparent;
         width:30px;
@@ -324,7 +381,7 @@ form{
     &>label,&>h5{
       display:block;
       padding:0 0 8px 0;
-      font-weight:700;
+     font-weight:normal;
       font-size: 14px;
       line-height: 1.5;
       color: #222222;
@@ -467,14 +524,19 @@ form{
       right:0;
       z-index:99;
       overflow-y:scroll; 
-      max-height: 225px;
-      height: 0;
+      max-height: 0px;
       transition: height 0.5s;
+      .waitingdata {
+        position: absolute;
+        left:50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
       &.search-height{
-        height: 225px;
+        max-height: 225px;
       }
       &.theSelected{
-        height: 60px;
+        max-height: 60px;
       }
 
     }
@@ -511,14 +573,14 @@ form{
             }
             .appName{
               font-size:14px;
-              font-weight:700;
+             font-weight:normal;
               line-height:1.5;
               word-break:keep-all;     
              
             }
             .artistName{
               font-size:12px;
-              font-weight:700;
+             font-weight:normal;
               line-height:1.5;
               color:#aaa;
             }
@@ -562,15 +624,12 @@ form{
  
 .upload-btn{
   button{
-      color:#222;
-      font-size: 14px;
+      font-size: 18px;
       margin: 0 auto;
-      height:40px;
+      height:50px;
+      width:150px;
       padding: 10px 25px;
-      background-color: #FFFA00;
       border: none;
-      border-radius: 3px;
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
       margin-right:10px;
       &.upload-cancel{
         background-color:#f4f4f4;

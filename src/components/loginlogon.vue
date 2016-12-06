@@ -41,7 +41,15 @@
             <div class="logon-information">
               <h2>Hello, <span class="gl-ftcolor-theme">Designer</span>!</h2>
               <p class="gl-ftcolor-gray">Pleasa type your infomation to finish register.</p>
-              <input class="gl-bgcolor-gray-ed gl-ftcolor-black" type="text" name="" maxlength = '6'>
+              <div class="VerificationCode clearfix">
+                  <input  v-model="registered"  type="text" name="" maxlength = '6'>
+                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[0]}}</span>
+                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[1]}}</span>
+                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[2]}}</span>
+                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[3]}}</span>
+                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[4]}}</span>
+                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[5]}}</span>
+              </div>
               <div class="login-registered">
                 <button 
                 class="gl-bgcolor-black gl-ftcolor-white gl-fb" >Validation</button>
@@ -84,6 +92,11 @@
 import {mapGetters, mapActions} from 'vuex'
 
 export default {
+  data () {
+    return {
+      registered: ''
+    }
+  },
   computed: {
     ...mapGetters([
       'returnimportemail',
@@ -207,7 +220,25 @@ export default {
             margin-bottom: 30px;
           }
         }
-      }      
 
+      }   
+      .VerificationCode{
+        position:relative;
+        input {
+          position:absolute;
+          left: 0;
+          right: 0;
+          opacity: 0;
+        }
+        span {
+          display:block;
+          margin: 0px 2px;
+          float: left;
+          width: calc(100% / 6  - 5px);
+          height: 60px;
+          line-height: 60px;
+          font-size: 36px;
+        }
+      }   
 }
 </style>

@@ -38,11 +38,12 @@ export default {
   },
   uploadProject (_data, callback) {
     const fdata = new window.FormData()
+    let tag = _data.tag ? _data.tag.join(',') : ''
     fdata.append('file', _data.file)
     fdata.append('platform', _data.PlatformIndex)
     fdata.append('category', _data.Category.join(','))
     fdata.append('name', _data.name)
-    fdata.append('tag', _data.tag.join(','))
+    fdata.append('tag', tag)
     fdata.append('link', _data.link)
     fdata.append('icon_link', _data.icon_link)
     fdata.append('developer', _data.developer)

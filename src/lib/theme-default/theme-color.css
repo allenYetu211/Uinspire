@@ -3,7 +3,7 @@
 }
 
 .gl-ftcolor-black{
-  color:#333;
+  color:#222;
 }
 
 .gl-ftcolor-white{
@@ -23,7 +23,7 @@
 }
 
 .gl-bgcolor-black {
-  background-color: #333;
+  background-color: #222;
 }
 
 .gl-bgcolor-gray-ed {
@@ -32,4 +32,8 @@
 
 .gl-bgcolor-gray-dc {
   background-color:#DCDCDC;
+}
+
+.gl-bgcolor-gray-f7 {
+  background-color:#f7f7f7;
 }

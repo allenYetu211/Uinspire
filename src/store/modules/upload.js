@@ -30,6 +30,7 @@ const mutations = {
     console.log(state.text)
   },
   [POSTIMGDATA] (state, _data) {
+    _data.progressbar = true
     API.uploadProject(_data, (url) => {
       state.returnData.push(url)
     })

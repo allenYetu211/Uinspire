@@ -12,7 +12,11 @@
                         <button class="delete">
                             <i class="sprite_delete"></i>
                         </button>
-                        <transition name="custom-classes-transition" enter-active-class="animated slideInDown" leave-active-class="animated slideOutUp" @before-enter="beforeEnter">
+                        <transition 
+                        name="custom-classes-transition" 
+                        enter-active-class="animated slideInDown" 
+                        leave-active-class="animated slideOutUp" 
+                        @before-enter="beforeEnter">
                             <!-- :style="{animationDelay: trans_dalay}" -->
                             <img v-show="comtrastpopup" :data-index="index" :src="itms" alt="">
                         </transition>
@@ -110,7 +114,7 @@ export default {
       }
     },
     beforeEnter (el) {
-      var delay = el.dataset.index * 40
+      let delay = el.dataset.index * 40
       el.style.animationDelay = delay + 'ms'
     },
     _prev () {
