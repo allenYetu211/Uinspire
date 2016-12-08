@@ -1,9 +1,9 @@
 <style lang="scss" scoped>
     li {
-      width:calc(100% / 6 - 20px);
+      // width:calc(100% / 6 - 20px);
       float: left;
       margin: 10px 10px;
-      position:relative;
+      position:absolute;
       overflow:hidden;
       transition: box-shadow 0.3s;
       
@@ -73,7 +73,7 @@
 </style>
 
 <template>
-  <li  :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
+  <li :style="[styleObject]"  :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
     <div class="imagesShow-box-shadow" :class="{active : hover}">
       <img :src="itmes.url">
         <div class="imagesShow-paypal"  :class="{active : hover}">
@@ -97,12 +97,21 @@ export default{
   data () {
     return {
       like: false,
-      hover: false
+      hover: false,
+      styleObject: {
+        width: '',
+        left: ''
+      }
     }
   },
   mounted () {
     this.$nextTick(() => {
-      console.log(this.$el)
+      let maxWidth = window.innerWidth / 9 - 20
+      maxWidth = parseInt(maxWidth)
+      this.$el.style.left = maxWidth * (this.index + 1)
+      console.log(maxWidth * (this.index + 1))
+      this.styleObject.width = maxWidth + 'px'
+      this.styleObject.left = maxWidth * (this.index) + 20 + 'px'
     })
   },
   computed: {

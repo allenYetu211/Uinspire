@@ -45,7 +45,6 @@
                     </div>
             </div>
 
-            <transition-group name="uploadsuccess">
               <up-data-page-form
                v-for="(ic, index) in outintimagedata"
                :category='category' 
@@ -55,7 +54,6 @@
                 v-if="!ic.isuploadsuccess"
               >
                </up-data-page-form>
-            </transition>
         </div>
     </div>
 </div>
