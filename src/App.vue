@@ -15,14 +15,12 @@
 </template>
 
 <script>
-import Navigation from './components/navigation'
 import InspireNav from './components/inspire-nav'
 import ContrastPage from './components/contrastPage'
 import { mapActions } from 'vuex'
 
 export default {
   components: {
-    Navigation,
     ContrastPage,
     InspireNav
   },

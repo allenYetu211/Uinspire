@@ -1,203 +1,211 @@
-
 <template>
-<div class="informations-uploade">
-    <form @submit.prevent="">
-        <div class="file-img-information">
-            <div class="upload-img">
-                <img :src="ic.url">
-            </div>
-            <div class="file-img-imfor">
-                <p class="gl-fb Platform">
-                    Platform
-                    <span class="gl-fn infoamtions-r">{{ic.Platform}}</span>
-                </p>
-                <p class="gl-fb Dimension">
-                    Dimension
-                    <span class="gl-fn infoamtions-r">{{ic.width}} * {{ic.height}}</span>
-                </p>
-                <p class="gl-fb Size">
-                    Size
-                    <span class="gl-fn infoamtions-r">{{ic.size}}KB</span>
-                </p>
-            </div>
-        </div>
-        <div class="upload-information">
-            <div class="upload-form-gurop">
-                <h5 
-                class="gl-fb" 
-                :class="{ pleaseinput: appname }">Name
-                <span 
-                v-show="appname" 
-                class="gl-fn">Please input the website name
-                </span>
-                </h5>
-                <div v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
-                    <input type="text" v-model="ic.name" name="" placeholder="Input APP Name Search">
-                    <button 
-                    @click="_AppStore" 
-                    data-platform='ios' 
-                    class="search">
-                    <i class="sprite_find"></i> 
-                    </button>
-                    <div class="_Apps clearfix">
-                        <li class="_AppItem consent-information">Input App Name</li>
-                        <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
-                          <div class="waitingdata" v-if= "getAppStore.length === 0">
-                            In the search...
+      <div class="informations-uploade" :class="{loadsuccess: !ic.isuploadsuccess}">
+          <form @submit.prevent="">
+              <div class="file-img-information">
+                  <div class="upload-img">
+                      <img :src="ic.url">
+                  </div>
+                  <div class="file-img-imfor">
+                      <p class="gl-fb Platform">
+                          Platform
+                          <span class="gl-fn infoamtions-r">{{ic.Platform}}</span>
+                      </p>
+                      <p class="gl-fb Dimension">
+                          Dimension
+                          <span class="gl-fn infoamtions-r">{{ic.width}} * {{ic.height}}</span>
+                      </p>
+                      <p class="gl-fb Size">
+                          Size
+                          <span class="gl-fn infoamtions-r">{{ic.size}}KB</span>
+                      </p>
+                  </div>
+              </div>
+              <div class="upload-information">
+                  <div class="upload-form-gurop">
+                      <h5 
+                      class="gl-fb" 
+                      :class="{ pleaseinput: appname }">Name
+                      <span 
+                      v-show="appname" 
+                      class="gl-fn">Please input the website name
+                      </span>
+                      </h5>
+                      <div v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
+                          <input type="text" v-model="ic.name" name="" placeholder="Input APP Name Search">
+                          <button 
+                          @click="_AppStore" 
+                          data-platform='ios' 
+                          class="search">
+                          <i class="sprite_find"></i> 
+                          </button>
+                          <div class="_Apps clearfix">
+                             <li v-if="searchNull" class="_AppItem consent-information">Input App Name</li>
+                             <li v-else class="_AppItem consent-information">Search 0 result,Retry?</li>
+                              <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
+                                <div class="waitingdata" v-if= "getAppStore.length === 0">
+                                  In the search...
+                                </div>
+                                  
+                                  <li 
+                                  @click.stop="_getAppData" 
+                                  class="_AppItem list-complete-item" 
+                                  v-for="(ics, imoc) in getAppStore" 
+                                  :data-Gnd="imoc" 
+                                  data-platform='ios' 
+                                  :key="imoc" 
+                                  :data-index="imoc" 
+                                  :style="{animationDelay: animationDelay}">
+                                      <div class="appIcon">
+                                          <img :src="ics.artworkUrl512">
+                                      </div>
+                                      <div>
+                                          <p class="appName">{{ics.trackName}}</p>
+                                          <p class="artistName">{{ics.artistName}} {{imoc}}</p>
+                                      </div>
+                                  </li>
+                              </ul>
                           </div>
-                            
-                            <li 
-                            @click.stop="_getAppData" 
-                            class="_AppItem list-complete-item" 
-                            v-for="(ics, imoc) in getAppStore" 
-                            :data-Gnd="imoc" 
-                            data-platform='ios' 
-                            :key="imoc" 
-                            :data-index="imoc" 
-                            :style="{animationDelay: animationDelay}">
-                                <div class="appIcon">
-                                    <img :src="ics.artworkUrl512">
-                                </div>
-                                <div>
-                                    <p class="appName">{{ics.trackName}}</p>
-                                    <p class="artistName">{{ics.artistName}} {{imoc}}</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div v-if="ic.Platform === 'Android'">
-                    <input type="text" v-model="ic.name" name="" placeholder="Input Name Search">
-                    <button @click="_AppStore" data-platform='android' class="search"><i class="sprite_find"></i></button>
-                    <div class="_Apps">
-                       <li class="_AppItem consent-information">Input App Name</li>
-                         <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
-                         <div class="waitingdata" v-if= "getAppStore.length === 0">
-                            In the search...
-                          </div>
-                         <transition-group 
-                             name="list-complete"
-                             tag="p"
-                             >
-                            <li 
-                            @click.stop="_getAppData" 
-                            class="_AppItem list-complete-item" 
-                            v-for="(ics, imoc) in getAppStore" 
-                            :key="imoc" 
-                            :data-Gnd="imoc" data-platform='android'>
-                                <div class="appIcon">
-                                    <img :src="ics.icons.px256">
-                                </div>
-                                <div>
-                                    <p class="appName" v-html="ics.title"></p>
-                                    <p 
-                                    class="artistName" 
-                                    v-for='infor in ics.apks'>{{infor.versionName}}</p>
-                                </div>
-                            </li>
-                            </transition-group>
-                        </ul>
-                    </div>
-                </div>
-                <div v-if="ic.Platform === 'WEB'">
-                    <input type="text" v-model="ic.name" name="" placeholder="Input Name Search">
-                    <div class="_Apps">
-                        <ul>
-                            <li 
-                            @click.stop="_getAppData" 
-                            class="_AppItem" 
-                            v-for="(ics, imoc) in getAppStore" 
-                            :data-Gnd="imoc" 
-                            data-platform='android'>
-                                <div class="appIcon">
-                                    <img :src="ics.icons.px256">
-                                </div>
-                                <div>
-                                    <p class="appName" v-html="ics.title"></p>
-                                    <p class="artistName" v-for='infor in ics.apks'>{{infor.versionName}} </p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                <div class="upload-form-gurop">
-                    <h5 
-                    class="gl-fb" 
-                    :class="{pleaseinput: applink}">Link
-                    <span 
-                    v-show="applink" 
-                    class="gl-fn">Please input the website link
-                    </span>
-                    </h5>
-                    <input type="text" v-model="ic.link" name="">
-                </div>
-                </div>
+                      </div>
+                      <div v-if="ic.Platform === 'Android'">
+                          <input type="text" v-model="ic.name" name="" placeholder="Input Name Search">
+                          <button @click="_AppStore" data-platform='android' class="search"><i class="sprite_find"></i></button>
+                          <div class="_Apps">
 
-            </div>
-            <div class="upload-form-gurop">
-                <h5 
-                class="gl-fb" 
-                :class="{ pleaseinput: appcategory}">Category
-                <span 
-                v-show="appcategory && ic.Category.length === 0" 
-                class="gl-fn">Please Select Category</span></h5>
-                <div class="clearfix">
-                    <div 
-                    class="category-checkbox" 
-                    v-for="(ck, ins) in category">
-                        <input
-                        v-model="ic.Category" 
-                        :value="ins" 
-                        :id="'ckcategory_' + index + ins " 
-                        type="checkbox" 
-                        name="" 
-                        style="display:none">
-                        <i class="sprite_checkbox"></i>
-                        <label :for="'ckcategory_' + index + ins ">{{ck}}</label>
-                    </div>
-                </div>
-            </div>
-            <div class="upload-form-gurop">
-                <h5 class="gl-fb">Tags</h5>
-                <div>
-                    <div class="upload-tag">
-                        <span class="tag-laber" v-for="(tag, tagindex) in updataTga">
-                          {{tag}}
-                          <i :data-tag="tagindex" @click="_deleteTag">x</i>
-                        </span>
-                        <button 
-                        @click="_popupShow" 
-                        class="updata-Tag" 
-                        type="button">添加标签</button>
-                        <div 
-                        class="popup-tag" 
-                        v-if="updataTga.length < 5 && popup">
-                            <input v-model="inputTag" type="text" name="">
-                            <button @click="_addPushTag" class="popup-addTag">添加</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="upload-btn">
-                <button 
-                class="gl-fb gl-bgcolor-black gl-ftcolor-white" 
-                type="button" 
-                @click="_uplosings">UPLOAD
-                </button>
-                <button 
-                type="button gl-ftcolor-white" 
-                :data-cancelIndex='index' 
-                @click="_upcancel" 
-                class="gl-fb upload-cancel">CANCEL
-                </button>
-            </div>
-        </div>
-    </form>
-</div>
+                             <li v-if="searchNull" class="_AppItem consent-information">Input App Name</li>
+                             <li v-else class="_AppItem consent-information">Search 0 result,Retry?</li>
+                               <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
+                               <div class="waitingdata" v-if= "getAppStore.length === 0">
+                                  In the search...
+                                </div>
+                               <transition-group 
+                                   name="list-complete"
+                                   tag="p"
+                                   >
+                                  <li 
+                                  @click.stop="_getAppData" 
+                                  class="_AppItem list-complete-item" 
+                                  v-for="(ics, imoc) in getAppStore" 
+                                  :key="imoc" 
+                                  :data-Gnd="imoc" data-platform='android'>
+                                      <div class="appIcon">
+                                          <img :src="ics.icons.px256">
+                                      </div>
+                                      <div>
+                                          <p class="appName" v-html="ics.title"></p>
+                                          <p 
+                                          class="artistName" 
+                                          v-for='infor in ics.apks'>{{infor.versionName}}</p>
+                                      </div>
+                                  </li>
+                                  </transition-group>
+                              </ul>
+                          </div>
+                      </div>
+                      <div v-if="ic.Platform === 'WEB'">
+                          <input type="text" v-model="ic.name" name="" placeholder="Input Name Search">
+                          <div class="_Apps">
+                              <ul>
+                                  <li 
+                                  @click.stop="_getAppData" 
+                                  class="_AppItem" 
+                                  v-for="(ics, imoc) in getAppStore" 
+                                  :data-Gnd="imoc" 
+                                  data-platform='android'>
+                                      <div class="appIcon">
+                                          <img :src="ics.icons.px256">
+                                      </div>
+                                      <div>
+                                          <p class="appName" v-html="ics.title"></p>
+                                          <p class="artistName" v-for='infor in ics.apks'>{{infor.versionName}} </p>
+                                      </div>
+                                  </li>
+                              </ul>
+                          </div>
+                      <div class="upload-form-gurop">
+                          <h5 
+                          class="gl-fb" 
+                          :class="{pleaseinput: applink}">Link
+                          <span 
+                          v-show="applink" 
+                          class="gl-fn">Please input the website link
+                          </span>
+                          </h5>
+                          <input type="text" v-model="ic.link" name="">
+                      </div>
+                      </div>
+
+                  </div>
+                  <div class="upload-form-gurop">
+                      <h5 
+                      class="gl-fb" 
+                      :class="{ pleaseinput: appcategory}">Category
+                      <span 
+                      v-show="appcategory && ic.Category.length === 0" 
+                      class="gl-fn">Please Select Category</span></h5>
+                      <div class="clearfix">
+                          <div 
+                          class="category-checkbox" 
+                          v-for="(ck, ins) in category">
+                              <input
+                              v-model="ic.Category" 
+                              :value="ins" 
+                              :id="'ckcategory_' + index + ins " 
+                              type="checkbox" 
+                              name="" 
+                              style="display:none">
+                              <i class="sprite_checkbox"></i>
+                              <label :for="'ckcategory_' + index + ins ">{{ck}}</label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="upload-form-gurop">
+                      <h5 class="gl-fb">Tags</h5>
+                      <div>
+                          <div class="upload-tag">
+                              <span class="tag-laber" v-for="(tag, tagindex) in updataTag">
+                                {{tag}}
+                                <i :data-tag="tagindex" @click="_deleteTag">x</i>
+                              </span>
+                              <button 
+                              @click="_popupShow" 
+                              class="updata-Tag" 
+                              type="button">Add Tag</button>
+                              <div 
+                              class="popup-tag" 
+                              v-if="updataTag.length < 5 && popup">
+                              <div class="popup-input">
+                                  <input v-model="inputTag" maxlength="8" type="text" name="" placeholder="Tag..">
+                                  <button @click="_addPushTag" class="popup-addTag">Add</button>
+                              </div>
+                                  <ul>
+                                    <li v-for="tag in tagList" @click="_addhistory">{{tag}}</li>
+                                  </ul>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="upload-btn">
+                      <button 
+                      class="gl-fb gl-bgcolor-black gl-ftcolor-white" 
+                      type="button" 
+                      @click="_uplosings">UPLOAD
+                      </button>
+                      <button 
+                      type="button gl-ftcolor-white" 
+                      :data-cancelIndex='index' 
+                      @click="_upcancel" 
+                      class="gl-fb upload-cancel">CANCEL
+                      </button>
+                  </div>
+              </div>
+          </form>
+      </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import '../Publicjs/filter.js'
+import axios from 'axios'
 
 export default {
   props: ['ic', 'index', 'category'],
@@ -205,7 +213,7 @@ export default {
     return {
       checkedNames: [],
       getAppStore: [],
-      updataTga: [],
+      updataTag: [],
       inputTag: '',
       popup: false,
       clickAppStore: true,
@@ -215,7 +223,10 @@ export default {
       appname: false,
       applink: false,
       appcategory: false,
-      searchStore: false
+      searchStore: false,
+      searchNull: true,
+      preventTherepeat: true,
+      tagList: []
     }
   },
   computed: {
@@ -248,14 +259,22 @@ export default {
       }
       this._searchShow = !this._searchShow
       let self = this
-      self.$http.get(__url__).then((response) => {
+      axios.get(__url__).then((response) => {
         if (el.target.dataset.platform === 'ios') {
-          let _results = JSON.parse(response.data)
-          self.getAppStore = _results.results
+          let _results = response.data
+          if (_results.resultCount === 0) {
+            self.searchNull = false
+          } else {
+            self.getAppStore = _results.results
+          }
         } else {
-          self.getAppStore = response.data.appList
+          if (response.data.total === 0) {
+            self.searchNull = false
+          } else {
+            self.getAppStore = response.data.appList
+          }
         }
-      }).then((response) => {
+      }).catch((response) => {
       })
     },
     _upcancel (el) {
@@ -272,20 +291,35 @@ export default {
       } else if (this.ic.Category.length === 0) {
         this.appcategory = true
       } else {
-        this.postimgdata(this.ic)
+        if (this.preventTherepeat) {
+          this.postimgdata(this.ic)
+          this.preventTherepeat = false
+        }
       }
     },
     _popupShow () {
+      if (this.updataTag.length >= 5) {
+        return
+      }
       this.popup = true
     },
-    _addPushTag () {
-      this.updataTga.push(this.inputTag)
-      this.ic['tag'] = this.updataTga
+    _addhistory (el) {
+      this.updataTag.push(el.target.innerText)
+      this.ic['tag'] = this.updataTag
       this.popup = false
     },
+    _addPushTag () {
+      this.updataTag.push(this.inputTag)
+      this.ic['tag'] = this.updataTag
+      this.popup = false
+      this.tagList.push(this.inputTag)
+      if (this.tagList.length > 3) {
+        this.tagList.shift()
+      }
+    },
     _deleteTag (el) {
-      this.updataTga.splice(el.target.dataset.tag, 1)
-      this.ic['tag'] = this.updataTga
+      this.updataTag.splice(el.target.dataset.tag, 1)
+      this.ic['tag'] = this.updataTag
     },
     _getAppData (event) {
       this.appname = false
@@ -324,6 +358,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+ .informations-uploade{
+    border-bottom:1px solid #EFEFEF;
+    padding: 50px 0;
+    height: 0;
+    padding: 0;
+    overflow:hidden;
+    transition: all 0.5s;
+    &.loadsuccess{
+      height: 600px;
+      padding: 50px 0;
+    }
+  }
 form{
   flex: row;
   display: flex;
@@ -433,69 +479,96 @@ form{
       border:none;
       background: #f4f4f4;
       border-radius: 5px;
-      min-height:40px;
+      height: 44px;
       font-size:14px;
       padding:10px 25px 10px 15px;
       position:relative;
       span.tag-laber{
-        background: #e1e1e1;
-        padding:5px;
-        margin:5px;
+        background: #D8D8D8;
+        padding: 5px 0px 5px 18px ;
+        margin:0 5px;
         display:inline-block;
         position:relative;
         transition:padding 0.5s;
-        &:hover{
-          padding-right:25px;
-        }
-        &:hover i {
-          opacity: 1;
-          transform: translate(0%,-50%);
-          // display:block;
+        position:relative;
+        border-radius:100px;
+        &:before {
+          display:block;
+          content: '';
+          position: absolute;
+          left: 10px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 4px;
+          height: 4px;
+          border-radius:50%;
+          background-color:#EFEFEF;
           z-index:9;
         }
+        &:hover{
+          padding-right:10px;
+        }
+        &:hover i {
+          transform: scale(1);
+        }
         i{
-          position:absolute;
-          top: 50%;
-          transform: translate(150%,-50%) rotate(180deg);
+          transform: scale(0);
           border-radius:50%;
-          right:0px;
-          display: block;
+          display: inline-block;
           width: 15px;
           height:15px;
           line-height:15px;
           text-align:center;
-          background-color:#FFFA00;
-          opacity: 0;
-          z-index:-99;
-          transition:opacity 0.5s, transform 0.5s;
+          background-color:#666666;
+          transition: transform 0.5s;
           cursor:pointer;
         }
       }
       .popup-tag{
         position:absolute;
         left: 0;
-        bottom: -45px;
+        top: 50px;
         width:200px;
-        background-color:#fff;
-        input{
-          padding:10px 55px 10px 10px;
-          border:none;
-          border-bottom: 1px solid #333;
+        background-color:#FFFFFF;
+        box-shadow: 0 0 5px rgba(0,0,0,.25);
+        .popup-input{
           position:relative;
-          & + button{
-            position:absolute;
-            top:50%;
-            transform: translateY(-50%);
-            right:10px;
+          & > input{
+            padding:10px 55px 10px 10px;
             border:none;
-            background-color:transparent;
+            border-bottom: 1px solid #efefef;
+            position:relative;
+            border-radius: 0;
+
+            background-color: transparent;
+            & + button{
+              position:absolute;
+              top:50%;
+              transform: translateY(-50%);
+              right:10px;
+              border:none;
+              background-color:transparent;
+            }
           }
         }
         ul{
-          padding:0;
+          padding-left: 20px;
           li{
-            line-hegiht:40px;
-            border-bottom: 1px solid #e0e0e0;
+            line-height:30px;
+            position: relative;
+            &:before{
+              display: block;
+              content: '';
+              position: absolute;
+              left: -10px;
+              top: 50%;
+              transform: translateY(-50%);
+              background-color: #D8D8D8;
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+
+            }
             &:last-child{
               border:none;
             }
@@ -516,6 +589,9 @@ form{
     border-radius: 5px;
     margin:5px 0;
     position:relative;
+    & > li._AppItem {
+      border-bottom: none;
+    }
     ul{
       background:#f4f4f4;
       position:absolute;
@@ -610,7 +686,7 @@ form{
           i{  
             position: absolute;
             z-index:-1;
-            left: -3px;
+            left: 0;
             top: 0;
             display: block;
             width: 20px;
@@ -631,6 +707,7 @@ form{
       padding: 10px 25px;
       border: none;
       margin-right:10px;
+      cursor:pointer;
       &.upload-cancel{
         background-color:#f4f4f4;
       }

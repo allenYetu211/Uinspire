@@ -8,7 +8,7 @@
         <div class="file-upload">
             
             <div 
-            @dragover.stop.prevent="handleDragOver" 
+            @dragover.stop.prevent="" 
             @drop.stop.prevent="handleFilSelect" 
             class="drop_zone gl-bgcolor-gray-f7">
                     <div class="upload-images" v-if='outintimagedata.length === 0'>
@@ -21,23 +21,41 @@
                             <img :src="ic.url">
                         </div>
                         <div class="file-imginfromation">
-                            <p class="fileimge-name">{{ic.imgname}}</p>
-                            <p class="fileimge-size">{{ic.size}}KB</p>
-                            <p class="file-progress-bar gl-bgcolor-gray-f7" 
-                            v-if="ic.progressbar">xx</p>
+                            <p>{{ic.imgname}}</p>
+                            <p>{{ic.size}}KB</p>
+                            <div class="progressbar-start" v-if="ic.progressbar">
+                               <p class="iswaiting" v-if="ic.iswaiting">Waiting</p>
+                               <p class="isuploading" v-if="ic.isuploading">Uploading...</p>
+                               <p class="gl-ftcolor-theme" v-if="ic.isuploadsuccess">Uploading Success</p>
+                               <div 
+                              class="file-progress-bar gl-bgcolor-gray-f7" 
+                              v-if="ic.progressbar">
+                                <span 
+                                :style= "'transform: scaleX(' + ic.progress + ')'"
+                                :class='{
+                                 waiting: ic.iswaiting,
+                                 uploading: ic.isuploading,
+                                 uploadfaild: ic.isuploadfaild,
+                                 uploadsuccess: ic.isuploadsuccess
+                                 }'></span>
+                              </div>
+                            </div>
+
                         </div>
                     </div>
             </div>
-            <div v-if="outintimagedata.length !== 0">
-                    <up-data-page-form
-                     v-for="(ic, index) in outintimagedata"
-                     :category='category' 
-                     :ic='ic' 
-                     :index="index"
-                     :key="index" 
-                     class="Initialize-information-item">
-                     </up-data-page-form>
-            </div>
+
+            <transition-group name="uploadsuccess">
+              <up-data-page-form
+               v-for="(ic, index) in outintimagedata"
+               :category='category' 
+               :ic='ic' 
+               :index="index"
+               :key="index"
+                v-if="!ic.isuploadsuccess"
+              >
+               </up-data-page-form>
+            </transition>
         </div>
     </div>
 </div>
@@ -85,13 +103,6 @@
         'loadtext',
         'storeimagedata'
       ]),
-      watchHeight (el) {
-        console.log(el)
-      },
-      _dragover () {
-      },
-      handleDragOver () {
-      },
       handleFilSelect (evt) {
         let i = 0
         let files = evt.dataTransfer.files
@@ -109,7 +120,6 @@
                 return
               }
               images['imgname'] = file.name
-              console.log(file.size)
               if (file.size > 1024 * 1024 * 2) {
                 window.alert(' A file size in less than 2MB.')
                 return
@@ -147,6 +157,11 @@
               images['app_category'] = ''
               images['version'] = ''
               images['progressbar'] = false
+              images['iswaiting'] = false
+              images['isuploading'] = false
+              images['isuploadfaild'] = false
+              images['isuploadsuccess'] = false
+              images['progress'] = 0
               self.imgIn.push(images)
               self.imgInformations = self.imgIn
               self.storeimagedata(self.imgInformations)
@@ -177,7 +192,8 @@ $color:#EFEFEF;
   }
   .drop_zone{
     padding:20px 10px;
-    height:300px;
+    min-height:300px;
+    max-height: 600px;
     overflow-y:scroll;
     margin: 0 auto;
     border-radius: 7px;
@@ -192,40 +208,70 @@ $color:#EFEFEF;
   .informations{
     width: calc(100% / 2 - 20px);
     display: inline-block;
-    padding:15px 15px;
-    min-height:100px;
+    padding:15px;
     background: #FFFFFF;
+    height: 95px;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.20);
     border-radius: 2px;
     margin:10px 10px;
     &>div{
       float: left;
       &.file-img{
-          width: 20%;
+          width: 25%;
           height: 0;
           overflow: hidden;
-          padding-bottom: 20%;
+          padding-bottom: 25%;
           img{
             max-width:100%;
         }
       }
         &.file-imginfromation{
-          padding:0 10px;
-          width: 80%;
-          p.fileimge-name{
+          padding:0 0 0 10px;
+          width: 75%;
+          position:relative;
+          height: 100%;
+          p:nth-child(1){
             font-size: 16px;
-            color: #222222;
             letter-spacing: 0.2px;
-            margin-bottom:10px;
+            margin-bottom:5px;
           }
-          p.fileimge-size{
+          p:nth-child(2){
             font-size: 12px;
             color: #CDCDCD;
             letter-spacing: 0.16px;
           }
-          p.file-progress-bar {
+          .progressbar-start{
+            position: absolute;
+            left: 10px;
+            right: 0;
+            bottom: 0;
+            p{
+              font-size:12px;
+              margin-bottom: 5px;
+            }
+          }
+          .file-progress-bar{
             width: 100%;
             height: 6px;
+            position: relative;
+            border-radius: 3px;
+            overflow:hidden;
+            span{
+              display: block;
+              position: absolute;
+              left: 0;
+              top: 0;
+              bottom: 0;
+              right: 0;
+              transition: transform 0.5s, opacity 0.5s;
+              transform-origin: left;
+              &.uploading{
+                background-color:#FFFF00;
+              }
+              &.uploadsuccess{
+                background-color:#2EF037;
+              }
+            }
           }
         }
      }
@@ -234,13 +280,7 @@ $color:#EFEFEF;
     width:640px;
     margin:0 auto;
   }
- .informations-uploade{
-    border-bottom:1px solid #EFEFEF;
-    padding: 50px 0;
-    // height: 0;
-    // padding: 0;
-    // overflow:hidden;
-  }
+
  .file-upload{
     margin-top:80px;
   }

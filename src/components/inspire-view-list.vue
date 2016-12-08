@@ -100,6 +100,11 @@ export default{
       hover: false
     }
   },
+  mounted () {
+    this.$nextTick(() => {
+      console.log(this.$el)
+    })
+  },
   computed: {
     ...mapGetters([
       'listArrangestate',

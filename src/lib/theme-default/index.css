@@ -27,6 +27,10 @@
   display: block;
   content:'';
 }
+
+body {
+    min-width: 1000px;
+}
 .gl-col-1,
 .gl-col-10,
 .gl-col-11,

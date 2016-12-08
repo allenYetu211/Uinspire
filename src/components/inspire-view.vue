@@ -10,7 +10,7 @@
   <div class="router">
     <div class="imagesShow">
       <ul class="clearfix">
-        <inspire-view-list v-for="(itms, index) in infor" :itmes="itms" :index="index"></inspire-view-list>
+          <inspire-view-list v-for="(itms, index) in infor" :key="index" :itmes="itms" :index="index"></inspire-view-list>
       </ul>
     </div>
   </div>

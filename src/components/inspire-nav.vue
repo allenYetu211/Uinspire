@@ -4,7 +4,7 @@
         <div class="inspirt-nav-l">
             <div class="inspirt-nav-sidebar inspirt-nav-fliter">
                 <button @click="inspirtnavsidebar">
-                    <span class="sprite_filter"></span>
+                    <span class="sprite_login"></span>
                 </button>
             </div>
             <div class="inspirt-nav-search">
@@ -16,10 +16,10 @@
         <div class="inspirt-nav-r">
             <div class="inspirt-nav-layout">
                 <button @click="listArrange">
-                    <i class="sprite_view-1" :class="{open: !listArrangestate}"></i>
+                    <i class="sprite_view-1 sprite_login" :class="{open: !listArrangestate}"></i>
                 </button>
                 <button @click="listArrangetwo">
-                    <i class="sprite_view-2" :class="{open: listArrangestate}"></i>
+                    <i class="sprite_view-2 sprite_login" :class="{open: listArrangestate}"></i>
                 </button>
             </div>
             <div class="inspirt-nav-sidebar inspirt-nav-personal-infoamtion" @click="sidebarright">
@@ -88,6 +88,7 @@ export default {
     top:0;
     left:0;
     right:0;
+    min-width: 1000px;
     height: 60px;
     line-height: 60px;
     text-align: center;
