@@ -88,7 +88,8 @@ export default {
       let categorydata = response.data.data
       let category = []
       for (let i = 0; i < categorydata.length; i++) {
-        category.push(categorydata[i].name_zh)
+        // category.push(categorydata[i].name_zh)
+        category.push(categorydata[i].name_en)
       }
       if (typeof callback === 'function') {
         callback(category)

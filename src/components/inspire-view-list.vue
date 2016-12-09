@@ -4,9 +4,10 @@
       float: left;
       margin: 10px 10px;
       position:absolute;
-      overflow:hidden;
-      transition: box-shadow 0.3s;
-      
+      transition: all 0.5s;
+      height: 0;
+      overflow: hidden;
+      padding-bottom: 28%;
        &.active{
            box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.25);
         }
@@ -14,7 +15,7 @@
         width:100%;
       }
       &.lists{
-        width:calc(100% / 8 - 20px);
+        padding-bottom: 17.7%;
       }
       .imagesShow-paypal{
           position:absolute;
@@ -73,7 +74,7 @@
 </style>
 
 <template>
-  <li :style="[styleObject]"  :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
+  <li  :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
     <div class="imagesShow-box-shadow" :class="{active : hover}">
       <img :src="itmes.url">
         <div class="imagesShow-paypal"  :class="{active : hover}">
@@ -101,17 +102,21 @@ export default{
       styleObject: {
         width: '',
         left: ''
-      }
+      },
+      list: []
     }
   },
   mounted () {
     this.$nextTick(() => {
-      let maxWidth = window.innerWidth / 9 - 20
-      maxWidth = parseInt(maxWidth)
-      this.$el.style.left = maxWidth * (this.index + 1)
-      console.log(maxWidth * (this.index + 1))
-      this.styleObject.width = maxWidth + 'px'
-      this.styleObject.left = maxWidth * (this.index) + 20 + 'px'
+      // let maxWidth = window.innerWidth / 6 - 20
+      // maxWidth = parseInt(maxWidth)
+      // this.$el.style.left = maxWidth * (this.index + 1)
+      // if (this.index % 6 < 6) {
+      //   this.list.push(this.index % 6)
+      //   // console.log(this.list)
+      // }
+      // this.styleObject.width = maxWidth + 'px'
+      // this.styleObject.left = maxWidth * (this.index) + 10 + 'px'
     })
   },
   computed: {

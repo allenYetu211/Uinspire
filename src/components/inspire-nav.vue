@@ -79,7 +79,7 @@ export default {
     height:30px;
     display:inline-block;
     background:url('../../static/svg_sprite.svg') no-repeat;
-    background-position:-45px -55px;
+    background-position:-5px -55px;
     vertical-align: -10px;
   }
   .inspirt-nav{
