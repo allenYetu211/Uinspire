@@ -91,7 +91,7 @@ export default {
             display: block;
             width: 20px;
             height: 20px;
-            background:url('../../static/svg_sprite.svg')no-repeat;
+            background:url('../assets/svg_sprite.svg')no-repeat;
             &.sprite_checkbox{
               background-position: -140px -120px;
             }

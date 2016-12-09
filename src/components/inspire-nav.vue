@@ -78,7 +78,7 @@ export default {
     width:30px;
     height:30px;
     display:inline-block;
-    background:url('../../static/svg_sprite.svg') no-repeat;
+    background:url('../assets/svg_sprite.svg') no-repeat;
     background-position:-5px -55px;
     vertical-align: -10px;
   }

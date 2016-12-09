@@ -1,9 +1,10 @@
 <style lang="scss" scoped>
     li {
-      // width:calc(100% / 6 - 20px);
+      width:calc(100% / 6 - 20px);
+      position:relative;
       float: left;
       margin: 10px 10px;
-      position:absolute;
+      // position:absolute;
       transition: all 0.5s;
       height: 0;
       overflow: hidden;
@@ -59,7 +60,7 @@
         width:20px;
         height:20px;
         display:inline-block;
-        background:url('../../static/svg_sprite.svg') no-repeat;
+        background:url('../assets/svg_sprite.svg') no-repeat;
         background-position:0px -120px;
         vertical-align:middle;
     }

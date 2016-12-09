@@ -164,12 +164,14 @@
                           <div class="upload-tag">
                               <span class="tag-laber" v-for="(tag, tagindex) in updataTag">
                                 {{tag}}
-                                <i :data-tag="tagindex" @click="_deleteTag">x</i>
+                                <i :data-tag="tagindex" @click="_deleteTag"></i>
                               </span>
                               <button 
                               @click="_popupShow" 
                               class="updata-Tag" 
-                              type="button">Add Tag</button>
+                              type="button">
+                              <i class="sprite_addTag"></i>
+                              </button>
                               <div 
                               class="popup-tag" 
                               v-if="updataTag.length < 5 && popup">
@@ -358,6 +360,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.sprite{
+    width: 16px;
+    height: 16px;
+    background:url('../assets/svg_sprite.svg')no-repeat;
+}
  .informations-uploade{
     border-bottom:1px solid #EFEFEF;
     padding: 50px 0;
@@ -375,7 +382,7 @@ form{
   display: flex;
   &>div.file-img-information{
     flex:3;
-    margin-right:40px;
+    margin-right:30px;
     div.upload-img{
       padding-bottom: 15px;
       border-bottom: 1px solid #000;
@@ -485,13 +492,16 @@ form{
       position:relative;
       span.tag-laber{
         background: #D8D8D8;
-        padding: 5px 0px 5px 18px ;
+        padding: 4px 0px 4px 18px ;
         margin:0 5px;
         display:inline-block;
         position:relative;
         transition:padding 0.5s;
         position:relative;
         border-radius:100px;
+        font-size: 12px;
+        height: 26px;
+        line-height: 20px;
         &:before {
           display:block;
           content: '';
@@ -506,22 +516,20 @@ form{
           z-index:9;
         }
         &:hover{
-          padding-right:10px;
+          padding-right:6px;
         }
         &:hover i {
           transform: scale(1);
+          margin-left: 3px;
         }
         i{
           transform: scale(0);
-          border-radius:50%;
           display: inline-block;
-          width: 15px;
-          height:15px;
-          line-height:15px;
-          text-align:center;
-          background-color:#666666;
-          transition: transform 0.5s;
+          @extend .sprite;
+          background-position: -243px -151px;
+          transition: all 0.5s;
           cursor:pointer;
+          vertical-align:-3px;
         }
       }
       .popup-tag{
@@ -578,6 +586,8 @@ form{
       button.updata-Tag{
         border:none;
         background:transparent;
+        vertical-align: middle;
+        cursor: pointer;
       }
     }
 
@@ -677,7 +687,7 @@ form{
       position:relative;
       font-size:12px;
            input:checked + i {
-              background-position: -120px -120px;
+              background-position: -120px -150px;
             }
           label{
             line-height:20px;
@@ -691,9 +701,9 @@ form{
             display: block;
             width: 20px;
             height: 20px;
-            background:url('../../static/svg_sprite.svg')no-repeat;
+            background:url('../assets/svg_sprite.svg')no-repeat;
             &.sprite_checkbox{
-              background-position: -140px -120px;
+              background-position: -140px -150px;
             }
       }
 }
@@ -713,5 +723,9 @@ form{
       }
     }
 }
-  
+.sprite_addTag{
+    display: block;
+    @extend .sprite;
+    background-position: -262px -153px;
+}
 </style>

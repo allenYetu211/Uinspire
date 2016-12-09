@@ -176,7 +176,7 @@ export default {
           display:inline-block;
           width:20px;
           height:20px;
-          background:url('../../static/svg_sprite.svg')no-repeat;
+          background:url('../assets/svg_sprite.svg')no-repeat;
           background-position:-95px -95px;
           margin-right:10px;
           vertical-align:middle;
@@ -214,7 +214,7 @@ export default {
         display:block;
         width:30px;
         height:30px;
-        background:url('../../static/svg_sprite.svg');
+        background:url('../assets/svg_sprite.svg');
         background-position:-5px -55px;
       }
     }
@@ -262,7 +262,7 @@ export default {
           display:block;
           width:20px;
           height:20px;
-          background:url('../../static/svg_sprite.svg')no-repeat;
+          background:url('../assets/svg_sprite.svg')no-repeat;
           background-position:-58px -120px;
         }
       }
@@ -312,7 +312,7 @@ export default {
       display:inline-block;
       width:25px;
       height:50px;
-      background:url('../../static/svg_sprite.svg')no-repeat;
+      background:url('../assets/svg_sprite.svg')no-repeat;
       &.sprite_next{
         background-position: -35px 0;
       }

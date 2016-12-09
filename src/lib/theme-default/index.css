@@ -9,15 +9,15 @@
 
 @font-face {
   font-family: 'Gotham-Book';
-  src: url('../../../static/font/Gotham-Book.eot?#iefix') format('embedded-opentype'),  url('../../../static/font/Gotham-Book.otf')  format('opentype'),
-         url('../../../static/font/Gotham-Book.woff') format('woff'), url('../../../static/font/Gotham-Book.ttf')  format('truetype'), url('../../../static/font/Gotham-Book.svg#Gotham-Book') format('svg');
+  src: url('../../assets/fonts/Gotham-Book.eot?#iefix') format('embedded-opentype'),  url('../../assets/fonts/Gotham-Book.otf')  format('opentype'),
+         url('../../assets/fonts/Gotham-Book.woff') format('woff'), url('../../assets/fonts/Gotham-Book.ttf')  format('truetype'), url('../../assets/fonts/Gotham-Book.svg#Gotham-Book') format('svg');
   font-weight: 100;
   font-style: normal;
 }
 @font-face {
   font-family: 'Gotham-Bold';
-  src: url('../../../static/font/Gotham-Bold.eot?#iefix') format('embedded-opentype'),  url('../../../static/font/Gotham-Bold.otf')  format('opentype'),
-         url('../../../static/font/Gotham-Bold.woff') format('woff'), url('../../../static/font/Gotham-Bold.ttf')  format('truetype'), url('../../../static/font/Gotham-Bold.svg#Gotham-Bold') format('svg');
+  src: url('../../assets/fonts/Gotham-Bold.eot?#iefix') format('embedded-opentype'),  url('../../assets/fonts/Gotham-Bold.otf')  format('opentype'),
+         url('../../assets/fonts/Gotham-Bold.woff') format('woff'), url('../../assets/fonts/Gotham-Bold.ttf')  format('truetype'), url('../../assets/fonts/Gotham-Bold.svg#Gotham-Bold') format('svg');
   font-weight: 900;
   font-style: normal;
 }

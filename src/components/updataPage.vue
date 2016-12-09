@@ -44,7 +44,7 @@
                         </div>
                     </div>
             </div>
-
+              <transition-group name="uploadsuccess">
               <up-data-page-form
                v-for="(ic, index) in outintimagedata"
                :category='category' 
@@ -54,6 +54,7 @@
                 v-if="!ic.isuploadsuccess"
               >
                </up-data-page-form>
+               </transition-group>
         </div>
     </div>
 </div>
@@ -79,10 +80,10 @@
     },
     mounted () {
       this.$nextTick(() => {
-        this.$http.get('http://inspire-api.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
+        this.$http.get('http://inspire.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
           this.categ = JSON.parse(response.data)
           for (let i = 0; i < this.categ.data.length; i++) {
-            this.category.push(this.categ.data[i].name_zh)
+            this.category.push(this.categ.data[i].name_en)
           }
         }).then((repones) => {
         })
@@ -275,7 +276,7 @@ $color:#EFEFEF;
      }
   }
   .al-container{
-    width:640px;
+    width:700px;
     margin:0 auto;
   }
 

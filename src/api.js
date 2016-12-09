@@ -17,7 +17,7 @@ export default {
     var color = '\'#343434\''
     console.log(singsz)
     color = encodeURI(color)
-    Vue.http.get(encodeURI('http://inspire-api.stoyard.com/index.php/api/inspire/adddata?platform=1&category=2&name=allen&color=' + color)).then((response) => {
+    Vue.http.get(encodeURI('http://inspire.stoyard.com/index.php/api/inspire/adddata?platform=1&category=2&name=allen&color=' + color)).then((response) => {
       console.log(json.parse(response.data))
       if (response.data.code === 0) {
       } else {
@@ -54,7 +54,7 @@ export default {
     fdata.append('screen_height', _data.height)
     fdata.append('color', '\'#343434\'')
     Vue.http({
-      url: 'http://inspire-api.stoyard.com/index.php/api/inspire/adddata',
+      url: 'http://inspire.stoyard.com/index.php/api/inspire/adddata',
       method: 'POST',
       emulateJSON: true,
       body: fdata
@@ -74,7 +74,7 @@ export default {
   },
   // uploadProject (_data, callback) {
   //   axios({
-  //     ulr: 'http://inspire-api.stoyard.com/index.php/api/inspire/adddata',
+  //     ulr: 'http://inspire.stoyard.com/index.php/api/inspire/adddata',
   //     methods: 'POST',
   //     data: {
   //       fistName: _data
@@ -84,7 +84,7 @@ export default {
   //   })
   // },
   initCategory (callback) {
-    axios.get('http://inspire-api.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
+    axios.get('http://inspire.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
       let categorydata = response.data.data
       let category = []
       for (let i = 0; i < categorydata.length; i++) {
