@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="360px" height="184px" viewBox="0 0 360 184" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="360px" height="186px" viewBox="0 0 360 186" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
     <title>svg_sprite</title>
     <desc>Created with Sketch.</desc>
@@ -211,7 +211,7 @@
             </g>
             <path d="M211.796641,151 C207.827834,151 204.59808,154.2304 204.59808,158.2 C204.59808,159.8608 205.169166,161.3872 206.119376,162.6064 L201.262747,167.464 C200.912418,167.8144 200.912418,168.3856 201.262747,168.736 C201.440312,168.9136 201.670666,169 201.90102,169 C202.131374,169 202.361728,168.9136 202.539292,168.736 L207.395921,163.8784 C208.614877,164.8288 210.140972,165.4 211.80144,165.4 C215.770246,165.4 219,162.1696 219,158.2 C218.995201,154.2304 215.765447,151 211.796641,151 Z M211.796641,163.6 C208.821236,163.6 206.39772,161.176 206.39772,158.2 C206.39772,155.224 208.821236,152.8 211.796641,152.8 C214.772046,152.8 217.195561,155.224 217.195561,158.2 C217.195561,161.176 214.772046,163.6 211.796641,163.6 Z" id="Shape" fill="#000000"></path>
             <polygon id="Shape" fill="#000000" points="239 161 231 161 231 169 229 169 229 161 221 161 221 159 229 159 229 151 231 151 231 159 239 159"></polygon>
-            <g id="Group-6" transform="translate(14.000000, 170.000000)">
+            <g id="Group-6" transform="translate(17.000000, 171.000000)">
                 <g id="ic-clear-48-px">
                     <g id="Group">
                         <circle id="Oval-4" fill="#222222" cx="7" cy="7" r="7"></circle>
@@ -220,7 +220,7 @@
                     </g>
                 </g>
             </g>
-            <g id="Group-6-Copy" transform="translate(0.000000, 170.000000)">
+            <g id="Group-6-Copy" transform="translate(1.000000, 171.000000)">
                 <g id="ic-clear-48-px">
                     <g id="Group">
                         <circle id="Oval-4" fill="#222222" cx="7" cy="7" r="7"></circle>
