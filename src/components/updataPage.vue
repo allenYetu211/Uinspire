@@ -47,7 +47,6 @@
               <transition-group name="uploadsuccess">
               <up-data-page-form
                v-for="(ic, index) in outintimagedata"
-               :category='category' 
                :ic='ic' 
                :index="index"
                :key="index"
@@ -79,15 +78,15 @@
       }
     },
     mounted () {
-      this.$nextTick(() => {
-        this.$http.get('http://inspire.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
-          this.categ = JSON.parse(response.data)
-          for (let i = 0; i < this.categ.data.length; i++) {
-            this.category.push(this.categ.data[i].name_en)
-          }
-        }).then((repones) => {
-        })
-      })
+      // this.$nextTick(() => {
+      //   this.$http.get('http://inspire.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
+      //     this.categ = JSON.parse(response.data)
+      //     for (let i = 0; i < this.categ.data.length; i++) {
+      //       this.category.push(this.categ.data[i].name_en)
+      //     }
+      //   }).then((repones) => {
+      //   })
+      // })
     },
     computed: {
       ...mapGetters([

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
+// import VueResource from 'vue-resource'
 // import Axions from 'axios'
 // import ElementUI from 'element-ui'
 import './lib/theme-default/index.css'
@@ -17,7 +17,7 @@ import 'animate.css/animate.min.css'
 
 // Vue.use(Axions)
 // Vue.use(ElementUI)
-Vue.use(VueResource)
+// Vue.use(VueResource)
 // Vue.use(Axios)
 Vue.use(VueRouter)
 const router = new VueRouter({
