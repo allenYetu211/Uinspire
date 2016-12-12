@@ -53,6 +53,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.sprite_filter-ico {
+    display:inline-block;
+    background:url('../assets/svg_sprite.svg') no-repeat;
+    width:20px;
+    height:20px;
+    vertical-align: -10px;
+  }
+
 .sidebar-filter{
   position:fixed;
   z-index: 998;
@@ -88,16 +96,13 @@ export default {
             z-index:-1;
             left: 0px;
             top: 0px;
-            display: block;
-            width: 20px;
-            height: 20px;
-            background:url('../assets/svg_sprite.svg')no-repeat;
+            @extend .sprite_filter-ico;
             &.sprite_checkbox{
-              background-position: -140px -120px;
+              background-position: -140px -150px;
             }
           }
       &:checked + i{
-          background-position: -120px -120px;
+          background-position: -120px -150px;
         }  
     }
     label {

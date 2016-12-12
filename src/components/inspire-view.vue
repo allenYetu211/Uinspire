@@ -9,8 +9,8 @@
 </style>
 <template>
   <div class="router">
-  <button @click="_changeshowlist"> 6 -> 9</button>
-  <button @click="_changeshowlist2"> 9 -> 6</button>
+<!--   <button @click="_changeshowlist"> 6 -> 9</button>
+  <button @click="_changeshowlist2"> 9 -> 6</button> -->
     <div class="imagesShow">
       <ul id='inspire-view-list' class=" clearfix">
           <!-- <transition> -->

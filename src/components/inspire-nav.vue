@@ -4,11 +4,11 @@
         <div class="inspirt-nav-l">
             <div class="inspirt-nav-sidebar inspirt-nav-fliter">
                 <button @click="inspirtnavsidebar">
-                    <span class="sprite_login"></span>
+                    <span class="sprite_filter"></span>
                 </button>
             </div>
             <div class="inspirt-nav-search">
-                <i class="sprite_login"></i>
+                <i class="sprite_search"></i>
                 <input type="text" placeholder="Search for inspire" name="">
             </div>
         </div>
@@ -16,10 +16,10 @@
         <div class="inspirt-nav-r">
             <div class="inspirt-nav-layout">
                 <button @click="listArrange">
-                    <i class="sprite_view-1 sprite_login" :class="{open: !listArrangestate}"></i>
+                    <i class="sprite_view-1 sprite_theme" :class="{open: !listArrangestate}"></i>
                 </button>
                 <button @click="listArrangetwo">
-                    <i class="sprite_view-2 sprite_login" :class="{open: listArrangestate}"></i>
+                    <i class="sprite_view-2 sprite_switch" :class="{open: listArrangestate}"></i>
                 </button>
             </div>
             <div class="inspirt-nav-sidebar inspirt-nav-personal-infoamtion" @click="sidebarright">
@@ -74,13 +74,32 @@ export default {
 </script>
 
 <style lang="scss">
-  .sprite_login{
-    width:30px;
-    height:30px;
+  .sprite_inspire-nav {
     display:inline-block;
     background:url('../assets/svg_sprite.svg') no-repeat;
-    background-position:-5px -55px;
+    width:30px;
+    height:30px;
     vertical-align: -10px;
+  }
+  .sprite_filter{
+    @extend .sprite_inspire-nav;
+    background-position: 0px -90px;
+  }
+  .sprite_search{
+    @extend .sprite_inspire-nav;
+    background-position: -30px -90px;
+  }
+  .sprite_theme {
+    @extend .sprite_inspire-nav;
+    background-position: -120px -90px;
+  }
+  .sprite_switch {
+    @extend .sprite_inspire-nav;
+    background-position: -60px -90px;
+  }
+  .sprite_login{
+    @extend .sprite_inspire-nav;
+    background-position: -180px -90px;
   }
   .inspirt-nav{
     position:fixed;
