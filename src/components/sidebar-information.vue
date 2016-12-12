@@ -99,7 +99,7 @@ export default {
   top: 60px;
   bottom: 0;
   z-index:998;
-  width: 320px;
+  width: 370px;
   padding: 20px 20px 15px;
   border-left: 1px solid #e0e0e0;
   overflow-y:auto;

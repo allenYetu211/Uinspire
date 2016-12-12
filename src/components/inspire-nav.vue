@@ -3,7 +3,7 @@
     <div class="inspirt-nav gl-bgcolor-white">
         <div class="inspirt-nav-l">
             <div class="inspirt-nav-sidebar inspirt-nav-fliter">
-                <button @click="inspirtnavsidebar">
+                <button @click="sidebarleft">
                     <span class="sprite_filter"></span>
                 </button>
             </div>
@@ -67,7 +67,8 @@ export default {
       'inspirtnavsidebar',
       'listArrange',
       'listArrangetwo',
-      'sidebarright'
+      'sidebarright',
+      'sidebarleft'
     ])
   }
 }
@@ -131,7 +132,10 @@ export default {
     }
     .inspirt-nav-r{
         float:right;
-        
+        .inspirt-nav-layout{
+          border-left: 1px solid #eee;
+          padding-left: 10px;
+        }
         .inspirt-nav-personal-infoamtion{
           border-left: 1px solid #eee;
           margin-left: 20px;

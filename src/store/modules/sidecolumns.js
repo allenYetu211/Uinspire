@@ -3,7 +3,8 @@ import {
   LISTARRANGE,
   LISTARRANGETWO,
   NAVIGATIONTITLE,
-  SIDEBARRIGHT
+  SIDEBARRIGHT,
+  SIDEBARLEFT
 } from '../actions'
 
 const state = {
@@ -14,7 +15,8 @@ const state = {
   navposWidth: '',
   navposLeft: '',
   navposIndex: 0,
-  sidebarright: false
+  sidebarright: false,
+  sidebarleft: false
 
 }
 const mutations = {
@@ -34,6 +36,9 @@ const mutations = {
   },
   [SIDEBARRIGHT] (state) {
     state.sidebarright = !state.sidebarright
+  },
+  [SIDEBARLEFT] (state) {
+    state.sidebarleft = !state.sidebarleft
   }
 }
 

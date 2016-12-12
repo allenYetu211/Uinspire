@@ -15,3 +15,6 @@ export const navigationtitle = ({commit}, slide) => {
 
 export const SIDEBARRIGHT = 'sidebarright'
 export const sidebarright = ({commit}, slide) => { commit(SIDEBARRIGHT) }
+
+export const SIDEBARLEFT = 'sidebarleft'
+export const sidebarleft = ({commit}, slide) => { commit(SIDEBARLEFT) }

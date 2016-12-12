@@ -12,7 +12,8 @@
             @drop.stop.prevent="handleFilSelect" 
             class="drop_zone gl-bgcolor-gray-f7">
                     <div class="upload-images" v-if='outintimagedata.length === 0'>
-                        <img src="../../static/upload-images-icon.png">
+                        <img src="../assets/upload-images-icon.png">
+                        <p>Drag or select screenshot file in this box.<br/>Support JPG & PNG file. A file size in less than 5MB;</p>
                     </div>  
                     <div class="informations  list-complete-m-item" 
                     v-for="(ic,indexcount) in outintimagedata"  
@@ -201,6 +202,18 @@ $color:#EFEFEF;
       left: 50%;
       top: 50%;
       transform:translate(-50%, -50%);
+      text-align: center;
+      img{
+        width: 90px;
+        padding-bottom: 25px;
+        text-align: center;
+        margin: 0 auto;
+      }
+      p{
+        
+        color: #CDCDCD;
+        line-height: 2;
+      }
     }
   }
   .informations{
@@ -208,9 +221,8 @@ $color:#EFEFEF;
     display: inline-block;
     padding:15px;
     background: #FFFFFF;
-    height: 95px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.20);
-    border-radius: 2px;
+    height: 105px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.10);    
     margin:10px 10px;
     &>div{
       float: left;
@@ -219,12 +231,13 @@ $color:#EFEFEF;
           height: 0;
           overflow: hidden;
           padding-bottom: 25%;
+          border:1px solid #f4f4f4;
           img{
             max-width:100%;
         }
       }
         &.file-imginfromation{
-          padding:0 0 0 10px;
+          padding:0 0 0 15px;
           width: 75%;
           position:relative;
           height: 100%;
@@ -240,7 +253,7 @@ $color:#EFEFEF;
           }
           .progressbar-start{
             position: absolute;
-            left: 10px;
+            left: 15px;
             right: 0;
             bottom: 0;
             p{
