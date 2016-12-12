@@ -28,9 +28,9 @@
       </div>
 
       <div class="log-search-moodboard">
-        <i>Ｘ</i>
+        <button><i class="sprite_sidebar-search"></i></button>
         <input placeholder="Search moodboard" type="text" name="">
-        <button class="gl-bgcolor-gray-dc"></button>
+        <button class="gl-bgcolor-gray-dc"> <i class="sprite_sidebar-add"></i></button>
       </div>
 
       <div class="log-drawing-board">
@@ -78,6 +78,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.sprite_sidebar{
+    display:inline-block;
+    background:url('../assets/svg_sprite.svg') no-repeat;
+    width:20px;
+    height:20px;
+    vertical-align: -10px;
+}
+.sprite_sidebar-search{
+  @extend .sprite_sidebar;
+  background-position: -200px -150px;
+}
+.sprite_sidebar-add{
+  @extend .sprite_sidebar;
+  background-position: -220px -150px;
+}
 .sidebar-information{
   position:fixed;
   right: 0;
@@ -86,7 +101,7 @@ export default {
   z-index:998;
   width: 320px;
   padding: 20px 20px 15px;
-  box-shadow: 0 0 10px rgba(0,0,0,.1);
+  border-left: 1px solid #e0e0e0;
   overflow-y:auto;
   &.open{
     transform: translateX(20px);
@@ -133,12 +148,6 @@ export default {
     height: 40px;
     margin: 20px 0 20px -20px;
     position: relative;
-    i{
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-    }
     input{
       width: 100%;
       height: 100%;
@@ -150,12 +159,19 @@ export default {
         } 
     }
     button{
-      height: 100%;
-      width: 65px;
       position: absolute;
-      right: 0;
       top: 0;
       border:none;
+    }
+    button:first-child{
+      height: 100%;
+      left: 0;
+      background-color: transparent;
+    }
+    button:last-child{
+      height: 100%;
+      width: 65px;
+      right: 0;
     }
   }
   .log-drawing-board {

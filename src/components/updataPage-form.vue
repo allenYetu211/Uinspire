@@ -390,6 +390,7 @@ form{
       margin-bottom: 12px;
       img{
         width:100%;
+        border: 1px solid #e0e0e0;
       }
     }
     .file-img-imfor{

@@ -21,6 +21,7 @@
         <p><span>Category</span>{{appinformations.Category}}</p>
         <p><span>Lastest Version</span>{{appinformations.LastestVersion}}</p>
       </div>
+
     </div>
 
     <div class="app-version">
@@ -75,7 +76,13 @@ export default {
 <style lang="scss">
   .indexApp{
     .app-informations{
-
+      width: 760px;
+      margin: 0 auto;
+      border-bottom: 1px solid #e0e0e0;
+      img{
+        width: 60px;
+        height: 60px;
+      }
     }
   }
 </style>

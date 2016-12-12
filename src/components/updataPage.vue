@@ -113,13 +113,13 @@
             reader.onload = function (oireader) {
               images['file'] = file
               images['url'] = oireader.target.result
-              if (file.name.slice(-4) !== '.jpg' && file.name.slice(-4) !== '.png') {
+              if (file.name.slice(-4) !== '.jpg' && file.name.slice(-4) !== '.JPG' && file.name.slice(-5) !== '.jpeg' && file.name.slice(-5) !== '.JPEG' && file.name.slice(-4) !== '.png' && file.name.slice(-4) !== '.PNG') {
                 window.alert('Support JPG & PNG file. ')
                 return
               }
               images['imgname'] = file.name
-              if (file.size > 1024 * 1024 * 2) {
-                window.alert(' A file size in less than 2MB.')
+              if (file.size > 1024 * 1024 * 5) {
+                window.alert(' A file size in less than 5MB.')
                 return
               }
               images['size'] = Math.round(file.size / 1024)
