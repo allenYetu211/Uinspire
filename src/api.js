@@ -6,9 +6,7 @@ import axios from 'axios'
 const stamp = Date.parse(new Date())
 const token = 'stoyard'
 let sing = ''
-
-// const dev = false && /^[localhost|15]/.test(window.location.host)
-// const __url__ = dev ?  '' : 'http://text.stoyard.com'
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 export default {
   loadProjectTextData () {
@@ -36,53 +34,73 @@ export default {
     }
     return new window.Blob([ab], { type: 'image/jpeg' })
   },
+  // uploadProject (_data, callback) {
+  //   let tag = _data.tag ? _data.tag.join(',') : ''
+  //   const fdata = new window.FormData()
+  //   fdata.append('file', _data.file)
+  //   axios.post(
+  //    'http://inspire.stoyard.com/index.php/api/inspire/adddata', {
+  //      file: _data.file,
+  //      platform: _data.PlatformIndex,
+  //      category: _data.Category.join(','),
+  //      name: _data.name,
+  //      tag: tag,
+  //      link: _data.link,
+  //      icon_link: _data.icon_link,
+  //      app_category: _data.app_category,
+  //      version: _data.version,
+  //      screen_width: _data.width,
+  //      screen_height: _data.height,
+  //      color: '#343434'
+  //    }).then((response) => {
+  //      console.log('axios成功')
+  //      console.log(response)
+  //      if (typeof callback === 'function') {
+  //        callback(json.parse(response.data).data.thumb_img_url)
+  //      }
+  //    }).catch((error) => {
+  //      console.log(error)
+  //    })
+  // },
   uploadProject (_data, callback) {
-    const fdata = new window.FormData()
     let tag = _data.tag ? _data.tag.join(',') : ''
-    fdata.append('file', _data.file)
-    fdata.append('platform', _data.PlatformIndex)
-    fdata.append('category', _data.Category.join(','))
-    fdata.append('name', _data.name)
-    fdata.append('tag', tag)
-    fdata.append('link', _data.link)
-    fdata.append('icon_link', _data.icon_link)
-    fdata.append('developer', _data.developer)
-    fdata.append('developer_link', _data.developer_link)
-    fdata.append('app_category', _data.app_category)
-    fdata.append('version', _data.version)
-    fdata.append('screen_width', _data.width)
-    fdata.append('screen_height', _data.height)
-    fdata.append('color', '\'#343434\'')
-    Vue.http({
-      url: 'http://inspire.stoyard.com/index.php/api/inspire/adddata',
-      method: 'POST',
-      emulateJSON: true,
-      body: fdata
-    }).then((response) => {
-      if (json.parse(response.data).code === '0') {
-        console.log('返回成功')
-        if (typeof callback === 'function') {
-          callback(json.parse(response.data).data.thumb_img_url)
-        }
-        // return self.returnData
-      } else {
-        console.log('data:', json.parse(response.data))
+    let category = _data.Category.join(',')
+    axios({
+      url: 'inspire/adddata',
+      method: 'post',
+      baseURL: 'http://inspire.stoyard.com/index.php/api/',
+      transformRequest: [(_data) => {
+        // 对 data 进行任意转换处理
+        const fdata = new window.FormData()
+        fdata.append('file', _data.file)
+        fdata.append('platform', _data.PlatformIndex)
+        fdata.append('category', category)
+        fdata.append('name', _data.name)
+        fdata.append('tag', tag)
+        fdata.append('link', _data.link)
+        fdata.append('icon_link', _data.icon_link)
+        fdata.append('developer', _data.developer)
+        fdata.append('developer_link', _data.developer_link)
+        fdata.append('app_category', _data.app_category)
+        fdata.append('version', _data.version)
+        fdata.append('screen_width', _data.width)
+        fdata.append('screen_height', _data.height)
+        fdata.append('color', '\'#343434\'')
+        return fdata
+      }],
+      data: _data,
+      onUploadProgress (progressEvent) {
+        console.log(progressEvent.loaded / progressEvent.total)
       }
-    }, (response) => {
-      console.log('error')
+    }).then((response) => {
+      console.log('success!!!')
+      if (typeof callback === 'function') {
+        callback(response.data.thumb_img_url)
+      }
+    }).catch((error) => {
+      console.log(error)
     })
   },
-  // uploadProject (_data, callback) {
-  //   axios({
-  //     ulr: 'http://inspire.stoyard.com/index.php/api/inspire/adddata',
-  //     methods: 'POST',
-  //     data: {
-  //       fistName: _data
-  //     }
-  //   }).then((response) => {
-  //     console.log(response)
-  //   })
-  // },
   initCategory (callback) {
     axios.get('http://inspire.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
       let categorydata = response.data.data

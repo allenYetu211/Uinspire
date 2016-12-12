@@ -145,7 +145,7 @@
                       <div class="clearfix">
                           <div 
                           class="category-checkbox" 
-                          v-for="(ck, ins) in category">
+                          v-for="(ck, ins) in categoryDate">
                               <input
                               v-model="ic.Category" 
                               :value="ins" 
@@ -210,7 +210,7 @@ import '../Publicjs/filter.js'
 import axios from 'axios'
 
 export default {
-  props: ['ic', 'index', 'category'],
+  props: ['ic', 'index'],
   data () {
     return {
       checkedNames: [],
@@ -234,7 +234,8 @@ export default {
   computed: {
     ...mapGetters([
       'loadtexts',
-      'outintimagedata'
+      'outintimagedata',
+      'categoryDate'
     ])
   },
   methods: {
