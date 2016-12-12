@@ -724,8 +724,15 @@ form{
     }
 }
 .sprite_addTag{
-    display: block;
     @extend .sprite;
+    display: block;
     background-position: -262px -153px;
+}
+.sprite_find {
+  @extend .sprite;
+  display: block;
+  background-position: -34px -93px;
+  width: 25px;
+  height: 25px;
 }
 </style>
