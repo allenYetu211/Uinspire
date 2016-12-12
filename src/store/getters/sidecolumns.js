@@ -9,3 +9,5 @@ export const navposLeft = state => state.sides.navposLeft
 export const navposIndex = state => state.sides.navposIndex
 
 export const sidebarrightopenclose = state => state.sides.sidebarright
+
+export const sidebarleftopenclose = state => state.sides.sidebarleft

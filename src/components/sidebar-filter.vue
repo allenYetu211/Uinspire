@@ -1,29 +1,33 @@
 <template>
-<div 
-class="sidebar-filter gl-bgcolor-white" 
-:class="{open : inspirtnavsidebarOpenClose}">
-    <div class="category clearfix">
-        <h2 class="gl-size-20">Category</h2>
+<div>
+    <transition name="sidebar-left">
         <div 
-        class="gl-col-12 category-list" 
-        v-for="(item, index) in categoryDate">
-            <input 
-            @click="_sendfiltercategory" 
-            :data-filterindex='index' 
-            type="checkbox" 
-            :id="'sidebar-' + index">
-            <i class="sprite_checkbox"></i>
-            <label class="gl-size-16" :for="'sidebar-' + index">{{item}}</label>
+        class="sidebar-filter gl-bgcolor-white" 
+        :class="{open : inspirtnavsidebarOpenClose}"
+         v-show="sidebarleftopenclose">
+            <div class="category clearfix">
+                <h2 class="gl-size-20">Category</h2>
+                <div 
+                class="gl-col-12 category-list" 
+                v-for="(item, index) in categoryDate">
+                    <input 
+                    @click="_sendfiltercategory" 
+                    :data-filterindex='index' 
+                    type="checkbox" 
+                    :id="'sidebar-' + index">
+                    <i class="sprite_checkbox"></i>
+                    <label class="gl-size-14" :for="'sidebar-' + index">{{item}}</label>
+                </div>
+            </div>
+            <div class="tags">
+                <h2 class="gl-size-20">Tags</h2>
+            </div>
+            <div class="color">
+                <h2 class="gl-size-20">Color</h2>
+            </div>
         </div>
-        <div class="tags">
-            <h2 class="gl-size-20">Tags</h2>
-        </div>
-        <div class="color">
-            <h2 class="gl-size-20">Color</h2>
-        </div>
-    </div>
-</div>
-
+      </transition>
+  </div>
 </template>
 
 <script>
@@ -33,7 +37,8 @@ export default {
   computed: {
     ...mapGetters([
       'categoryDate',
-      'inspirtnavsidebarOpenClose'
+      'inspirtnavsidebarOpenClose',
+      'sidebarleftopenclose'
     ])
   },
   methods: {
@@ -66,18 +71,18 @@ export default {
   z-index: 998;
   top: 60px;
   bottom: 0;
-  width: 350px;
+  width: 370px;
   border-right: 1px solid #e0e0e0;
   padding: 30px 15px;
-  transform: translateX(-100%);
-  transition: transform 0.5s ease-in-out;
+  // transform: translateX(-100%);
+  // transition: transform 0.5s ease-in-out;
   &.open{
-    transform: translateX(0%);
+    transform: translateX(-20px);
   }
   .category,
   .tags,
   .color{
-    padding-bottom:60px;
+    padding-bottom:30px;
     h2{
       padding-bottom: 20px;
     }
@@ -86,6 +91,7 @@ export default {
     .category-list{
         padding-bottom: 20px;
         position:relative;
+        padding-left:5px;
       }
     input {
       opacity: 0;
@@ -94,8 +100,9 @@ export default {
       & + i{  
             position: absolute;
             z-index:-1;
-            left: 0px;
+            left: 5px;
             top: 0px;
+
             @extend .sprite_filter-ico;
             &.sprite_checkbox{
               background-position: -140px -150px;
@@ -103,10 +110,14 @@ export default {
           }
       &:checked + i{
           background-position: -120px -150px;
-        }  
+        }
+      &:checked ~ label{
+          color: #222;
+      }
     }
     label {
       // padding-left: 25px;
+      color: #bbb;
     }
   }
 }
