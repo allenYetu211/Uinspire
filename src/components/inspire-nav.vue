@@ -156,6 +156,7 @@ export default {
     }
     .inspirt-nav-search{
       input {
+        min-width:300px;
         border:none;
         height:60px;
         margin-left: 10px;

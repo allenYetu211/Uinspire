@@ -21,16 +21,16 @@
                     </div>
                 </div>
                 <div class="app-infor-right">
-                    <p><span class="gl-fb">Developer: </span>{{appinformations.Developer}}</p>
-                    <p><span class="gl-fb">Category: </span>{{appinformations.Category}}</p>
-                    <p><span class="gl-fb">Lastest Version: </span>{{appinformations.LastestVersion}}</p>
+                    <p><span class="gl-fb">Developer : </span>{{appinformations.Developer}}</p>
+                    <p><span class="gl-fb">Category : </span>{{appinformations.Category}}</p>
+                    <p><span class="gl-fb">Lastest Version : </span>{{appinformations.LastestVersion}}</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="app-version">
         <div class="app-version-introduce app-border-line">
-            <div class="app-version-information gl-ftcolor-gray">Version</div>
+            <div class="app-version-information gl-ftcolor-black">Version {{appinformations.LastestVersion}}</div>
             <div class="app-container clearfix">
                 <ul>
                     <li v-for="introduce in infordata">
@@ -41,8 +41,10 @@
                     </li>
                 </ul>
             </div>
+
             <div class="app-version-count gl-ftcolor-gray">{{infordata.length}} screenshot</div>
         </div>
+
     </div>
 </div>
 
@@ -98,16 +100,16 @@ export default {
 }
   .indexApp{
     .app-container{
-      width: 800px;
+      width: 980px;
       margin: 0 auto;
-      padding: 10px 0;
+      padding: 25px 0 20px;
       position: relative;
     }
     .app-border-line{
       border-bottom: 1px solid #e0e0e0;
     }
     .app-informations{
-      width: 760px;
+      width: 100%;
       height: 85px;
       padding: 0 10px;
       display: flex;
@@ -119,14 +121,19 @@ export default {
       .app-infor-left{
           float: left;
           flex: 3;
+          .app-logo img{
+            border-radius:20px;
+          }
           .app-about{
-            padding: 0 15px;
+            padding: 0 20px;
             width: 75%;
             button{
               background-color: transparent;
               border: none;
               font-size: 14px;
               cursor:pointer;
+              padding:0;
+              margin-right:10px;
             }
             p{
               font-size: 20px;
@@ -143,10 +150,12 @@ export default {
         }
       }
       .app-infor-right{
-        flex: 1;
+        flex: 2;
         float: right;
         font-size: 14px;
-        line-height: 2;
+        p{
+          margin-bottom: 12px;
+        }
       }
     }
     .app-version-introduce{
@@ -154,10 +163,10 @@ export default {
       li{
         width: calc(100% / 4 - 20px);
         display:inline-block;
-        margin: 0 10px;
+        margin: 0px 10px 15px;
         p{
           text-align: center;
-          padding: 5px 0;
+          padding: 10px 0;
           font-size: 12px;
         }
         img{
@@ -166,13 +175,15 @@ export default {
       }
       .app-version-information{
         position: absolute;
-        left: 15px;
-        top: 10px;
+        left: 20px;
+        top: 25px;
+        font-size: 16px;
       }
       .app-version-count{
         position: absolute;
-        right: 15px;
-        top: 10px;
+        right: 20px;
+        top: 25px;
+        font-size:14px;
       }
     }
   }
