@@ -3,6 +3,7 @@ import Login from './components/login'
 import UpdatePage from './components/updataPage'
 import IndexApp from './components/index-app'
 import UserProfile from './components/user-profile'
+import UserJoinus from './components/user-joinus'
 export default [
   {
     path: '/inspire',
@@ -24,6 +25,10 @@ export default [
     path: '/UserProfile',
     name: 'UserProfile',
     component: UserProfile
+  }, {
+    path: '/UserJoinus',
+    name: 'UserJoinus',
+    component: UserJoinus
   }, {
     path: '*',
     redirect: '/inspire'
