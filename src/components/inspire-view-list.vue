@@ -163,6 +163,9 @@ li {
       }
       &-fn{
         text-align: right;
+        button{
+          cursor: pointer;
+        }
       }
       &-py {
         a {

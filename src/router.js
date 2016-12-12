@@ -2,6 +2,7 @@ import Inspire from './components/inspire-view'
 import Login from './components/login'
 import UpdatePage from './components/updataPage'
 import IndexApp from './components/index-app'
+import UserProfile from './components/user-profile'
 export default [
   {
     path: '/inspire',
@@ -19,6 +20,10 @@ export default [
     path: '/IndexApp',
     name: 'IndexApp',
     component: IndexApp
+  }, {
+    path: '/UserProfile',
+    name: 'UserProfile',
+    component: UserProfile
   }, {
     path: '*',
     redirect: '/inspire'

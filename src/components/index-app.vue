@@ -1,46 +1,52 @@
 <template>
-  <div class="indexApp">
 
-    <div class="app-informations">
-
-      <div class="app-infor-left">
-        <div class="app-logo">
-          <img :src="appinformations.url">
-        </div>
-        <div class="app-about">
-          <p>{{appinformations.name}}</p>
-          <div>
-            <span>View in Appstore</span>
-            <span>Download</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="app-infor-right">
-        <p><span>Developer</span>{{appinformations.Developer}}</p>
-        <p><span>Category</span>{{appinformations.Category}}</p>
-        <p><span>Lastest Version</span>{{appinformations.LastestVersion}}</p>
-      </div>
-
-    </div>
-
-    <div class="app-version">
-      <div class="app-version-information"></div>
-
-      <div class="app-version-introduce">
-        <ul>
-          <li v-for= "introduce in infordata">
-            <div>
-              <img :src="introduce.url">
+<div class="indexApp">
+    <div class="app-border-line">
+        <div class="app-container clearfix">
+            <div class="app-informations">
+                <div class="app-infor-left">
+                    <div class="app-logo">
+                        <img :src="appinformations.url">
+                    </div>
+                    <div class="app-about">
+                        <p class="gl-fb">{{appinformations.name}}</p>
+                        <div>
+                            <button class="gl-ftcolor-gray">
+                              <i class="sprite_Appstore"></i>View in Appstore
+                            </button>
+                            <button class="gl-ftcolor-gray">
+                              <i class="sprite_Download"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="app-infor-right">
+                    <p><span class="gl-fb">Developer: </span>{{appinformations.Developer}}</p>
+                    <p><span class="gl-fb">Category: </span>{{appinformations.Category}}</p>
+                    <p><span class="gl-fb">Lastest Version: </span>{{appinformations.LastestVersion}}</p>
+                </div>
             </div>
-            <p>{{introduce. appname}}</p>
-          </li>
-        </ul>
-      </div>
-
+        </div>
     </div>
+    <div class="app-version">
+        <div class="app-version-introduce app-border-line">
+            <div class="app-version-information gl-ftcolor-gray">Version</div>
+            <div class="app-container clearfix">
+                <ul>
+                    <li v-for="introduce in infordata">
+                        <div>
+                            <img :src="introduce.url">
+                        </div>
+                        <p>{{introduce. appname}}</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="app-version-count gl-ftcolor-gray">{{infordata.length}} screenshot</div>
+        </div>
+    </div>
+</div>
 
-  </div>
+
 </template>
 
 <script>
@@ -74,14 +80,99 @@ export default {
 </script>
 
 <style lang="scss">
+.sprite_index-app{
+    display:inline-block;
+    background:url('../assets/svg_sprite.svg') no-repeat;
+    width:20px;
+    height:20px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.sprite_Appstore{
+  @extend .sprite_index-app;
+  background-position: -180px -151px;
+}
+.sprite_Download{
+  @extend .sprite_index-app;
+  background-position: -160px -150px;
+}
   .indexApp{
+    .app-container{
+      width: 800px;
+      margin: 0 auto;
+      padding: 10px 0;
+      position: relative;
+    }
+    .app-border-line{
+      border-bottom: 1px solid #e0e0e0;
+    }
     .app-informations{
       width: 760px;
-      margin: 0 auto;
-      border-bottom: 1px solid #e0e0e0;
+      height: 85px;
+      padding: 0 10px;
+      display: flex;
       img{
-        width: 60px;
-        height: 60px;
+        width: 80px;
+        height: 80px;
+        vertical-align: middle;
+      }
+      .app-infor-left{
+          float: left;
+          flex: 3;
+          .app-about{
+            padding: 0 15px;
+            width: 75%;
+            button{
+              background-color: transparent;
+              border: none;
+              font-size: 14px;
+              cursor:pointer;
+            }
+            p{
+              font-size: 20px;
+
+            }
+            div{
+              margin-top: 25px;
+
+            }
+          }
+        div{
+          float: left;
+
+        }
+      }
+      .app-infor-right{
+        flex: 1;
+        float: right;
+        font-size: 14px;
+        line-height: 2;
+      }
+    }
+    .app-version-introduce{
+      position: relative;
+      li{
+        width: calc(100% / 4 - 20px);
+        display:inline-block;
+        margin: 0 10px;
+        p{
+          text-align: center;
+          padding: 5px 0;
+          font-size: 12px;
+        }
+        img{
+          width: 100%;
+        }
+      }
+      .app-version-information{
+        position: absolute;
+        left: 15px;
+        top: 10px;
+      }
+      .app-version-count{
+        position: absolute;
+        right: 15px;
+        top: 10px;
       }
     }
   }
