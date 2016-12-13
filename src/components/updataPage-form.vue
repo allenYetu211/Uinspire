@@ -31,9 +31,16 @@
                       </span>
                       </h5>
                       <div v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
-                          <input type="text" v-model="ic.name" name="" placeholder="Input APP Name Search">
+                          <input type="text" v-model="ic.name" @focus="_historyFocus" name="" placeholder="Input APP Name Search">
+
+                          <div  class="Search-history gl-bgcolor-white" v-show="userhistorystate">
+                              <ul>
+                                <li v-for="tag in hostuserhistory" @click="_search_history">{{tag}}</li>
+                              </ul>
+                          </div>
+
                           <button 
-                          @click="_AppStore" 
+                          @click.stop="_AppStore" 
                           data-platform='ios' 
                           class="search">
                           <i class="sprite_find"></i> 
@@ -60,14 +67,19 @@
                                       </div>
                                       <div>
                                           <p class="appName">{{ics.trackName}}</p>
-                                          <p class="artistName">{{ics.artistName}} {{imoc}}</p>
+                                          <p class="artistName">{{ics.artistName}}</p>
                                       </div>
                                   </li>
                               </ul>
                           </div>
                       </div>
                       <div v-if="ic.Platform === 'Android'">
-                          <input type="text" v-model="ic.name" name="" placeholder="Input Name Search">
+                          <input type="text" v-model="ic.name" @focus="_historyFocus" name="" placeholder="Input Name Search">
+                          <div  class="Search-history gl-bgcolor-white" v-show="userhistorystate">
+                              <ul>
+                                <li v-for="tag in hostuserhistory" @click="_search_history">{{tag}}</li>
+                              </ul>
+                          </div>
                           <button @click="_AppStore" data-platform='android' class="search"><i class="sprite_find"></i></button>
                           <div class="_Apps">
 
@@ -228,53 +240,76 @@ export default {
       searchStore: false,
       searchNull: true,
       preventTherepeat: true,
-      tagList: []
+      tagList: [],
+      device: '',
+      userhistorystate: false
     }
   },
   computed: {
     ...mapGetters([
       'loadtexts',
       'outintimagedata',
-      'categoryDate'
+      'categoryDate',
+      'hostuserhistory'
     ])
   },
   methods: {
     ...mapActions([
       'loadtext',
       'postimgdata',
-      'deleteimagedata'
+      'deleteimagedata',
+      'history'
     ]),
     beforeEnter (el) {
       var delay = el.dataset.imoc * 20
       el.style.animationDelay = delay + 'ms'
     },
     _AppStore (el) {
-      let __url__ = ''
+      // let __url__ = ''
       this.getAppStore = []
       this.searchStore = true
       this.searchHeight = true
       this.theSelecteds = false
       this.clickAppStore = false
-      if (el.target.dataset.platform === 'ios') {
-        __url__ = 'https://itunes.apple.com/search?term=' + this.ic.name + '&country=CN&media=software&limit=10'
-      } else {
-        __url__ = 'http://apps.wandoujia.com/api/v1/search/$' + this.ic.name + '?opt_fields=title,icons.px256,packageName,apks.versionName'
-      }
+      this.userhistorystate = false
+      // if (el.target.dataset.platform === 'ios') {
+      //   this.device = 'ios'
+      //   // __url__ = 'https://itunes.apple.com/search?term=' + this.ic.name + '&country=CN&media=software&limit=10'
+      // } else {
+      //   this.device = 'android'
+      //   // __url__ = 'http://apps.wandoujia.com/api/v1/search/$' + this.ic.name + '?opt_fields=title,icons.px256,packageName,apks.versionName'
+      // }
       this._searchShow = !this._searchShow
-      let self = this
-      axios.get(__url__).then((response) => {
+      // let self = this
+      // axios.get('http://inspire.stoyard.com/api/inspire/appInfo', {
+      //   params: {
+      //     name: this.ic.name,
+      //     device: this.ic.Platform
+      //   }
+      // }).then((response) => {
+      //   console.log(response)
+      // }).catch((error) => {
+      //   console.log(error)
+      // })
+      axios.get('http://inspire.stoyard.com/api/inspire/appInfo', {
+        params: {
+          name: this.ic.name,
+          device: this.ic.Platform
+        }
+      }).then((response) => {
+        let _results = JSON.parse(response.data.data)
+        this.history(this.ic.name)
         if (el.target.dataset.platform === 'ios') {
-          let _results = response.data
           if (_results.resultCount === 0) {
-            self.searchNull = false
+            this.searchNull = false
           } else {
-            self.getAppStore = _results.results
+            this.getAppStore = _results.results
           }
         } else {
-          if (response.data.total === 0) {
-            self.searchNull = false
+          if (_results.total === 0) {
+            this.searchNull = false
           } else {
-            self.getAppStore = response.data.appList
+            this.getAppStore = _results.appList
           }
         }
       }).catch((response) => {
@@ -305,6 +340,13 @@ export default {
         return
       }
       this.popup = true
+    },
+    _historyFocus () {
+      this.userhistorystate = true
+    },
+    _search_history (el) {
+      this.ic.name = el.target.innerHTML
+      this.userhistorystate = false
     },
     _addhistory (el) {
       this.updataTag.push(el.target.innerText)
@@ -411,6 +453,35 @@ form{
   .upload-form-gurop{
     margin-bottom:20px;
     position:relative;
+    .Search-history{
+      position: absolute;
+      left: 0;
+      top: 75px;
+      min-width: 200px;
+      z-index: 999;
+        ul{
+          padding-left: 20px;
+          li{
+            line-height:30px;
+            position: relative;
+            &:before{
+              display: block;
+              content: '';
+              position: absolute;
+              left: -10px;
+              top: 50%;
+              transform: translateY(-50%);
+              background-color: #D8D8D8;
+              width: 5px;
+              height: 5px;
+              border-radius: 50%;
+            }
+            &:last-child{
+              border:none;
+            }
+          }
+        }
+      }
     h5{
       span{
         float:right;

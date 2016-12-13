@@ -115,5 +115,16 @@ export default {
     }).catch((error) => {
       console.log(error)
     })
+  },
+  // 获取首页展示图片信息
+  uinspireio (callback) {
+    axios.get('http://inspire.stoyard.com/api/inspire/viewdata').then((response) => {
+      console.log(json.parse(response.data.data))
+      if (typeof callback === 'function') {
+        callback(json.parse(response.data.data))
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 }

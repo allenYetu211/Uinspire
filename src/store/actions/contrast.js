@@ -32,3 +32,7 @@ export const deletemoodbarod = ({commit}) => { commit(DELETEMOODBRADOD) }
 // Moodbarod 删除框显示隐藏
 export const SHOWCOLSEMOODBRADOD = 'showcolsemoodbarod'
 export const showcolsemoodbarod = ({commit}) => { commit(SHOWCOLSEMOODBRADOD) }
+
+// 存储用户搜索记录
+export const USERHISTORY = 'history'
+export const history = ({commit}, history) => { commit(USERHISTORY, history) }

@@ -19,3 +19,5 @@ export const actionindex = state => state.contrast.actionindex
 export const moodbarod = state => state.contrast.deletemoodbarod
 
 export const showcolsemood = state => state.contrast.showcolsemoodbarod
+
+export const hostuserhistory = state => state.contrast.userhistory
