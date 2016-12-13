@@ -6,7 +6,7 @@
         :class="{open : inspirtnavsidebarOpenClose}"
          v-show="sidebarleftopenclose">
             <div class="category clearfix">
-                <h2 class="gl-size-20">Category</h2>
+                <h2 class="gl-size-20 gl-fb">Category</h2>
                 <div 
                 class="gl-col-12 category-list" 
                 v-for="(item, index) in categoryDate">
@@ -20,10 +20,10 @@
                 </div>
             </div>
             <div class="tags">
-                <h2 class="gl-size-20">Tags</h2>
+                <h2 class="gl-size-20 gl-fb">Tags</h2>
             </div>
             <div class="color">
-                <h2 class="gl-size-20">Color</h2>
+                <h2 class="gl-size-20 gl-fb">Color</h2>
             </div>
         </div>
       </transition>
@@ -85,13 +85,14 @@ export default {
     padding-bottom:30px;
     h2{
       padding-bottom: 20px;
+      font-weight: normal;
     }
   }
   .category{
     .category-list{
         padding-bottom: 20px;
         position:relative;
-        padding-left:5px;
+        padding-left:0px;
       }
     input {
       opacity: 0;
@@ -100,7 +101,7 @@ export default {
       & + i{  
             position: absolute;
             z-index:-1;
-            left: 5px;
+            left: 0px;
             top: 0px;
 
             @extend .sprite_filter-ico;

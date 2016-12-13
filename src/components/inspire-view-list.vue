@@ -115,10 +115,11 @@ li {
   float: left;
   margin: 10px 10px;
   // position:absolute;
-  transition: all 0.5s;
+  transition: all .65s;
   height: 0;
   overflow: hidden;
-  padding-bottom: 26.8%;
+  padding-bottom: 27.5%;
+  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.0);
    &.active{
        box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.25);
     }
@@ -138,7 +139,7 @@ li {
       background-color:#fff;
       width:100%;
       transition:transform 0.3s, opacity 0.3s 0.1s;
-      padding:0 5px;
+      padding:0 10px;
       pointer-events: none;
       transform:translateY(100%);
       &.active{
@@ -147,14 +148,14 @@ li {
          pointer-events: all;
       }
       &>div{
-        flex:1;
+        flex:4;
         &:last-child{
-          flex:5;
+          flex:3;
         }
         button{
           border:none;
           background-color:transparent;
-          padding:0;
+          padding:0 3px;
           opacity:0.15;
           &._like{
             opacity: 1;
@@ -170,6 +171,7 @@ li {
       &-py {
         a {
           text-decoration: none;
+          font-size: 16px;
         }
       }
   }

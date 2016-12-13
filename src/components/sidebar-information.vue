@@ -43,14 +43,14 @@
 
       <div class="about-G_Lab">
         <ul class="G_Lab-introduce">
-          <li><a href="">About</a></li>
-          <li><a href="">Help</a></li>
-          <li><a href="">Support</a></li>
-          <li><a href="">Feedback</a></li>
+          <li><a href="" class="gl-ftcolor-black">About</a></li>
+          <li><a href="" class="gl-ftcolor-black">Help</a></li>
+          <li><a href="" class="gl-ftcolor-black">Support</a></li>
+          <li><a href="" class="gl-ftcolor-black">Feedback</a></li>
         </ul>
 
         <p class="gl-ftcolor-gray-99">
-          Copyright © <span class="gl-ftcolor-theme">G_Lab Stoyard</span>
+          Copyright © <span class="gl-ftcolor-theme gl-fb">G_Lab Stoyard</span>
         </p>
         <p class="gl-ftcolor-gray-99">
           UInspire.io  2016
@@ -152,7 +152,7 @@ export default {
       width: 100%;
       height: 100%;
       border: none;
-      padding:0 60px 0 35px;
+      padding:0 60px 0 40px;
       &::-webkit-input-placeholder{
            color:#DCDCDC;
            font-size:16px;
@@ -165,7 +165,7 @@ export default {
     }
     button:first-child{
       height: 100%;
-      left: 0;
+      left: 3px;
       background-color: transparent;
     }
     button:last-child{
@@ -211,7 +211,7 @@ export default {
         li{
           display: inline-block;
           // float:left;
-          margin: 0 5px;
+          margin: 0 10px;
           a{
             text-decoration: none;
           }
