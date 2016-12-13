@@ -15,3 +15,6 @@ export const getreturncode = state => state.upload.setreturncode
 
 // 注册用户
 export const registereduser = state => state.upload.logonuser
+
+// uinspire 首页展示图片
+export const uinspireioDate = state => state.upload.uinspireioDate

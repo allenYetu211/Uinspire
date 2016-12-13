@@ -10,7 +10,8 @@ import {
   ADDFILMSLIDE,
   LESSFILMSLIDE,
   DELETEMOODBRADOD,
-  SHOWCOLSEMOODBRADOD
+  SHOWCOLSEMOODBRADOD,
+  USERHISTORY
 } from '../actions'
 
 const state = {
@@ -58,7 +59,8 @@ const state = {
   showDataList: '',
   actionindex: '',
   deletemoodbarod: false,
-  showcolsemoodbarod: false
+  showcolsemoodbarod: false,
+  userhistory: []
 }
 
 const mutations = {
@@ -102,6 +104,12 @@ const mutations = {
   [SHOWCOLSEMOODBRADOD] (state) {
     state.showcolsemoodbarod = !state.showcolsemoodbarod
     state.deletemoodbarod = false
+  },
+  [USERHISTORY] (state, history) {
+    state.userhistory.unshift(history)
+    if (state.userhistory.length > 5) {
+      state.userhistory.pop()
+    }
   }
 }
 

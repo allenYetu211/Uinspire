@@ -3,11 +3,11 @@
 <template>
   <li  :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
     <div class="imagesShow-box-shadow" :class="{active : hover}">
-      <img :src="itmes.url">
+      <img :src="itmes.img">
         <div class="imagesShow-paypal"  @click.stop="" :class="{active : hover}">
           <div class="imagesShow-paypal-py">
               <router-link :to="{ name: 'IndexApp'}" class="gl-ftcolor-black">
-                Paypal
+                {{itmes.name}}
               </router-link>
           </div>
           <div class="imagesShow-paypal-fn">

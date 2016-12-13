@@ -14,7 +14,7 @@
     <div class="imagesShow">
       <ul id='inspire-view-list' class=" clearfix">
           <!-- <transition> -->
-            <inspire-view-list  v-for="(itms, index) in infor" :key="index" :itmes="itms" :index="index"></inspire-view-list>
+            <inspire-view-list  v-for="(itms, index) in uinspireioDate" :key="index" :itmes="itms" :index="index"></inspire-view-list>
           <!-- </transition> -->
       </ul>
     </div>
@@ -39,9 +39,7 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      setTimeout(() => {
-        this._change()
-      }, 200)
+      this.uinspireio()
     })
   },
   methods: {
@@ -49,7 +47,8 @@ export default {
       'inspirtnavsidebar',
       'listArrange',
       'listArrangetwo',
-      'sidebarright'
+      'sidebarright',
+      'uinspireio'
     ]),
     _change (_showcount = 6, scale = 0.28) {
       // let listParents = document.querySelector('#inspire-view-list')
@@ -90,7 +89,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'infor'
+      'infor',
+      'uinspireioDate'
     ])
   }
 }

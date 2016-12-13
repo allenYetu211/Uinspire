@@ -75,13 +75,9 @@ export default {
       'addlessstate',
       'filmslidestate',
       'showDataList',
-      'actionindex'
+      'actionindex',
+      'uinspireioDate'
     ])
-  },
-  mounted () {
-    // this.$nextTick(function () {
-    //   console.log('next:' + this.actionindex)
-    // })
   },
   updated () {
     let lateLi = document.querySelectorAll('li.films-li')

@@ -9,7 +9,8 @@ import {
   LESSFILTERCATEGORY,
   IMPORTEMAIL,
   SETRETURNCODE,
-  LOGONUSER
+  LOGONUSER,
+  UINSPIREIO
 } from '../actions'
 
 const state = {
@@ -21,7 +22,8 @@ const state = {
   filtercategory: [],
   importemail: false,
   setreturncode: false,
-  logonuser: false
+  logonuser: false,
+  uinspireioDate: ''
 }
 
 const mutations = {
@@ -87,6 +89,11 @@ const mutations = {
   },
   [LOGONUSER] (state) {
     state.logonuser = !state.logonuser
+  },
+  [UINSPIREIO] (state) {
+    API.uinspireio((_data) => {
+      state.uinspireioDate = _data
+    })
   }
 }
 

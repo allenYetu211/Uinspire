@@ -35,3 +35,8 @@ export const setreturncode = ({commit}) => { commit(SETRETURNCODE) }
 // 注册用户
 export const LOGONUSER = 'logonuser'
 export const logonuser = ({commit}) => { commit(LOGONUSER) }
+
+// 获取首页展示图片
+export const UINSPIREIO = 'uinspireio'
+export const uinspireio = ({commit}) => { commit(UINSPIREIO) }
+
