@@ -4,9 +4,10 @@
       <moodboard-datail-view-itmes v-for="(ins, index) in infor" :ins="ins" :index="index"></moodboard-datail-view-itmes>
     </ul>
       <div class="startlogin-moodboard">
-      <div class="import-email gl-bgcolor-white" :class="{'login': returnimportemail, 'qr-code': getreturncode}">
+      <div class="import-email gl-bgcolor-white" :class="{'login': moodbarod }">
         <transition name="loginlogon" tag="div">
-          <div v-if='!returnimportemail'>
+          <div v-if='!moodbarod'>
+          {{moodbarod}}
             <h2>Share <span class="gl-ftcolor-theme">Mood</span>board</h2>
             <p class="gl-ftcolor-gray">Input your friend’s E-mail, It’s will auto send a e-mail to invite him.</p>
             <div class="moddboard-email">
@@ -18,24 +19,20 @@
             </div>
             <div class="login-registered">
               <button 
+              @click= "_deletemoodboard"
               class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >INVITE</button>
             </div>
           </div>
         </transition>
 
         <transition name="loginlogon" tag="div">
-          <div v-if="registereduser">
+          <div v-if="moodbarod">
             <div class="logon-information">
-              <h2>Hello, <span class="gl-ftcolor-theme">Designer</span>!</h2>
+              <h2 class="gl-fb">Delete</h2>
               <p class="gl-ftcolor-gray">Pleasa type your infomation to finish register.</p>
-              <input class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Password"   type="password" name="">
-              <input class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Name"   type="text" name="">
-              <input class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Company"   type="text" name="">
-              <input class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Job Title"   type="text" name="">
               <div class="login-registered">
-                <button 
-                @click="setreturncode"
-                class="gl-bgcolor-black gl-ftcolor-white gl-fb" >Register</button>
+                <button class="gl-bgcolor-black gl-ftcolor-white gl-fb" >Register</button>
+                <button class="gl-bgcolor-gray-bb gl-ftcolor-white gl-fb" >Register</button>
               </div>
             </div>
           </div>
@@ -93,18 +90,22 @@ export default {
       ]
     }
   },
-  methods: {
-    ...mapActions([
-    ])
-  },
   computed: {
     ...mapGetters([
       'returnimportemail',
       'getreturncode',
-      'registereduser'
+      'registereduser',
+      'moodbarod'
     ])
+  },
+  methods: {
+    ...mapActions([
+      'deletemoodbarod'
+    ]),
+    _deletemoodboard () {
+      this.deletemoodbarod()
+    }
   }
-
 }
 </script>
 
@@ -127,12 +128,11 @@ export default {
       transform:translate(-50%, -50%);
       text-align:center;
       box-shadow:0 5px 15px rgba(0,0,0,.5);
-      transition:height 0.5s;
+      transition:height 0.5s, width 0.5s;
       &.login{
-        height:570px;
-      }
-      &.qr-code{
-        height:350px;
+        height:240px;
+        width: 400px;
+        padding:40px 30px;
       }
       .login-registered {
         margin-top: 50px;

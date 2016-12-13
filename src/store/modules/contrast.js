@@ -8,7 +8,8 @@ import {
   FILMSLIDE,
   COMTRASTOPEN,
   ADDFILMSLIDE,
-  LESSFILMSLIDE
+  LESSFILMSLIDE,
+  DELETEMOODBRADOD
 } from '../actions'
 
 const state = {
@@ -17,6 +18,7 @@ const state = {
   linkinfor: false,
   comtrast: false,
   filmslide: false,
+  deletemoodbarod: false,
   infordata: [
         {url: 'static/img1.jpg'},
         {url: 'static/img1.jpg'},
@@ -91,6 +93,9 @@ const mutations = {
   },
   [LESSFILMSLIDE] (state) {
     state.actionindex--
+  },
+  [DELETEMOODBRADOD] (state) {
+    state.deletemoodbarod = !state.deletemoodbarod
   }
 }
 

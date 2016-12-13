@@ -25,3 +25,6 @@ export const addfilmsilde = ({commit}) => { commit(ADDFILMSLIDE) }
 export const LESSFILMSLIDE = 'lessfilmsilde'
 export const lessfilmsilde = ({commit}) => { commit(LESSFILMSLIDE) }
 
+// Moodbarod 删除项目
+export const DELETEMOODBRADOD = 'deletemoodbarod'
+export const deletemoodbarod = ({commit}) => { commit(DELETEMOODBRADOD) }
