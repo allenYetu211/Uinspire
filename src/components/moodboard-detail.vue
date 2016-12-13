@@ -34,7 +34,8 @@ export default {
 
 <style lang="scss">
   .moodboard-head{
-    height: 180px;
+    min-height: 180px;
+    padding:50px;
     text-align:center;
     border-bottom: 1px solid #e0e0e0;
     display: flex;
@@ -51,7 +52,7 @@ export default {
     }
   }
   .moodboard-members{
-    // padding: 20px 0;
+    padding: 20px 0;
   }
   .members{
     display: inline-block;
@@ -59,8 +60,8 @@ export default {
     border-radius: 50%;
     overflow: hidden;
     div {
-      width: 30px;
-      height: 30px;
+      width: 40px;
+      height: 40px;
     }
   }
   .children-router{

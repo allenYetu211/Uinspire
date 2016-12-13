@@ -6,12 +6,13 @@
           <div class="project-introduce">
             <img :src="infor.url">
           </div>
-          <p class="gl-fb">{{infor.appname}}</p>
-          <p class="gl-ftcolor-gray">{{infor.screenshot}} Screenshot</p>
+          <p class="gl-fb gl-size-16">{{infor.appname}}</p>
+          <p class="gl-fn gl-ftcolor-gray">{{infor.screenshot}} Screenshot</p>
         </router-link>
         <li>
           <div class="add-projects gl-bgcolor-gray-f7 gl-ftcolor-gray-ab">
             <div>
+                <i class="addmood"></i>
                 Add Moodboard
             </div>
           </div>
@@ -49,20 +50,19 @@ export default {
       ul.moodboard-projects{
         li{
           width: calc(100% / 4 - 20px);
-          margin: 10px;
+          margin: 10px 10px 50px 10px;
           display: inline-block;
           cursor: pointer;
           &:last-child{
             float: right;
           }
           p{
-            margin: 10px 0;
             text-align: center;
-            &:first-child {
-              font-size: 16px;
+            &.gl-fb {
+              margin-top: 16px;
             }
-            &:last-child{
-              font-size: 12px;
+            &.gl-fn{
+              margin-top: 7px;
             }
           }
           .project-introduce, .add-projects{
@@ -82,6 +82,15 @@ export default {
               left: 50%;
               top: 50%;
               transform: translate(-50%, -50%);
+              text-align: center;
+              i{
+                display:block;
+                background:url('../assets/svg_sprite.svg') no-repeat;
+                width:40px;
+                height:40px;
+                background-position: -40px -50px;
+                margin: 0 auto 20px auto;
+              }
             }
          }
       }

@@ -44,11 +44,11 @@
         </template>
     </div>
     <div class="screenDownload" :class="{open : addlessstate}">
-        <button class="screen" @click="comtrastOpenCount">
-            <i class="sprite_screen"></i> Ful-screen
+        <button class="screen gl-fb gl-size-16" @click="comtrastOpenCount">
+            <i class="sprite_screen"></i> FullScreen
         </button>
-        <button class="download">
-            <i class="sprite_download"></i> Download
+        <button class="download gl-fb gl-size-16">
+            <i class="sprite_download"></i> Add Board
         </button>
     </div>
 </div>
@@ -157,37 +157,44 @@ export default {
       display:flex;
       justify-content: center;
       align-itmes:center;
-      padding:10px 0;
+      padding:0;
       background:rgba(255,255,255,.99);
-      box-shadow: 0px -2px 14px 0px rgba(0,0,0,0.09);
+      // box-shadow: 0px -2px 14px 0px rgba(0,0,0,0.09);
+      border-top:1px solid #dcdcdc;
       transform:translateY(100%);
       transition:transform 0.3s;
       &.open{
         transform:translateY(0);
       }
       button{
-        margin: 0 20px;
-        padding:5px 20px;
-        border-radius:50px;
-        border:1px solid #222;
+        margin: 0;
+        padding:20px 30px;
+        height:60px;
+        border:0px solid #222;
         background:transparent;
-        transition:background-color 0.5s, border-color 0.3s;
+        transition: color 0.3s;
+        border-right:1px solid #dcdcdc;
+        &:first-child{
+          border-left:1px solid #dcdcdc;
+        }
+        i{
+          margin-top:-2px;
+        }
         i.sprite_screen{
           display:inline-block;
           width:20px;
           height:20px;
           background:url('../assets/svg_sprite.svg')no-repeat;
-          background-position:-95px -95px;
+          background-position:-5px -125px;
           margin-right:10px;
           vertical-align:middle;
         }
         i.sprite_download{
           @extend i.sprite_screen;
-          background-position:-125px -95px;
+          background-position:-65px -125px;
         }
         &:hover {
-          background-color:#FFFF00;
-          border-color:transparent;
+          color:#2EF037;
         }
       }
     }

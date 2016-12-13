@@ -111,6 +111,7 @@ export default{
 }
 li {
   width:calc(100% / 6 - 20px);
+  min-width: 220px;
   position:relative;
   float: left;
   margin: 10px 10px;
@@ -120,8 +121,8 @@ li {
   overflow: hidden;
   padding-bottom: 27.5%;
   box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.0);
-   &.active{
-       box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.25);
+    &.active{
+      box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.25);
     }
   img{
     width:100%;

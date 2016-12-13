@@ -9,7 +9,7 @@
             </div>
             <div class="inspirt-nav-search">
                 <i class="sprite_search"></i>
-                <input type="text" placeholder="Search for inspire" name="">
+                <input type="text" placeholder="Search for inspire" name="" class="gl-size-18 gl-fn">
             </div>
         </div>
         <div class="logo gl-size-24 gl-fb"><span class="gl-ftcolor-theme">UI</span>nspire.io</div>
@@ -145,7 +145,7 @@ export default {
       float:left;
       .inspirt-nav-fliter{
           border-right: 1px solid #eee;
-          margin-right: 20px;
+          margin-right: 12px;
       }
     }
     .inspirt-nav-l,

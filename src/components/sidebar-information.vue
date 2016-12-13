@@ -29,7 +29,7 @@
 
       <div class="log-search-moodboard">
         <button><i class="sprite_sidebar-search"></i></button>
-        <input placeholder="Search moodboard" type="text" name="">
+        <input placeholder="Search moodboard" type="text" name="" class="gl-fn gl-size-16">
         <button class="gl-bgcolor-gray-dc"> <i class="sprite_sidebar-add"></i></button>
       </div>
 
