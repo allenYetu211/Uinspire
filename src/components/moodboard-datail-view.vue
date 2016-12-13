@@ -1,19 +1,24 @@
 <template>
-    <div class="startlogin">
+  <div>
+    <ul>
+      <moodboard-datail-view-itmes v-for="(ins, index) in infor" :ins="ins" :index="index"></moodboard-datail-view-itmes>
+    </ul>
+      <div class="startlogin-moodboard">
       <div class="import-email gl-bgcolor-white" :class="{'login': returnimportemail, 'qr-code': getreturncode}">
         <transition name="loginlogon" tag="div">
           <div v-if='!returnimportemail'>
-            <h2>Join <span class="gl-ftcolor-theme">UI</span>nspire.io</h2>
-            <p class="gl-ftcolor-gray">Input your E-mail, It’s will auto validation your account.</p>
+            <h2>Share <span class="gl-ftcolor-theme">Mood</span>board</h2>
+            <p class="gl-ftcolor-gray">Input your friend’s E-mail, It’s will auto send a e-mail to invite him.</p>
+            <div class="moddboard-email">
             <input 
             class="gl-bgcolor-gray-ed gl-ftcolor-black" 
             placeholder="E-mail" 
             type="email" 
             name="">
+            </div>
             <div class="login-registered">
               <button 
-              @click="_loginLogon" 
-              class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >Validation</button>
+              class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >INVITE</button>
             </div>
           </div>
         </transition>
@@ -59,43 +64,38 @@
             </div>
           </div>
         </transition>
-
-
-
-        <!-- <transition name="loginlogon" tag="div">
-            <div v-if="returnimportemail">
-              <div class="headerportrait gl-bgcolor-gray-ed">
-                <img src="">
-              </div>
-              <div class="username gl-ftcolor-black" :class="{'gl-bgcolor-gray-ed': !returnimportemail}">Allen</div>
-              <div class="userinformation gl-ftcolor-gray">have  artistic breath Programmers </div>
-              
-              <div class="useremail gl-bgcolor-gray-ed"></div>
-
-              <div class="importPassword">
-                <input class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Password"   type="password" name="">
-                <a class="gl-ftcolor-gray" href="#">Forgot?</a>
-              </div>
-
-              <div class="login-registered">
-                  <button 
-                  @click="_loginLogon" 
-                  class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >Sing in</button>
-                </div>
-            </div>
-        </transition> -->
       </div>
     </div>
+  </div>
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
-
+import MoodboardDatailViewItmes from './moodboard-datail-view-itmes'
+import { mapGetters, mapActions } from 'vuex'
 export default {
+  components: {
+    MoodboardDatailViewItmes
+  },
   data () {
     return {
-      registered: ''
+      infor: [
+        {url: 'static/img1.jpg'},
+        {url: 'static/img1.jpg'},
+        {url: 'static/img2.jpg'},
+        {url: 'static/img3.jpg'},
+        {url: 'static/img4.jpg'},
+        {url: 'static/img5.jpg'},
+        {url: 'static/img6.jpg'},
+        {url: 'static/img7.jpg'},
+        {url: 'static/img8.jpg'},
+        {url: 'static/img9.jpg'},
+        {url: 'static/img10.jpg'}
+      ]
     }
+  },
+  methods: {
+    ...mapActions([
+    ])
   },
   computed: {
     ...mapGetters([
@@ -103,22 +103,13 @@ export default {
       'getreturncode',
       'registereduser'
     ])
-  },
-  methods: {
-    ...mapActions([
-      'importemail',
-      'setreturncode',
-      'logonuser'
-    ]),
-    _loginLogon () {
-      this.importemail()
-    }
   }
+
 }
 </script>
 
 <style lang="scss">
-  .startlogin{
+    .startlogin-moodboard{
   position:fixed;
   top:0;
   right:0;
@@ -128,7 +119,7 @@ export default {
   .import-email{
       width:600px;
       height:350px;
-      padding:40px 100px;
+      padding:40px 70px;
       position:absolute;
       z-index:998;
       top:50%;
@@ -153,6 +144,9 @@ export default {
       p {
           font-size:14px;
           margin-bottom:50px;
+        }
+      .moddboard-email{
+          padding: 0 30px;
         }
       input {
         border:none;

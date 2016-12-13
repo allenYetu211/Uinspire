@@ -98,13 +98,14 @@ export default {
   @extend .sprite_index-app;
   background-position: -160px -150px;
 }
-  .indexApp{
     .app-container{
       width: 980px;
       margin: 0 auto;
       padding: 25px 0 20px;
       position: relative;
     }
+  .indexApp{
+
     .app-border-line{
       border-bottom: 1px solid #e0e0e0;
     }
