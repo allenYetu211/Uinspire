@@ -5,6 +5,7 @@
         <router-link :to="{name: 'MoodBoardDetailView'}" tag="li" v-for="infor in infordata">
           <div class="project-introduce">
             <img :src="infor.url">
+            <div class="doorplank"></div>
           </div>
           <p class="gl-fb">{{infor.appname}}</p>
           <p class="gl-ftcolor-gray">{{infor.screenshot}} Screenshot</p>
@@ -52,6 +53,8 @@ export default {
           margin: 10px;
           display: inline-block;
           cursor: pointer;
+          position: relative;
+
           &:last-child{
             float: right;
           }
@@ -65,11 +68,34 @@ export default {
               font-size: 12px;
             }
           }
-          .project-introduce, .add-projects{
+          .add-projects{
             width: 100%;
             height: 0;
             padding-bottom: 68%;
             overflow: hidden;
+          }
+          .project-introduce{
+            width: 100%;
+            height: 0;
+            padding-bottom: 68%;
+            overflow: hidden;
+            position:relative;
+              .doorplank{
+              content: '';
+              display: block;
+              position: absolute;
+              left: 0;
+              top: 0;
+              bottom: 0;
+              right: 0;
+              background: -webkit-linear-gradient(bottom, rgba(0,0,0,.5), transparent);  
+              opacity: 0;
+              transition: opacity 0.5s;
+                &:hover{
+                  opacity: 1;
+              }
+            }
+           
           }
           img{
             width: 100%;
