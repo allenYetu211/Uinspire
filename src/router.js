@@ -38,11 +38,11 @@ export default [
     component: MoodBoardDetail,
     children: [
       {
-        path: '',
+        path: 'home',
         name: 'MoodBoardDetailProject',
         component: MoodBoardDetailProject
       }, {
-        path: '/MoodBoardDetailView',
+        path: 'MoodBoardDetailView',
         name: 'MoodBoardDetailView',
         component: MoodBoardDetailView
       }

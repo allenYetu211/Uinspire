@@ -3,65 +3,40 @@
     <ul>
       <moodboard-datail-view-itmes v-for="(ins, index) in infor" :ins="ins" :index="index"></moodboard-datail-view-itmes>
     </ul>
-      <div class="startlogin-moodboard">
-      <div class="import-email gl-bgcolor-white" :class="{'login': moodbarod }">
-        <transition name="loginlogon" tag="div">
-          <div v-if='!moodbarod'>
-          {{moodbarod}}
-            <h2>Share <span class="gl-ftcolor-theme">Mood</span>board</h2>
-            <p class="gl-ftcolor-gray">Input your friend’s E-mail, It’s will auto send a e-mail to invite him.</p>
-            <div class="moddboard-email">
-            <input 
-            class="gl-bgcolor-gray-ed gl-ftcolor-black" 
-            placeholder="E-mail" 
-            type="email" 
-            name="">
-            </div>
-            <div class="login-registered">
-              <button 
-              @click= "_deletemoodboard"
-              class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >INVITE</button>
-            </div>
-          </div>
-        </transition>
-
-        <transition name="loginlogon" tag="div">
-          <div v-if="moodbarod">
-            <div class="logon-information">
-              <h2 class="gl-fb">Delete</h2>
-              <p class="gl-ftcolor-gray">Pleasa type your infomation to finish register.</p>
-              <div class="login-registered">
-                <button class="gl-bgcolor-black gl-ftcolor-white gl-fb" >Register</button>
-                <button class="gl-bgcolor-gray-bb gl-ftcolor-white gl-fb" >Register</button>
-              </div>
-            </div>
-          </div>
-        </transition>
-
-        <transition name="loginlogon" tag="div">
-          <div v-if="getreturncode">
-            <div class="logon-information">
-              <h2>Hello, <span class="gl-ftcolor-theme">Designer</span>!</h2>
-              <p class="gl-ftcolor-gray">Pleasa type your infomation to finish register.</p>
-              <div class="VerificationCode clearfix">
-                  <input  v-model="registered"  type="text" name="" maxlength = '6'>
-                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[0]}}</span>
-                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[1]}}</span>
-                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[2]}}</span>
-                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[3]}}</span>
-                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[4]}}</span>
-                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[5]}}</span>
+    <div class="startlogin-moodboard" v-if="showcolsemood">
+        <div class="import-email gl-bgcolor-white" :class="{'login': moodbarod }">
+          <transition name="loginlogon" tag="div">
+            <div v-if='!moodbarod'>
+              <h2>Share <span class="gl-ftcolor-theme">Mood</span>board</h2>
+              <p class="gl-ftcolor-gray">Input your friend’s E-mail, It’s will auto send a e-mail to invite him.</p>
+              <div class="moddboard-email">
+              <input 
+              class="gl-bgcolor-gray-ed gl-ftcolor-black" 
+              placeholder="E-mail" 
+              type="email" 
+              name="">
               </div>
               <div class="login-registered">
                 <button 
-                class="gl-bgcolor-black gl-ftcolor-white gl-fb" >Validation</button>
-                <button 
-                class="gl-bgcolor-gray gl-ftcolor-white gl-fb" >Register</button>
+                @click= "_deletemoodboard"
+                class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >INVITE</button>
               </div>
             </div>
-          </div>
-        </transition>
-      </div>
+          </transition>
+
+          <transition name="loginlogon" tag="div">
+            <div v-if="moodbarod">
+              <div class="logon-information">
+                <h2 class="gl-fb">Delete</h2>
+                <p class="gl-ftcolor-gray">Pleasa type your infomation to finish register.</p>
+                <div class="login-registered">
+                  <button class="gl-bgcolor-black gl-ftcolor-white gl-fb" >DELETE</button>
+                  <button @click="showcolsemoodbarod" class="gl-bgcolor-gray-bb gl-ftcolor-white gl-fb" >CANCEL</button>
+                </div>
+              </div>
+            </div>
+          </transition>
+        </div>
     </div>
   </div>
 </template>
@@ -95,12 +70,14 @@ export default {
       'returnimportemail',
       'getreturncode',
       'registereduser',
-      'moodbarod'
+      'moodbarod',
+      'showcolsemood'
     ])
   },
   methods: {
     ...mapActions([
-      'deletemoodbarod'
+      'deletemoodbarod',
+      'showcolsemoodbarod'
     ]),
     _deletemoodboard () {
       this.deletemoodbarod()
@@ -164,6 +141,7 @@ export default {
         height:50px;
         border:none;
         font-size:20px;
+        margin: 0 5px;
         cursor:pointer;
       }
 

@@ -20,8 +20,8 @@
         </div>
 
         <div class="log-func gl-fb">
-         <a href="#">Inspire</a>
-         <router-link :to="{ name: 'MoodBoardDetail'}">Moodboard</router-link>
+         <router-link :to="{ name: 'inspire'}">Inspire</router-link>
+         <router-link :to="{ name: 'MoodBoardDetailProject'}">Moodboard</router-link>
          <router-link :to="{ name: 'UserProfile'}">Profile</router-link>
          <router-link :to="{ name: 'updatePage'}">Upload</router-link>
         </div>

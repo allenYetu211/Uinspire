@@ -28,3 +28,7 @@ export const lessfilmsilde = ({commit}) => { commit(LESSFILMSLIDE) }
 // Moodbarod 删除项目
 export const DELETEMOODBRADOD = 'deletemoodbarod'
 export const deletemoodbarod = ({commit}) => { commit(DELETEMOODBRADOD) }
+
+// Moodbarod 删除框显示隐藏
+export const SHOWCOLSEMOODBRADOD = 'showcolsemoodbarod'
+export const showcolsemoodbarod = ({commit}) => { commit(SHOWCOLSEMOODBRADOD) }

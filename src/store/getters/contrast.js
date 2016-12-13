@@ -17,3 +17,5 @@ export const showDataList = state => state.contrast.showDataList
 export const actionindex = state => state.contrast.actionindex
 
 export const moodbarod = state => state.contrast.deletemoodbarod
+
+export const showcolsemood = state => state.contrast.showcolsemoodbarod

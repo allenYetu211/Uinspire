@@ -1,13 +1,25 @@
 <template>
   <li>
     <img :src="ins.url">
-    <button>X</button>
+    <button @click="showcolsemoodbarod">X</button>
   </li>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  props: ['ins', 'index']
+  props: ['ins', 'index'],
+  computed: {
+    ...mapGetters([
+      'showcolsemood'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'showcolsemoodbarod'
+    ])
+  }
 }
 </script>
 
