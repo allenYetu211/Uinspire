@@ -67,7 +67,7 @@
                                       </div>
                                       <div>
                                           <p class="appName">{{ics.trackName}}</p>
-                                          <p class="artistName">{{ics.artistName}} {{imoc}}</p>
+                                          <p class="artistName">{{ics.artistName}}</p>
                                       </div>
                                   </li>
                               </ul>
