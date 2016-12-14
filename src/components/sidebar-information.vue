@@ -101,7 +101,7 @@ export default {
   z-index:998;
   width: 370px;
   padding: 20px 20px 15px;
-  border-left: 1px solid #e0e0e0;
+  border-left: 1px solid #eee;
   overflow-y:auto;
   &.open{
     transform: translateX(20px);
