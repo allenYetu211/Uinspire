@@ -119,12 +119,98 @@ export default {
   // 获取首页展示图片信息
   uinspireio (callback) {
     axios.get('http://inspire.stoyard.com/api/inspire/viewdata').then((response) => {
-      console.log(json.parse(response.data.data))
+      console.log(typeof callback === 'function')
       if (typeof callback === 'function') {
-        callback(json.parse(response.data.data))
+        callback(response.data)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+  // 验证用户邮箱
+  validationEmail (_data, callback) {
+    axios.get('http://inspire.stoyard.com/api/user/login', {
+      params: {
+        email: _data
+      }
+    }).then((response) => {
+      if (response.data.code === '10048') {
+        axios.get('http://inspire.stoyard.com/api/user/sendemailcode', {
+          params: {
+            email: _data
+          }
+        }).then((response) => {
+          console.log(response.data.code)
+          console.log('发送邮件')
+        })
+      }
+      if (typeof callback === 'function') {
+        callback(response.data)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+  // 验证邮箱 验证码
+  verifyCode (_data, callback) {
+    // axios({
+    //   url: 'http://inspire.stoyard.com/api/user/checkemailcode',
+    //   method: 'post',
+    //   transformRequest: [(_data) => {
+    //     const fdata = new window.FormData()
+    //     fdata.append('email', _data[0].email)
+    //     fdata.append('code', _data[0].code)
+    //     return fdata
+    //   }],
+    //   data: _data
+    // }).then((response) => {
+    //   console.log(_data)
+    //   console.log('verifyCode:', response)
+    //   if (typeof callback === 'function') {
+    //     callback(response.data)
+    //   }
+    // }).catch((error) => {
+    //   console.log(error)
+    // })
+    axios.get('http://inspire.stoyard.com/api/user/checkemailcode', {
+      params: {
+        email: _data[0].email,
+        code: _data[0].code
+      }
+    }).then((response) => {
+      console.log(response)
+      console.log(typeof callback === 'function')
+      if (typeof callback === 'function') {
+        callback(response.data)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+  // 注册用户
+  logonUser (_data, callback) {
+    axios({
+      url: 'http://inspire.stoyard.com/api/user/register',
+      method: 'Post',
+      transformRequest: [(_data) => {
+        const userdata = new window.FormData()
+        userdata.append('email', _data.email)
+        userdata.append('password', _data.password)
+        return userdata
+      }],
+      data: _data
+    }).then((response) => {
+      console.log(response)
+      if (callback === 'function') {
+        console.log(response)
       }
     }).catch((error) => {
       console.log(error)
     })
   }
+  // },
+  // // 判断用户是否登录
+  // whetherthelogin (callback) {
+  //   // axios.get('http://')
+  // }
 }

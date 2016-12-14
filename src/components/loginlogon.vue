@@ -1,6 +1,6 @@
 <template>
     <div class="startlogin">
-      <div class="import-email gl-bgcolor-white" :class="{'login': returnimportemail, 'qr-code': getreturncode}">
+      <div class="import-email gl-bgcolor-white" :class="{'login': loginPopup, 'login': getreturncode}">
         <transition name="loginlogon" tag="div">
           <div v-if='!returnimportemail'>
             <h2>Join <span class="gl-ftcolor-theme">UI</span>nspire.io</h2>
@@ -9,6 +9,7 @@
             class="gl-bgcolor-gray-ed gl-ftcolor-black" 
             placeholder="E-mail" 
             type="email" 
+            v-model="loginlogonEmail"
             name="">
             <div class="login-registered">
               <button 
@@ -18,26 +19,8 @@
           </div>
         </transition>
 
-        <transition name="loginlogon" tag="div">
+         <transition name="loginlogon" tag="div">
           <div v-if="registereduser">
-            <div class="logon-information">
-              <h2>Hello, <span class="gl-ftcolor-theme">Designer</span>!</h2>
-              <p class="gl-ftcolor-gray">Pleasa type your infomation to finish register.</p>
-              <input class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Password"   type="password" name="">
-              <input class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Name"   type="text" name="">
-              <input class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Company"   type="text" name="">
-              <input class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Job Title"   type="text" name="">
-              <div class="login-registered">
-                <button 
-                @click="setreturncode"
-                class="gl-bgcolor-black gl-ftcolor-white gl-fb" >Register</button>
-              </div>
-            </div>
-          </div>
-        </transition>
-
-        <transition name="loginlogon" tag="div">
-          <div v-if="getreturncode">
             <div class="logon-information">
               <h2>Hello, <span class="gl-ftcolor-theme">Designer</span>!</h2>
               <p class="gl-ftcolor-gray">Pleasa type your infomation to finish register.</p>
@@ -52,22 +35,40 @@
               </div>
               <div class="login-registered">
                 <button 
-                class="gl-bgcolor-black gl-ftcolor-white gl-fb" >Validation</button>
+                @click="_verifynext"
+                class="gl-bgcolor-black gl-ftcolor-white gl-fb" >Enter</button>
                 <button 
-                class="gl-bgcolor-gray gl-ftcolor-white gl-fb" >Register</button>
+                class="gl-bgcolor-gray gl-ftcolor-white gl-fb" >Resent</button>
+              </div>
+            </div>
+          </div>
+
+        </transition>
+
+        <transition name="loginlogon" tag="div">
+          <div v-if="logonverifynext">
+            <div class="logon-information">
+              <h2>Hello, <span class="gl-ftcolor-theme">Designer</span>!</h2>
+              <p class="gl-ftcolor-gray">Pleasa type your infomation to finish register.</p>
+              <input v-model="logonPassword" class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Password"   type="password" name="">
+              <input v-model="logonName" class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Name"   type="text" name="">
+              <input v-model="logonCompany" class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Company"   type="text" name="">
+              <input v-model="logonJob" class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Job Title"   type="text" name="">
+              <div class="login-registered">
+                <button 
+                @click="_logonuser"
+                class="gl-bgcolor-black gl-ftcolor-white gl-fb" >Register</button>
               </div>
             </div>
           </div>
         </transition>
 
-
-
-        <!-- <transition name="loginlogon" tag="div">
-            <div v-if="returnimportemail">
+        <transition name="loginlogon" tag="div">
+            <div v-if="loginPopup">
               <div class="headerportrait gl-bgcolor-gray-ed">
                 <img src="">
               </div>
-              <div class="username gl-ftcolor-black" :class="{'gl-bgcolor-gray-ed': !returnimportemail}">Allen</div>
+              <div class="username gl-ftcolor-black" :class="{'gl-bgcolor-gray-ed': !loginPopup}">Allen</div>
               <div class="userinformation gl-ftcolor-gray">have  artistic breath Programmers </div>
               
               <div class="useremail gl-bgcolor-gray-ed"></div>
@@ -83,7 +84,7 @@
                   class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >Sing in</button>
                 </div>
             </div>
-        </transition> -->
+        </transition>
       </div>
     </div>
 </template>
@@ -94,24 +95,52 @@ import {mapGetters, mapActions} from 'vuex'
 export default {
   data () {
     return {
-      registered: ''
+      registered: '',
+      loginlogonEmail: '',
+      logonPassword: '',
+      logonName: '',
+      logonCompany: '',
+      logonJob: ''
     }
   },
   computed: {
     ...mapGetters([
       'returnimportemail',
       'getreturncode',
-      'registereduser'
+      'registereduser',
+      'logonverifynext',
+      'loginPopup'
     ])
   },
   methods: {
     ...mapActions([
       'importemail',
       'setreturncode',
-      'logonuser'
+      'logonuser',
+      'verifynext'
     ]),
     _loginLogon () {
-      this.importemail()
+      this.importemail(this.loginlogonEmail)
+    },
+    _logonuser () {
+      let logonuserinformation = []
+      let logonins = {}
+      logonins['email'] = this.loginlogonEmail
+      logonins['password'] = this.logonPassword
+      logonins['name'] = this.logonName
+      logonins['company'] = this.logonCompany
+      logonins['job'] = this.logonJob
+
+      logonuserinformation.push(logonins)
+      this.setreturncode(logonuserinformation)
+    },
+    _verifynext () {
+      let verifyCode = []
+      let logon = {}
+      logon['email'] = this.loginlogonEmail
+      logon['code'] = this.registered
+      verifyCode.push(logon)
+      this.verifynext(verifyCode)
     }
   }
 }

@@ -31,7 +31,14 @@
                       </span>
                       </h5>
                       <div v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
-                          <input type="text" v-model="ic.name" @focus="_historyFocus" name="" placeholder="Input APP Name Search">
+                          <input 
+                          class="app_name"
+                          type="text" 
+                          v-model="ic.name" 
+                          @focus="_historyFocus" 
+                          name="" 
+                          placeholder="Input APP Name Search"
+                          >
 
                           <div  class="Search-history gl-bgcolor-white" v-show="userhistorystate">
                               <ul>
@@ -244,7 +251,8 @@ export default {
       preventTherepeat: true,
       tagList: [],
       device: '',
-      userhistorystate: false
+      userhistorystate: false,
+      inputfocus: false
     }
   },
   computed: {
@@ -347,6 +355,11 @@ export default {
       this.userhistorystate = true
     },
     _search_history (el) {
+      // var query = document.querySelectorAll('.app_name')
+      // console.log(query[this.index].addEventListenter('foucs'))
+      // console.log(el.target.parentNode.parentNode.previousElementSibling)
+      this.inputfocus = true
+      // console.log(this.inputfocus)
       this.ic.name = el.target.innerHTML
       this.userhistorystate = false
     },
