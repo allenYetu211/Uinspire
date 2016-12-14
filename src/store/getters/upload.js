@@ -25,6 +25,9 @@ export const loginSidebar = state => state.upload.theSidebar
 // 登录窗口
 export const loginPopup = state => state.upload.loginPopup
 
+// 用户登录信息
+export const loginuserdata = state => state.upload.loginuserdata
+
 // 验证成功下一步注册
 export const logonverifynext = state => state.upload.verifynext
 

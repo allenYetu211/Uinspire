@@ -12,7 +12,8 @@ import {
   LOGONUSER,
   UINSPIREIO,
   WHETHERTHELOGIN,
-  VERIFYNEXT
+  VERIFYNEXT,
+  USERLOGIN
 } from '../actions'
 
 const state = {
@@ -29,7 +30,8 @@ const state = {
   whetherthelogin: false, // 用户是否登录状态
   theSidebar: false,       // 控制展示用户栏或登录注册弹窗
   verifynext: false,       // 验证成功下一步
-  loginPopup: false       // 登录弹出窗口
+  loginPopup: false,       // 登录弹出窗口
+  loginuserdata: ''
 }
 
 const mutations = {
@@ -87,13 +89,13 @@ const mutations = {
   },
   [IMPORTEMAIL] (state, _email) {
     API.validationEmail(_email, (userstate) => {
-      console.log(userstate.code)
+      console.log(userstate)
       // 邮箱未注册
       if (userstate.code === '10048') {
         state.importemail = !state.importemail
         state.logonuser = true
-      } else if (userstate.code === '10040') {
-        console.log(userstate)
+      } else if (userstate.code === '0') {
+        state.loginuserdata = userstate.data
         state.importemail = false
         state.loginPopup = true
         state.importemail = true
@@ -135,6 +137,15 @@ const mutations = {
       state.verifynext = true
       state.logonuser = false
       state.setreturncode = true
+      state.theSidebar = false
+    })
+  },
+  [USERLOGIN] (state, _userinformation) {
+    API.userLogin(_userinformation, (back) => {
+      if (back.data.code === '0') {
+        state.theSidebar = false
+        // state.whetherthelogin = state.whetherthelogins
+      }
     })
   }
 }

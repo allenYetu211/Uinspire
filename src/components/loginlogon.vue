@@ -1,6 +1,6 @@
 <template>
     <div class="startlogin">
-      <div class="import-email gl-bgcolor-white" :class="{'login': getreturncode, 'login': loginPopup}">
+      <div class="import-email gl-bgcolor-white" :class="{'logon': getreturncode, 'login': loginPopup}">
         <transition name="loginlogon" tag="div">
           <div v-if='!returnimportemail'>
             <h2 class="gl-fb">Join <span class="gl-ftcolor-theme">UI</span>nspire.io</h2>
@@ -66,21 +66,21 @@
         <transition name="loginlogon" tag="div">
             <div v-if="loginPopup">
               <div class="headerportrait gl-bgcolor-gray-ed">
-                <img src="">
+                <img :src="loginuserdata.icon_link">
               </div>
-              <div class="username gl-ftcolor-black" :class="{'gl-bgcolor-gray-ed': !loginPopup}">Allen</div>
-              <div class="userinformation gl-ftcolor-gray">have  artistic breath Programmers </div>
+              <div class="username gl-ftcolor-black" :class="{'gl-bgcolor-gray-ed': !loginPopup}">{{loginuserdata.user_name}}</div>
+              <div class="userinformation gl-ftcolor-gray">{{loginuserdata.position}}</div>
               
-              <div class="useremail gl-bgcolor-gray-ed"></div>
+              <div class="useremail gl-bgcolor-gray-ed">{{loginlogonEmail}}</div>
 
               <div class="importPassword">
-                <input class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Password"   type="password" name="">
+                <input class="gl-bgcolor-gray-ed gl-ftcolor-black" v-model="loginuserpassword"  placeholder="Password"   type="password" name="">
                 <a class="gl-ftcolor-gray" href="#">Forgot?</a>
               </div>
 
               <div class="login-registered">
                   <button 
-                  @click="_loginLogon" 
+                  @click="_userlogin" 
                   class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >Sing in</button>
                 </div>
             </div>
@@ -100,7 +100,8 @@ export default {
       logonPassword: '',
       logonName: '',
       logonCompany: '',
-      logonJob: ''
+      logonJob: '',
+      loginuserpassword: ''
     }
   },
   computed: {
@@ -109,7 +110,8 @@ export default {
       'getreturncode',
       'registereduser',
       'logonverifynext',
-      'loginPopup'
+      'loginPopup',
+      'loginuserdata'
     ])
   },
   methods: {
@@ -117,8 +119,17 @@ export default {
       'importemail',
       'setreturncode',
       'logonuser',
-      'verifynext'
+      'verifynext',
+      'userlogin'
     ]),
+    _userlogin () {
+      let _userinformation = []
+      let userinfor = {}
+      userinfor['password'] = this.loginuserpassword
+      userinfor['email'] = this.loginlogonEmail
+      _userinformation.push(userinfor)
+      this.userlogin(_userinformation)
+    },
     _loginLogon () {
       this.importemail(this.loginlogonEmail)
     },
@@ -167,6 +178,9 @@ export default {
       box-shadow: 0 8px 25px 0 rgba(0,0,0,0.15);
       transition:height 0.5s;
       &.login{
+        height:620px;
+      }
+      &.logon{
         height:620px;
       }
       &.qr-code{

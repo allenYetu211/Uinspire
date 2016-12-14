@@ -3,8 +3,8 @@
 
     <transition name="sidebar-right">
     <div class="sidebar-information gl-bgcolor-white" 
-    :class="{open : sidebarrightopenclose}" 
-    v-show="sidebarrightopenclose">
+    :class="{open : !whetherthelogins}" 
+    v-show="!whetherthelogins">
 
       <div class="log-userinformation">
         <div class="log-userheaderportrait clearfix">
@@ -67,7 +67,8 @@ import {mapGetters, mapActions} from 'vuex'
 export default {
   computed: {
     ...mapGetters([
-      'sidebarrightopenclose'
+      'sidebarrightopenclose',
+      'whetherthelogins'
     ])
   },
   methods: {

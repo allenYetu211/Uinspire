@@ -36,6 +36,10 @@ export const setreturncode = ({commit}, _userinformation) => { commit(SETRETURNC
 export const LOGONUSER = 'logonuser'
 export const logonuser = ({commit}) => { commit(LOGONUSER) }
 
+// 用户登录
+export const USERLOGIN = 'userlogin'
+export const userlogin = ({commit}, _userinformations) => { commit(USERLOGIN, _userinformations) }
+
 // 获取首页展示图片
 export const UINSPIREIO = 'uinspireio'
 export const uinspireio = ({commit}) => { commit(UINSPIREIO) }

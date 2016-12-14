@@ -178,7 +178,6 @@ export default {
         code: _data[0].code
       }
     }).then((response) => {
-      console.log(response)
       console.log(typeof callback === 'function')
       if (typeof callback === 'function') {
         callback(response.data)
@@ -204,8 +203,29 @@ export default {
       data: _data
     }).then((response) => {
       console.log(response)
-      if (callback === 'function') {
+      if (typeof callback === 'function') {
         console.log(response)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+  // 用户登录
+  userLogin (_data, callback) {
+    axios({
+      url: 'http://inspire.stoyard.com/api/user/login',
+      method: 'Post',
+      transformRequest: [(_data) => {
+        const userdata = new window.FormData()
+        userdata.append('email', _data[0].email)
+        userdata.append('password', _data[0].password)
+        return userdata
+      }],
+      data: _data
+    }).then((response) => {
+      console.log('callback:', callback === 'function')
+      if (typeof callback === 'function') {
+        callback(response)
       }
     }).catch((error) => {
       console.log(error)
