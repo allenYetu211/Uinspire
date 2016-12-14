@@ -167,7 +167,7 @@ export default {
   z-index:1000;
   .import-email{
       width:600px;
-      height:350px;
+      height:370px;
       padding:40px 100px;
       position:absolute;
       z-index:998;

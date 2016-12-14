@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="360px" height="186px" viewBox="0 0 360 186" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="390px" height="186px" viewBox="0 0 390 186" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
     <title>svg_sprite</title>
     <desc>Created with Sketch.</desc>
@@ -51,7 +51,7 @@
                 <g id="Assets">
                     <g>
                         <g id="Web-assets">
-                            <polygon id="prev" fill="#222222" transform="translate(11.627907, 25.000000) scale(-1, 1) translate(-11.627907, -25.000000) " points="23.255814 25.5813953 1.1627907 50 4.61852778e-14 48.8372093 20.9302326 25.5813953 4.61852778e-14 1.1627907 1.1627907 0"></polygon>
+                            <polygon id="prev" fill="#222222" transform="translate(11.627907, 25.000000) scale(-1, 1) translate(-11.627907, -25.000000) " points="23.255814 25.5813953 1.1627907 50 0 48.8372093 20.9302326 25.5813953 0 1.1627907 1.1627907 0"></polygon>
                             <rect id="Rectangle" x="0" y="0" width="30" height="50"></rect>
                         </g>
                     </g>
@@ -61,7 +61,7 @@
                 <g id="Assets">
                     <g>
                         <g id="Web-assets">
-                            <polygon id="prev" fill="#222222" transform="translate(11.627907, 25.000000) scale(-1, 1) translate(-11.627907, -25.000000) " points="23.255814 25.5813953 1.1627907 50 -6.75015599e-14 48.8372093 20.9302326 25.5813953 -6.75015599e-14 1.1627907 1.1627907 0"></polygon>
+                            <polygon id="prev" fill="#222222" transform="translate(11.627907, 25.000000) scale(-1, 1) translate(-11.627907, -25.000000) " points="23.255814 25.5813953 1.1627907 50 -5.68434189e-14 48.8372093 20.9302326 25.5813953 -5.68434189e-14 1.1627907 1.1627907 0"></polygon>
                             <rect id="Rectangle-2" x="0" y="0" width="30" height="50"></rect>
                         </g>
                     </g>
@@ -106,7 +106,7 @@
                 </g>
             </g>
             <g id="ic-keyboard-arrow-down-48-px-copy" transform="translate(345.000000, 105.000000) rotate(-180.000000) translate(-345.000000, -105.000000) translate(330.000000, 90.000000)">
-                <g id="Group" transform="translate(0.000000, 0.000000)">
+                <g id="Group">
                     <polygon id="Shape" fill="#222222" points="9.26875 13.6653061 15 19.2795918 20.73125 13.6653061 22.5 15.3979592 15 22.744898 7.5 15.3979592"></polygon>
                     <polygon id="Shape" points="0 0 30 0 30 29.3877551 0 29.3877551"></polygon>
                 </g>
@@ -211,25 +211,31 @@
             </g>
             <path d="M211.796641,151 C207.827834,151 204.59808,154.2304 204.59808,158.2 C204.59808,159.8608 205.169166,161.3872 206.119376,162.6064 L201.262747,167.464 C200.912418,167.8144 200.912418,168.3856 201.262747,168.736 C201.440312,168.9136 201.670666,169 201.90102,169 C202.131374,169 202.361728,168.9136 202.539292,168.736 L207.395921,163.8784 C208.614877,164.8288 210.140972,165.4 211.80144,165.4 C215.770246,165.4 219,162.1696 219,158.2 C218.995201,154.2304 215.765447,151 211.796641,151 Z M211.796641,163.6 C208.821236,163.6 206.39772,161.176 206.39772,158.2 C206.39772,155.224 208.821236,152.8 211.796641,152.8 C214.772046,152.8 217.195561,155.224 217.195561,158.2 C217.195561,161.176 214.772046,163.6 211.796641,163.6 Z" id="Shape" fill="#000000"></path>
             <polygon id="Shape" fill="#000000" points="239 161 231 161 231 169 229 169 229 161 221 161 221 159 229 159 229 151 231 151 231 159 239 159"></polygon>
-            <g id="Group-6" transform="translate(17.000000, 171.000000)">
+            <g id="Group-6" transform="translate(16.000000, 170.000000)">
                 <g id="ic-clear-48-px">
                     <g id="Group">
-                        <circle id="Oval-4" fill="#222222" cx="7" cy="7" r="7"></circle>
-                        <path d="M7.7,6.3 L7.7,2.8 L6.3,2.8 L6.3,6.3 L2.8,6.3 L2.8,7.7 L6.3,7.7 L6.3,11.2 L7.7,11.2 L7.7,7.7 L11.2,7.7 L11.2,6.3 L7.7,6.3 Z" id="Combined-Shape" fill="#FFFFFF"></path>
-                        <polygon id="Shape" points="0 0 14 0 14 14 0 14"></polygon>
+                        <circle id="Oval-4" fill="#222222" cx="8" cy="8" r="7"></circle>
+                        <path d="M8.7,7.3 L8.7,3.8 L7.3,3.8 L7.3,7.3 L3.8,7.3 L3.8,8.7 L7.3,8.7 L7.3,12.2 L8.7,12.2 L8.7,8.7 L12.2,8.7 L12.2,7.3 L8.7,7.3 Z" id="Combined-Shape" fill="#FFFFFF"></path>
+                        <polygon id="Shape" points="0 0 16 0 16 16 0 16"></polygon>
                     </g>
                 </g>
             </g>
-            <g id="Group-6-Copy" transform="translate(1.000000, 171.000000)">
+            <g id="Group-6-Copy" transform="translate(0.000000, 170.000000)">
                 <g id="ic-clear-48-px">
                     <g id="Group">
-                        <circle id="Oval-4" fill="#222222" cx="7" cy="7" r="7"></circle>
-                        <path d="M7.7,6.3 L7.7,2.8 L6.3,2.8 L6.3,6.3 L2.8,6.3 L2.8,7.7 L6.3,7.7 L6.3,11.2 L7.7,11.2 L7.7,7.7 L11.2,7.7 L11.2,6.3 L7.7,6.3 Z" id="Combined-Shape" fill="#FFFFFF" transform="translate(7.000000, 7.000000) rotate(-315.000000) translate(-7.000000, -7.000000) "></path>
-                        <polygon id="Shape" points="0 0 14 0 14 14 0 14"></polygon>
+                        <circle id="Oval-4" fill="#222222" cx="8" cy="8" r="7"></circle>
+                        <path d="M8.7,7.3 L8.7,3.8 L7.3,3.8 L7.3,7.3 L3.8,7.3 L3.8,8.7 L7.3,8.7 L7.3,12.2 L8.7,12.2 L8.7,8.7 L12.2,8.7 L12.2,7.3 L8.7,7.3 Z" id="Combined-Shape" fill="#FFFFFF" transform="translate(8.000000, 8.000000) rotate(-315.000000) translate(-8.000000, -8.000000) "></path>
+                        <polygon id="Shape" points="0 0 16 0 16 16 0 16"></polygon>
                     </g>
                 </g>
             </g>
             <polygon id="Shape" fill="#ACACAC" points="80 72 62 72 62 90 58 90 58 72 40 72 40 68 58 68 58 50 62 50 62 68 80 68"></polygon>
+            <g id="ic-power-settings-new-48-px" transform="translate(360.000000, 90.000000)">
+                <g id="Group">
+                    <polygon id="Shape" points="0 0 30 0 30 30 0 30"></polygon>
+                    <path d="M16.25,3.75 L13.75,3.75 L13.75,16.25 L16.25,16.25 L16.25,3.75 Z M22.29375,6.45625 L20.525,8.225 C22.4875,9.83125 23.75,12.2625 23.75,15 C23.75,19.83125 19.83125,23.75 15,23.75 C10.16875,23.75 6.25,19.83125 6.25,15 C6.25,12.2625 7.5125,9.83125 9.475,8.225 L7.70625,6.45625 C5.29375,8.51875 3.75,11.575 3.75,15 C3.75,21.2125 8.7875,26.25 15,26.25 C21.2125,26.25 26.25,21.2125 26.25,15 C26.25,11.575 24.70625,8.51875 22.29375,6.45625 Z" id="Shape" fill="#000000"></path>
+                </g>
+            </g>
         </g>
     </g>
 </svg>
