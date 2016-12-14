@@ -33,3 +33,7 @@ export const logonverifynext = state => state.upload.verifynext
 
 // 注册用户
 export const registereduser = state => state.upload.logonuser
+
+// 注册用户
+export const sidebarrights = state => state.upload.sidebarright
+

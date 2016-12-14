@@ -31,7 +31,8 @@ const state = {
   theSidebar: false,       // 控制展示用户栏或登录注册弹窗
   verifynext: false,       // 验证成功下一步
   loginPopup: false,       // 登录弹出窗口
-  loginuserdata: ''
+  loginuserdata: '',
+  sidebarright: false     // 用户登录状态时为FALSE
 }
 
 const mutations = {
@@ -117,16 +118,23 @@ const mutations = {
   [UINSPIREIO] (state) {
     API.uinspireio((_data) => {
       state.uinspireioDate = _data.data
-      if (!_data.user) {
-        state.whetherthelogin = true
-      }
     })
   },
   // 判断用户是否登录
   [WHETHERTHELOGIN] (state) {
+    API.whetherthelogin((loginstate) => {
+      // 登录返回 0
+      if (loginstate.data.code === '0') {
+        state.sidebarright = !state.sidebarright
+      } else {
+        state.whetherthelogin = true
+      }
+    })
     // 让用户处于登录状态的时候 右侧边栏展开收起
     if (state.whetherthelogin) {
       state.theSidebar = true
+    } else {
+      state.sidebarright = true
     }
   },
   // 验证成功 下一步

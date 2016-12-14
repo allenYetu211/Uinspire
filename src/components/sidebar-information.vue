@@ -3,8 +3,8 @@
 
     <transition name="sidebar-right">
     <div class="sidebar-information gl-bgcolor-white" 
-    :class="{open : !whetherthelogins}" 
-    v-show="!whetherthelogins">
+    :class="{open : !sidebarrights}" 
+    v-show="!sidebarrights">
 
       <div class="log-userinformation">
         <div class="log-userheaderportrait clearfix">
@@ -68,7 +68,8 @@ export default {
   computed: {
     ...mapGetters([
       'sidebarrightopenclose',
-      'whetherthelogins'
+      'whetherthelogins',
+      'sidebarrights'
     ])
   },
   methods: {

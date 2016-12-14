@@ -223,7 +223,18 @@ export default {
       }],
       data: _data
     }).then((response) => {
-      console.log('callback:', callback === 'function')
+      console.log('loginuser:', response)
+      if (typeof callback === 'function') {
+        callback(response)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+  // 判断用户是否登录
+  whetherthelogin (callback) {
+    axios.get('http://inspire.stoyard.com/api/inspire/islogin').then((response) => {
+      console.log(response)
       if (typeof callback === 'function') {
         callback(response)
       }
@@ -231,9 +242,4 @@ export default {
       console.log(error)
     })
   }
-  // },
-  // // 判断用户是否登录
-  // whetherthelogin (callback) {
-  //   // axios.get('http://')
-  // }
 }
