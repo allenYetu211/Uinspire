@@ -22,7 +22,7 @@
                     <i class="sprite_view-2 sprite_switch" :class="{open: listArrangestate}"></i>
                 </button>
             </div>
-            <div class="inspirt-nav-sidebar inspirt-nav-personal-infoamtion" @click="sidebarright">
+            <div class="inspirt-nav-sidebar inspirt-nav-personal-infoamtion" @click="whetherthelogin">
                 <i class="sprite_login"></i>
             </div>
         </div>
@@ -34,7 +34,9 @@
     <side-bar-infor-mation></side-bar-infor-mation>
 
     <!-- 登录窗口 -->
-    <!-- <login-logon></login-logon> -->
+    <div v-if="loginSidebar">
+      <login-logon></login-logon>
+    </div>
 </div>
 
 </template>
@@ -59,7 +61,9 @@ export default {
   computed: {
     ...mapGetters([
       'listArrangestate',
-      'categoryDate'
+      'categoryDate',
+      'whetherthelogins',
+      'loginSidebar'
     ])
   },
   methods: {
@@ -68,7 +72,8 @@ export default {
       'listArrange',
       'listArrangetwo',
       'sidebarright',
-      'sidebarleft'
+      'sidebarleft',
+      'whetherthelogin'
     ])
   }
 }

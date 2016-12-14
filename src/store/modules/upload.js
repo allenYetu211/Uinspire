@@ -10,7 +10,9 @@ import {
   IMPORTEMAIL,
   SETRETURNCODE,
   LOGONUSER,
-  UINSPIREIO
+  UINSPIREIO,
+  WHETHERTHELOGIN,
+  VERIFYNEXT
 } from '../actions'
 
 const state = {
@@ -20,10 +22,14 @@ const state = {
   progress: '',
   categoryDate: '',
   filtercategory: [],
-  importemail: false,
-  setreturncode: false,
-  logonuser: false,
-  uinspireioDate: ''
+  importemail: false,      // 显示注册页面弹框
+  setreturncode: false,    // 显示登录页面
+  logonuser: false,       // 显示验证码信息
+  uinspireioDate: '',
+  whetherthelogin: false, // 用户是否登录状态
+  theSidebar: false,       // 控制展示用户栏或登录注册弹窗
+  verifynext: false,       // 验证成功下一步
+  loginPopup: false       // 登录弹出窗口
 }
 
 const mutations = {
@@ -79,20 +85,54 @@ const mutations = {
       }
     }
   },
-  [IMPORTEMAIL] (state) {
-    state.importemail = !state.importemail
-    state.logonuser = true
+  [IMPORTEMAIL] (state, _email) {
+    API.validationEmail(_email, (userstate) => {
+      console.log(userstate.code)
+      // 邮箱未注册
+      if (userstate.code === '10048') {
+        state.importemail = !state.importemail
+        state.logonuser = true
+      } else {
+        console.log('登录窗口')
+        state.importemail = false
+        state.loginPopup = true
+      }
+    })
   },
-  [SETRETURNCODE] (state) {
-    state.setreturncode = !state.setreturncode
-    state.logonuser = false
+  [SETRETURNCODE] (state, _userinformation) {
+    console.log('_userinformation', _userinformation)
+    API.logonUser(_userinformation, (requey) => {
+      console.log(requey)
+      state.setreturncode = !state.setreturncode
+      state.logonuser = false
+    })
   },
   [LOGONUSER] (state) {
     state.logonuser = !state.logonuser
   },
   [UINSPIREIO] (state) {
     API.uinspireio((_data) => {
-      state.uinspireioDate = _data
+      state.uinspireioDate = _data.data
+      if (!_data.user) {
+        state.whetherthelogin = true
+      }
+    })
+  },
+  // 判断用户是否登录
+  [WHETHERTHELOGIN] (state) {
+    // 让用户处于登录状态的时候 右侧边栏展开收起
+    if (state.whetherthelogin) {
+      state.theSidebar = true
+    }
+  },
+  // 验证成功 下一步
+  [VERIFYNEXT] (state, _verify) {
+    console.log(_verify)
+    API.verifyCode(_verify, (_vcode) => {
+      console.log(_vcode)
+      state.verifynext = true
+      state.logonuser = false
+      state.setreturncode = true
     })
   }
 }

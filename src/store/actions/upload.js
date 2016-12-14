@@ -26,11 +26,11 @@ export const lessfiltercategory = ({commit}, categoryIndex) => { commit(LESSFILT
 
 // 处理用户输入邮箱
 export const IMPORTEMAIL = 'importemail'
-export const importemail = ({commit}) => { commit(IMPORTEMAIL) }
+export const importemail = ({commit}, _email) => { commit(IMPORTEMAIL, _email) }
 
 // 验证码
 export const SETRETURNCODE = 'setreturncode'
-export const setreturncode = ({commit}) => { commit(SETRETURNCODE) }
+export const setreturncode = ({commit}, _userinformation) => { commit(SETRETURNCODE, _userinformation) }
 
 // 注册用户
 export const LOGONUSER = 'logonuser'
@@ -40,3 +40,10 @@ export const logonuser = ({commit}) => { commit(LOGONUSER) }
 export const UINSPIREIO = 'uinspireio'
 export const uinspireio = ({commit}) => { commit(UINSPIREIO) }
 
+// 判断登录注册或展开收起侧边栏
+export const WHETHERTHELOGIN = 'whetherthelogin'
+export const whetherthelogin = ({commit}) => { commit(WHETHERTHELOGIN) }
+
+// 验证码验证成功下一步
+export const VERIFYNEXT = 'verifynext'
+export const verifynext = ({commit}, _verify) => { commit(VERIFYNEXT, _verify) }
