@@ -117,7 +117,7 @@ export default {
     height: 60px;
     line-height: 60px;
     text-align: center;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #eee;
     & > div {
       float: left;
     }

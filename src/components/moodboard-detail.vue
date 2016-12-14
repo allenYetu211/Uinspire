@@ -37,7 +37,7 @@ export default {
     min-height: 180px;
     padding:50px;
     text-align:center;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #eee;
     display: flex;
     justify-content: center;
     align-items: center;

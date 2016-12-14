@@ -72,7 +72,7 @@ export default {
   top: 60px;
   bottom: 0;
   width: 370px;
-  border-right: 1px solid #e0e0e0;
+  border-right: 1px solid #eee;
   padding: 30px 15px;
   // transform: translateX(-100%);
   // transition: transform 0.5s ease-in-out;

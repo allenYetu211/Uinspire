@@ -3,10 +3,10 @@
       <div class="import-email gl-bgcolor-white" :class="{'login': loginPopup, 'login': getreturncode}">
         <transition name="loginlogon" tag="div">
           <div v-if='!returnimportemail'>
-            <h2>Join <span class="gl-ftcolor-theme">UI</span>nspire.io</h2>
-            <p class="gl-ftcolor-gray">Input your E-mail, It’s will auto validation your account.</p>
+            <h2 class="gl-fb">Join <span class="gl-ftcolor-theme">UI</span>nspire.io</h2>
+            <p class="gl-ftcolor-gray gl-fn">Input your E-mail, It’s will auto validation your account.</p>
             <input 
-            class="gl-bgcolor-gray-ed gl-ftcolor-black" 
+            class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" 
             placeholder="E-mail" 
             type="email" 
             v-model="loginlogonEmail"
@@ -14,7 +14,7 @@
             <div class="login-registered">
               <button 
               @click="_loginLogon" 
-              class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >Validation</button>
+              class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >ENTER</button>
             </div>
           </div>
         </transition>
@@ -22,8 +22,8 @@
          <transition name="loginlogon" tag="div">
           <div v-if="registereduser">
             <div class="logon-information">
-              <h2>Hello, <span class="gl-ftcolor-theme">Designer</span>!</h2>
-              <p class="gl-ftcolor-gray">Pleasa type your infomation to finish register.</p>
+              <h2 class="gl-fb">Hello, <span class="gl-ftcolor-theme">Designer</span></h2>
+              <p class="gl-ftcolor-gray gl-fn">Pleasa type your infomation to finish register.</p>
               <div class="VerificationCode clearfix">
                   <input  v-model="registered"  type="text" name="" maxlength = '6'>
                   <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[0]}}</span>
@@ -36,9 +36,9 @@
               <div class="login-registered">
                 <button 
                 @click="_verifynext"
-                class="gl-bgcolor-black gl-ftcolor-white gl-fb" >Enter</button>
+                class="gl-bgcolor-black gl-ftcolor-white gl-fb" >ENTER</button>
                 <button 
-                class="gl-bgcolor-gray gl-ftcolor-white gl-fb" >Resent</button>
+                class="gl-bgcolor-gray gl-ftcolor-white gl-fb" >RESENT</button>
               </div>
             </div>
           </div>
@@ -48,12 +48,12 @@
         <transition name="loginlogon" tag="div">
           <div v-if="logonverifynext">
             <div class="logon-information">
-              <h2>Hello, <span class="gl-ftcolor-theme">Designer</span>!</h2>
-              <p class="gl-ftcolor-gray">Pleasa type your infomation to finish register.</p>
-              <input v-model="logonPassword" class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Password"   type="password" name="">
-              <input v-model="logonName" class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Name"   type="text" name="">
-              <input v-model="logonCompany" class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Company"   type="text" name="">
-              <input v-model="logonJob" class="gl-bgcolor-gray-ed gl-ftcolor-black"  placeholder="Job Title"   type="text" name="">
+              <h2 class="gl-fb">Hello, <span class="gl-ftcolor-theme">Designer</span></h2>
+              <p class="gl-ftcolor-gray gl-fn">Pleasa type your infomation to finish register.</p>
+              <input v-model="logonPassword" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Password"   type="password" name="">
+              <input v-model="logonName" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Name"   type="text" name="">
+              <input v-model="logonCompany" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Company"   type="text" name="">
+              <input v-model="logonJob" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Job Title"   type="text" name="">
               <div class="login-registered">
                 <button 
                 @click="_logonuser"
@@ -164,16 +164,19 @@ export default {
       left:50%;
       transform:translate(-50%, -50%);
       text-align:center;
-      box-shadow:0 5px 15px rgba(0,0,0,.5);
+      box-shadow: 0 8px 25px 0 rgba(0,0,0,0.15);
       transition:height 0.5s;
       &.login{
-        height:570px;
+        height:620px;
       }
       &.qr-code{
         height:350px;
       }
       .login-registered {
         margin-top: 50px;
+        button{
+          margin:0px 5px;
+        }
       }
       h2{
         font-size:36px;
