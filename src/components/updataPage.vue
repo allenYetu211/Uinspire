@@ -22,7 +22,7 @@
                             <img :src="ic.url">
                         </div>
                         <div class="file-imginfromation">
-                            <p>{{ic.imgname}}</p>
+                            <p class="gl-fb gl-color-black">{{ic.imgname}}</p>
                             <p>{{ic.size}}KB</p>
                             <div class="progressbar-start" v-if="ic.progressbar">
                                <p class="iswaiting" v-if="ic.iswaiting">Waiting</p>
@@ -242,9 +242,9 @@ $color:#EFEFEF;
           position:relative;
           height: 100%;
           p:nth-child(1){
-            font-size: 16px;
-            letter-spacing: 0.2px;
-            margin-bottom:5px;
+            font-size: 14px;
+            line-height: 18px;
+            margin-bottom:2px;
           }
           p:nth-child(2){
             font-size: 12px;
@@ -258,14 +258,14 @@ $color:#EFEFEF;
             bottom: 0;
             p{
               font-size:12px;
-              margin-bottom: 5px;
+              margin-bottom: 1px;
             }
           }
           .file-progress-bar{
             width: 100%;
-            height: 6px;
+            height: 4px;
             position: relative;
-            border-radius: 3px;
+            border-radius: 8px;
             overflow:hidden;
             span{
               display: block;

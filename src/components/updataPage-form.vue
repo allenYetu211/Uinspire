@@ -114,36 +114,38 @@
                           </div>
                       </div>
                       <div v-if="ic.Platform === 'WEB'">
-                          <input type="text" v-model="ic.name" name="" placeholder="Input Name Search">
-                          <div class="_Apps">
-                              <ul>
-                                  <li 
-                                  @click.stop="_getAppData" 
-                                  class="_AppItem" 
-                                  v-for="(ics, imoc) in getAppStore" 
-                                  :data-Gnd="imoc" 
-                                  data-platform='android'>
-                                      <div class="appIcon">
-                                          <img :src="ics.icons.px256">
-                                      </div>
-                                      <div>
-                                          <p class="appName" v-html="ics.title"></p>
-                                          <p class="artistName" v-for='infor in ics.apks'>{{infor.versionName}} </p>
-                                      </div>
-                                  </li>
-                              </ul>
+                          <div class="upload-form-gurop">
+                            <input type="text" v-model="ic.name" name="" placeholder="Input Website Name">
+                            <div class="_Apps">
+                                <ul>
+                                    <li 
+                                    @click.stop="_getAppData" 
+                                    class="_AppItem" 
+                                    v-for="(ics, imoc) in getAppStore" 
+                                    :data-Gnd="imoc" 
+                                    data-platform='android'>
+                                        <div class="appIcon">
+                                            <img :src="ics.icons.px256">
+                                        </div>
+                                        <div>
+                                            <p class="appName" v-html="ics.title"></p>
+                                            <p class="artistName" v-for='infor in ics.apks'>{{infor.versionName}} </p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
                           </div>
-                      <div class="upload-form-gurop">
-                          <h5 
-                          class="gl-fb" 
-                          :class="{pleaseinput: applink}">Link
-                          <span 
-                          v-show="applink" 
-                          class="gl-fn">Please input the website link
-                          </span>
-                          </h5>
-                          <input type="text" v-model="ic.link" name="">
-                      </div>
+                          <div class="upload-form-gurop">
+                              <h5 
+                              class="gl-fb" 
+                              :class="{pleaseinput: applink}">Link
+                              <span 
+                              v-show="applink" 
+                              class="gl-fn">Please input the website link
+                              </span>
+                              </h5>
+                              <input type="text" v-model="ic.link" name="" placeholder="Input WebSite Link">
+                          </div>
                       </div>
 
                   </div>
@@ -174,7 +176,7 @@
                       <h5 class="gl-fb">Tags</h5>
                       <div>
                           <div class="upload-tag">
-                              <span class="tag-laber" v-for="(tag, tagindex) in updataTag">
+                              <span class="tag-laber gl-fn" v-for="(tag, tagindex) in updataTag">
                                 {{tag}}
                                 <i :data-tag="tagindex" @click="_deleteTag"></i>
                               </span>
@@ -455,20 +457,24 @@ form{
     position:relative;
     .Search-history{
       position: absolute;
-      left: 0;
-      top: 75px;
+      left: 8px;
+      top: 66px;
       min-width: 200px;
       z-index: 999;
+      // border:1px solid #dcdcdc;
+      box-shadow: 0 3px 10px 0 rgba(0,0,0,0.2);
         ul{
-          padding-left: 20px;
+          
           li{
-            line-height:30px;
+            line-height:38px;
             position: relative;
+            text-indent:25px;
+            font-size: 14px;
             &:before{
               display: block;
               content: '';
               position: absolute;
-              left: -10px;
+              left: 10px;
               top: 50%;
               transform: translateY(-50%);
               background-color: #D8D8D8;
@@ -479,6 +485,7 @@ form{
             &:last-child{
               border:none;
             }
+            
           }
         }
       }
@@ -565,16 +572,16 @@ form{
       position:relative;
       span.tag-laber{
         background: #D8D8D8;
-        padding: 4px 0px 4px 18px ;
+        padding: 4px 10px;
+        text-indent:12px;
         margin:0 5px;
         display:inline-block;
-        position:relative;
-        transition:padding 0.5s;
+        transition:padding 218ms;
         position:relative;
         border-radius:100px;
         font-size: 12px;
-        height: 26px;
-        line-height: 20px;
+        height: 24px;
+        line-height: 17px;
         &:before {
           display:block;
           content: '';
@@ -582,27 +589,35 @@ form{
           left: 10px;
           top: 50%;
           transform: translateY(-50%);
-          width: 4px;
-          height: 4px;
+          width: 6px;
+          height: 6px;
           border-radius:50%;
           background-color:#EFEFEF;
           z-index:9;
         }
         &:hover{
-          padding-right:6px;
+          padding-right:24px;
         }
         &:hover i {
-          transform: scale(1);
-          margin-left: 3px;
+          opacity: .2;
+          z-index: 2;
         }
         i{
-          transform: scale(0);
-          display: inline-block;
+          // transform: scale(0);
+          // display: inline-block;
           @extend .sprite;
-          background-position: -243px -151px;
-          transition: all 0.5s;
-          cursor:pointer;
-          vertical-align:-3px;
+          background-position: 0px -170px;
+          // transition: all 0.5s;
+          // cursor:pointer;
+          vertical-align:-4px;
+          position: absolute;
+          right: 4px;
+          top: 4px;
+          opacity: 0;
+          z-index: 0;
+          transition: opacity 218ms ease;
+          // top: 50%;
+          // transform: translataX(-50%);
         }
       }
       .popup-tag{
@@ -635,7 +650,7 @@ form{
         ul{
           padding-left: 20px;
           li{
-            line-height:30px;
+            line-height:38px;
             position: relative;
             &:before{
               display: block;
@@ -661,6 +676,8 @@ form{
         background:transparent;
         vertical-align: middle;
         cursor: pointer;
+        padding: 4px;
+
       }
     }
 
@@ -799,13 +816,14 @@ form{
 .sprite_addTag{
     @extend .sprite;
     display: block;
-    background-position: -262px -153px;
+    background-position: -16px -170px;
+    opacity:.2;
 }
 .sprite_find {
   @extend .sprite;
   display: block;
-  background-position: -34px -93px;
-  width: 25px;
-  height: 25px;
+  background-position: -30px -90px;
+  width: 30px;
+  height: 30px;
 }
 </style>

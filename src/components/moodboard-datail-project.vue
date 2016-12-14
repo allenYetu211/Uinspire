@@ -80,6 +80,8 @@ export default {
             padding-bottom: 68%;
             overflow: hidden;
             position:relative;
+            box-shadow: 0 0px 0px 0 rgba(0,0,0,0);
+            transition: all 0.5s;
               .doorplank{
               content: '';
               display: block;
@@ -88,14 +90,17 @@ export default {
               top: 0;
               bottom: 0;
               right: 0;
-              background: -webkit-linear-gradient(bottom, rgba(0,0,0,.5), transparent);  
+              background: -webkit-linear-gradient(bottom, rgba(0,0,0,.4), transparent);  
               opacity: 0;
               transition: opacity 0.5s;
-                &:hover{
-                  opacity: 1;
+              &:hover{
+                opacity: .5;
               }
             }
-           
+            &:hover{
+              transform:scale(1.02);
+              box-shadow: 0 3px 9px 0 rgba(0,0,0,0.3);
+            }
           }
           img{
             width: 100%;
