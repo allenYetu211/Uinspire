@@ -12,7 +12,7 @@
                 <input type="text" placeholder="Search for inspire" name="" class="gl-size-18 gl-fn">
             </div>
         </div>
-        <div class="logo gl-size-24 gl-fb"><span class="gl-ftcolor-theme">UI</span>nspire.io</div>
+        <div class="logo gl-size-24 gl-fb"><router-link class="gl-ftcolor-black" :to= "{name: 'inspire'}" ><span class="gl-ftcolor-theme">UI</span>nspire.io</router-link></div>
         <div class="inspirt-nav-r">
             <div class="inspirt-nav-layout">
                 <button @click="listArrange">
@@ -130,6 +130,9 @@ export default {
       left:50%;
       top:50%;
       transform: translate(-50%, -50%);
+      a{
+        text-decoration: none;
+      }
     }
     .inspirt-nav-sidebar{
       width:60px;

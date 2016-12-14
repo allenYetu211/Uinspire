@@ -204,7 +204,7 @@ export default {
     }).then((response) => {
       console.log(response)
       if (typeof callback === 'function') {
-        console.log(response)
+        callback(response)
       }
     }).catch((error) => {
       console.log(error)

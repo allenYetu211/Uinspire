@@ -51,3 +51,7 @@ export const whetherthelogin = ({commit}) => { commit(WHETHERTHELOGIN) }
 // 验证码验证成功下一步
 export const VERIFYNEXT = 'verifynext'
 export const verifynext = ({commit}, _verify) => { commit(VERIFYNEXT, _verify) }
+
+//  注册成功隐藏弹窗
+export const USERLOGONSUCCESS = 'userlogonsuccess'
+export const userlogonsuccess = ({commit}) => { commit(USERLOGONSUCCESS) }

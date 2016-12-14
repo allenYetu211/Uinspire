@@ -3,12 +3,12 @@
 
     <transition name="sidebar-right">
     <div class="sidebar-information gl-bgcolor-white" 
-    :class="{open : !sidebarrights}" 
-    v-show="!sidebarrights">
+    :class="{open : sidebarrights}" 
+    v-show="sidebarrights">
 
       <div class="log-userinformation">
         <div class="log-userheaderportrait clearfix">
-
+          <a href="http://inspire.stoyard.com/api/user/logout">EXIT</a>
           <div class="header-portarait gl-bgcolor-gray-ed">
             <img src="">
           </div>

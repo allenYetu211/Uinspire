@@ -55,10 +55,13 @@
               <input v-model="logonCompany" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Company"   type="text" name="">
               <input v-model="logonJob" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Job Title"   type="text" name="">
               <div class="login-registered">
-                <button 
-                @click="_logonuser"
-                class="gl-bgcolor-black gl-ftcolor-white gl-fb" >Register</button>
-              </div>
+                  <div @click="userlogonsuccess" :class="{'success': logonsuccess}">
+                    <span class="gl-ftcolor-white gl-fb">SUCCESS</span>
+                  </div>
+                  <button 
+                  @click="_logonuser"
+                  class="gl-bgcolor-black gl-ftcolor-white gl-fb" >REGISTER</button>
+                </div>
             </div>
           </div>
         </transition>
@@ -69,13 +72,14 @@
                 <img :src="loginuserdata.icon_link">
               </div>
               <div class="username gl-ftcolor-black gl-fb gl-size-26" :class="{'gl-bgcolor-gray-ed': !loginPopup}">
-                <input class="gl-bgcolor-gray-ed gl-ftcolor-black" v-model="loginuserpassword"  placeholder="Password"   type="password" name="" :value="loginuserdata.user_name">
+              {{loginuserdata.user_name}}
               </div>
               <div class="userinformation gl-ftcolor-gray">{{loginuserdata.position}}</div>
               
-              <div class="useremail gl-bgcolor-gray-ed">{{loginlogonEmail}}</div>
+              <!-- <div class="useremail gl-bgcolor-gray-ed">{{loginlogonEmail}}</div> -->
 
               <div class="importPassword">
+                <input class="gl-bgcolor-gray-ed gl-ftcolor-black"   type="text" name="" :value="loginlogonEmail">
                 <input class="gl-bgcolor-gray-ed gl-ftcolor-black" v-model="loginuserpassword"  placeholder="Password"   type="password" name="">
                 <a class="gl-ftcolor-gray" href="#">Forgot?</a>
               </div>
@@ -113,7 +117,8 @@ export default {
       'registereduser',
       'logonverifynext',
       'loginPopup',
-      'loginuserdata'
+      'loginuserdata',
+      'logonsuccess'
     ])
   },
   methods: {
@@ -122,7 +127,8 @@ export default {
       'setreturncode',
       'logonuser',
       'verifynext',
-      'userlogin'
+      'userlogin',
+      'userlogonsuccess'
     ]),
     _userlogin () {
       let _userinformation = []
@@ -190,6 +196,31 @@ export default {
       }
       .login-registered {
         margin-top: 50px;
+        position:relative;
+        div{
+          position:absolute;
+          width:151px;
+          height: 50px;
+          left: 50%;
+          transform: translateX(-50%) scaleX(0);
+          background: #2EF037;
+          transform-origin: left;
+          transition: transform 0.2s;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 20px;
+          span{
+            opacity: 0;
+            transition: opacity 0.3s 0.2s;
+          }
+          &.success {
+            transform: translateX(-50%) scaleX(1);
+            span{
+              opacity: 1;
+            }
+          }
+        }
         button{
           margin:0px 5px;
         }
@@ -248,10 +279,13 @@ export default {
       }
       .importPassword{
         position:relative;
+        input:first-child{
+          margin-bottom: 5px;
+        }
         a{
           position:absolute;
           right: 15px;
-          top: 20px;
+          bottom: 20px;
           text-decoration: none;
           font-size: 20px;
         }

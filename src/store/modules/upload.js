@@ -13,7 +13,8 @@ import {
   UINSPIREIO,
   WHETHERTHELOGIN,
   VERIFYNEXT,
-  USERLOGIN
+  USERLOGIN,
+  USERLOGONSUCCESS
 } from '../actions'
 
 const state = {
@@ -32,7 +33,8 @@ const state = {
   verifynext: false,       // 验证成功下一步
   loginPopup: false,       // 登录弹出窗口
   loginuserdata: '',
-  sidebarright: false     // 用户登录状态时为FALSE
+  sidebarright: false,     // 用户登录状态时为FALSE
+  logonsuccess: false
 }
 
 const mutations = {
@@ -106,11 +108,18 @@ const mutations = {
   [SETRETURNCODE] (state, _userinformation) {
     console.log('_userinformation', _userinformation)
     API.logonUser(_userinformation, (requey) => {
-      console.log(requey)
-      state.setreturncode = !state.setreturncode
-      state.logonuser = false
-      state.theSidebar = false
+      state.logonsuccess = true
+      // state.setreturncode = !state.setreturncode
+      // state.logonuser = false
+      // state.theSidebar = false
+      // state.whetherthelogin = false
     })
+  },
+  [USERLOGONSUCCESS] (state) {
+     // state.setreturncode = !state.setreturncode
+    state.logonuser = false
+    state.theSidebar = false
+    state.whetherthelogin = false
   },
   [LOGONUSER] (state) {
     state.logonuser = !state.logonuser
@@ -128,13 +137,16 @@ const mutations = {
         state.sidebarright = !state.sidebarright
       } else {
         state.whetherthelogin = true
+        state.theSidebar = true
       }
     })
     // 让用户处于登录状态的时候 右侧边栏展开收起
     if (state.whetherthelogin) {
       state.theSidebar = true
+      // state.sidebarright = false
     } else {
-      state.sidebarright = true
+      state.theSidebar = false
+      // state.sidebarright = true
     }
   },
   // 验证成功 下一步
@@ -145,13 +157,14 @@ const mutations = {
       state.verifynext = true
       state.logonuser = false
       state.setreturncode = true
-      state.theSidebar = false
+      // state.theSidebar = false
     })
   },
   [USERLOGIN] (state, _userinformation) {
     API.userLogin(_userinformation, (back) => {
       if (back.data.code === '0') {
         state.theSidebar = false
+        state.whetherthelogin = false
         // state.whetherthelogin = state.whetherthelogins
       }
     })

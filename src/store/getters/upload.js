@@ -37,3 +37,6 @@ export const registereduser = state => state.upload.logonuser
 // 注册用户
 export const sidebarrights = state => state.upload.sidebarright
 
+// 注册用户
+export const logonsuccess = state => state.upload.logonsuccess
+
