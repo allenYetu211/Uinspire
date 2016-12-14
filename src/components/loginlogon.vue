@@ -68,7 +68,9 @@
               <div class="headerportrait gl-bgcolor-gray-ed">
                 <img :src="loginuserdata.icon_link">
               </div>
-              <div class="username gl-ftcolor-black" :class="{'gl-bgcolor-gray-ed': !loginPopup}">{{loginuserdata.user_name}}</div>
+              <div class="username gl-ftcolor-black gl-fb gl-size-26" :class="{'gl-bgcolor-gray-ed': !loginPopup}">
+                <input class="gl-bgcolor-gray-ed gl-ftcolor-black" v-model="loginuserpassword"  placeholder="Password"   type="password" name="" :value="loginuserdata.user_name">
+              </div>
               <div class="userinformation gl-ftcolor-gray">{{loginuserdata.position}}</div>
               
               <div class="useremail gl-bgcolor-gray-ed">{{loginlogonEmail}}</div>
@@ -81,7 +83,7 @@
               <div class="login-registered">
                   <button 
                   @click="_userlogin" 
-                  class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >Sing in</button>
+                  class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >SIGN IN</button>
                 </div>
             </div>
         </transition>
@@ -178,7 +180,7 @@ export default {
       box-shadow: 0 8px 25px 0 rgba(0,0,0,0.15);
       transition:height 0.5s;
       &.login{
-        height:620px;
+        height:570px;
       }
       &.logon{
         height:620px;
@@ -225,21 +227,24 @@ export default {
         margin: 0 auto;
         border-radius: 50%;
         margin-bottom:10px;
+        img{
+          width: 100%;
+          border-radius: 50%;
+        }
       }
       .username{
         min-height: 25px;
         min-width: 60px;
-        font-size:20px;
         margin-bottom: 8px;
       }
       .userinformation{
-        @extend .username;
+        
         font-size:16px;
         margin-bottom:20px;
 
       }
       .useremail{
-        @extend .username;
+        
       }
       .importPassword{
         position:relative;
