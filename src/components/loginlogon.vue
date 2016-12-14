@@ -1,6 +1,6 @@
 <template>
     <div class="startlogin">
-      <div class="import-email gl-bgcolor-white" :class="{'login': loginPopup, 'login': getreturncode}">
+      <div class="import-email gl-bgcolor-white" :class="{'login': getreturncode, 'login': loginPopup}">
         <transition name="loginlogon" tag="div">
           <div v-if='!returnimportemail'>
             <h2>Join <span class="gl-ftcolor-theme">UI</span>nspire.io</h2>
@@ -129,7 +129,7 @@ export default {
       logonins['password'] = this.logonPassword
       logonins['name'] = this.logonName
       logonins['company'] = this.logonCompany
-      logonins['job'] = this.logonJob
+      logonins['position'] = this.logonJob
 
       logonuserinformation.push(logonins)
       this.setreturncode(logonuserinformation)

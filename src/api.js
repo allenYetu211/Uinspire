@@ -194,8 +194,11 @@ export default {
       method: 'Post',
       transformRequest: [(_data) => {
         const userdata = new window.FormData()
-        userdata.append('email', _data.email)
-        userdata.append('password', _data.password)
+        userdata.append('email', _data[0].email)
+        userdata.append('name', _data[0].name)
+        userdata.append('company', _data[0].company)
+        userdata.append('position', _data[0].position)
+        userdata.append('password', _data[0].password)
         return userdata
       }],
       data: _data

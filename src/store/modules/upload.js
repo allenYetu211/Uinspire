@@ -92,10 +92,11 @@ const mutations = {
       if (userstate.code === '10048') {
         state.importemail = !state.importemail
         state.logonuser = true
-      } else {
-        console.log('登录窗口')
+      } else if (userstate.code === '10040') {
+        console.log(userstate)
         state.importemail = false
         state.loginPopup = true
+        state.importemail = true
       }
     })
   },
@@ -105,6 +106,7 @@ const mutations = {
       console.log(requey)
       state.setreturncode = !state.setreturncode
       state.logonuser = false
+      state.theSidebar = false
     })
   },
   [LOGONUSER] (state) {
