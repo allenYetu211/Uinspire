@@ -23,7 +23,7 @@
           <div v-if="registereduser">
             <div class="logon-information">
               <h2 class="gl-fb">Hello, <span class="gl-ftcolor-theme">Designer</span></h2>
-              <p class="gl-ftcolor-gray gl-fn">Pleasa type your infomation to finish register.</p>
+              <p class="gl-ftcolor-gray gl-fn">Please check your E-mail, and type the code to register.</p>
               <div class="VerificationCode clearfix">
                   <input  v-model="registered"  type="text" name="" maxlength = '6'>
                   <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[0]}}</span>
@@ -79,8 +79,8 @@
               <!-- <div class="useremail gl-bgcolor-gray-ed">{{loginlogonEmail}}</div> -->
 
               <div class="importPassword">
-                <input class="gl-bgcolor-gray-ed gl-ftcolor-black"   type="text" name="" :value="loginlogonEmail">
-                <input class="gl-bgcolor-gray-ed gl-ftcolor-black" v-model="loginuserpassword"  placeholder="Password"   type="password" name="">
+                <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"   type="text" name="" :value="loginlogonEmail">
+                <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" v-model="loginuserpassword"  placeholder="Password"   type="password" name="">
                 <a class="gl-ftcolor-gray" href="#">Forgot?</a>
               </div>
 
@@ -175,7 +175,7 @@ export default {
   z-index:1000;
   .import-email{
       width:600px;
-      height:370px;
+      height:360px;
       padding:40px 100px;
       position:absolute;
       z-index:998;
@@ -183,13 +183,13 @@ export default {
       left:50%;
       transform:translate(-50%, -50%);
       text-align:center;
-      box-shadow: 0 8px 25px 0 rgba(0,0,0,0.15);
+      box-shadow: 0 12px 30px 0 rgba(0,0,0,0.25);
       transition:height 0.5s;
       &.login{
         height:570px;
       }
       &.logon{
-        height:620px;
+        height:590px;
       }
       &.qr-code{
         height:350px;
@@ -258,6 +258,7 @@ export default {
         margin: 0 auto;
         border-radius: 50%;
         margin-bottom:10px;
+        margin-top: 20px;
         img{
           width: 100%;
           border-radius: 50%;
@@ -271,7 +272,7 @@ export default {
       .userinformation{
         
         font-size:16px;
-        margin-bottom:20px;
+        margin-bottom:50px;
 
       }
       .useremail{

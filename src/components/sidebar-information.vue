@@ -8,7 +8,7 @@
 
       <div class="log-userinformation">
         <div class="log-userheaderportrait clearfix">
-          <a href="http://inspire.stoyard.com/api/user/logout">EXIT</a>
+          <a href="http://inspire.stoyard.com/api/user/logout"><i class="logout"></i></a>
           <div class="header-portarait gl-bgcolor-gray-ed">
             <img src="">
           </div>
@@ -110,6 +110,17 @@ export default {
   }
   .log-userheaderportrait{
     margin-bottom: 20px;
+    i.logout{
+      display:inline-block;
+      background:url('../assets/svg_sprite.svg') no-repeat;
+      width:30px;
+      height:30px;
+      background-position: -360px -90px;
+      margin-top: 2px;
+      float: right;
+      margin-right: 20px;
+      opacity: 0.15;
+    }
   }
   .header-portarait{
     width: 60px;

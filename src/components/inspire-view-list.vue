@@ -110,25 +110,30 @@ export default{
   background-position: -40px -150px;
 }
 li {
-  width:calc(100% / 6 - 20px);
-  min-width: 220px;
+  width:calc(100% / 6 - 30px);
+  min-width: 200px;
   position:relative;
   float: left;
-  margin: 10px 10px;
+  margin: 15px;
   // position:absolute;
-  transition: all .65s;
-  height: 0;
+  transition: all .4s, box-shadow .6s;
   overflow: hidden;
-  padding-bottom: 27.5%;
-  box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.0);
-    &.active{
-      box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.25);
-    }
+  transform:scale(1);
+  box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
+  &.active{
+    box-shadow: 0px 9px 18px 0px rgba(0,0,0,0.15);
+    transform:scale(1.005);
+  }
   img{
     width:100%;
   }
   &.lists{
     padding-bottom: 17.7%;
+  }
+  .imagesShow-box-shadow{
+    padding-bottom: 177.7%;
+    height: 0;
+    overflow: hidden;
   }
   .imagesShow-paypal{
       position:absolute;
@@ -139,19 +144,21 @@ li {
       line-height:40px;
       background-color:#fff;
       width:100%;
-      transition:transform 0.3s, opacity 0.3s 0.1s;
+      transition:transform 0.3s, opacity 0.3s 0.1s, box-shadow 0.3s;
       padding:0 10px;
       pointer-events: none;
       transform:translateY(100%);
+      box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.0);
       &.active{
          transform:translateY(0%);
          opacity: 1;
          pointer-events: all;
+         box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
       }
       &>div{
         flex:4;
         &:last-child{
-          flex:3;
+          flex:4;
         }
         button{
           border:none;
@@ -172,7 +179,7 @@ li {
       &-py {
         a {
           text-decoration: none;
-          font-size: 16px;
+          font-size: 12px;
         }
       }
   }

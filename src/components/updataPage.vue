@@ -1,12 +1,11 @@
 <template>
 <div class="loaderPage">
+    <div class="upload-screenshot">
+        <h2 class="gl-fb">Upload <span class="gl-ftcolor-theme">Screenshot</span></h2>
+        <p class="gl-ftcolor-gray">Drag or select screenshot file in this box</p>
+    </div>
     <div class="al-container">
-        <div class="upload-screenshot">
-            <h2 class="gl-fb">Upload <span class="gl-ftcolor-theme">Screenshot</span></h2>
-            <p class="gl-ftcolor-gray">Drag or select screenshot file in this box</p>
-        </div>
         <div class="file-upload">
-            
             <div 
             @dragover.stop.prevent="" 
             @drop.stop.prevent="handleFilSelect" 
@@ -41,7 +40,6 @@
                                  }'></span>
                               </div>
                             </div>
-
                         </div>
                     </div>
             </div>
@@ -179,14 +177,21 @@
 <style lang="scss" scoped>
 $color:#EFEFEF;
   .upload-screenshot{
-    text-align: center;
-    margin-top:100px;
-    h2{
-      font-size:36px;
-      margin-bottom: 15px;
+    min-height: 180px;
+    padding:50px;
+    text-align:center;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h2 {
+         font-size: 36px;
+         margin: 15px 0;
     }
-    p{
-      font-size: 14px;
+    p {
+          font-size: 14px;
+          margin-bottom: 5px;
     }
   }
   .drop_zone{

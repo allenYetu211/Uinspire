@@ -1,9 +1,11 @@
 <style lang="scss" scoped>
   .imagesShow{
-    padding:20px 20px 80px;
+    padding:15px 15px 80px;
+    background: #fafafa;
     ul{
         margin: 0;
         position:relative;
+        min-width:1440px;
       }
 }
 </style>

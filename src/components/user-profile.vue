@@ -10,19 +10,19 @@
   <div class="personal-infordata">
 
     <div class="personal-validation">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black" type="email" name="" placeholder="Email">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black" type="password" name="" placeholder="Password">
+      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" type="email" name="" placeholder="Email">
+      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" type="password" name="" placeholder="Password">
     </div>
 
     <div class="personal-validation">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black" type="text" name="" placeholder="Name">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black" type="text" name="" placeholder="Company">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black" type="text" name="" placeholder="Job Title">
+      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" type="text" name="" placeholder="Name">
+      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" type="text" name="" placeholder="Company">
+      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" type="text" name="" placeholder="Job Title">
     </div>
 
     <div  class="personal-registered">
-        <router-link :to="{ name: 'UserJoinus' }" tag="button" class="gl-bgcolor-black gl-ftcolor-white gl-fb">Validation</router-link>
-        <button  class="gl-bgcolor-gray gl-ftcolor-white gl-fb">Register</button>
+        <router-link :to="{ name: 'UserJoinus' }" tag="button" class="gl-bgcolor-black gl-ftcolor-white gl-fb">ENTER</router-link>
+        <button  class="gl-bgcolor-gray gl-ftcolor-white gl-fb">CANCEL</button>
     </div>
 
   </div>
@@ -36,7 +36,7 @@
   width:400px;
   margin: 0 auto;
   text-align: center;
-  padding: 30px 0;
+  padding: 80px 0;
 }
   .personal{
     .personal-headportrait{
@@ -58,6 +58,7 @@
     }
   }
   .personal-infordata{
+    margin-top:60px;
     input{
       display: block;
       border: none;
@@ -72,12 +73,14 @@
     }
   }
   .personal-registered{
+    margin-top: 80px;
     button{
       width: 150px;
       height: 50px;
       border: none;
       font-size: 20px;
       cursor: pointer;
+      margin:0 5px;
     }
   }
 </style>

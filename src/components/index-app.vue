@@ -138,10 +138,10 @@ export default {
             }
             p{
               font-size: 20px;
-
+              line-height: 24px;
             }
             div{
-              margin-top: 25px;
+              margin-top: 13px;
 
             }
           }
