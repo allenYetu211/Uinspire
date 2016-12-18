@@ -474,7 +474,7 @@ form{
       top: 66px;
       min-width: 200px;
       z-index: 999;
-      // border:1px solid #dcdcdc;
+      // border:1px solid #eee;
       box-shadow: 0 3px 10px 0 rgba(0,0,0,0.2);
         ul{
           
@@ -732,7 +732,7 @@ form{
     ._AppItem{
         display:flex;
         flex:row;
-        border-bottom:1px solid #dcdcdc;
+        border-bottom:1px solid #eee;
         height:60px;
         padding:10px 12px;
         &.consent-information{

@@ -240,7 +240,7 @@ export default {
         padding:10px 15px;
         font-size:20px;
         &::-webkit-input-placeholder {
-          color:#BBBBBB;
+          color:#dcdcdc;
           font-size:20px;
         }
       }

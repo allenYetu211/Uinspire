@@ -156,7 +156,7 @@ export default {
       padding:0;
       background:rgba(255,255,255,.99);
       // box-shadow: 0px -2px 14px 0px rgba(0,0,0,0.09);
-      border-top:1px solid #dcdcdc;
+      border-top:1px solid #eee;
       transform:translateY(100%);
       transition:transform 0.3s;
       &.open{
@@ -167,11 +167,11 @@ export default {
         padding:20px 30px;
         height:60px;
         border:0px solid #222;
-        background:transparent;
-        transition: color 0.3s;
-        border-right:1px solid #dcdcdc;
+        background: linear-gradient(-180deg, #FFFFFF 0%, #FFFFFF 100%);
+        transition: all 0.3s;
+        border-right:1px solid #eee;
         &:first-child{
-          border-left:1px solid #dcdcdc;
+          border-left:1px solid #eee;
         }
         i{
           margin-top:-2px;
@@ -190,7 +190,7 @@ export default {
           background-position:-65px -125px;
         }
         &:hover {
-          color:#2EF037;
+          background: linear-gradient(-180deg, #FDFDFD 0%, #F3F3F3 98%);
         }
       }
     }

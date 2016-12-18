@@ -198,7 +198,7 @@ $color:#EFEFEF;
     padding:20px 10px;
     min-height:300px;
     max-height: 600px;
-    overflow-y:scroll;
+    overflow-y:auto;
     margin: 0 auto;
     border-radius: 7px;
     position:relative;

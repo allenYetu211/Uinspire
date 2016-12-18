@@ -147,7 +147,7 @@ export default {
       padding: 8px 0;
       font-size: 28px;
       text-decoration:none;
-      color:#DCDCDC;
+      color:#eee;
       padding-left: 10px;
       &.router-link-active{
         color: #222;
@@ -156,8 +156,8 @@ export default {
   }
 
   .log-search-moodboard{
-    border-top: 1px solid #DCDCDC;
-    border-bottom: 1px solid #DCDCDC;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
     height: 40px;
     margin: 20px 0 20px -20px;
     position: relative;
@@ -167,7 +167,7 @@ export default {
       border: none;
       padding:0 60px 0 40px;
       &::-webkit-input-placeholder{
-           color:#DCDCDC;
+           color:#dcdcdc;
            font-size:16px;
         } 
     }
@@ -212,7 +212,7 @@ export default {
   }
   .about-G_Lab{
     text-align: center;
-    border-top: 1px solid #DCDCDC;
+    border-top: 1px solid #eee;
     position: absolute;
     bottom: 0;
     left: 0;

@@ -170,7 +170,7 @@ export default {
         margin-left: 10px;
         background-color:transparent;
         &::-webkit-input-placeholder{
-          color:#DCDCDC;
+          color:#dcdcdc;
           font-size:18px;
         }
       }

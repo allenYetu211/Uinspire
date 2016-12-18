@@ -115,7 +115,7 @@ li {
   position:relative;
   float: left;
   margin: 15px;
-  // position:absolute;
+  border-radius: 2px;
   transition: all .4s, box-shadow .6s;
   overflow: hidden;
   transform:scale(1);
