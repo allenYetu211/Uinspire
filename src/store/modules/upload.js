@@ -46,12 +46,18 @@ const mutations = {
     let count = 0
     let progressbar
     _data.progressbar = true
-    API.uploadProject(_data, (url) => {
+    API.uploadProject(_data, (response) => {
       clearInterval(progressbar)
       _data.progress = 1
       _data.isuploading = false
       _data.isuploadsuccess = true
-      state.returnData.push(url)
+      state.returnData.push(response.data.thumb_img_url)
+      // if (response.data.code === 0) {
+      //   _data.isuploadsuccess = true
+      //   state.returnData.push(response.data.thumb_img_url)
+      // } else {
+      //   _data.iserror = true
+      // }
     })
     /*
      * 返还状态
@@ -106,7 +112,6 @@ const mutations = {
     })
   },
   [SETRETURNCODE] (state, _userinformation) {
-    console.log('_userinformation', _userinformation)
     API.logonUser(_userinformation, (requey) => {
       state.logonsuccess = true
       // state.setreturncode = !state.setreturncode

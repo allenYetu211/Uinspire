@@ -77,6 +77,7 @@ export default {
         fdata.append('category', category)
         fdata.append('name', _data.name)
         fdata.append('tag', tag)
+        fdata.append('app_id', _data.app_id)
         fdata.append('link', _data.link)
         fdata.append('icon_link', _data.icon_link)
         fdata.append('developer', _data.developer)
@@ -95,7 +96,7 @@ export default {
     }).then((response) => {
       console.log('success!!!')
       if (typeof callback === 'function') {
-        callback(response.data.thumb_img_url)
+        callback(response)
       }
     }).catch((error) => {
       console.log(error)
@@ -119,6 +120,7 @@ export default {
   // 获取首页展示图片信息
   uinspireio (callback) {
     axios.get('http://inspire.stoyard.com/api/inspire/viewdata').then((response) => {
+      console.log(response)
       console.log(typeof callback === 'function')
       if (typeof callback === 'function') {
         callback(response.data)

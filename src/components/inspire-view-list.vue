@@ -1,9 +1,7 @@
-
-
 <template>
   <li  :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
     <div class="imagesShow-box-shadow" :class="{active : hover}">
-      <img :src="itmes.img_thumb_400">
+      <img :src="itmes.img + '?x-oss-process=image/resize,w_600'">
         <div class="imagesShow-paypal"  @click.stop="" :class="{active : hover}">
           <div class="imagesShow-paypal-py">
               <router-link :to="{ name: 'IndexApp'}" class="gl-ftcolor-black">

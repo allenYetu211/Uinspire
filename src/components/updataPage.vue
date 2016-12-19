@@ -12,7 +12,7 @@
             class="drop_zone gl-bgcolor-gray-f7">
                     <div class="upload-images" v-if='outintimagedata.length === 0'>
                         <img src="../assets/upload-images-icon.png">
-                        <p>Drag or select screenshot file in this box.<br/>Support JPG & PNG file. A file size in less than 5MB;</p>
+                        <p>Drag or select screenshot file in this box.<br/>Support JPG & PNG file. A file size in less than 10MB;</p>
                     </div>  
                     <div class="informations  list-complete-m-item" 
                     v-for="(ic,indexcount) in outintimagedata"  
@@ -23,9 +23,10 @@
                         <div class="file-imginfromation">
                             <p class="gl-fb gl-color-black">{{ic.imgname}}</p>
                             <p>{{ic.size}}KB</p>
-                            <div class="progressbar-start" v-if="ic.progressbar">
+                            <div class="progressbar-start">
                                <p class="iswaiting" v-if="ic.iswaiting">Waiting</p>
                                <p class="isuploading" v-if="ic.isuploading">Uploading...</p>
+                               <p class="iserror" v-if="ic.iserror">Upload Failed</p>
                                <p class="gl-ftcolor-theme" v-if="ic.isuploadsuccess">Uploading Success</p>
                                <div 
                               class="file-progress-bar gl-bgcolor-gray-f7" 
@@ -34,7 +35,7 @@
                                 :style= "'transform: scaleX(' + ic.progress + ')'"
                                 :class='{
                                  waiting: ic.iswaiting,
-                                 uploading: ic.isuploading,
+                                 uploaderror: ic.iserror,
                                  uploadfaild: ic.isuploadfaild,
                                  uploadsuccess: ic.isuploadsuccess
                                  }'></span>
@@ -117,7 +118,7 @@
                 return
               }
               images['imgname'] = file.name
-              if (file.size > 1024 * 1024 * 5) {
+              if (file.size > 1024 * 1024 * 10) {
                 window.alert(' A file size in less than 5MB.')
                 return
               }
@@ -147,6 +148,7 @@
                   break
               }
               images['Category'] = []
+              images['app_id'] = ''
               images['name'] = ''
               images['tag'] = ''
               images['link'] = ''
@@ -158,6 +160,7 @@
               images['isuploading'] = false
               images['isuploadfaild'] = false
               images['isuploadsuccess'] = false
+              images['iserror'] = false
               images['progress'] = 0
               self.imgIn.push(images)
               self.imgInformations = self.imgIn
@@ -264,6 +267,9 @@ $color:#EFEFEF;
             p{
               font-size:12px;
               margin-bottom: 1px;
+              p.iserror {
+                color:  #D0011B;
+              }
             }
           }
           .file-progress-bar{
@@ -279,13 +285,16 @@ $color:#EFEFEF;
               top: 0;
               bottom: 0;
               right: 0;
-              transition: transform 0.5s, opacity 0.5s;
+              transition: transform 0.2s, opacity 0.5s;
               transform-origin: left;
               &.uploading{
                 background-color:#FFFF00;
               }
               &.uploadsuccess{
                 background-color:#2EF037;
+              }
+              &.uploaderror{
+                background-color: #D0011B;
               }
             }
           }
