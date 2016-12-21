@@ -287,25 +287,7 @@ export default {
       this.clickAppStore = false
       this.userhistorystate = false
       this.sprite_correct = false
-      // if (el.target.dataset.platform === 'ios') {
-      //   this.device = 'ios'
-      //   // __url__ = 'https://itunes.apple.com/search?term=' + this.ic.name + '&country=CN&media=software&limit=10'
-      // } else {
-      //   this.device = 'android'
-      //   // __url__ = 'http://apps.wandoujia.com/api/v1/search/$' + this.ic.name + '?opt_fields=title,icons.px256,packageName,apks.versionName'
-      // }
       this._searchShow = !this._searchShow
-      // let self = this
-      // axios.get('http://inspire.stoyard.com/api/inspire/appInfo', {
-      //   params: {
-      //     name: this.ic.name,
-      //     device: this.ic.Platform
-      //   }
-      // }).then((response) => {
-      //   console.log(response)
-      // }).catch((error) => {
-      //   console.log(error)
-      // })
       axios.get('http://inspire.stoyard.com/api/inspire/appInfo', {
         params: {
           name: this.ic.name,
@@ -313,7 +295,6 @@ export default {
         }
       }).then((response) => {
         let _results = JSON.parse(response.data.data)
-        console.log(_results)
         this.history(this.ic.name)
         if (this.ic.Platform === 'iPhone' || this.ic.Platform === 'iPad') {
           if (_results.resultCount === 0) {
@@ -361,11 +342,7 @@ export default {
       this.userhistorystate = true
     },
     _search_history (el) {
-      // var query = document.querySelectorAll('.app_name')
-      // console.log(query[this.index].addEventListenter('foucs'))
-      // console.log(el.target.parentNode.parentNode.previousElementSibling)
       this.inputfocus = true
-      // console.log(this.inputfocus)
       this.ic.name = el.target.innerHTML
       this.userhistorystate = false
       this._AppStore()
@@ -403,7 +380,6 @@ export default {
         this.ic.app_category = filter['genres'] = target.genres
         this.ic.version = filter['version'] = target.version
         this.ic.name = filter['trackName'] = target.trackName
-        console.log(target.trackId)
         this.ic.app_id = filter['app_id'] = target.trackId
       } else {
         this.ic.link = filter['trackViewUrl'] = 'http://www.wandoujia.com/apps/' + target.packageName

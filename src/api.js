@@ -34,34 +34,6 @@ export default {
     }
     return new window.Blob([ab], { type: 'image/jpeg' })
   },
-  // uploadProject (_data, callback) {
-  //   let tag = _data.tag ? _data.tag.join(',') : ''
-  //   const fdata = new window.FormData()
-  //   fdata.append('file', _data.file)
-  //   axios.post(
-  //    'http://inspire.stoyard.com/index.php/api/inspire/adddata', {
-  //      file: _data.file,
-  //      platform: _data.PlatformIndex,
-  //      category: _data.Category.join(','),
-  //      name: _data.name,
-  //      tag: tag,
-  //      link: _data.link,
-  //      icon_link: _data.icon_link,
-  //      app_category: _data.app_category,
-  //      version: _data.version,
-  //      screen_width: _data.width,
-  //      screen_height: _data.height,
-  //      color: '#343434'
-  //    }).then((response) => {
-  //      console.log('axios成功')
-  //      console.log(response)
-  //      if (typeof callback === 'function') {
-  //        callback(json.parse(response.data).data.thumb_img_url)
-  //      }
-  //    }).catch((error) => {
-  //      console.log(error)
-  //    })
-  // },
   uploadProject (_data, callback) {
     let tag = _data.tag ? _data.tag.join(',') : ''
     let category = _data.Category.join(',')
@@ -86,7 +58,7 @@ export default {
         fdata.append('version', _data.version)
         fdata.append('screen_width', _data.width)
         fdata.append('screen_height', _data.height)
-        fdata.append('color', '\'#343434\'')
+        fdata.append('login_uid', _data.login_uid)
         return fdata
       }],
       data: _data,
@@ -94,7 +66,7 @@ export default {
         console.log(progressEvent.loaded / progressEvent.total)
       }
     }).then((response) => {
-      console.log('success!!!')
+      console.log('success!!!:', response)
       if (typeof callback === 'function') {
         callback(response)
       }
@@ -120,8 +92,6 @@ export default {
   // 获取首页展示图片信息
   uinspireio (callback) {
     axios.get('http://inspire.stoyard.com/api/inspire/viewdata').then((response) => {
-      console.log(response)
-      console.log(typeof callback === 'function')
       if (typeof callback === 'function') {
         callback(response.data)
       }
@@ -142,7 +112,6 @@ export default {
             email: _data
           }
         }).then((response) => {
-          console.log(response.data.code)
           console.log('发送邮件')
         })
       }
@@ -155,25 +124,6 @@ export default {
   },
   // 验证邮箱 验证码
   verifyCode (_data, callback) {
-    // axios({
-    //   url: 'http://inspire.stoyard.com/api/user/checkemailcode',
-    //   method: 'post',
-    //   transformRequest: [(_data) => {
-    //     const fdata = new window.FormData()
-    //     fdata.append('email', _data[0].email)
-    //     fdata.append('code', _data[0].code)
-    //     return fdata
-    //   }],
-    //   data: _data
-    // }).then((response) => {
-    //   console.log(_data)
-    //   console.log('verifyCode:', response)
-    //   if (typeof callback === 'function') {
-    //     callback(response.data)
-    //   }
-    // }).catch((error) => {
-    //   console.log(error)
-    // })
     axios.get('http://inspire.stoyard.com/api/user/checkemailcode', {
       params: {
         email: _data[0].email,
@@ -234,14 +184,41 @@ export default {
     })
   },
   // 判断用户是否登录
-  whetherthelogin (callback) {
-    axios.get('http://inspire.stoyard.com/api/inspire/islogin').then((response) => {
+  whetherthelogin (uinspire, callback) {
+    axios.get('http://inspire.stoyard.com/api/inspire/islogin', {
+      params: {
+        login_uid: uinspire
+      }
+    }).then((response) => {
+      console.log('uinspire:', response)
+      if (typeof callback === 'function') {
+        callback(response)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+  // get --> AppCollection
+  getAppCollection (_data, callback) {
+    axios.get('http://inspire.stoyard.com/api/inspire/getRelAppList', {
+      params: {
+        id: _data
+      }
+    }).then((response) => {
       console.log(response)
       if (typeof callback === 'function') {
         callback(response)
       }
     }).catch((error) => {
       console.log(error)
+    })
+  },
+  // logout
+  logout (callback) {
+    axios.get('http://inspire.stoyard.com/api/user/logout').then((response) => {
+      if (typeof callback === 'function') {
+        callback(response)
+      }
     })
   }
 }

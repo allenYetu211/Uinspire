@@ -40,3 +40,11 @@ export const sidebarrights = state => state.upload.sidebarright
 // 注册用户
 export const logonsuccess = state => state.upload.logonsuccess
 
+// appCollection --- state
+export const collectionPopup = state => state.upload.collectionPopup
+
+// storageAppCollection
+export const storageAppCollection = state => state.upload.storageAppCollection
+
+// showAppCollection Index
+export const showCollectionIndex = state => state.upload.showCollectionIndex

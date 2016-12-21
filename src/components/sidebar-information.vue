@@ -8,7 +8,7 @@
 
       <div class="log-userinformation">
         <div class="log-userheaderportrait clearfix">
-          <a href="http://inspire.stoyard.com/api/user/logout"><i class="logout"></i></a>
+          <button @click="logout"><i class="logout"></i></button>
           <div class="header-portarait gl-bgcolor-gray-ed">
             <img src="">
           </div>
@@ -74,6 +74,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'logout'
     ])
   }
 }
@@ -110,6 +111,13 @@ export default {
   }
   .log-userheaderportrait{
     margin-bottom: 20px;
+    button{
+      background: transparent;
+      border: none;
+      text-align: right;
+      cursor: pointer;
+      float: right;
+    }
     i.logout{
       display:inline-block;
       background:url('../assets/svg_sprite.svg') no-repeat;
@@ -117,8 +125,6 @@ export default {
       height:30px;
       background-position: -360px -90px;
       margin-top: 2px;
-      float: right;
-      margin-right: 20px;
       opacity: 0.15;
     }
   }

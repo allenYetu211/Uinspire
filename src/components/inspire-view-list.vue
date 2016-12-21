@@ -59,16 +59,17 @@ export default{
       'lesslike',
       'contrasts',
       'lesscontrasts',
-      'filmslide'
+      'filmslide',
+      'getappcollection'
     ]),
     _like (e) {
       if (this.like === true) {
         this.lesslike()
-        this.lesscontrasts(this.itmes.url)
+        this.lesscontrasts(this.itmes.img)
       } else {
         if (this.likecount > 5) return
         this.addlike()
-        this.contrasts(this.itmes.url)
+        this.contrasts(this.itmes.img)
       }
       this.like = !this.like
     },
@@ -80,7 +81,9 @@ export default{
       this.hover = false
     },
     _postData () {
-      this.filmslide(this.index)
+      this.getappcollection(this.itmes.id)
+      this.$emit('_postData')
+      // this.filmslide(this.index)
       // console.log(this.itmes)
     }
   }
@@ -114,13 +117,11 @@ li {
   float: left;
   margin: 15px;
   border-radius: 2px;
-  transition: all .4s, box-shadow .6s;
+  transition: transform .4s .2s, box-shadow .6s;
   overflow: hidden;
-  transform:scale(1);
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
   &.active{
     box-shadow: 0px 9px 18px 0px rgba(0,0,0,0.15);
-    transform:scale(1.005);
   }
   img{
     width:100%;
@@ -142,13 +143,13 @@ li {
       line-height:40px;
       background-color:#fff;
       width:100%;
-      transition:transform 0.3s, opacity 0.3s 0.1s, box-shadow 0.3s;
+      transition:transform 0.2s, opacity 0.3s 0.1s, box-shadow 0.3s;
       padding:0 10px;
       pointer-events: none;
       transform:translateY(100%);
       box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.0);
       &.active{
-         transform:translateY(0%);
+         transform:translateY(2%) scale(1.005);
          opacity: 1;
          pointer-events: all;
          box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);

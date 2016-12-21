@@ -20,7 +20,12 @@
           <!-- </transition> -->
       </ul>
     </div>
-    <!-- <app-collection></app-collection>   -->
+      <transition
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated fadeOut"
+        >
+      <app-collection v-show="collectionPopup" :class="{open: collectionPopup}"></app-collection>
+    </transition>
   </div>
 </template>
 
@@ -47,6 +52,13 @@ export default {
       // this._change()
       this.uinspireio()
     })
+  },
+  computed: {
+    ...mapGetters([
+      'infor',
+      'uinspireioDate',
+      'collectionPopup'
+    ])
   },
   methods: {
     ...mapActions([
@@ -92,12 +104,6 @@ export default {
       this.listArrange()
       this._change(6, 0.28)
     }
-  },
-  computed: {
-    ...mapGetters([
-      'infor',
-      'uinspireioDate'
-    ])
   }
 }
 </script>

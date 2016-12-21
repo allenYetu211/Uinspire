@@ -1,4 +1,5 @@
 import API from '../../api.js'
+import Cke from '../../Publicjs/ckie.js'
 import {
   LOADTEXT,
   POSTIMGDATA,
@@ -14,7 +15,12 @@ import {
   WHETHERTHELOGIN,
   VERIFYNEXT,
   USERLOGIN,
-  USERLOGONSUCCESS
+  USERLOGONSUCCESS,
+  GETAPPCOLLECTION,
+  CLOSERAPPCOLLECTION,
+  ADDCOLLECTIONINDEX,
+  LESSCOLLECTIONINDEX,
+  LOGOUT
 } from '../actions'
 
 const state = {
@@ -24,17 +30,21 @@ const state = {
   progress: '',
   categoryDate: '',
   filtercategory: [],
-  importemail: false,      // 显示注册页面弹框
-  setreturncode: false,    // 显示登录页面
-  logonuser: false,       // 显示验证码信息
   uinspireioDate: '',
-  whetherthelogin: false, // 用户是否登录状态
-  theSidebar: false,       // 控制展示用户栏或登录注册弹窗
-  verifynext: false,       // 验证成功下一步
-  loginPopup: false,       // 登录弹出窗口
   loginuserdata: '',
-  sidebarright: false,     // 用户登录状态时为FALSE
-  logonsuccess: false
+  importemail: false,       // 显示注册页面弹框
+  setreturncode: false,     // 显示登录页面
+  logonuser: false,         // 显示验证码信息
+  whetherthelogin: false,   // 用户是否登录状态
+  theSidebar: false,        // 控制展示用户栏或登录注册弹窗
+  verifynext: false,        // 验证成功下一步
+  loginPopup: false,        // 登录弹出窗口
+  sidebarright: false,      // 用户登录状态时为FALSE
+  logonsuccess: false,      // 登录成功状态
+  getAppCollection: '',     // 存储APP对应图集
+  collectionPopup: false,   // APP弹框浮层
+  storageAppCollection: '', // 存储列表数据
+  showCollectionIndex: 0   // 显示对应图集下标
 }
 
 const mutations = {
@@ -136,9 +146,10 @@ const mutations = {
   },
   // 判断用户是否登录
   [WHETHERTHELOGIN] (state) {
-    API.whetherthelogin((loginstate) => {
+    let uinspire = Cke.getCookie('uinspire')
+    API.whetherthelogin(uinspire, (loginstate) => {
       // 登录返回 0
-      if (loginstate.data.code === '0') {
+      if (loginstate.data.code === '0' || loginstate.data.code === '100490') {
         state.sidebarright = !state.sidebarright
       } else {
         state.whetherthelogin = true
@@ -170,8 +181,41 @@ const mutations = {
       if (back.data.code === '0') {
         state.theSidebar = false
         state.whetherthelogin = false
-        // state.whetherthelogin = state.whetherthelogins
+        Cke.setCookie('uinspire', back.data.data.login_uid)
       }
+    })
+  },
+  [GETAPPCOLLECTION] (state, collectionId) {
+    // 修改app-collection state
+    state.storageAppCollection = ''
+    state.collectionPopup = !state.collectionPopup
+    API.getAppCollection(collectionId, (back) => {
+      state.storageAppCollection = back.data.data
+      for (let i = 0; i < back.data.data.length; i++) {
+        if (back.data.data[i].id === collectionId) {
+          state.showCollectionIndex = i
+          break
+        }
+      }
+    })
+  },
+  [ADDCOLLECTIONINDEX] (steta) {
+    state.showCollectionIndex++
+  },
+  [LESSCOLLECTIONINDEX] (steta) {
+    state.showCollectionIndex--
+  },
+  [CLOSERAPPCOLLECTION] (state) {
+    // 修改app-collection state
+    state.collectionPopup = false
+  },
+  [LOGOUT] (state) {
+    API.logout((callback) => {
+      Cke.deleteCookie('uinspire')
+      state.sidebarright = false
+      state.importemail = true
+      state.loginPopup = false
+      state.importemail = false
     })
   }
 }
