@@ -148,7 +148,6 @@ export default {
       width: 100%;
       display: inline-block;
       transform: scale(0.8);
-      opacity: 0;
       transition: transform 0.3s;
       padding: 0 5px;
       &.active{
