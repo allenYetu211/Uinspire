@@ -20,10 +20,10 @@
         </div>
 
         <div class="log-func gl-fb">
-         <router-link :to="{ name: 'inspire'}">Inspire</router-link>
-         <router-link :to="{ name: 'MoodBoardDetailProject'}">Moodboard</router-link>
-         <router-link :to="{ name: 'UserProfile'}">Profile</router-link>
-         <router-link :to="{ name: 'updatePage'}">Upload</router-link>
+         <router-link tag="a" @click="_closerPopup" :to="{ name: 'inspire'}">Inspire</router-link>
+         <router-link tag="a" @click="_closerPopup" :to="{ name: 'MoodBoardDetailProject'}">Moodboard</router-link>
+         <router-link tag="a" @click="_closerPopup" :to="{ name: 'UserProfile'}">Profile</router-link>
+         <router-link tag="a" @click="_closerPopup" :to="{ name: 'updatePage'}">Upload</router-link>
         </div>
       </div>
 
@@ -74,8 +74,13 @@ export default {
   },
   methods: {
     ...mapActions([
-      'logout'
-    ])
+      'logout',
+      'closerappcollection'
+    ]),
+    _closerPopup () {
+      console.log('>>>>>>>>>>>>>>')
+      this.closerappcollection()
+    }
   }
 }
 </script>

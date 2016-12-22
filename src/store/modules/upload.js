@@ -228,6 +228,7 @@ const mutations = {
   [CLOSERAPPCOLLECTION] (state) {
     // 修改app-collection state
     state.collectionPopup = false
+    console.log('state.collectionPopup:', state.collectionPopup)
   },
   [LOGOUT] (state) {
     API.logout((callback) => {

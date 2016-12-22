@@ -66,10 +66,8 @@ export default {
     ])
   },
   mounted () {
-    this.$nextTick(() => {
-      let filmsLi = document.querySelector('li.films_li')
-      console.log(filmsLi)
-    })
+    // this.$nextTick(() => {
+    // })
   },
   watch: {
     collectionPopup: function () {
