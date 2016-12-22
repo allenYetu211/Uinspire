@@ -105,7 +105,7 @@
       font-size: 20px;
         &::-webkit-input-placeholder{ 
         font-size: 20px;
-        color: #BBBBBB;
+        color: #dcdcdc;
       }
       &:focus {
         outline:none;

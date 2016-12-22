@@ -30,6 +30,7 @@
                       class="gl-fn">Please input the website name
                       </span>
                       </h5>
+
                       <div v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
                           <input 
                           class="app_name"
@@ -76,10 +77,12 @@
                                           <p class="appName">{{ics.trackName}}</p>
                                           <p class="artistName">{{ics.artistName}}</p>
                                       </div>
+                                      <i  v-show="sprite_correct" class="sprite_correct"></i>
                                   </li>
                               </ul>
                           </div>
                       </div>
+
                       <div v-if="ic.Platform === 'Android'">
                           <input type="text" v-model="ic.name" @focus="_historyFocus" name="" placeholder="Input Name Search">
                           <div  class="Search-history gl-bgcolor-white" v-show="userhistorystate">
@@ -114,6 +117,7 @@
                                           <p 
                                           class="artistName" 
                                           v-for='infor in ics.apks'>{{infor.versionName}}</p>
+                                          <i  v-show="sprite_correct" class="sprite_correct"></i>
                                       </div>
                                   </li>
                                   </transition-group>
@@ -252,7 +256,8 @@ export default {
       tagList: [],
       device: '',
       userhistorystate: false,
-      inputfocus: false
+      inputfocus: false,
+      sprite_correct: false
     }
   },
   computed: {
@@ -275,32 +280,14 @@ export default {
       el.style.animationDelay = delay + 'ms'
     },
     _AppStore (el) {
-      // let __url__ = ''
       this.getAppStore = []
       this.searchStore = true
       this.searchHeight = true
       this.theSelecteds = false
       this.clickAppStore = false
       this.userhistorystate = false
-      // if (el.target.dataset.platform === 'ios') {
-      //   this.device = 'ios'
-      //   // __url__ = 'https://itunes.apple.com/search?term=' + this.ic.name + '&country=CN&media=software&limit=10'
-      // } else {
-      //   this.device = 'android'
-      //   // __url__ = 'http://apps.wandoujia.com/api/v1/search/$' + this.ic.name + '?opt_fields=title,icons.px256,packageName,apks.versionName'
-      // }
+      this.sprite_correct = false
       this._searchShow = !this._searchShow
-      // let self = this
-      // axios.get('http://inspire.stoyard.com/api/inspire/appInfo', {
-      //   params: {
-      //     name: this.ic.name,
-      //     device: this.ic.Platform
-      //   }
-      // }).then((response) => {
-      //   console.log(response)
-      // }).catch((error) => {
-      //   console.log(error)
-      // })
       axios.get('http://inspire.stoyard.com/api/inspire/appInfo', {
         params: {
           name: this.ic.name,
@@ -309,7 +296,7 @@ export default {
       }).then((response) => {
         let _results = JSON.parse(response.data.data)
         this.history(this.ic.name)
-        if (el.target.dataset.platform === 'ios') {
+        if (this.ic.Platform === 'iPhone' || this.ic.Platform === 'iPad') {
           if (_results.resultCount === 0) {
             this.searchNull = false
           } else {
@@ -355,13 +342,10 @@ export default {
       this.userhistorystate = true
     },
     _search_history (el) {
-      // var query = document.querySelectorAll('.app_name')
-      // console.log(query[this.index].addEventListenter('foucs'))
-      // console.log(el.target.parentNode.parentNode.previousElementSibling)
       this.inputfocus = true
-      // console.log(this.inputfocus)
       this.ic.name = el.target.innerHTML
       this.userhistorystate = false
+      this._AppStore()
     },
     _addhistory (el) {
       this.updataTag.push(el.target.innerText)
@@ -385,6 +369,7 @@ export default {
       this.appname = false
       this.searchHeight = false
       this.theSelecteds = true
+      this.sprite_correct = true
       let filter = {}
       let target = this.getAppStore[event.target.dataset.gnd]
       if (event.target.dataset.platform === 'ios') {
@@ -395,6 +380,7 @@ export default {
         this.ic.app_category = filter['genres'] = target.genres
         this.ic.version = filter['version'] = target.version
         this.ic.name = filter['trackName'] = target.trackName
+        this.ic.app_id = filter['app_id'] = target.trackId
       } else {
         this.ic.link = filter['trackViewUrl'] = 'http://www.wandoujia.com/apps/' + target.packageName
         let blibli = {}
@@ -474,7 +460,7 @@ form{
       top: 66px;
       min-width: 200px;
       z-index: 999;
-      // border:1px solid #dcdcdc;
+      // border:1px solid #eee;
       box-shadow: 0 3px 10px 0 rgba(0,0,0,0.2);
         ul{
           
@@ -732,9 +718,10 @@ form{
     ._AppItem{
         display:flex;
         flex:row;
-        border-bottom:1px solid #dcdcdc;
+        border-bottom:1px solid #eee;
         height:60px;
         padding:10px 12px;
+        position: relative;
         &.consent-information{
           justify-content: center;
           align-items: center;
@@ -743,6 +730,17 @@ form{
         &:last-child{
           border:none;
         }
+        i.sprite_correct{
+          @extend .sprite;
+          position:absolute;
+          display: block;
+          width: 20px;
+          height: 20px;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+          background-position: -40px -150px;
+        }
         &>div{
           pointer-events: none;
           &:first-child{
@@ -750,7 +748,7 @@ form{
             margin-right:12px;
             float: left;
           }
-          &:last-child{
+          &:nth-child(2){
             flex:7;
             p{
                max-width:320px;   

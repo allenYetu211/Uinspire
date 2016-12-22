@@ -55,3 +55,27 @@ export const verifynext = ({commit}, _verify) => { commit(VERIFYNEXT, _verify) }
 //  注册成功隐藏弹窗
 export const USERLOGONSUCCESS = 'userlogonsuccess'
 export const userlogonsuccess = ({commit}) => { commit(USERLOGONSUCCESS) }
+
+// 点击点击单张图片获取新app图集数据
+export const GETAPPCOLLECTION = 'getappcollection'
+export const getappcollection = ({commit}, collectionId) => { commit(GETAPPCOLLECTION, collectionId) }
+
+// 点击点击单张图片获取新app图集数据
+export const CLOSERAPPCOLLECTION = 'closerappcollection'
+export const closerappcollection = ({commit}) => { commit(CLOSERAPPCOLLECTION) }
+
+// addCollectionIndex
+export const ADDCOLLECTIONINDEX = 'addcollectionindex'
+export const addcollectionindex = ({commit}) => { commit(ADDCOLLECTIONINDEX) }
+
+// lessCollectionIndex
+export const LESSCOLLECTIONINDEX = 'lesscollectionindex'
+export const lesscollectionindex = ({commit}) => { commit(LESSCOLLECTIONINDEX) }
+
+// Log out
+export const LOGOUT = 'logout'
+export const logout = ({commit}) => { commit(LOGOUT) }
+
+// change login state
+export const CHANGESTATE = 'changestate'
+export const changestate = ({commit}) => { commit(CHANGESTATE) }

@@ -1,4 +1,5 @@
 import API from '../../api.js'
+import Cke from '../../Publicjs/ckie.js'
 import {
   LOADTEXT,
   POSTIMGDATA,
@@ -14,7 +15,13 @@ import {
   WHETHERTHELOGIN,
   VERIFYNEXT,
   USERLOGIN,
-  USERLOGONSUCCESS
+  USERLOGONSUCCESS,
+  GETAPPCOLLECTION,
+  CLOSERAPPCOLLECTION,
+  ADDCOLLECTIONINDEX,
+  LESSCOLLECTIONINDEX,
+  LOGOUT,
+  CHANGESTATE
 } from '../actions'
 
 const state = {
@@ -24,17 +31,23 @@ const state = {
   progress: '',
   categoryDate: '',
   filtercategory: [],
-  importemail: false,      // 显示注册页面弹框
-  setreturncode: false,    // 显示登录页面
-  logonuser: false,       // 显示验证码信息
   uinspireioDate: '',
-  whetherthelogin: false, // 用户是否登录状态
-  theSidebar: false,       // 控制展示用户栏或登录注册弹窗
-  verifynext: false,       // 验证成功下一步
-  loginPopup: false,       // 登录弹出窗口
   loginuserdata: '',
-  sidebarright: false,     // 用户登录状态时为FALSE
-  logonsuccess: false
+  importemail: false,       // 验证邮箱
+  emailError: false,        // 邮箱错误
+  setreturncode: false,     // 显示登录页面
+  logonuser: false,         // 显示验证码信息
+  whetherthelogin: false,   // 用户是否登录状态
+  theSidebar: false,        // 控制展示用户栏或登录注册弹窗
+  verifynext: false,        // 验证成功下一步
+  loginPopup: false,        // 登录弹出窗口
+  sidebarright: false,      // 用户登录状态时为FALSE
+  logonsuccess: false,      // 登录成功状态
+  getAppCollection: '',     // 存储APP对应图集
+  collectionPopup: false,   // APP弹框浮层
+  storageAppCollection: '', // 存储列表数据
+  showCollectionIndex: 0,  // 显示对应图集下标
+  userpas_Error: false
 }
 
 const mutations = {
@@ -46,12 +59,18 @@ const mutations = {
     let count = 0
     let progressbar
     _data.progressbar = true
-    API.uploadProject(_data, (url) => {
+    API.uploadProject(_data, (response) => {
       clearInterval(progressbar)
       _data.progress = 1
       _data.isuploading = false
       _data.isuploadsuccess = true
-      state.returnData.push(url)
+      state.returnData.push(response.data.thumb_img_url)
+      // if (response.data.code === 0) {
+      //   _data.isuploadsuccess = true
+      //   state.returnData.push(response.data.thumb_img_url)
+      // } else {
+      //   _data.iserror = true
+      // }
     })
     /*
      * 返还状态
@@ -106,9 +125,12 @@ const mutations = {
     })
   },
   [SETRETURNCODE] (state, _userinformation) {
-    console.log('_userinformation', _userinformation)
     API.logonUser(_userinformation, (requey) => {
+      console.log(requey)
+      Cke.setCookie('uinspire', requey.data.data.login_uid)
       state.logonsuccess = true
+      state.logonuser = false
+      state.setreturncode = false
       // state.setreturncode = !state.setreturncode
       // state.logonuser = false
       // state.theSidebar = false
@@ -117,9 +139,11 @@ const mutations = {
   },
   [USERLOGONSUCCESS] (state) {
      // state.setreturncode = !state.setreturncode
-    state.logonuser = false
-    state.theSidebar = false
-    state.whetherthelogin = false
+    setTimeout(() => {
+      state.logonuser = false
+      state.theSidebar = false
+      state.whetherthelogin = false
+    }, 2000)
   },
   [LOGONUSER] (state) {
     state.logonuser = !state.logonuser
@@ -131,9 +155,10 @@ const mutations = {
   },
   // 判断用户是否登录
   [WHETHERTHELOGIN] (state) {
-    API.whetherthelogin((loginstate) => {
+    let uinspire = Cke.getCookie('uinspire')
+    API.whetherthelogin(uinspire, (loginstate) => {
       // 登录返回 0
-      if (loginstate.data.code === '0') {
+      if (loginstate.data.code === '0' || loginstate.data.code === '100490') {
         state.sidebarright = !state.sidebarright
       } else {
         state.whetherthelogin = true
@@ -153,20 +178,64 @@ const mutations = {
   [VERIFYNEXT] (state, _verify) {
     console.log(_verify)
     API.verifyCode(_verify, (_vcode) => {
-      console.log(_vcode)
+      console.log('_vcode:', _vcode)
+      if (_vcode.code === '10044') {
+        console.log('验证码错误')
+        return
+      }
       state.verifynext = true
       state.logonuser = false
       state.setreturncode = true
       // state.theSidebar = false
     })
   },
+  [CHANGESTATE] (state) {
+    state.userpas_Error = false
+  },
   [USERLOGIN] (state, _userinformation) {
     API.userLogin(_userinformation, (back) => {
       if (back.data.code === '0') {
         state.theSidebar = false
         state.whetherthelogin = false
-        // state.whetherthelogin = state.whetherthelogins
+        state.userpas_Error = false
+        Cke.setCookie('uinspire', back.data.data.login_uid)
+      } else if (back.data.code === '10049') {
+        state.userpas_Error = true
+        console.log('state.userpas_Error:', state.userpas_Error)
       }
+    })
+  },
+  [GETAPPCOLLECTION] (state, collectionId) {
+    // 修改app-collection state
+    state.storageAppCollection = ''
+    state.collectionPopup = !state.collectionPopup
+    API.getAppCollection(collectionId, (back) => {
+      state.storageAppCollection = back.data.data
+      for (let i = 0; i < back.data.data.length; i++) {
+        if (back.data.data[i].id === collectionId) {
+          state.showCollectionIndex = i
+          break
+        }
+      }
+    })
+  },
+  [ADDCOLLECTIONINDEX] (steta) {
+    state.showCollectionIndex++
+  },
+  [LESSCOLLECTIONINDEX] (steta) {
+    state.showCollectionIndex--
+  },
+  [CLOSERAPPCOLLECTION] (state) {
+    // 修改app-collection state
+    state.collectionPopup = false
+  },
+  [LOGOUT] (state) {
+    API.logout((callback) => {
+      Cke.deleteCookie('uinspire')
+      state.sidebarright = false
+      state.importemail = true
+      state.loginPopup = false
+      state.importemail = false
     })
   }
 }

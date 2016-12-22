@@ -1,9 +1,7 @@
-
-
 <template>
-  <li  :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
+  <li  :class="{lists: listArrangestate ,active : hover, animated: like}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
     <div class="imagesShow-box-shadow" :class="{active : hover}">
-      <img :src="itmes.img_thumb_400">
+      <img :src="itmes.img + '?x-oss-process=image/resize,w_600'">
         <div class="imagesShow-paypal"  @click.stop="" :class="{active : hover}">
           <div class="imagesShow-paypal-py">
               <router-link :to="{ name: 'IndexApp'}" class="gl-ftcolor-black">
@@ -61,16 +59,17 @@ export default{
       'lesslike',
       'contrasts',
       'lesscontrasts',
-      'filmslide'
+      'filmslide',
+      'getappcollection'
     ]),
     _like (e) {
       if (this.like === true) {
         this.lesslike()
-        this.lesscontrasts(this.itmes.url)
+        this.lesscontrasts(this.itmes.img)
       } else {
         if (this.likecount > 5) return
         this.addlike()
-        this.contrasts(this.itmes.url)
+        this.contrasts(this.itmes.img)
       }
       this.like = !this.like
     },
@@ -78,11 +77,15 @@ export default{
       this.hover = true
     },
     _mouseout () {
-      if (this.like === true) return
+      if (this.like === true) {
+        return
+      }
       this.hover = false
     },
     _postData () {
-      this.filmslide(this.index)
+      this.getappcollection(this.itmes.id)
+      this.$emit('_postData')
+      // this.filmslide(this.index)
       // console.log(this.itmes)
     }
   }
@@ -115,14 +118,17 @@ li {
   position:relative;
   float: left;
   margin: 15px;
-  // position:absolute;
-  transition: all .4s, box-shadow .6s;
+  border-radius: 2px;
+  transition: transform .25s, box-shadow .25s;
   overflow: hidden;
-  transform:scale(1);
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
   &.active{
-    box-shadow: 0px 9px 18px 0px rgba(0,0,0,0.15);
-    transform:scale(1.005);
+    box-shadow: 0px 4px 9px 0px rgba(0,0,0,0.12);
+  }
+  &.animated{
+    // animation: animateds_start 0.3s forwards;
+    transform: translateY(-8px);
+    box-shadow: 0px 9px 18px 0px rgba(0,0,0,0.2);
   }
   img{
     width:100%;
@@ -144,13 +150,13 @@ li {
       line-height:40px;
       background-color:#fff;
       width:100%;
-      transition:transform 0.3s, opacity 0.3s 0.1s, box-shadow 0.3s;
+      transition:transform 0.2s, opacity 0.3s 0.1s, box-shadow 0.3s;
       padding:0 10px;
       pointer-events: none;
       transform:translateY(100%);
       box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.0);
       &.active{
-         transform:translateY(0%);
+         transform:translateY(2%) scale(1.005);
          opacity: 1;
          pointer-events: all;
          box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);

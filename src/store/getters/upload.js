@@ -8,7 +8,14 @@ export const getprogress = state => state.upload.progress
 
 export const categoryDate = state => state.upload.categoryDate
 
+// 验证用户邮箱
 export const returnimportemail = state => state.upload.importemail
+
+// 邮箱错误
+export const emailError = state => state.upload.emailError
+
+// 帐号或者错误
+export const upError = state => state.upload.userpas_Error
 
 // 验证码
 export const getreturncode = state => state.upload.setreturncode
@@ -40,3 +47,11 @@ export const sidebarrights = state => state.upload.sidebarright
 // 注册用户
 export const logonsuccess = state => state.upload.logonsuccess
 
+// appCollection --- state
+export const collectionPopup = state => state.upload.collectionPopup
+
+// storageAppCollection
+export const storageAppCollection = state => state.upload.storageAppCollection
+
+// showAppCollection Index
+export const showCollectionIndex = state => state.upload.showCollectionIndex

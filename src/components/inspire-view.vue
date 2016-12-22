@@ -20,15 +20,23 @@
           <!-- </transition> -->
       </ul>
     </div>
+      <transition
+          enter-active-class="animated fadeIn"
+          leave-active-class="animated fadeOut"
+        >
+      <app-collection v-show="collectionPopup" :class="{open: collectionPopup}"></app-collection>
+    </transition>
   </div>
 </template>
 
 <script>
 import InspireViewList from './inspire-view-list'
+import AppCollection from './app-collection'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
-    InspireViewList
+    InspireViewList,
+    AppCollection
   },
   data () {
     return {
@@ -41,8 +49,16 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
+      // this._change()
       this.uinspireio()
     })
+  },
+  computed: {
+    ...mapGetters([
+      'infor',
+      'uinspireioDate',
+      'collectionPopup'
+    ])
   },
   methods: {
     ...mapActions([
@@ -53,32 +69,32 @@ export default {
       'uinspireio'
     ]),
     _change (_showcount = 6, scale = 0.28) {
-      // let listParents = document.querySelector('#inspire-view-list')
-      // let listchilren = listParents.getElementsByTagName('li')
-      // let countArray = []
-      // let maxWidth = window.innerWidth / _showcount - 20
-      // let height = window.innerWidth * scale
-      // console.log(window.innerWidth * 0.28)
-      // let count = -1
-      // maxWidth = parseInt(maxWidth)
-      // for (let i = 0; i < listchilren.length; i++) {
-        // if (i % _showcount === 0) {
-          // count++
-          // countArray = []
-          // countArray.push(i % _showcount)
-          // listchilren[i].style.width = maxWidth + 'px'
-          // listchilren[i].style.top = count * (height + 5) + 'px'
-          // listchilren[i].style.left = 0 + 'px'
-          // listchilren[i].style.transition = 'opacity ' + (i % _showcount) * 10 + 'ms'
-        // } else if (i % _showcount < _showcount) {
-          // countArray.push(i % _showcount)
-          // listchilren[i].style.width = maxWidth + 'px'
-          // listchilren[i].style.left = maxWidth * (i % _showcount) + 12 * (i % _showcount) + 'px'
-          // listchilren[i].style.top = count * (height + 5) + 'px'
-          // listchilren[i].style.transition = 'opacity ' + (i % _showcount) * 10 + 'ms'
-        // }
-      // }
-      // listParents.style.height = height * (count + 1) + 'px'
+      let listParents = document.querySelector('#inspire-view-list')
+      let listchilren = listParents.getElementsByTagName('li')
+      let countArray = []
+      let maxWidth = window.innerWidth / _showcount - 20
+      let height = window.innerWidth * scale
+      console.log(window.innerWidth * 0.28)
+      let count = -1
+      maxWidth = parseInt(maxWidth)
+      for (let i = 0; i < listchilren.length; i++) {
+        if (i % _showcount === 0) {
+          count++
+          countArray = []
+          countArray.push(i % _showcount)
+          listchilren[i].style.width = maxWidth + 'px'
+          listchilren[i].style.top = count * (height + 5) + 'px'
+          listchilren[i].style.left = 0 + 'px'
+          listchilren[i].style.transition = 'opacity ' + (i % _showcount) * 10 + 'ms'
+        } else if (i % _showcount < _showcount) {
+          countArray.push(i % _showcount)
+          listchilren[i].style.width = maxWidth + 'px'
+          listchilren[i].style.left = maxWidth * (i % _showcount) + 12 * (i % _showcount) + 'px'
+          listchilren[i].style.top = count * (height + 5) + 'px'
+          listchilren[i].style.transition = 'opacity ' + (i % _showcount) * 10 + 'ms'
+        }
+      }
+      listParents.style.height = height * (count + 1) + 'px'
     },
     _changeshowlist () {
       this.listArrangetwo()
@@ -88,12 +104,6 @@ export default {
       this.listArrange()
       this._change(6, 0.28)
     }
-  },
-  computed: {
-    ...mapGetters([
-      'infor',
-      'uinspireioDate'
-    ])
   }
 }
 </script>

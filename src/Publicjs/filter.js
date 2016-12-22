@@ -24,6 +24,7 @@ const filter = {
         _index = i
       }
     }
+    console.log('this.newdata:', this.newdata)
     this.newdata.remove(_index)
     return this.newdata
     // console.log(newDate.slice([keysv[0]], 1).concat(this.newdata.slice(1)))

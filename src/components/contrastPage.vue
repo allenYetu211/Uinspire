@@ -1,14 +1,15 @@
 
 <template>
 <div class="comtrast-poups">
-    <div :style="{transitionDelay: upDelay}" class="comtrast" :class="{open: comtrastpopup}">
+    <div :style="{transitionDelay: upDelay}" class="comtrast gl-bgcolor-white" :class="{open: comtrastpopup}">
         <template v-if="!filmslidestate">
             <div class="close">
                 <button @click="comtrastOpenCount"><i class="sprite_close"></i></button>
             </div>
             <div class="comtrast-popup">
+
                 <ul class="comtrast-popup-ul">
-                    <li :style="{width:mathWidth}" class="comtrast-popup-li" v-for="(itms, index) in contrastins">
+                    <li class="comtrast-popup-li" v-for="(itms, index) in contrastins">
                         <button class="delete">
                             <i class="sprite_delete"></i>
                         </button>
@@ -17,11 +18,11 @@
                         enter-active-class="animated slideInDown" 
                         leave-active-class="animated slideOutUp" 
                         @before-enter="beforeEnter">
-                            <!-- :style="{animationDelay: trans_dalay}" -->
                             <img v-show="comtrastpopup" :data-index="index" :src="itms" alt="">
                         </transition>
                     </li>
                 </ul>
+
             </div>
         </template>
         <template v-else>
@@ -98,19 +99,15 @@ export default {
     ]),
     comtrastOpenCount () {
       this.comtrast()
-      if (this.likecount === 1 || 2 || 3) {
-        this.mathWidth = '25%'
+      let parseUl = document.querySelector('.comtrast-popup-ul')
+      if (this.likecount <= 3) {
+        parseUl.style.cssText = 'justify-content: center;'
       } else {
-        this.mathWidth = 'calc(100% / ' + this.likecount + ' + 20px)'
-      }
-      if (this.comtrastpopup !== true) {
-        this.upDelay = '240ms'
-      } else {
-        this.upDelay = '0ms'
+        parseUl.style.cssText = ''
       }
     },
     beforeEnter (el) {
-      let delay = el.dataset.index * 40
+      let delay = el.dataset.index * 60
       el.style.animationDelay = delay + 'ms'
     },
     _prev () {
@@ -156,7 +153,7 @@ export default {
       padding:0;
       background:rgba(255,255,255,.99);
       // box-shadow: 0px -2px 14px 0px rgba(0,0,0,0.09);
-      border-top:1px solid #dcdcdc;
+      border-top:1px solid #eee;
       transform:translateY(100%);
       transition:transform 0.3s;
       &.open{
@@ -167,11 +164,11 @@ export default {
         padding:20px 30px;
         height:60px;
         border:0px solid #222;
-        background:transparent;
-        transition: color 0.3s;
-        border-right:1px solid #dcdcdc;
+        background: linear-gradient(-180deg, #FFFFFF 0%, #FFFFFF 100%);
+        transition: all 0.3s;
+        border-right:1px solid #eee;
         &:first-child{
-          border-left:1px solid #dcdcdc;
+          border-left:1px solid #eee;
         }
         i{
           margin-top:-2px;
@@ -190,7 +187,7 @@ export default {
           background-position:-65px -125px;
         }
         &:hover {
-          color:#2EF037;
+          background: linear-gradient(-180deg, #FDFDFD 0%, #F3F3F3 98%);
         }
       }
     }
@@ -200,14 +197,13 @@ export default {
   right:0;
   left: 0;
   bottom:0px;
-  z-index:1000;
-  background-color:rgba(255,255,255,.97);
+  z-index:990;
   transform:translate3d(0, -100%, 0);
   transition:transform 0.5s;
   .close{
     position:absolute;
-    right: 15px;
-    top:15px;
+    right: 30px;
+    top: 60px;
     opacity:1;
     z-index:999;
     button{
@@ -232,18 +228,21 @@ export default {
       width:100%;
       height:100%;
       display: flex;
-      justify-content: center;
+      // justify-content: center;
       align-items: center;
-      overflow: hidden;
+      overflow: scroll;
     }
     &-li{
-      margin: 10px;
-      text-align: center;
-      position:relative;
+        margin: 10px;
+        text-align: center;
+        position: relative;
+        height: calc( 100vh - 200px);
       img{
-        width:100%;
+        // width:100%;
+        height: 100%;
         vertical-align: middle;
-        box-shadow: 0 2px 18px 0 rgba(0,0,0,0.25);
+        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
       }
       &:hover .delete{
         opacity: 1;
@@ -294,35 +293,6 @@ export default {
         }
     }
 }
-.arrow{
-  button{
-    background:transparent;
-    border:none;
-  }
-    &-prev,&-next{
-      position: absolute;
-      top:45%;
-      z-index:999;
-      transform:translateY(-50%);
-    }
-    &-prev{
-      left:33%;
-    }
-    &-next{
-      right:33%;
-    }
-    i{
-      display:inline-block;
-      width:25px;
-      height:50px;
-      background:url('../assets/svg_sprite.svg')no-repeat;
-      &.sprite_next{
-        background-position: -35px 0;
-      }
-    }
-    .sprite_prev{
-      position:0;
-    }
-}
+
  
 </style>

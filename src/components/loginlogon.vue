@@ -5,12 +5,20 @@
           <div v-if='!returnimportemail'>
             <h2 class="gl-fb">Join <span class="gl-ftcolor-theme">UI</span>nspire.io</h2>
             <p class="gl-ftcolor-gray gl-fn">Input your E-mail, It’s will auto validation your account.</p>
-            <input 
-            class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" 
-            placeholder="E-mail" 
-            type="email" 
-            v-model="loginlogonEmail"
-            name="">
+            <div class="inputEmails">
+              <input 
+              class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" 
+              placeholder="E-mail" 
+              type="email" 
+              v-model="loginlogonEmail"
+              autofocus="autofocus"
+              @focus="errorEmail = false"
+              @keyup.enter="_loginLogon"
+              name="">
+              <div v-if="errorEmail" class="errorEmail">
+                Please Check E-mail format
+              </div>
+            </div>
             <div class="login-registered">
               <button 
               @click="_loginLogon" 
@@ -20,12 +28,12 @@
         </transition>
 
          <transition name="loginlogon" tag="div">
-          <div v-if="registereduser">
+          <div v-show="registereduser">
             <div class="logon-information">
               <h2 class="gl-fb">Hello, <span class="gl-ftcolor-theme">Designer</span></h2>
               <p class="gl-ftcolor-gray gl-fn">Please check your E-mail, and type the code to register.</p>
               <div class="VerificationCode clearfix">
-                  <input  v-model="registered"  type="text" name="" maxlength = '6'>
+                  <input class="registeredCode"  @keyup.enter="_verifynext"  v-model="registered"  type="text" name="" maxlength = '6' autofocus="autofocus">
                   <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[0]}}</span>
                   <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[1]}}</span>
                   <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[2]}}</span>
@@ -36,6 +44,7 @@
               <div class="login-registered">
                 <button 
                 @click="_verifynext"
+               
                 class="gl-bgcolor-black gl-ftcolor-white gl-fb" >ENTER</button>
                 <button 
                 class="gl-bgcolor-gray gl-ftcolor-white gl-fb" >RESENT</button>
@@ -46,14 +55,25 @@
         </transition>
 
         <transition name="loginlogon" tag="div">
-          <div v-if="logonverifynext">
+          <div v-show="logonverifynext">
             <div class="logon-information">
               <h2 class="gl-fb">Hello, <span class="gl-ftcolor-theme">Designer</span></h2>
               <p class="gl-ftcolor-gray gl-fn">Pleasa type your infomation to finish register.</p>
-              <input v-model="logonPassword" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Password"   type="password" name="">
-              <input v-model="logonName" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Name"   type="text" name="">
-              <input v-model="logonCompany" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Company"   type="text" name="">
-              <input v-model="logonJob" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Job Title"   type="text" name="">
+            
+            <div class="user-informations">
+              
+              <input @focus="validationPassWord = false" v-model="logonPassword" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Password"   type="password" name="">
+              <input @focus="validationlogonName = false" v-model="logonName" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Name"   type="text" name="">
+              <input @focus="validationlogonCompany = false" v-model="logonCompany" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Company"   type="text" name="">
+              <input @focus="validationlogonJob = false"  @keyup.enter="_logonuser" v-model="logonJob" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Job Title"   type="text" name="">
+
+              <div :class="{inputError: validationPassWord}" class="validationPassWord">Please enter above 6 characters</div>
+              <div :class="{inputError: validationlogonName}"  class="validationlogonName">Please enter your Name</div>
+              <div :class="{inputError: validationlogonCompany}" class="validationlogonCompany">Please enter Company Name</div>
+              <div :class="{inputError: validationlogonJob}"  class="validationlogonJob">Please enter your job title</div>
+
+            </div>
+
               <div class="login-registered">
                   <div @click="userlogonsuccess" :class="{'success': logonsuccess}">
                     <span class="gl-ftcolor-white gl-fb">SUCCESS</span>
@@ -80,9 +100,19 @@
 
               <div class="importPassword">
                 <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"   type="text" name="" :value="loginlogonEmail">
-                <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" v-model="loginuserpassword"  placeholder="Password"   type="password" name="">
+                <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" 
+                @keyup.enter="_userlogin"
+                @keyup.delete="_deleteLogin"
+                @focus="userpasError = false"  
+                v-model="loginuserpassword"  
+                placeholder="Password"   
+                type="password" 
+                 >
                 <a class="gl-ftcolor-gray" href="#">Forgot?</a>
               </div>
+              <div class="user-pas-error" v-if="userpasError">
+                  登录失败-用户名或者密码错误
+                </div>
 
               <div class="login-registered">
                   <button 
@@ -107,7 +137,18 @@ export default {
       logonName: '',
       logonCompany: '',
       logonJob: '',
-      loginuserpassword: ''
+      loginuserpassword: '',
+      errorEmail: false,
+      userpasError: false,
+      validationPassWord: false,
+      validationlogonName: false,
+      validationlogonCompany: false,
+      validationlogonJob: false
+    }
+  },
+  watch: {
+    upError: function () {
+      this.upError ? this.userpasError = true : this.userpasError = false
     }
   },
   computed: {
@@ -118,7 +159,9 @@ export default {
       'logonverifynext',
       'loginPopup',
       'loginuserdata',
-      'logonsuccess'
+      'logonsuccess',
+      'emailError',
+      'upError'
     ])
   },
   methods: {
@@ -128,8 +171,12 @@ export default {
       'logonuser',
       'verifynext',
       'userlogin',
-      'userlogonsuccess'
+      'userlogonsuccess',
+      'changestate'
     ]),
+    _deleteLogin () {
+      this.changestate()
+    },
     _userlogin () {
       let _userinformation = []
       let userinfor = {}
@@ -139,21 +186,43 @@ export default {
       this.userlogin(_userinformation)
     },
     _loginLogon () {
+      let inputs = document.getElementsByClassName('registeredCode')[0]
+      inputs.focus()
+      console.log(inputs)
+      let pattern = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/
+      if (!pattern.test(this.loginlogonEmail)) {
+        this.errorEmail = true
+        return
+      }
       this.importemail(this.loginlogonEmail)
     },
     _logonuser () {
       let logonuserinformation = []
       let logonins = {}
+      if (this.logonPassword.length < 6) {
+        this.validationPassWord = true
+      }
+      if (this.logonName.length === 0) {
+        this.validationlogonName = true
+      }
+      if (this.logonCompany.length === 0) {
+        this.validationlogonCompany = true
+      }
+      if (this.logonJob.length === 0) {
+        this.validationlogonJob = true
+      }
       logonins['email'] = this.loginlogonEmail
       logonins['password'] = this.logonPassword
       logonins['name'] = this.logonName
       logonins['company'] = this.logonCompany
       logonins['position'] = this.logonJob
-
       logonuserinformation.push(logonins)
-      this.setreturncode(logonuserinformation)
+      if (this.logonName.length !== 0 && this.logonCompany.length !== 0 && this.logonJob.length !== 0 && this.logonPassword.length > 6) {
+        this.setreturncode(logonuserinformation)
+      }
     },
     _verifynext () {
+      console.log(222)
       let verifyCode = []
       let logon = {}
       logon['email'] = this.loginlogonEmail
@@ -240,7 +309,7 @@ export default {
         padding:10px 15px;
         font-size:20px;
         &::-webkit-input-placeholder {
-          color:#BBBBBB;
+          color:#dcdcdc;
           font-size:20px;
         }
       }
@@ -291,16 +360,59 @@ export default {
           font-size: 20px;
         }
       }
+      .user-pas-error{
+        padding-top: 10px;
+        color: #F40909;
+      }
+      .inputEmails{
+        position: relative;
+        .errorEmail{
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+          color:#F40909;
+        }
+      }
     }
 
       .logon-information{
+        .user-informations{
+          position: relative;
+          .validationPassWord,
+          .validationlogonName,
+          .validationlogonCompany,
+          .validationlogonJob{
+            position: absolute;
+            right: 10px;
+            font-size:12px;
+            color:#F40909;
+            opacity: 0;
+            transition: opacity 0.2s;
+            &.inputError{
+              opacity: 1;
+            }
+          }
+          .validationPassWord{
+            top: 25px;
+          }
+          .validationlogonName{
+            top: 115px;
+          }
+          .validationlogonCompany{
+            top: 180px;
+          }
+          .validationlogonJob{
+           top: 245px;
+          }
+        }
         input{
           &[type="text"]{
             margin-bottom: 5px;
           }
-          &:last-child{
-            margin-bottom:50px !important;
-          }
+          // &:last-child{
+          //   margin-bottom:50px !important;
+          // }
 
           &[type="password"]{
             margin-bottom: 30px;

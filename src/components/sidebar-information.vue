@@ -8,7 +8,7 @@
 
       <div class="log-userinformation">
         <div class="log-userheaderportrait clearfix">
-          <a href="http://inspire.stoyard.com/api/user/logout"><i class="logout"></i></a>
+          <button @click="logout"><i class="logout"></i></button>
           <div class="header-portarait gl-bgcolor-gray-ed">
             <img src="">
           </div>
@@ -74,6 +74,7 @@ export default {
   },
   methods: {
     ...mapActions([
+      'logout'
     ])
   }
 }
@@ -110,6 +111,13 @@ export default {
   }
   .log-userheaderportrait{
     margin-bottom: 20px;
+    button{
+      background: transparent;
+      border: none;
+      text-align: right;
+      cursor: pointer;
+      float: right;
+    }
     i.logout{
       display:inline-block;
       background:url('../assets/svg_sprite.svg') no-repeat;
@@ -117,8 +125,6 @@ export default {
       height:30px;
       background-position: -360px -90px;
       margin-top: 2px;
-      float: right;
-      margin-right: 20px;
       opacity: 0.15;
     }
   }
@@ -147,7 +153,7 @@ export default {
       padding: 8px 0;
       font-size: 28px;
       text-decoration:none;
-      color:#DCDCDC;
+      color:#eee;
       padding-left: 10px;
       &.router-link-active{
         color: #222;
@@ -156,8 +162,8 @@ export default {
   }
 
   .log-search-moodboard{
-    border-top: 1px solid #DCDCDC;
-    border-bottom: 1px solid #DCDCDC;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
     height: 40px;
     margin: 20px 0 20px -20px;
     position: relative;
@@ -167,7 +173,7 @@ export default {
       border: none;
       padding:0 60px 0 40px;
       &::-webkit-input-placeholder{
-           color:#DCDCDC;
+           color:#dcdcdc;
            font-size:16px;
         } 
     }
@@ -212,7 +218,7 @@ export default {
   }
   .about-G_Lab{
     text-align: center;
-    border-top: 1px solid #DCDCDC;
+    border-top: 1px solid #eee;
     position: absolute;
     bottom: 0;
     left: 0;
