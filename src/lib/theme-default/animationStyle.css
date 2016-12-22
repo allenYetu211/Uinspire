@@ -156,4 +156,35 @@
   }
  }
 
+ /*
+  *
+  *  Use place :
+  *  -->
+  *     loginlogon
+  *     
+ */
 
+
+.loginlogonAnimated-item{
+  transition: transform 0.6s;
+}
+.loginlogonAnimated-leave, .loginlogonAnimated-enter-active  {
+  transition: transform 0.6s;
+  transform: translate(-50%, -50%) scaleY(1);
+}
+.loginlogonAnimated-leave-active, .loginlogonAnimated-enter {
+  transition: transform 0.6s;
+  transform: translate(-50%, -50%) scaleY(0);
+}
+
+ @keyframes animated_flash {
+  from {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  to{
+    opacity: 0;
+  }
+ }

@@ -1,6 +1,6 @@
 <template>
   <div>
-
+    {{loginuserdata}}
     <transition name="sidebar-right">
     <div class="sidebar-information gl-bgcolor-white" 
     :class="{open : sidebarrights}" 
@@ -10,12 +10,12 @@
         <div class="log-userheaderportrait clearfix">
           <button @click="logout"><i class="logout"></i></button>
           <div class="header-portarait gl-bgcolor-gray-ed">
-            <img src="">
+            <img :src="loginuserdata.icon_link">
           </div>
 
           <div class="log-userinformations">
-            <p class="log-userName gl-bgcolor-gray-ed"></p>
-            <p class="log-introduce gl-bgcolor-gray-ed"></p>
+            <p class="log-userName gl-fb">{{loginuserdata.user_name}}</p>
+            <p class="log-introduce gl-fn">{{loginuserdata.company}}  {{loginuserdata.position}}</p>
           </div>
         </div>
 
@@ -69,7 +69,8 @@ export default {
     ...mapGetters([
       'sidebarrightopenclose',
       'whetherthelogins',
-      'sidebarrights'
+      'sidebarrights',
+      'loginuserdata'
     ])
   },
   methods: {
@@ -140,18 +141,26 @@ export default {
     height: 60px;
     border-radius: 50%;
     margin-right: 15px;
+    overflow: hidden;
     float: left;
+    img{
+      width: 100%;
+    }
   }
   .log-userinformations{
     float: left;
      p.log-userName {
         height:24px;
-        width: 150px;
-        margin: 5px 0 8px;
+        margin: 5px 0 5px;
+        line-height:24px;
+        color: #222;
+        font-size: 20px;
       }
      p.log-introduce {
       height:16px;
-      width: 100px;
+      line-height:16px;
+      color: #dcdcdc;
+      font-size: 14px;
     }
   }
   .log-func{
