@@ -161,7 +161,7 @@ export default {
       .appcollection-images{
         box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
         margin-bottom: 30px;
-        height: calc(100vh - 320px);
+        height: calc(100vh - 420px);
       }
       img{
         height: 100%;
@@ -174,7 +174,7 @@ export default {
   }
   .itms-collection{
     margin: 0 auto;
-    width: calc((100vh - 320px) * 0.582);
+    width: calc((100vh - 420px) * 0.582);
   }
   .appcollection-informations{
     height: 120px;
