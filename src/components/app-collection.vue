@@ -160,22 +160,20 @@ $designWidth : 350;
         transform: scale(1);
       }
       .appcollection-images{
-        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
         margin-bottom: 30px;
-        height: calc(100vh - 400px);
+        height: calc(100vh - 350px);
       }
       img{
         height: 100%;
-        // width: 100%;
-        vertical-align: -4px;
         border-radius:2px;
+        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
       }
 
     } 
   }
   .itms-collection{
     margin: 0 auto;
-    width: calc((100vh - 400px) * 0.562);
+    width: calc((100vh - 350px) * 0.562);
   }
   .appcollection-informations{
     height: 120px;
