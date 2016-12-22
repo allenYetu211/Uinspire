@@ -4,6 +4,7 @@
       <i class="sprite_close"></i>
     </button>
       <ul>
+      <div class="itms-collection">
         <li 
         v-for="(list, list_index) in storageAppCollection" 
         :class="{active: list_index === showCollectionIndex}"
@@ -33,6 +34,7 @@
             </p>
           </div>
         </li>
+        </div>
       </ul>
     <div class="arrow"   @keyup.left="_prev"  @keyup.right="_next">
         <div class="arrow-prev">
@@ -64,8 +66,10 @@ export default {
     ])
   },
   mounted () {
-    // this.$on('_postData', () => {
-    // })
+    this.$nextTick(() => {
+      let filmsLi = document.querySelector('li.films_li')
+      console.log(filmsLi)
+    })
   },
   watch: {
     collectionPopup: function () {
@@ -100,7 +104,7 @@ export default {
     transformUpdata () {
       let lateLi = document.querySelectorAll('li.films-li')
       for (let i = 0; i < lateLi.length; i++) {
-        lateLi[i].style.cssText = 'transition: transform 0.2s;transform:translateX(-' + this.showCollectionIndex * 100 + '%);opacity: 1'
+        lateLi[i].style.cssText = 'transition: transform 0.2s, opacity: 0.3s;transform:translateX(-' + this.showCollectionIndex * 100 + '%);'
       }
     }
   }
@@ -124,7 +128,7 @@ export default {
     background-color: transparent;
     border: none;
     cursor: pointer;
-
+    z-index: 99;
     i{
         display: block;
         width: 30px;
@@ -134,21 +138,21 @@ export default {
     }
   }
   ul{
-    width: 25%;
     height: 100%;
-    max-width: 280px;
-    min-width: 220px;
     margin: 0 auto;
     overflow: hidden;
     white-space: nowrap;
+    display: -ms-flexbox;
     display: flex;
+    -ms-flex-align: center;
     align-items: center;
      li {
-      min-width: 100%;
-      width: 100%;
+      // min-width: 100%;
+      // width: 100%;
       display: inline-block;
       transform: scale(0.8);
-      transition: transform 0.3s;
+      opacity: 0;
+      transition: transform 0.3s, opacity 0.3s;
       padding: 0 5px;
       &.active{
         opacity: 1;
@@ -157,17 +161,23 @@ export default {
       .appcollection-images{
         box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
         margin-bottom: 30px;
+        height: calc(100vh - 320px);
       }
       img{
-        width: 100%;
+        height: 100%;
+        // width: 100%;
         vertical-align: -4px;
         border-radius:2px;
       }
 
     } 
   }
+  .itms-collection{
+    margin: 0 auto;
+    width: calc((100vh - 320px) * 0.582);
+  }
   .appcollection-informations{
-
+    height: 120px;
     h2,
     p:nth-child(1),
     p:nth-child(2),
