@@ -71,14 +71,14 @@ export default {
   },
   watch: {
     collectionPopup: function () {
-      // if (this.collectionPopup) {
-      setTimeout(() => {
-        let lateLi = document.querySelectorAll('li.films-li')
-        for (let i = 0; i < lateLi.length; i++) {
-          lateLi[i].style.cssText = 'transition: all 0s;transform:translateX(-' + this.showCollectionIndex * 100 + '%);'
-        }
-      }, 200)
-      // }
+      if (this.collectionPopup) {
+        setTimeout(() => {
+          let lateLi = document.querySelectorAll('li.films-li')
+          for (let i = 0; i < lateLi.length; i++) {
+            lateLi[i].style.cssText = 'transition: transform 0s; transform:translateX(-' + this.showCollectionIndex * 100 + '%);'
+          }
+        }, 200)
+      }
     }
   },
   methods: {
@@ -102,7 +102,7 @@ export default {
     transformUpdata () {
       let lateLi = document.querySelectorAll('li.films-li')
       for (let i = 0; i < lateLi.length; i++) {
-        lateLi[i].style.cssText = 'transition: transform 0.2s, opacity: 0.3s;transform:translateX(-' + this.showCollectionIndex * 100 + '%);'
+        lateLi[i].style.cssText = 'transform:translateX(-' + this.showCollectionIndex * 100 + '%) scale(1);'
       }
     }
   }
@@ -121,10 +121,11 @@ $designWidth : 350;
   right: 0;
   bottom: 0;
   z-index: 99;
+
   button.collectionClose{
     position: absolute;
-    right: 30px;
-    top: 80px;
+    right: 10px;
+    top: 75px;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -150,27 +151,21 @@ $designWidth : 350;
       // min-width: 100%;
       // width: 100%;
       display: inline-block;
-      
       opacity: 0;
-      transition: transform 1s, opacity 0.3s;
+      transition: transform .3s .05s, opacity 0.3s;
       padding: 0 5px;
       &.active{
         opacity: 1;
-        .appcollection-images{
-          transform: scale(1);
-        }
+        transform:scale(1);
       }
       .appcollection-images{
         margin-bottom: 30px;
         height: calc(100vh - 350px);
-        transform: scale(0.2);
-        transition: transform 2.2s;
       }
       img{
         height: 100%;
         border-radius:2px;
         box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
-
       }
 
     } 
@@ -194,7 +189,9 @@ $designWidth : 350;
     }
     h2{
       border-bottom: 1px solid #222;
-      padding-bottom: 10px;
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+      line-height:2.5;
     }
     p{
       line-height: 2.5;
@@ -225,8 +222,9 @@ $designWidth : 350;
   button{
     background:transparent;
     border:none;
+    transition: opacity .2s;
     &.transparency{
-      opacity: 0.3;
+      opacity: 0.08;
     }
   }
     &-prev,&-next{
