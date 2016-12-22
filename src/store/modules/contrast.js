@@ -11,7 +11,8 @@ import {
   LESSFILMSLIDE,
   DELETEMOODBRADOD,
   SHOWCOLSEMOODBRADOD,
-  USERHISTORY
+  USERHISTORY,
+  CLOSERCOMTRAST
 } from '../actions'
 
 const state = {
@@ -45,6 +46,9 @@ const mutations = {
   [COMTRAST] (state) {
     state.comtrast = !state.comtrast
     state.filmslide = false
+  },
+  [CLOSERCOMTRAST] (state) {
+    state.comtrast = false
   },
   [FILMSLIDE] (state, inx) {
     state.actionindex = inx

@@ -22,8 +22,8 @@
       </ul>
     </div>
       <transition
-          enter-active-class="animated fadeIn"
-          leave-active-class="animated fadeOut"
+          enter-active-class="animated appCollection fadeIn"
+          leave-active-class="animated appCollection fadeOut"
         >
       <app-collection v-show="collectionPopup" :class="{open: collectionPopup}"></app-collection>
     </transition>

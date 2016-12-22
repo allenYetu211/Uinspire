@@ -102,23 +102,26 @@
                 <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"   type="text" name="" :value="loginlogonEmail">
                 <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" 
                 @keyup.enter="_userlogin"
-                @keyup.delete="_deleteLogin"
-                @focus="userpasError = false"  
+                @keyup="_test"
                 v-model="loginuserpassword"  
                 placeholder="Password"   
                 type="password" 
                  >
                 <a class="gl-ftcolor-gray" href="#">Forgot?</a>
               </div>
-              <div class="user-pas-error" v-if="userpasError">
+   <!--            <div class="user-pas-error" v-if="userpasError">
                   登录失败-用户名或者密码错误
-                </div>
+                </div> -->
 
               <div class="login-registered">
                   <button 
                   @click="_userlogin" 
-                  class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >SIGN IN</button>
-                </div>
+                  class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >
+      
+                    <span v-if="!upError">SIGN IN</span>
+                    <span v-else>PASSWORD ERROR</span>
+                  </button>
+                 </div>
             </div>
         </transition>
       </div>
@@ -177,7 +180,13 @@ export default {
     _deleteLogin () {
       this.changestate()
     },
+    _test () {
+      this.changestate()
+    },
     _userlogin () {
+      if (this.loginuserpassword.length === 0) {
+        return
+      }
       let _userinformation = []
       let userinfor = {}
       userinfor['password'] = this.loginuserpassword
