@@ -121,7 +121,6 @@ $designWidth : 350;
   right: 0;
   bottom: 0;
   z-index: 99;
-
   button.collectionClose{
     position: absolute;
     right: 30px;
@@ -151,22 +150,27 @@ $designWidth : 350;
       // min-width: 100%;
       // width: 100%;
       display: inline-block;
-      transform: scale(0.8);
+      
       opacity: 0;
-      transition: transform 0.3s, opacity 0.3s;
+      transition: transform 1s, opacity 0.3s;
       padding: 0 5px;
       &.active{
         opacity: 1;
-        transform: scale(1);
+        .appcollection-images{
+          transform: scale(1);
+        }
       }
       .appcollection-images{
         margin-bottom: 30px;
         height: calc(100vh - 350px);
+        transform: scale(0.2);
+        transition: transform 2.2s;
       }
       img{
         height: 100%;
         border-radius:2px;
         box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+
       }
 
     } 

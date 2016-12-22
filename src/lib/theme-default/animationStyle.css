@@ -112,7 +112,16 @@
     transform: translate3d(350px, 0, 0);
   }
 }
-
+.appCollectionFade-enter-active {
+  opacity: 1;
+ 
+}
+.appCollectionFade-leave-active{
+  opacity: 0;
+}
+.appCollectionFade-enter-active, .appCollectionFade-leave-active {
+ transition: opacity 0.5;
+}
 
 /*
   *
