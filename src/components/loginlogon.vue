@@ -1,6 +1,8 @@
 <template>
     <div class="startlogin">
-      <div class="import-email gl-bgcolor-white" :class="{'logon': getreturncode, 'login': loginPopup}">
+      <transition
+      name="loginlogonAnimated" tag="em">
+      <div class="import-email gl-bgcolor-white" v-if='loginSidebar' :class="{'logon': getreturncode, 'login': loginPopup}">
         <transition name="loginlogon" tag="div">
           <div v-if='!returnimportemail'>
             <h2 class="gl-fb">Join <span class="gl-ftcolor-theme">UI</span>nspire.io</h2>
@@ -12,40 +14,52 @@
               type="email" 
               v-model="loginlogonEmail"
               autofocus="autofocus"
-              @focus="errorEmail = false"
+              @keyup="errorEmail = false"
               @keyup.enter="_loginLogon"
               name="">
-              <div v-if="errorEmail" class="errorEmail">
-                Please Check E-mail format
-              </div>
             </div>
             <div class="login-registered">
               <button 
               @click="_loginLogon" 
-              class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >ENTER</button>
+              class="gl-bgcolor-black gl-ftcolor-white  gl-fb"
+              :class="{'pasError': errorEmail}" >
+                <span v-if="!errorEmail">ENTER</span>
+                <span v-else>ERROR</span>
+              </button>
             </div>
           </div>
         </transition>
 
-         <transition name="loginlogon" tag="div">
+         <transition name="loginlogon" tag="div" @after-enter="loginEnter">
           <div v-show="registereduser">
             <div class="logon-information">
               <h2 class="gl-fb">Hello, <span class="gl-ftcolor-theme">Designer</span></h2>
               <p class="gl-ftcolor-gray gl-fn">Please check your E-mail, and type the code to register.</p>
-              <div class="VerificationCode clearfix">
-                  <input class="registeredCode"  @keyup.enter="_verifynext"  v-model="registered"  type="text" name="" maxlength = '6' autofocus="autofocus">
-                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[0]}}</span>
-                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[1]}}</span>
-                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[2]}}</span>
-                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[3]}}</span>
-                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[4]}}</span>
-                  <span  class="gl-bgcolor-gray-ed gl-fb"> {{registered[5]}}</span>
+              <div class="VerificationCode gl-fb clearfix">
+                  <input class="registeredCode" 
+                  ref="loginpwds"  
+                  @keyup.enter="_verifynext"  
+                  v-model="registered"  
+                  type="text" 
+                  name="" 
+                  maxlength = '6'
+                  @keyup="verifycodes"
+                  >
+                  <span :class="{'active': registered.length === 0}"  class="gl-bgcolor-gray-ed gl-fb"> {{registered[0]}}</span>
+                  <span :class="{'active': registered.length === 1}"  class="gl-bgcolor-gray-ed gl-fb"> {{registered[1]}}</span>
+                  <span :class="{'active': registered.length === 2}"  class="gl-bgcolor-gray-ed gl-fb"> {{registered[2]}}</span>
+                  <span :class="{'active': registered.length === 3}"  class="gl-bgcolor-gray-ed gl-fb"> {{registered[3]}}</span>
+                  <span :class="{'active': registered.length === 4}"  class="gl-bgcolor-gray-ed gl-fb"> {{registered[4]}}</span>
+                  <span :class="{'active': registered.length === 5}"  class="gl-bgcolor-gray-ed gl-fb"> {{registered[5]}}</span>
               </div>
               <div class="login-registered">
                 <button 
                 @click="_verifynext"
-               
-                class="gl-bgcolor-black gl-ftcolor-white gl-fb" >ENTER</button>
+                class="gl-bgcolor-black gl-ftcolor-white gl-fb"
+                :class="{'pasError': verifyCode}" >
+                <span v-if="!verifyCode">ENTER</span>
+                <span v-else>ERROR</span>
+                </button>
                 <button 
                 class="gl-bgcolor-gray gl-ftcolor-white gl-fb" >RESENT</button>
               </div>
@@ -54,7 +68,7 @@
 
         </transition>
 
-        <transition name="loginlogon" tag="div">
+        <transition name="loginlogon" tag="div" @after-enter="loginEnter">
           <div v-show="logonverifynext">
             <div class="logon-information">
               <h2 class="gl-fb">Hello, <span class="gl-ftcolor-theme">Designer</span></h2>
@@ -62,7 +76,7 @@
             
             <div class="user-informations">
               
-              <input @focus="validationPassWord = false" v-model="logonPassword" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Password"   type="password" name="">
+              <input @focus="validationPassWord = false" ref="loginpwd"  v-model="logonPassword" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Password"   type="password" name="">
               <input @focus="validationlogonName = false" v-model="logonName" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Name"   type="text" name="">
               <input @focus="validationlogonCompany = false" v-model="logonCompany" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Company"   type="text" name="">
               <input @focus="validationlogonJob = false"  @keyup.enter="_logonuser" v-model="logonJob" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"  placeholder="Job Title"   type="text" name="">
@@ -80,13 +94,14 @@
                   </div>
                   <button 
                   @click="_logonuser"
-                  class="gl-bgcolor-black gl-ftcolor-white gl-fb" >REGISTER</button>
+                  class="gl-bgcolor-black gl-ftcolor-white gl-fb" :class="{'pasError': upError}">REGISTER</button>
                 </div>
+
             </div>
           </div>
         </transition>
 
-        <transition name="loginlogon" tag="div">
+        <transition name="loginlogon" tag="div" @after-enter="loginEnter">
             <div v-if="loginPopup">
               <div class="headerportrait gl-bgcolor-gray-ed">
                 <img :src="loginuserdata.icon_link">
@@ -99,8 +114,9 @@
               <!-- <div class="useremail gl-bgcolor-gray-ed">{{loginlogonEmail}}</div> -->
 
               <div class="importPassword">
-                <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn"   type="text" name="" :value="loginlogonEmail">
+                <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" disabled="disabled"   type="text" name="" :value="loginlogonEmail">
                 <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" 
+                ref="loginpwd"
                 @keyup.enter="_userlogin"
                 @keyup="_test"
                 v-model="loginuserpassword"  
@@ -109,22 +125,22 @@
                  >
                 <a class="gl-ftcolor-gray" href="#">Forgot?</a>
               </div>
-   <!--            <div class="user-pas-error" v-if="userpasError">
-                  登录失败-用户名或者密码错误
-                </div> -->
-
               <div class="login-registered">
+                  <div :class="{'success': userSuccess}">
+                    <span class="gl-ftcolor-white gl-fb">SUCCESS</span>
+                  </div>
                   <button 
                   @click="_userlogin" 
-                  class="gl-bgcolor-black gl-ftcolor-white  gl-fb" >
+                  class="gl-bgcolor-black gl-ftcolor-white  gl-fb" :class="{'pasError': upError}">
       
                     <span v-if="!upError">SIGN IN</span>
-                    <span v-else>PASSWORD ERROR</span>
+                    <span v-else>ERROR</span>
                   </button>
                  </div>
             </div>
         </transition>
       </div>
+      </transition>
     </div>
 </template>
 
@@ -164,7 +180,10 @@ export default {
       'loginuserdata',
       'logonsuccess',
       'emailError',
-      'upError'
+      'upError',
+      'userSuccess',
+      'loginSidebar',
+      'verifyCode'
     ])
   },
   methods: {
@@ -175,7 +194,8 @@ export default {
       'verifynext',
       'userlogin',
       'userlogonsuccess',
-      'changestate'
+      'changestate',
+      'verifycodes'
     ]),
     _deleteLogin () {
       this.changestate()
@@ -195,9 +215,6 @@ export default {
       this.userlogin(_userinformation)
     },
     _loginLogon () {
-      let inputs = document.getElementsByClassName('registeredCode')[0]
-      inputs.focus()
-      console.log(inputs)
       let pattern = /\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/
       if (!pattern.test(this.loginlogonEmail)) {
         this.errorEmail = true
@@ -238,6 +255,10 @@ export default {
       logon['code'] = this.registered
       verifyCode.push(logon)
       this.verifynext(verifyCode)
+    },
+    loginEnter () {
+      this.$refs.loginpwd.focus()
+      this.$refs.loginpwds.focus()
     }
   }
 }
@@ -278,8 +299,9 @@ export default {
         div{
           position:absolute;
           width:151px;
-          height: 50px;
+          height: 52px;
           left: 50%;
+          top: -1px;
           transform: translateX(-50%) scaleX(0);
           background: #2EF037;
           transform-origin: left;
@@ -301,6 +323,11 @@ export default {
         }
         button{
           margin:0px 5px;
+          transition: background-color 0.2s;
+          &.pasError {
+            background-color:#f44000;
+            animation: shake 0.3s;
+          }
         }
       }
       h2{
@@ -352,9 +379,6 @@ export default {
         font-size:16px;
         margin-bottom:50px;
 
-      }
-      .useremail{
-        
       }
       .importPassword{
         position:relative;
@@ -436,6 +460,11 @@ export default {
           left: 0;
           right: 0;
           opacity: 0;
+          z-index: 98;
+          // width: 120%;
+          // letter-spacing: 1.28em;
+          // font-size: 36px;
+          // background: rgba(0,0,0,0);
         }
         span {
           display:block;
@@ -445,6 +474,18 @@ export default {
           height: 60px;
           line-height: 60px;
           font-size: 36px;
+          position: relative;
+          &.active:after{
+            display: block;
+            content: '';
+            position:absolute;
+            width: 1px;
+            left: 30px;
+            top: 15px;
+            bottom: 15px;
+            background-color:#000;
+            animation: animated_flash 1.2s ease infinite forwards;
+          }
         }
       }   
 }

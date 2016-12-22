@@ -21,7 +21,8 @@ import {
   ADDCOLLECTIONINDEX,
   LESSCOLLECTIONINDEX,
   LOGOUT,
-  CHANGESTATE
+  CHANGESTATE,
+  VERIFYCODES
 } from '../actions'
 
 const state = {
@@ -46,14 +47,16 @@ const state = {
   getAppCollection: '',     // 存储APP对应图集
   collectionPopup: false,   // APP弹框浮层
   storageAppCollection: '', // 存储列表数据
-  showCollectionIndex: 0,  // 显示对应图集下标
-  userpas_Error: false
+  showCollectionIndex: 0,   // 显示对应图集下标
+  userpas_Error: false,     // 密码错误显示状态
+  userSuccess: false,       // 密码成功状态
+  verifyCode: false,        // 验证码状态
+  userInformation: ''
 }
 
 const mutations = {
   [LOADTEXT] (state) {
     state.text = API.loadProjectTextData()
-    console.log(state.text)
   },
   [POSTIMGDATA] (state, _data) {
     let count = 0
@@ -111,7 +114,6 @@ const mutations = {
   },
   [IMPORTEMAIL] (state, _email) {
     API.validationEmail(_email, (userstate) => {
-      console.log(userstate)
       // 邮箱未注册
       if (userstate.code === '10048') {
         state.importemail = !state.importemail
@@ -126,11 +128,17 @@ const mutations = {
   },
   [SETRETURNCODE] (state, _userinformation) {
     API.logonUser(_userinformation, (requey) => {
-      console.log(requey)
-      Cke.setCookie('uinspire', requey.data.data.login_uid)
-      state.logonsuccess = true
-      state.logonuser = false
-      state.setreturncode = false
+      if (requey.data.code === '0') {
+        Cke.setCookie('uinspire', requey.data.data.login_uid)
+        state.logonsuccess = true
+        setTimeout(() => {
+          state.logonuser = false
+          state.setreturncode = false
+          state.verifynext = false
+          state.importemail = false
+          state.theSidebar = false
+        }, 1000)
+      }
       // state.setreturncode = !state.setreturncode
       // state.logonuser = false
       // state.theSidebar = false
@@ -159,27 +167,31 @@ const mutations = {
     API.whetherthelogin(uinspire, (loginstate) => {
       // 登录返回 0
       if (loginstate.data.code === '0' || loginstate.data.code === '100490') {
+        console.log(1)
         state.sidebarright = !state.sidebarright
+        state.theSidebar = false
       } else {
+        console.log(2)
         state.whetherthelogin = true
         state.theSidebar = true
       }
     })
     // 让用户处于登录状态的时候 右侧边栏展开收起
-    if (state.whetherthelogin) {
-      state.theSidebar = true
-      // state.sidebarright = false
-    } else {
-      state.theSidebar = false
-      // state.sidebarright = true
-    }
+    // if (!state.whetherthelogin) {
+    //   console.log(3)
+    //   state.theSidebar = true
+    //   // state.sidebarright = false
+    // } else {
+    //   console.log(4)
+    //   state.theSidebar = false
+    //   // state.sidebarright = true
+    // }
   },
   // 验证成功 下一步
   [VERIFYNEXT] (state, _verify) {
-    console.log(_verify)
     API.verifyCode(_verify, (_vcode) => {
-      console.log('_vcode:', _vcode)
       if (_vcode.code === '10044') {
+        state.verifyCode = true
         console.log('验证码错误')
         return
       }
@@ -189,19 +201,27 @@ const mutations = {
       // state.theSidebar = false
     })
   },
+  [VERIFYCODES] (state) {
+    state.verifyCode = false
+  },
   [CHANGESTATE] (state) {
     state.userpas_Error = false
   },
   [USERLOGIN] (state, _userinformation) {
     API.userLogin(_userinformation, (back) => {
       if (back.data.code === '0') {
-        state.theSidebar = false
-        state.whetherthelogin = false
-        state.userpas_Error = false
+        state.userInformation = back.data.data
+        console.log('state.userInformation:', state.userInformation)
         Cke.setCookie('uinspire', back.data.data.login_uid)
+        state.userSuccess = true
+        setTimeout(() => {
+          state.userSuccess = false
+          state.theSidebar = false
+          state.whetherthelogin = false
+          state.userpas_Error = false
+        }, 1000)
       } else if (back.data.code === '10049') {
         state.userpas_Error = true
-        console.log('state.userpas_Error:', state.userpas_Error)
       }
     })
   },
@@ -228,7 +248,6 @@ const mutations = {
   [CLOSERAPPCOLLECTION] (state) {
     // 修改app-collection state
     state.collectionPopup = false
-    console.log('state.collectionPopup:', state.collectionPopup)
   },
   [LOGOUT] (state) {
     API.logout((callback) => {

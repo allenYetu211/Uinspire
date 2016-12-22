@@ -26,6 +26,9 @@ export const uinspireioDate = state => state.upload.uinspireioDate
 // 用户登录状态
 export const whetherthelogins = state => state.upload.whetherthelogin
 
+// 用户登录成功
+export const userSuccess = state => state.upload.userSuccess
+
 // 用户点击后显示登录或侧边栏
 export const loginSidebar = state => state.upload.theSidebar
 
@@ -35,8 +38,14 @@ export const loginPopup = state => state.upload.loginPopup
 // 用户登录信息
 export const loginuserdata = state => state.upload.loginuserdata
 
+// 登录成功用户信息
+export const userInformation = state => state.upload.userInformation
+
 // 验证成功下一步注册
 export const logonverifynext = state => state.upload.verifynext
+
+// 验证码状态
+export const verifyCode = state => state.upload.verifyCode
 
 // 注册用户
 export const registereduser = state => state.upload.logonuser

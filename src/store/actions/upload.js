@@ -32,6 +32,10 @@ export const importemail = ({commit}, _email) => { commit(IMPORTEMAIL, _email) }
 export const SETRETURNCODE = 'setreturncode'
 export const setreturncode = ({commit}, _userinformation) => { commit(SETRETURNCODE, _userinformation) }
 
+// 验证码状态
+export const VERIFYCODES = 'verifycodes'
+export const verifycodes = ({commit}) => { commit(VERIFYCODES) }
+
 // 注册用户
 export const LOGONUSER = 'logonuser'
 export const logonuser = ({commit}) => { commit(LOGONUSER) }
