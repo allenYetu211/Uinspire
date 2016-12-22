@@ -20,7 +20,8 @@ import {
   CLOSERAPPCOLLECTION,
   ADDCOLLECTIONINDEX,
   LESSCOLLECTIONINDEX,
-  LOGOUT
+  LOGOUT,
+  CHANGESTATE
 } from '../actions'
 
 const state = {
@@ -32,7 +33,8 @@ const state = {
   filtercategory: [],
   uinspireioDate: '',
   loginuserdata: '',
-  importemail: false,       // 显示注册页面弹框
+  importemail: false,       // 验证邮箱
+  emailError: false,        // 邮箱错误
   setreturncode: false,     // 显示登录页面
   logonuser: false,         // 显示验证码信息
   whetherthelogin: false,   // 用户是否登录状态
@@ -44,7 +46,8 @@ const state = {
   getAppCollection: '',     // 存储APP对应图集
   collectionPopup: false,   // APP弹框浮层
   storageAppCollection: '', // 存储列表数据
-  showCollectionIndex: 0   // 显示对应图集下标
+  showCollectionIndex: 0,  // 显示对应图集下标
+  userpas_Error: false
 }
 
 const mutations = {
@@ -123,7 +126,11 @@ const mutations = {
   },
   [SETRETURNCODE] (state, _userinformation) {
     API.logonUser(_userinformation, (requey) => {
+      console.log(requey)
+      Cke.setCookie('uinspire', requey.data.data.login_uid)
       state.logonsuccess = true
+      state.logonuser = false
+      state.setreturncode = false
       // state.setreturncode = !state.setreturncode
       // state.logonuser = false
       // state.theSidebar = false
@@ -132,9 +139,11 @@ const mutations = {
   },
   [USERLOGONSUCCESS] (state) {
      // state.setreturncode = !state.setreturncode
-    state.logonuser = false
-    state.theSidebar = false
-    state.whetherthelogin = false
+    setTimeout(() => {
+      state.logonuser = false
+      state.theSidebar = false
+      state.whetherthelogin = false
+    }, 2000)
   },
   [LOGONUSER] (state) {
     state.logonuser = !state.logonuser
@@ -169,19 +178,30 @@ const mutations = {
   [VERIFYNEXT] (state, _verify) {
     console.log(_verify)
     API.verifyCode(_verify, (_vcode) => {
-      console.log(_vcode)
+      console.log('_vcode:', _vcode)
+      if (_vcode.code === '10044') {
+        console.log('验证码错误')
+        return
+      }
       state.verifynext = true
       state.logonuser = false
       state.setreturncode = true
       // state.theSidebar = false
     })
   },
+  [CHANGESTATE] (state) {
+    state.userpas_Error = false
+  },
   [USERLOGIN] (state, _userinformation) {
     API.userLogin(_userinformation, (back) => {
       if (back.data.code === '0') {
         state.theSidebar = false
         state.whetherthelogin = false
+        state.userpas_Error = false
         Cke.setCookie('uinspire', back.data.data.login_uid)
+      } else if (back.data.code === '10049') {
+        state.userpas_Error = true
+        console.log('state.userpas_Error:', state.userpas_Error)
       }
     })
   },

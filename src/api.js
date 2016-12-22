@@ -130,12 +130,10 @@ export default {
         code: _data[0].code
       }
     }).then((response) => {
-      console.log(typeof callback === 'function')
+      console.log(response)
       if (typeof callback === 'function') {
         callback(response.data)
       }
-    }).catch((error) => {
-      console.log(error)
     })
   },
   // 注册用户

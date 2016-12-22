@@ -75,3 +75,7 @@ export const lesscollectionindex = ({commit}) => { commit(LESSCOLLECTIONINDEX) }
 // Log out
 export const LOGOUT = 'logout'
 export const logout = ({commit}) => { commit(LOGOUT) }
+
+// change login state
+export const CHANGESTATE = 'changestate'
+export const changestate = ({commit}) => { commit(CHANGESTATE) }

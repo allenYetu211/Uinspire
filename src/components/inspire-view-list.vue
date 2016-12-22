@@ -1,5 +1,5 @@
 <template>
-  <li  :class="{lists: listArrangestate ,active : hover}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
+  <li  :class="{lists: listArrangestate ,active : hover, animated: like}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
     <div class="imagesShow-box-shadow" :class="{active : hover}">
       <img :src="itmes.img + '?x-oss-process=image/resize,w_600'">
         <div class="imagesShow-paypal"  @click.stop="" :class="{active : hover}">
@@ -77,7 +77,9 @@ export default{
       this.hover = true
     },
     _mouseout () {
-      if (this.like === true) return
+      if (this.like === true) {
+        return
+      }
       this.hover = false
     },
     _postData () {
@@ -117,11 +119,16 @@ li {
   float: left;
   margin: 15px;
   border-radius: 2px;
-  transition: transform .4s .2s, box-shadow .6s;
+  transition: transform .25s, box-shadow .25s;
   overflow: hidden;
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
   &.active{
-    box-shadow: 0px 9px 18px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 4px 9px 0px rgba(0,0,0,0.12);
+  }
+  &.animated{
+    // animation: animateds_start 0.3s forwards;
+    transform: translateY(-8px);
+    box-shadow: 0px 9px 18px 0px rgba(0,0,0,0.2);
   }
   img{
     width:100%;
