@@ -13,6 +13,9 @@ export const lesslike = ({commit}) => { commit(LESSLIKE) }
 export const COMTRAST = 'comtrast'
 export const comtrast = ({commit}) => { commit(COMTRAST) }
 
+export const CLOSERCOMTRAST = 'closecomtrast'
+export const closecomtrast = ({commit}) => { commit(CLOSERCOMTRAST) }
+
 export const COMTRASTOPEN = 'comtrastopen'
 export const comtrastopen = ({commit}) => { commit(COMTRASTOPEN) }
 

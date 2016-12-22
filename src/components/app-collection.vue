@@ -71,14 +71,14 @@ export default {
   },
   watch: {
     collectionPopup: function () {
-      if (this.collectionPopup) {
-        setTimeout(() => {
-          let lateLi = document.querySelectorAll('li.films-li')
-          for (let i = 0; i < lateLi.length; i++) {
-            lateLi[i].style.cssText = 'transition: all 0s;transform:translateX(-' + this.showCollectionIndex * 100 + '%);'
-          }
-        }, 200)
-      }
+      // if (this.collectionPopup) {
+      setTimeout(() => {
+        let lateLi = document.querySelectorAll('li.films-li')
+        for (let i = 0; i < lateLi.length; i++) {
+          lateLi[i].style.cssText = 'transition: all 0s;transform:translateX(-' + this.showCollectionIndex * 100 + '%);'
+        }
+      }, 200)
+      // }
     }
   },
   methods: {
