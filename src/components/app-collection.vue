@@ -112,7 +112,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+@function px2rem( $px ){
+  @return $px*320/$designWidth/20 + rem;
+}
+$designWidth : 350;
 .app-collection{
   position: fixed;
   top:0;
