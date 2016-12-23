@@ -47,21 +47,24 @@ export default {
          border-bottom: 1px solid #f3f3f3;
          flex-flow: column;
          position: relative;
+         background-image: linear-gradient(-180deg, #FFFFFF 0%, #FAFAFA 74%, #FEFEFE 100%);
          &:hover {
+          
           a {
-            transform: translateY(-6px) rotate(6deg);
+            transform: translateY(-8px) rotate(6deg);
           }
           p {
             opacity: 1;
-            transform: translateY(-6px);
+            transform: translateY(-8px);
           }
          }
          p{
-            width: 60%;
+            width: 100%;
+            padding: 0 16%;
             text-overflow: ellipsis;
             text-align: center;
             position: absolute;
-            bottom: 20px;
+            bottom: 26px;
             opacity: 0;
             font-size:12px;
             white-space: nowrap;
@@ -81,7 +84,8 @@ export default {
         img{
           width: 100%;
           border-radius: 22%;
-          box-shadow: 0px 1px 2px 0px rgba(0,0,0,.15);
+          box-shadow: 0px 1px 2px 0px rgba(0,0,0,.1);
+          // border: 0.5px solid #f3f3f3;
         }
       }
     }
