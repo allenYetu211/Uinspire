@@ -67,7 +67,7 @@ export default{
         this.lesslike()
         this.lesscontrasts(this.itmes.img)
       } else {
-        if (this.likecount > 5) return
+        // if (this.likecount > 5) return
         this.addlike()
         this.contrasts(this.itmes.img)
       }
@@ -127,8 +127,8 @@ li {
   }
   &.animated{
     // animation: animateds_start 0.3s forwards;
-    transform: translateY(-8px);
-    box-shadow: 0px 9px 18px 0px rgba(0,0,0,0.2);
+    transform: translateY(-12px);
+    box-shadow: 0px 12px 20px 0px rgba(0,0,0,0.2);
   }
   img{
     width:100%;

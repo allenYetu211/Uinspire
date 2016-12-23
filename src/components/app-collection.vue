@@ -17,7 +17,7 @@
           
           <div class="appcollection-informations">
             <h2 class="gl-fb">{{list.name}}<span class="gl-nr">{{list.user_name}}</span></h2>
-            <p class="gl-fb">category <span class="gl-nr" v-for="categoryEn in list.category.name_en">{{categoryEn}}</span></p>
+            <p class="gl-fb">category <span class="gl-nr" v-for="categoryEn in list.category.name_en"> {{categoryEn}}</span></p>
             <p class="gl-fb">Tags 
             <span v-if="list.tag" class="gl-nr">{{list.tag}}</span>
             <span v-else class="gl-nr">No Tag</span>
@@ -160,22 +160,22 @@ $designWidth : 350;
       }
       .appcollection-images{
         margin-bottom: 30px;
-        height: calc(100vh - 350px);
+        height: calc(100vh - 420px);
       }
       img{
         height: 100%;
         border-radius:2px;
-        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
       }
 
     } 
   }
   .itms-collection{
     margin: 0 auto;
-    width: calc((100vh - 350px) * 0.562);
+    width: calc((100vh - 420px) * 0.562);
   }
   .appcollection-informations{
-    height: 120px;
+    height: 130px;
     h2,
     p:nth-child(1),
     p:nth-child(2),
@@ -185,6 +185,13 @@ $designWidth : 350;
         font-size: 12px;
         float: right;
         font-weight: 400;
+        margin:0px 0px 0px 5px;
+        &:after{
+          content:' /'
+        }
+        &:first-child:after{
+          content:''
+        }
       }
     }
     h2{
