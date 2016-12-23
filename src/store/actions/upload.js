@@ -83,3 +83,8 @@ export const logout = ({commit}) => { commit(LOGOUT) }
 // change login state
 export const CHANGESTATE = 'changestate'
 export const changestate = ({commit}) => { commit(CHANGESTATE) }
+
+// add AppWall Data
+export const ADDAPPWALLDATA = 'addappwalldata'
+export const addappwalldata = ({commit}) => { commit(ADDAPPWALLDATA) }
+

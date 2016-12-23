@@ -6,7 +6,6 @@ export default {
     document.cookie = name + '=' + escape(val)
   },
   getCookie (name) {
-    // let arr
     let reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)')
     if (document.cookie.match(reg)) {
       return unescape(document.cookie.match(reg)[2])
@@ -14,5 +13,10 @@ export default {
   },
   deleteCookie (name) {
     this.setCookie(name, '')
+  },
+  setDigital (digital) {
+    for (let name in digital) {
+      this.setCookie(name, digital[name])
+    }
   }
 }

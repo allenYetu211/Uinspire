@@ -64,3 +64,6 @@ export const storageAppCollection = state => state.upload.storageAppCollection
 
 // showAppCollection Index
 export const showCollectionIndex = state => state.upload.showCollectionIndex
+
+// appwall logodata
+export const applogodata = state => state.upload.applogodata

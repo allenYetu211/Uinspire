@@ -22,7 +22,8 @@ import {
   LESSCOLLECTIONINDEX,
   LOGOUT,
   CHANGESTATE,
-  VERIFYCODES
+  VERIFYCODES,
+  ADDAPPWALLDATA
 } from '../actions'
 
 const state = {
@@ -51,7 +52,9 @@ const state = {
   userpas_Error: false,     // 密码错误显示状态
   userSuccess: false,       // 密码成功状态
   verifyCode: false,        // 验证码状态
-  userInformation: ''
+  userInformation: '',
+  userCookieinformations: true,
+  applogodata: ''           // 存储logo
 }
 
 const mutations = {
@@ -126,10 +129,13 @@ const mutations = {
       }
     })
   },
+  // 用户注册
   [SETRETURNCODE] (state, _userinformation) {
     API.logonUser(_userinformation, (requey) => {
       if (requey.data.code === '0') {
-        Cke.setCookie('uinspire', requey.data.data.login_uid)
+        state.loginuserdata = requey.data.data
+        Cke.setDigital(state.loginuserdata)
+        Cke.setCookie('login_uid', requey.data.data.login_uid)
         state.logonsuccess = true
         setTimeout(() => {
           state.logonuser = false
@@ -163,7 +169,16 @@ const mutations = {
   },
   // 判断用户是否登录
   [WHETHERTHELOGIN] (state) {
-    let uinspire = Cke.getCookie('uinspire')
+    let uinspire = Cke.getCookie('login_uid')
+    if (state.userCookieinformations) {
+      let cookieInms = {}
+      cookieInms['icon_link'] = Cke.getCookie('icon_link')
+      cookieInms['user_name'] = Cke.getCookie('user_name')
+      cookieInms['position'] = Cke.getCookie('position')
+      cookieInms['company'] = Cke.getCookie('company')
+      state.loginuserdata = cookieInms
+      state.userCookieinformations = false
+    }
     API.whetherthelogin(uinspire, (loginstate) => {
       // 登录返回 0
       if (loginstate.data.code === '0' || loginstate.data.code === '100490') {
@@ -207,12 +222,15 @@ const mutations = {
   [CHANGESTATE] (state) {
     state.userpas_Error = false
   },
+  // 用户登录成功
   [USERLOGIN] (state, _userinformation) {
     API.userLogin(_userinformation, (back) => {
+      console.log(back.data.data)
       if (back.data.code === '0') {
         state.userInformation = back.data.data
-        console.log('state.userInformation:', state.userInformation)
-        Cke.setCookie('uinspire', back.data.data.login_uid)
+        // console.log(back)
+        Cke.setDigital(state.userInformation)
+        Cke.setCookie('login_uid', back.data.data.login_uid)
         state.userSuccess = true
         setTimeout(() => {
           state.userSuccess = false
@@ -251,11 +269,17 @@ const mutations = {
   },
   [LOGOUT] (state) {
     API.logout((callback) => {
-      Cke.deleteCookie('uinspire')
+      Cke.deleteCookie('login_uid')
       state.sidebarright = false
       state.importemail = true
       state.loginPopup = false
       state.importemail = false
+    })
+  },
+  // 存储applogodata
+  [ADDAPPWALLDATA] (state) {
+    API.getAppLogodata((callback) => {
+      state.applogodata = callback.data.data
     })
   }
 }

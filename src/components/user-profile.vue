@@ -2,22 +2,23 @@
 <div class="the-personal-data">
 
   <div class="personal">
-    <div class="personal-headportrait gl-bgcolor-gray-f7"></div>
-    <p class=" gl-bgcolor-gray-f7"></p>
-    <p class=" gl-bgcolor-gray-f7"></p>
+    <div class="personal-headportrait gl-bgcolor-gray-f7">
+      <img :src="userInformation.icon_link">
+    </div>
+    <p class="gl-fb">{{userInformation.user_name}}</p>
+    <p class="">{{userInformation.company}} {{userInformation.position}}</p>
   </div>
-
   <div class="personal-infordata">
 
     <div class="personal-validation">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" type="email" name="" placeholder="Email">
+      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" disabled="disabled" :value="userInformation.email" type="email" name="" placeholder="Email">
       <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" type="password" name="" placeholder="Password">
     </div>
 
     <div class="personal-validation">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" type="text" name="" placeholder="Name">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" type="text" name="" placeholder="Company">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" type="text" name="" placeholder="Job Title">
+      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" :value="userInformation.user_name" type="text" name="" placeholder="Name">
+      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" :value="userInformation.company" type="text" name="" placeholder="Company">
+      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" :value="userInformation.position" type="text" name="" placeholder="Job Title">
     </div>
 
     <div  class="personal-registered">
@@ -29,7 +30,16 @@
 </div>
 </template>
 
-<script></script>
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters([
+      'userInformation'
+    ])
+  }
+}
+</script>
 
 <style lang="scss">
 .the-personal-data{
@@ -44,16 +54,25 @@
       height: 100px;
       border-radius: 50%;
       margin: 0 auto;
+      overflow: hidden;
       & + p {
         width: 155px;
         height: 24px;
+        color: #222;
+        font-size: 20px;
+      }
+      img{
+        width: 100%;
       }
     }
     p{
       margin: 10px auto;
       &:last-child{
         width: 100px;
-        height: 16px; 
+        height: 16px;
+        line-height: 14px; 
+        color: #dcdcdc;
+        font-size: 14px;
       }
     }
   }

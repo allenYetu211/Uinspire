@@ -14,7 +14,8 @@
         </div>
         <div class="logo gl-size-24 gl-fb"><router-link class="gl-ftcolor-black" :to= "{name: 'inspire'}" ><span class="gl-ftcolor-theme">UI</span>nspire.io</router-link></div>
         <div class="inspirt-nav-r">
-        <!-- 务动 -->
+
+        <!-- 不要动我！！！！ -->
 <!--             <div class="inspirt-nav-layout">
                 <button @click="listArrange">
                     <i class="sprite_view-1 sprite_theme" :class="{open: !listArrangestate}"></i>
@@ -23,6 +24,8 @@
                     <i class="sprite_view-2 sprite_switch" :class="{open: listArrangestate}"></i>
                 </button>
             </div> -->
+        <!-- 不要动我！！！！ -->
+        
             <div class="inspirt-nav-sidebar inspirt-nav-personal-infoamtion" @click="whetherthelogin">
                 <i class="sprite_login"></i>
             </div>

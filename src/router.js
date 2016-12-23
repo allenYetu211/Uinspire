@@ -7,6 +7,7 @@ import UserJoinus from './components/user-joinus'
 import MoodBoardDetail from './components/moodboard-detail'
 import MoodBoardDetailProject from './components/moodboard-datail-project'
 import MoodBoardDetailView from './components/moodboard-datail-view'
+import AppWall from './components/app-wall'
 export default [
   {
     path: '/inspire',
@@ -32,6 +33,10 @@ export default [
     path: '/UserJoinus',
     name: 'UserJoinus',
     component: UserJoinus
+  }, {
+    path: '/AppWall',
+    name: 'AppWall',
+    component: AppWall
   }, {
     path: '/MoodBoardDetail',
     name: 'MoodBoardDetail',

@@ -1,18 +1,15 @@
 <template>
   <div>
-    {{loginuserdata}}
     <transition name="sidebar-right">
     <div class="sidebar-information gl-bgcolor-white" 
     :class="{open : sidebarrights}" 
     v-show="sidebarrights">
-
       <div class="log-userinformation">
         <div class="log-userheaderportrait clearfix">
           <button @click="logout"><i class="logout"></i></button>
           <div class="header-portarait gl-bgcolor-gray-ed">
             <img :src="loginuserdata.icon_link">
           </div>
-
           <div class="log-userinformations">
             <p class="log-userName gl-fb">{{loginuserdata.user_name}}</p>
             <p class="log-introduce gl-fn">{{loginuserdata.company}}  {{loginuserdata.position}}</p>
@@ -21,6 +18,7 @@
 
         <div class="log-func gl-fb">
          <router-link :to="{ name: 'inspire'}"><span  @click="_closerPopup">Inspire</span></router-link>
+         <router-link :to="{ name: 'AppWall'}"><span  @click="_closerPopup">AppWall</span></router-link>
          <router-link :to="{ name: 'MoodBoardDetailProject'}"><span  @click="_closerPopup">Moodboard</span></router-link>
          <router-link :to="{ name: 'UserProfile'}"><span  @click="_closerPopup">Profile</span></router-link>
          <router-link :to="{ name: 'updatePage'}"><span  @click="_closerPopup">Upload</span></router-link>
@@ -77,10 +75,10 @@ export default {
     ...mapActions([
       'logout',
       'closerappcollection',
-      'closecomtrast'
+      'closecomtrast',
+      'addappwalldata'
     ]),
     _closerPopup () {
-      console.log('>>>>>>>>>>>>>>')
       this.closerappcollection()
       this.closecomtrast()
     }

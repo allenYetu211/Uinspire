@@ -218,5 +218,13 @@ export default {
         callback(response)
       }
     })
+  },
+  // get appwall data
+  getAppLogodata (callback) {
+    axios.get('http://inspire.stoyard.com/api/inspire/APPList').then((response) => {
+      if (typeof callback === 'function') {
+        callback(response)
+      }
+    })
   }
 }
