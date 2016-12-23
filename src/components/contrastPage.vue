@@ -202,8 +202,8 @@ export default {
   transition:transform 0.5s;
   .close{
     position:absolute;
-    right: 30px;
-    top: 60px;
+    right: 10px;
+    top: 75px;
     opacity:1;
     z-index:999;
     button{
@@ -231,41 +231,45 @@ export default {
       // justify-content: center;
       align-items: center;
       overflow: scroll;
+      padding:0px 30px;
     }
     &-li{
         margin: 10px;
         text-align: center;
         position: relative;
-        height: calc( 100vh - 200px);
+        height: calc( 100vh - 300px);
       img{
         // width:100%;
         height: 100%;
         vertical-align: middle;
-        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
         border-radius: 2px;
       }
       &:hover .delete{
         opacity: 1;
+        transform: rotate(0deg) scale(1);
       }
       .delete{
         position:absolute;
-        width:1.5rem;
-        height:1.5rem;
-        right:-10px;
-        top:-10px;
+        width:30px;
+        height:30px;
+        right:-15px;
+        top:-15px;
         border:none;
         border-radius:50%;
         background-color:#fff;
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.15);
+        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
         opacity:0;
-        transition: opacity 0.5s;
+        transition: all 0.2s ease-in;
         padding:0;
+        transform: rotate(90deg) scale(1);
         i.sprite_delete{
           display:block;
           width:20px;
           height:20px;
           background:url('../assets/svg_sprite.svg')no-repeat;
-          background-position:-58px -120px;
+          background-position:-60px -150px;
+          margin:1px auto;
         }
       }
     }
