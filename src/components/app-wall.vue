@@ -47,9 +47,8 @@ export default {
          border-bottom: 1px solid #f3f3f3;
          flex-flow: column;
          position: relative;
-         background-image: linear-gradient(-180deg, #FFFFFF 0%, #FAFAFA 74%, #FEFEFE 100%);
          &:hover {
-          
+          background-image: linear-gradient(-180deg, #FFFFFF 0%, #FAFAFA 74%, #FEFEFE 100%);
           a {
             transform: translateY(-8px) rotate(6deg);
           }
@@ -64,7 +63,7 @@ export default {
             text-overflow: ellipsis;
             text-align: center;
             position: absolute;
-            bottom: 26px;
+            bottom: 18%;
             opacity: 0;
             font-size:12px;
             white-space: nowrap;

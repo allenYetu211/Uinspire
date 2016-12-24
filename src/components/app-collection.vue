@@ -16,7 +16,7 @@
           </div>
           
           <div class="appcollection-informations">
-            <h2 class="gl-fb">{{list.name}}<span class="gl-nr">{{list.user_name}}</span></h2>
+            <h2 class="gl-fb"><span>{{list.name}}</span><span class="gl-nr">{{list.user_name}}</span></h2>
             <p class="gl-fb">category <span class="gl-nr" v-for="categoryEn in list.category.name_en"> {{categoryEn}}</span></p>
             <p class="gl-fb">Tags 
             <span v-if="list.tag" class="gl-nr">{{list.tag}}</span>
@@ -176,7 +176,6 @@ $designWidth : 350;
   }
   .appcollection-informations{
     height: 130px;
-    h2,
     p:nth-child(1),
     p:nth-child(2),
     p:nth-child(3){
@@ -184,7 +183,6 @@ $designWidth : 350;
       span{
         font-size: 12px;
         float: right;
-        font-weight: 400;
         margin:0px 0px 0px 5px;
         &:after{
           content:' /'
@@ -198,7 +196,24 @@ $designWidth : 350;
       border-bottom: 1px solid #222;
       padding-bottom: 5px;
       margin-bottom: 5px;
-      line-height:2.5;
+      line-height:1.8;
+      font-size: 12px;
+      span:first-child{
+        width: 70%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: inline-block;
+        overflow: hidden;
+      }
+      span:last-child{
+        width: 23%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        float: right;
+        text-align: right;
+        display: inline-block;
+        overflow: hidden;
+      }
     }
     p{
       line-height: 2.5;
