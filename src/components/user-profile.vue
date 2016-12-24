@@ -31,12 +31,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters([
       'userInformation'
     ])
+  },
+  methods: {
+    ...mapActions([
+      'cuinformation'
+    ])
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.cuinformation()
+    })
   }
 }
 </script>

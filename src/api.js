@@ -38,9 +38,8 @@ export default {
     let tag = _data.tag ? _data.tag.join(',') : ''
     let category = _data.Category.join(',')
     axios({
-      url: 'inspire/adddata',
+      url: 'http://inspire.stoyard.com/api/inspire/adddata',
       method: 'post',
-      baseURL: 'http://inspire.stoyard.com/index.php/api/',
       transformRequest: [(_data) => {
         // 对 data 进行任意转换处理
         const fdata = new window.FormData()
@@ -90,8 +89,12 @@ export default {
     })
   },
   // 获取首页展示图片信息
-  uinspireio (callback) {
-    axios.get('http://inspire.stoyard.com/api/inspire/viewdata').then((response) => {
+  uinspireio (_data, callback) {
+    axios.get('http://inspire.stoyard.com/api/inspire/viewdata', {
+      parasm: {
+        id: _data
+      }
+    }).then((response) => {
       if (typeof callback === 'function') {
         callback(response.data)
       }

@@ -23,7 +23,8 @@ import {
   LOGOUT,
   CHANGESTATE,
   VERIFYCODES,
-  ADDAPPWALLDATA
+  ADDAPPWALLDATA,
+  CUINFORMATION
 } from '../actions'
 
 const state = {
@@ -162,9 +163,9 @@ const mutations = {
   [LOGONUSER] (state) {
     state.logonuser = !state.logonuser
   },
-  [UINSPIREIO] (state) {
-    API.uinspireio((_data) => {
-      state.uinspireioDate = _data.data
+  [UINSPIREIO] (state, _id = '') {
+    API.uinspireio(_id, (callback) => {
+      state.uinspireioDate = callback.data
     })
   },
   // 判断用户是否登录
@@ -281,6 +282,16 @@ const mutations = {
     API.getAppLogodata((callback) => {
       state.applogodata = callback.data.data
     })
+  },
+  // change user information
+  [CUINFORMATION] (state) {
+    let cookieInms = {}
+    cookieInms['icon_link'] = Cke.getCookie('icon_link')
+    cookieInms['user_name'] = Cke.getCookie('user_name')
+    cookieInms['position'] = Cke.getCookie('position')
+    cookieInms['email'] = Cke.getCookie('email')
+    cookieInms['company'] = Cke.getCookie('company')
+    state.userInformation = cookieInms
   }
 }
 

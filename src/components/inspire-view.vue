@@ -19,6 +19,8 @@
           <!-- <transition> -->
             <inspire-view-list  v-for="(itms, index) in uinspireioDate" :key="index" :itmes="itms" :index="index"></inspire-view-list>
           <!-- </transition> -->
+      {{uinspireioDate[uinspireioDate.length - 1].id}}
+          
       </ul>
     </div>
       <transition

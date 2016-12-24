@@ -64,6 +64,8 @@
   import UpDataPageForm from './updataPage-form'
   // import ColorThief from '../../static/color-thief'
   import { mapActions, mapGetters } from 'vuex'
+  import ckie from '../Publicjs/ckie'
+
   export default {
     components: {
       UpDataPageForm
@@ -155,14 +157,14 @@
               images['icon_link'] = ''
               images['app_category'] = ''
               images['version'] = ''
-              images['progressbar'] = false
-              images['iswaiting'] = false
+              images['progressbar'] = true
+              images['iswaiting'] = true
               images['isuploading'] = false
               images['isuploadfaild'] = false
               images['isuploadsuccess'] = false
               images['iserror'] = false
               images['progress'] = 0
-              images['login_uid'] = ''
+              images['login_uid'] = ckie.getCookie('login_uid')
               self.imgIn.push(images)
               self.imgInformations = self.imgIn
               self.storeimagedata(self.imgInformations)
