@@ -51,7 +51,7 @@
           Copyright © <span class="gl-ftcolor-theme gl-fb">G_Lab Stoyard</span>
         </p>
         <p class="gl-ftcolor-gray-99">
-          UInspire.io  2016
+          UInspire.io  2016 | Version 1.2.2 β
         </p>
       </div>
     </div>
@@ -251,8 +251,8 @@ export default {
         }
       }
     p{
-      font-size: 14px;
-      line-height: 1.6;
+      font-size: 11px;
+      line-height: 2.2;
     }
   }
 }

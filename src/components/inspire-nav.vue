@@ -12,7 +12,7 @@
                 <input type="text" placeholder="Search for inspire" name="" class="gl-size-18 gl-fn">
             </div>
         </div>
-        <div class="logo gl-size-24 gl-fb"><router-link class="gl-ftcolor-black" :to= "{name: 'inspire'}" ><span class="gl-ftcolor-theme">UI</span>nspire.io</router-link></div>
+        <div class="logo gl-size-24 gl-fb"><router-link class="gl-ftcolor-black" :to= "{name: 'inspire'}" ><span class="gl-ftcolor-theme">UI</span>nspire.io<i class="gl-fb">β</i></router-link></div>
         <div class="inspirt-nav-r">
 
         <!-- 不要动我！！！！ -->
@@ -137,6 +137,14 @@ export default {
       transform: translate(-50%, -50%);
       a{
         text-decoration: none;
+      }
+      i{
+        font-style: normal;
+        font-size: 10px;
+        position: absolute;
+        top: -6px;
+        right: -9px;
+        color: #dcdcdc;
       }
     }
     .inspirt-nav-sidebar{

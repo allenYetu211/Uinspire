@@ -288,29 +288,29 @@ export default {
       this.userhistorystate = false
       this.sprite_correct = false
       this._searchShow = !this._searchShow
-      console.log('response2:')
       axios.get('http://inspire.stoyard.com/api/inspire/appInfo', {
         params: {
           name: this.ic.name,
           device: this.ic.Platform
         }
       }).then((response) => {
-        console.log('response2:', response)
+        console.log('response2:', response.data.data)
         let _results = response.data.data
         this.history(this.ic.name)
-        if (this.ic.Platform === 'iPhone' || this.ic.Platform === 'iPad') {
-          if (_results.resultCount === 0) {
-            this.searchNull = false
-          } else {
-            this.getAppStore = _results
-          }
+        // if (this.ic.Platform === 'iPhone' || this.ic.Platform === 'iPad') {
+        if (_results.resultCount === 0) {
+          this.searchNull = false
         } else {
-          if (_results.total === 0) {
-            this.searchNull = false
-          } else {
-            this.getAppStore = _results
-          }
+          // console.log('response2:', _results.replace('<em>', '').replace('</em>', ''))
+          this.getAppStore = _results
         }
+        // } else {
+          // if (_results.total === 0) {
+          //   this.searchNull = false
+          // } else {
+          //   this.getAppStore = _results
+          // }
+        // }
       }).catch((response) => {
       })
     },
@@ -318,9 +318,9 @@ export default {
       this.deleteimagedata(el.target.dataset.cancelindex)
     },
     _uplosings () {
-      if (this.ic.name.trim() === '') {
+      if (this.ic.name === '') {
         this.appname = true
-      } else if (this.ic.link.trim() === '') {
+      } else if (this.ic.link === '') {
         this.applink = true
         if (!this.searchStore) {
           this.appname = true
@@ -373,19 +373,17 @@ export default {
       this.theSelecteds = true
       this.sprite_correct = true
       let filter = {}
-      console.log('cs>>>>>>>>>>>>>')
       let target = this.getAppStore[event.target.dataset.gnd]
-      console.log(target)
-      if (event.target.dataset.platform === 'ios') {
-        this.ic.link = filter['link'] = target.link
-        this.ic.icon_link = filter['icon_link'] = target.icon_link
-        this.ic.developer = filter['developer'] = target.developer
-        this.ic.developer_link = filter['developer_link'] = target.developer_link
-        this.ic.app_category = filter['genres'] = target.genres
-        this.ic.version = filter['version'] = target.version
-        this.ic.name = filter['name'] = target.name
-        this.ic.app_id = filter['app_id'] = target.app_id
-      } else {
+      // if (event.target.dataset.platform === 'ios') {
+      this.ic.link = filter['link'] = target.link
+      this.ic.icon_link = filter['icon_link'] = target.icon_link
+      this.ic.developer = filter['developer'] = target.developer
+      this.ic.developer_link = filter['developer_link'] = target.developer_link
+      this.ic.app_category = filter['genres'] = target.genres
+      this.ic.version = filter['version'] = target.version
+      this.ic.name = filter['name'] = target.name
+      this.ic.app_id = filter['app_id'] = target.app_id
+      // } else {
         // this.ic.link = filter['trackViewUrl'] = 'http://www.wandoujia.com/apps/' + target.packageName
         // let blibli = {}
         // blibli['px256'] = target.icons.px256
@@ -395,7 +393,7 @@ export default {
         // filter['apks'] = [nullArray]
         // let newString = target.title.replace('<em>', '').replace('</em>', '')
         // this.ic.name = filter['title'] = newString
-      }
+      // }
       this.getAppStore = []
       this.getAppStore.push(filter)
     },
