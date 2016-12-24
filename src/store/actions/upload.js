@@ -46,7 +46,7 @@ export const userlogin = ({commit}, _userinformations) => { commit(USERLOGIN, _u
 
 // 获取首页展示图片
 export const UINSPIREIO = 'uinspireio'
-export const uinspireio = ({commit}) => { commit(UINSPIREIO) }
+export const uinspireio = ({commit}, _id) => { commit(UINSPIREIO, _id) }
 
 // 判断登录注册或展开收起侧边栏
 export const WHETHERTHELOGIN = 'whetherthelogin'
@@ -87,4 +87,8 @@ export const changestate = ({commit}) => { commit(CHANGESTATE) }
 // add AppWall Data
 export const ADDAPPWALLDATA = 'addappwalldata'
 export const addappwalldata = ({commit}) => { commit(ADDAPPWALLDATA) }
+
+// change user information
+export const CUINFORMATION = 'cuinformation'
+export const cuinformation = ({commit}) => { commit(CUINFORMATION) }
 

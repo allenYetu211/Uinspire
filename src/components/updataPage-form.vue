@@ -57,9 +57,9 @@
                              <li v-if="searchNull" class="_AppItem consent-information">Input App Name</li>
                              <li v-else class="_AppItem consent-information">Search 0 result,Retry?</li>
                               <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
-                         <!--        <div class="waitingdata" v-if= "getAppStore.length === 0">
+                                <div class="waitingdata" v-if= "getAppStore.length === 0">
                                   In the search...
-                                </div> -->
+                                </div>
                                   
                                   <li 
                                   @click.stop="_getAppData" 
@@ -83,7 +83,7 @@
                           </div>
                       </div>
 
-                 <!--      <div v-if="ic.Platform === 'Android'">
+                      <div v-if="ic.Platform === 'Android'">
                           <input type="text" v-model="ic.name" @focus="_historyFocus" name="" placeholder="Input Name Search">
                           <div  class="Search-history gl-bgcolor-white" v-show="userhistorystate">
                               <ul>
@@ -110,20 +110,20 @@
                                   :key="imoc" 
                                   :data-Gnd="imoc" data-platform='android'>
                                       <div class="appIcon">
-                                          <img :src="ics.icons.px256">
+                                          <img :src="ics.icon_link">
                                       </div>
                                       <div>
-                                          <p class="appName" v-html="ics.title"></p>
+                                          <p class="appName" >{{ics.name}}</p>
                                           <p 
                                           class="artistName" 
-                                          v-for='infor in ics.apks'>{{infor.versionName}}</p>
+                                          >{{ics.version}}</p>
                                           <i  v-show="sprite_correct" class="sprite_correct"></i>
                                       </div>
                                   </li>
                                   </transition-group>
                               </ul>
                           </div>
-                      </div> -->
+                      </div>
                       <div v-if="ic.Platform === 'WEB'">
                           <div class="upload-form-gurop">
                             <input type="text" v-model="ic.name" name="" placeholder="Input Website Name">
@@ -233,7 +233,6 @@
 import { mapActions, mapGetters } from 'vuex'
 import '../Publicjs/filter.js'
 import axios from 'axios'
-import ckie from '../Publicjs/ckie'
 
 export default {
   props: ['ic', 'index'],
@@ -386,17 +385,16 @@ export default {
         this.ic.version = filter['version'] = target.version
         this.ic.name = filter['name'] = target.name
         this.ic.app_id = filter['app_id'] = target.app_id
-        this.ic.login_uid = filter['login_uid'] = ckie.getCookie('uinspire')
       } else {
-        this.ic.link = filter['trackViewUrl'] = 'http://www.wandoujia.com/apps/' + target.packageName
-        let blibli = {}
-        blibli['px256'] = target.icons.px256
-        this.ic.icon_link = filter['icons'] = blibli
-        let nullArray = {}
-        nullArray['versionName'] = target.apks[0].versionName
-        filter['apks'] = [nullArray]
-        let newString = target.title.replace('<em>', '').replace('</em>', '')
-        this.ic.name = filter['title'] = newString
+        // this.ic.link = filter['trackViewUrl'] = 'http://www.wandoujia.com/apps/' + target.packageName
+        // let blibli = {}
+        // blibli['px256'] = target.icons.px256
+        // this.ic.icon_link = filter['icons'] = blibli
+        // let nullArray = {}
+        // nullArray['versionName'] = target.apks[0].versionName
+        // filter['apks'] = [nullArray]
+        // let newString = target.title.replace('<em>', '').replace('</em>', '')
+        // this.ic.name = filter['title'] = newString
       }
       this.getAppStore = []
       this.getAppStore.push(filter)
