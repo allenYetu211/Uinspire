@@ -57,9 +57,9 @@
                              <li v-if="searchNull" class="_AppItem consent-information">Input App Name</li>
                              <li v-else class="_AppItem consent-information">Search 0 result,Retry?</li>
                               <ul :class="{'search-height': searchHeight, 'theSelected': theSelecteds}">
-                                <div class="waitingdata" v-if= "getAppStore.length === 0">
+                         <!--        <div class="waitingdata" v-if= "getAppStore.length === 0">
                                   In the search...
-                                </div>
+                                </div> -->
                                   
                                   <li 
                                   @click.stop="_getAppData" 
@@ -71,11 +71,11 @@
                                   :data-index="imoc" 
                                   :style="{animationDelay: animationDelay}">
                                       <div class="appIcon">
-                                          <img :src="ics.artworkUrl512">
+                                          <img :src="ics.icon_link">
                                       </div>
                                       <div>
-                                          <p class="appName">{{ics.trackName}}</p>
-                                          <p class="artistName">{{ics.artistName}}</p>
+                                          <p class="appName">{{ics.name}}</p>
+                                          <p class="artistName">{{ics.developer}}</p>
                                       </div>
                                       <i  v-show="sprite_correct" class="sprite_correct"></i>
                                   </li>
@@ -83,7 +83,7 @@
                           </div>
                       </div>
 
-                      <div v-if="ic.Platform === 'Android'">
+                 <!--      <div v-if="ic.Platform === 'Android'">
                           <input type="text" v-model="ic.name" @focus="_historyFocus" name="" placeholder="Input Name Search">
                           <div  class="Search-history gl-bgcolor-white" v-show="userhistorystate">
                               <ul>
@@ -123,7 +123,7 @@
                                   </transition-group>
                               </ul>
                           </div>
-                      </div>
+                      </div> -->
                       <div v-if="ic.Platform === 'WEB'">
                           <div class="upload-form-gurop">
                             <input type="text" v-model="ic.name" name="" placeholder="Input Website Name">
@@ -233,6 +233,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import '../Publicjs/filter.js'
 import axios from 'axios'
+import ckie from '../Publicjs/ckie'
 
 export default {
   props: ['ic', 'index'],
@@ -288,25 +289,27 @@ export default {
       this.userhistorystate = false
       this.sprite_correct = false
       this._searchShow = !this._searchShow
+      console.log('response2:')
       axios.get('http://inspire.stoyard.com/api/inspire/appInfo', {
         params: {
           name: this.ic.name,
           device: this.ic.Platform
         }
       }).then((response) => {
-        let _results = JSON.parse(response.data.data)
+        console.log('response2:', response)
+        let _results = response.data.data
         this.history(this.ic.name)
         if (this.ic.Platform === 'iPhone' || this.ic.Platform === 'iPad') {
           if (_results.resultCount === 0) {
             this.searchNull = false
           } else {
-            this.getAppStore = _results.results
+            this.getAppStore = _results
           }
         } else {
           if (_results.total === 0) {
             this.searchNull = false
           } else {
-            this.getAppStore = _results.appList
+            this.getAppStore = _results
           }
         }
       }).catch((response) => {
@@ -371,16 +374,19 @@ export default {
       this.theSelecteds = true
       this.sprite_correct = true
       let filter = {}
+      console.log('cs>>>>>>>>>>>>>')
       let target = this.getAppStore[event.target.dataset.gnd]
+      console.log(target)
       if (event.target.dataset.platform === 'ios') {
-        this.ic.link = filter['trackViewUrl'] = target.trackViewUrl
-        this.ic.icon_link = filter['artworkUrl512'] = target.artworkUrl512
-        this.ic.developer = filter['artistName'] = target.artistName
-        this.ic.developer_link = filter['artistViewUrl'] = target.artistViewUrl
+        this.ic.link = filter['link'] = target.link
+        this.ic.icon_link = filter['icon_link'] = target.icon_link
+        this.ic.developer = filter['developer'] = target.developer
+        this.ic.developer_link = filter['developer_link'] = target.developer_link
         this.ic.app_category = filter['genres'] = target.genres
         this.ic.version = filter['version'] = target.version
-        this.ic.name = filter['trackName'] = target.trackName
-        this.ic.app_id = filter['app_id'] = target.trackId
+        this.ic.name = filter['name'] = target.name
+        this.ic.app_id = filter['app_id'] = target.app_id
+        this.ic.login_uid = filter['login_uid'] = ckie.getCookie('uinspire')
       } else {
         this.ic.link = filter['trackViewUrl'] = 'http://www.wandoujia.com/apps/' + target.packageName
         let blibli = {}
