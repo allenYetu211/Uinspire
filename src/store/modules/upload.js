@@ -55,7 +55,9 @@ const state = {
   verifyCode: false,        // 验证码状态
   userInformation: '',
   userCookieinformations: true,
-  applogodata: ''           // 存储logo
+  applogodata: '',          // 存储logo
+  appIdentification: true,  // 滚动加载状态标识
+  appLoadingAnimation: false // 滚动加载动画状态标识
 }
 
 const mutations = {
@@ -164,9 +166,24 @@ const mutations = {
     state.logonuser = !state.logonuser
   },
   [UINSPIREIO] (state, _id = '') {
-    API.uinspireio(_id, (callback) => {
-      state.uinspireioDate = callback.data
-    })
+    if (state.appIdentification) {
+      state.appIdentification = false
+      setTimeout(() => {
+        state.appIdentification = true
+      }, 5000)
+      API.uinspireio(_id, (callback) => {
+        console.log(callback.code)
+        if (callback.code === '100451') {
+          state.appIdentification = false
+          return
+        }
+        if (state.uinspireioDate === '') {
+          state.uinspireioDate = callback.data
+        } else {
+          state.uinspireioDate = state.uinspireioDate.concat(callback.data)
+        }
+      })
+    }
   },
   // 判断用户是否登录
   [WHETHERTHELOGIN] (state) {

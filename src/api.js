@@ -90,8 +90,9 @@ export default {
   },
   // 获取首页展示图片信息
   uinspireio (_data, callback) {
+    console.log('首页：', _data)
     axios.get('http://inspire.stoyard.com/api/inspire/viewdata', {
-      parasm: {
+      params: {
         id: _data
       }
     }).then((response) => {
