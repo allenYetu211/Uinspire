@@ -41,6 +41,9 @@ export const loginuserdata = state => state.upload.loginuserdata
 // 登录成功用户信息
 export const userInformation = state => state.upload.userInformation
 
+// 用户上传权限
+export const isEditer = state => state.upload.isEditer
+
 // 验证成功下一步注册
 export const logonverifynext = state => state.upload.verifynext
 
@@ -67,3 +70,16 @@ export const showCollectionIndex = state => state.upload.showCollectionIndex
 
 // appwall logodata
 export const applogodata = state => state.upload.applogodata
+
+// applist loading sate
+export const appLoadingSate = state => state.upload.appLoadingSate
+
+// applist loadingAnimation sate
+export const appLoadingAnimation = state => state.upload.appLoadingAnimation
+
+// applist loadingAnimationSuccess sate
+export const userPermissions = state => state.upload.userPermissions
+
+// applist changeUserState sate
+export const changeUserState = state => state.upload.changeUserState
+

@@ -12,17 +12,21 @@
 
     <div class="personal-validation">
       <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" disabled="disabled" :value="userInformation.email" type="email" name="" placeholder="Email">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" type="password" name="" placeholder="Password">
+      <input @keyup="agianuserinformations" ref="changePassword" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" type="password" name="" placeholder="Password">
     </div>
 
     <div class="personal-validation">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" :value="userInformation.user_name" type="text" name="" placeholder="Name">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" :value="userInformation.company" type="text" name="" placeholder="Company">
-      <input class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" :value="userInformation.position" type="text" name="" placeholder="Job Title">
+      <input @keyup="agianuserinformations" ref="changeName" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" :value="userInformation.user_name" type="text" name="" placeholder="Name">
+      <input @keyup="agianuserinformations" ref="changeCompany" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" :value="userInformation.company" type="text" name="" placeholder="Company">
+      <input @keyup="agianuserinformations" ref="changePosition" class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" :value="userInformation.position" type="text" name="" placeholder="Job Title">
     </div>
 
     <div  class="personal-registered">
-        <router-link :to="{ name: 'UserJoinus' }" tag="button" class="gl-bgcolor-black gl-ftcolor-white gl-fb">ENTER</router-link>
+        <button @click="_changeUserif" class="gl-bgcolor-black gl-ftcolor-white gl-fb" :class="{'success': changeUserState}">
+          <span v-if="!changeUserState">ENTER</span>
+          <span v-else>SUCCESS</span>
+        </button>
+        <!-- <router-link :to="{ name: 'UserJoinus' }" tag="button" class="gl-bgcolor-black gl-ftcolor-white gl-fb">ENTER</router-link> -->
         <button  class="gl-bgcolor-gray gl-ftcolor-white gl-fb">CANCEL</button>
     </div>
 
@@ -35,13 +39,26 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters([
-      'userInformation'
+      'userInformation',
+      'changeUserState'
     ])
   },
   methods: {
     ...mapActions([
-      'cuinformation'
-    ])
+      'cuinformation',
+      'userinformations',
+      'agianuserinformations'
+    ]),
+    _changeUserif () {
+      let userinfor = {
+        email: this.userInformation.email,
+        password: this.$refs.changePassword.value,
+        name: this.$refs.changeName.value,
+        company: this.$refs.changeCompany.value,
+        position: this.$refs.changePosition.value
+      }
+      this.userinformations(userinfor)
+    }
   },
   mounted () {
     this.$nextTick(() => {
@@ -110,6 +127,10 @@ export default {
       font-size: 20px;
       cursor: pointer;
       margin:0 5px;
+      transition: background-color 0.5s;
+      &.success{
+        background-color:#2EF037;
+      }
     }
   }
 </style>

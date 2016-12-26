@@ -15,18 +15,21 @@
         <p>Finalpjc from  <span class="gl-ftcolor-black gl-fb"><span class="gl-ftcolor-theme">UI</span>nspire.io</span></p>
       </div>
     </div>
-
+    <!-- {{userInformation}} -->
     <div class="joinus-introduce-right">
-      <input class="gl-bgcolor-gray-f7 gl-ftcolor-black" type="text" name="" placeholder="Name">
-      <input class="gl-bgcolor-gray-f7 gl-ftcolor-black" type="text" name="" placeholder="Company">
-      <input class="gl-bgcolor-gray-f7 gl-ftcolor-black" type="text" name="" placeholder="Job Title">
-      <input class="gl-bgcolor-gray-f7 gl-ftcolor-black" type="text" name="" placeholder="Phone">
-      <input class="gl-bgcolor-gray-f7 gl-ftcolor-black" type="text" name="" placeholder="Wechat">
-      <textarea class="gl-bgcolor-gray-f7 gl-ftcolor-black" placeholder="About you…"></textarea>
+      <input class="gl-bgcolor-gray-f7 gl-ftcolor-black" type="text" :value="userInformation.user_name" name="" placeholder="Name">
+      <input class="gl-bgcolor-gray-f7 gl-ftcolor-black" type="text" :value="userInformation.company" name="" placeholder="Company">
+      <input class="gl-bgcolor-gray-f7 gl-ftcolor-black" type="text" :value="userInformation.position" name="" placeholder="Job Title">
+      <input v-model="Phone" class="gl-bgcolor-gray-f7 gl-ftcolor-black" type="text" name="" placeholder="Phone">
+      <input v-model="Wechat" class="gl-bgcolor-gray-f7 gl-ftcolor-black" type="text" name="" placeholder="Wechat">
+      <textarea v-model="About"class="gl-bgcolor-gray-f7 gl-ftcolor-black" placeholder="About you…"></textarea>
 
       <div  class="joinus-registered">
-        <button  class="gl-bgcolor-black gl-ftcolor-white gl-fb">Enter</button>
-        <button  class="gl-bgcolor-gray gl-ftcolor-white gl-fb">Resent</button>
+        <button @click="_userjoinus"  class="gl-bgcolor-black gl-ftcolor-white gl-fb" :class="{'success': userPermissions}">
+        <span v-if="!userPermissions">ENTER</span>
+        <span v-else>SUCCESS</span>
+        </button>
+        <button  class="gl-bgcolor-gray gl-ftcolor-white gl-fb">RESENT</button>
       </div>
     </div>
 
@@ -37,6 +40,44 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+export default {
+  data () {
+    return {
+      Phone: '',
+      Wechat: '',
+      About: ''
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'userInformation',
+      'userPermissions'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'cuinformation',
+      'permissions'
+    ]),
+    _userjoinus () {
+      let newObjects = {
+        name: this.userInformation.user_name,
+        company: this.userInformation.company,
+        position: this.userInformation.position,
+        phone: this.Phone,
+        wechat: this.Wechat,
+        About: this.About
+      }
+      this.permissions(newObjects)
+    }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      this.cuinformation()
+    })
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -119,7 +160,11 @@
             border: none;
             font-size: 20px;
             cursor: pointer;
-          }
+            transition: background-color 0.5s;
+            &.success{
+              background-color:#2EF037;
+            }
+        }
     }
   }
 }

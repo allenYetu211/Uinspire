@@ -7,6 +7,9 @@
         margin: 0;
         position:relative;
         min-width:1440px;
+        & + p {
+          text-align: center;
+        }
       }
 }
 </style>
@@ -19,8 +22,13 @@
           <!-- <transition> -->
             <inspire-view-list  v-for="(itms, index) in uinspireioDate" :key="index" :itmes="itms" :index="index"></inspire-view-list>
           <!-- </transition> -->
+          {{$router.name}}
           {{uinspireioDate.length}}
       </ul>
+       <p class="gl-fb gl-ftcolor-gray" v-if="appLoadingSate">End</p>
+       <div class="loadingAnimation" v-if='appLoadingAnimation'>
+         加载动画。。。。。。。。。。。
+       </div>
     </div>
       <transition
           enter-active-class="animated appCollection fadeIn"
@@ -56,10 +64,18 @@ export default {
     // })
     let self = this
     let scrollDown = 0
+    let verlibar = false
     window.onscroll = function () {
+      if (!self.$route.name === 'inspire') {
+        return
+      }
+      if (!verlibar) {
+        verlibar = true
+        return
+      }
       let scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       if (scrolltop > scrollDown) {
-        if (self.$refs.parentScrollTop.offsetHeight - 500 < scrolltop) {
+        if (self.$refs.parentScrollTop.offsetHeight < scrolltop + document.documentElement.clientHeight) {
           self.uinspireio(self.uinspireioDate[self.uinspireioDate.length - 1].id)
         }
       }
@@ -76,7 +92,9 @@ export default {
     ...mapGetters([
       'infor',
       'uinspireioDate',
-      'collectionPopup'
+      'collectionPopup',
+      'appLoadingSate',
+      'appLoadingAnimation'
     ])
   },
   methods: {

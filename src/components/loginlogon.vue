@@ -242,8 +242,19 @@ export default {
       logonins['name'] = this.logonName
       logonins['company'] = this.logonCompany
       logonins['position'] = this.logonJob
+      // var {email,
+      // password,
+      // name,
+      // company,
+      // position} =
+      //   {email: this.loginlogonEmail,
+      //     password: this.logonPassword,
+      //     name: this.logonName,
+      //     company: this.logonCompany,
+      //     position: this.logonJob}
       logonuserinformation.push(logonins)
       if (this.logonName.length !== 0 && this.logonCompany.length !== 0 && this.logonJob.length !== 0 && this.logonPassword.length > 6) {
+        console.log('12312312312')
         this.setreturncode(logonuserinformation)
       }
     },

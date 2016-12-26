@@ -1,6 +1,8 @@
 <template>
   <li  :class="{lists: listArrangestate ,active : hover, animated: like}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
-    <div class="imagesShow-box-shadow" :class="{active : hover}">
+    <div class="imagesShow-box-shadow"
+     :style="{ background: 'hsl(' + itmes.hsl.h + ',' + itmes.hsl.s * 100 + '%' + ',' + itmes.hsl.l * 100 + '%)' }"
+     :class="{active : hover}">
       <img :src="itmes.img + '?x-oss-process=image/resize,w_600'">
         <div class="imagesShow-paypal"  @click.stop="" :class="{active : hover}">
           <div class="imagesShow-paypal-py">

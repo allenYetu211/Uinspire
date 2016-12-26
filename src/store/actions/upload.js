@@ -92,3 +92,14 @@ export const addappwalldata = ({commit}) => { commit(ADDAPPWALLDATA) }
 export const CUINFORMATION = 'cuinformation'
 export const cuinformation = ({commit}) => { commit(CUINFORMATION) }
 
+// user appliaction permissions
+export const PERMISSIONS = 'permissions'
+export const permissions = ({commit}, _data) => { commit(PERMISSIONS, _data) }
+
+// change userInformationse
+export const USERINFORMATIONS = 'userinformations'
+export const userinformations = ({commit}, _data) => { commit(USERINFORMATIONS, _data) }
+
+// again userInformationse
+export const AGAINUSERINFORMATIONS = 'agianuserinformations'
+export const agianuserinformations = ({commit}, _data) => { commit(AGAINUSERINFORMATIONS, _data) }

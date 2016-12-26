@@ -230,5 +230,48 @@ export default {
         callback(response)
       }
     })
+  },
+  // user permissions
+  permissions (_data, callback) {
+    axios({
+      url: 'http://inspire.stoyard.com/api/user/applyedit',
+      method: 'post',
+      transformRequest: [(_data) => {
+        const permissions = new window.FormData()
+        permissions.append('name', _data.name)
+        permissions.append('company', _data.company)
+        permissions.append('position', _data.position)
+        permissions.append('phone', _data.phone)
+        permissions.append('wechat', _data.wechat)
+        permissions.append('login_uid', _data.login_uid)
+        return permissions
+      }],
+      data: _data
+    }).then((response) => {
+      if (typeof callback === 'function') {
+        callback(response)
+      }
+    })
+  },
+  // change userinformations
+  changeuserinformations (_data, callback) {
+    axios({
+      url: 'http://inspire.stoyard.com/api/user/editprofile',
+      method: 'post',
+      transformRequest: [(_data) => {
+        const permissions = new window.FormData()
+        permissions.append('email', _data.email)
+        permissions.append('password', _data.password)
+        permissions.append('company', _data.company)
+        permissions.append('name', _data.name)
+        permissions.append('position', _data.position)
+        return permissions
+      }],
+      data: _data
+    }).then((response) => {
+      if (typeof callback === 'function') {
+        callback(response)
+      }
+    })
   }
 }

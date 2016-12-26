@@ -24,7 +24,10 @@ import {
   CHANGESTATE,
   VERIFYCODES,
   ADDAPPWALLDATA,
-  CUINFORMATION
+  CUINFORMATION,
+  PERMISSIONS,
+  USERINFORMATIONS,
+  AGAINUSERINFORMATIONS
 } from '../actions'
 
 const state = {
@@ -53,11 +56,16 @@ const state = {
   userpas_Error: false,     // 密码错误显示状态
   userSuccess: false,       // 密码成功状态
   verifyCode: false,        // 验证码状态
+  isEditer: false,          // 上传权限状态
+  userPermissions: false,   // 上传权限 申请发送成功
   userInformation: '',
   userCookieinformations: true,
   applogodata: '',          // 存储logo
   appIdentification: true,  // 滚动加载状态标识
-  appLoadingAnimation: false // 滚动加载动画状态标识
+  appLoadingAnimation: false, // 滚动加载动画状态标识
+  appLoadingSate: false,    // 滚动加载 服务器图片读取完
+  appIdCount: 0,            // 加载验证是否传递重复ID
+  changeUserState: false   // 修改用户信息显示状态
 }
 
 const mutations = {
@@ -166,15 +174,21 @@ const mutations = {
     state.logonuser = !state.logonuser
   },
   [UINSPIREIO] (state, _id = '') {
+    if (state.appIdCount === _id) {
+      return
+    }
     if (state.appIdentification) {
       state.appIdentification = false
+      state.appLoadingAnimation = true
       setTimeout(() => {
         state.appIdentification = true
-      }, 5000)
+      }, 500)
       API.uinspireio(_id, (callback) => {
-        console.log(callback.code)
+        state.appIdCount = _id
+        state.appLoadingAnimation = false
         if (callback.code === '100451') {
           state.appIdentification = false
+          state.appLoadingSate = true
           return
         }
         if (state.uinspireioDate === '') {
@@ -189,11 +203,12 @@ const mutations = {
   [WHETHERTHELOGIN] (state) {
     let uinspire = Cke.getCookie('login_uid')
     if (state.userCookieinformations) {
-      let cookieInms = {}
-      cookieInms['icon_link'] = Cke.getCookie('icon_link')
-      cookieInms['user_name'] = Cke.getCookie('user_name')
-      cookieInms['position'] = Cke.getCookie('position')
-      cookieInms['company'] = Cke.getCookie('company')
+      let cookieInms = {
+        icon_link: Cke.getCookie('icon_link'),
+        user_name: Cke.getCookie('user_name'),
+        position: Cke.getCookie('position'),
+        company: Cke.getCookie('company')
+      }
       state.loginuserdata = cookieInms
       state.userCookieinformations = false
     }
@@ -242,10 +257,11 @@ const mutations = {
   [USERLOGIN] (state, _userinformation) {
     API.userLogin(_userinformation, (back) => {
       if (back.data.code === '0') {
+        back.data.data.is_editer === '0' ? state.isEditer = false : state.isEditer = true
         state.userInformation = back.data.data
         // console.log(back)
         Cke.setDigital(state.userInformation)
-        Cke.setCookie('login_uid', back.data.data.login_uid)
+        // Cke.setCookie('login_uid', back.data.data.login_uid)
         state.userSuccess = true
         setTimeout(() => {
           state.userSuccess = false
@@ -299,14 +315,44 @@ const mutations = {
   },
   // change user information
   [CUINFORMATION] (state) {
-    let cookieInms = {}
-    cookieInms['icon_link'] = Cke.getCookie('icon_link')
-    cookieInms['user_name'] = Cke.getCookie('user_name')
-    cookieInms['position'] = Cke.getCookie('position')
-    cookieInms['email'] = Cke.getCookie('email')
-    cookieInms['company'] = Cke.getCookie('company')
+    let cookieInms = {
+      icon_link: Cke.getCookie('icon_link'),
+      user_name: Cke.getCookie('user_name'),
+      position: Cke.getCookie('position'),
+      email: Cke.getCookie('email'),
+      company: Cke.getCookie('company')
+    }
     state.userInformation = cookieInms
+  },
+  // user applications permissions
+  [PERMISSIONS] (state, _data) {
+    let addUidData = addLoginUid(_data)
+    API.permissions(addUidData, (callback) => {
+      if (callback.data.code === '0') {
+        state.userPermissions = true
+      }
+    })
+  },
+ // change userinformaotions
+  [USERINFORMATIONS] (state, _data) {
+    API.changeuserinformations(_data, (callback) => {
+      if (callback.data.code === '0') {
+        state.changeUserState = true
+        state.userInformation = state.loginuserdata = callback.data.data
+        Cke.setDigital(state.userInformation)
+      }
+    })
+  },
+  [AGAINUSERINFORMATIONS] (state) {
+    state.changeUserState = false
   }
+}
+
+function addLoginUid (data) {
+  let cookieUid = {
+    login_uid: Cke.getCookie('login_uid')
+  }
+  return Object.assign(data, cookieUid)
 }
 
 export default {
