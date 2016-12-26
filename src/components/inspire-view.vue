@@ -15,10 +15,11 @@
 <!--   <button @click="_changeshowlist"> 6 -> 9</button>
   <button @click="_changeshowlist2"> 9 -> 6</button> -->
     <div class="imagesShow">
-      <ul id='inspire-view-list' class=" clearfix">
+      <ul id='inspire-view-list' class=" clearfix" ref='parentScrollTop'>
           <!-- <transition> -->
             <inspire-view-list  v-for="(itms, index) in uinspireioDate" :key="index" :itmes="itms" :index="index"></inspire-view-list>
           <!-- </transition> -->
+          {{uinspireioDate.length}}
       </ul>
     </div>
       <transition
@@ -46,6 +47,23 @@ export default {
         left: ''
       },
       showlist: false
+    }
+  },
+  created () {
+    // let self = this
+    // window.addEventListener('scroll', () => {
+    //   console.log(this.scrollTop)
+    // })
+    let self = this
+    let scrollDown = 0
+    window.onscroll = function () {
+      let scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      if (scrolltop > scrollDown) {
+        if (self.$refs.parentScrollTop.offsetHeight - 500 < scrolltop) {
+          self.uinspireio(self.uinspireioDate[self.uinspireioDate.length - 1].id)
+        }
+      }
+      scrollDown = scrolltop
     }
   },
   mounted () {
