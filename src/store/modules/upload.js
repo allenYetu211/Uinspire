@@ -183,11 +183,9 @@ const mutations = {
     API.whetherthelogin(uinspire, (loginstate) => {
       // 登录返回 0
       if (loginstate.data.code === '0' || loginstate.data.code === '100490') {
-        console.log(1)
         state.sidebarright = !state.sidebarright
         state.theSidebar = false
       } else {
-        console.log(2)
         state.whetherthelogin = true
         state.theSidebar = true
       }
@@ -226,7 +224,6 @@ const mutations = {
   // 用户登录成功
   [USERLOGIN] (state, _userinformation) {
     API.userLogin(_userinformation, (back) => {
-      console.log(back.data.data)
       if (back.data.code === '0') {
         state.userInformation = back.data.data
         // console.log(back)

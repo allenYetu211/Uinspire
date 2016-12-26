@@ -379,7 +379,7 @@ export default {
       this.ic.icon_link = filter['icon_link'] = target.icon_link
       this.ic.developer = filter['developer'] = target.developer
       this.ic.developer_link = filter['developer_link'] = target.developer_link
-      this.ic.app_category = filter['genres'] = target.genres
+      this.ic.app_category = filter['app_category'] = target.app_category
       this.ic.version = filter['version'] = target.version
       this.ic.name = filter['name'] = target.name
       this.ic.app_id = filter['app_id'] = target.app_id
