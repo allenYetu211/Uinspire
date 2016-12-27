@@ -202,6 +202,7 @@ const mutations = {
   // 判断用户是否登录
   [WHETHERTHELOGIN] (state) {
     let uinspire = Cke.getCookie('login_uid')
+    Cke.getCookie('is_editer') === '0' ? state.isEditer = false : state.isEditer = true
     if (state.userCookieinformations) {
       let cookieInms = {
         icon_link: Cke.getCookie('icon_link'),
@@ -258,6 +259,7 @@ const mutations = {
     API.userLogin(_userinformation, (back) => {
       if (back.data.code === '0') {
         back.data.data.is_editer === '0' ? state.isEditer = false : state.isEditer = true
+        console.log('back.data.data.is_edite:', back.data.data.is_editer === '0')
         state.userInformation = back.data.data
         // console.log(back)
         Cke.setDigital(state.userInformation)
