@@ -104,7 +104,7 @@
         <transition name="loginlogon" tag="div" @after-enter="loginEnter">
             <div v-if="loginPopup">
               <div class="headerportrait gl-bgcolor-gray-ed">
-                <img :src="loginuserdata.icon_link">
+                <img :src="loginuserdata.headimgurl">
               </div>
               <div class="username gl-ftcolor-black gl-fb gl-size-26" :class="{'gl-bgcolor-gray-ed': !loginPopup}">
               {{loginuserdata.user_name}}

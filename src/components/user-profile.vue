@@ -3,7 +3,7 @@
 
   <div class="personal">
     <div class="personal-headportrait gl-bgcolor-gray-f7">
-      <img :src="userInformation.icon_link">
+      <img :src="userInformation.headimgurl">
     </div>
     <p class="gl-fb">{{userInformation.user_name}}</p>
     <p class="">{{userInformation.company}} {{userInformation.position}}</p>

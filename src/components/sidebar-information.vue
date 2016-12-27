@@ -8,7 +8,7 @@
         <div class="log-userheaderportrait clearfix">
           <button @click="logout"><i class="logout"></i></button>
           <div class="header-portarait gl-bgcolor-gray-ed">
-            <img :src="loginuserdata.icon_link">
+            <img :src="loginuserdata.headimgurl">
           </div>
           <div class="log-userinformations">
             <p class="log-userName gl-fb">{{loginuserdata.user_name}}</p>

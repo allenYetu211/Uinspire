@@ -205,7 +205,7 @@ const mutations = {
     Cke.getCookie('is_editer') === '0' ? state.isEditer = false : state.isEditer = true
     if (state.userCookieinformations) {
       let cookieInms = {
-        icon_link: Cke.getCookie('icon_link'),
+        headimgurl: Cke.getCookie('headimgurl'),
         user_name: Cke.getCookie('user_name'),
         position: Cke.getCookie('position'),
         company: Cke.getCookie('company')
@@ -318,7 +318,7 @@ const mutations = {
   // change user information
   [CUINFORMATION] (state) {
     let cookieInms = {
-      icon_link: Cke.getCookie('icon_link'),
+      headimgurl: Cke.getCookie('headimgurl'),
       user_name: Cke.getCookie('user_name'),
       position: Cke.getCookie('position'),
       email: Cke.getCookie('email'),
