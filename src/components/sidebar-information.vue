@@ -21,7 +21,7 @@
          <router-link :to="{ name: 'AppWall'}"><span  @click="_closerPopup">AppWall</span></router-link>
          <router-link :to="{ name: 'MoodBoardDetailProject'}"><span  @click="_closerPopup">Moodboard</span></router-link>
          <router-link :to="{ name: 'UserProfile'}"><span  @click="_closerPopup">Profile</span></router-link>
-         <router-link v-if="!isEditer" :to="{ name: 'UserJoinus'}"><span  @click="_closerPopup">UserJoinus</span></router-link>
+         <router-link v-if="!isEditer" :to="{ name: 'UserJoinus'}"><span  @click="_closerPopup">Join Editor</span></router-link>
          <router-link v-else :to="{ name: 'updatePage'}"><span  @click="_closerPopup">Upload</span></router-link>
         </div>
       </div>
