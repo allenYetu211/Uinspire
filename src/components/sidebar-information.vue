@@ -62,8 +62,14 @@
 
 <script>
 import {mapGetters, mapActions} from 'vuex'
+import Cke from '../Publicjs/ckie.js'
 
 export default {
+  data () {
+    return {
+      is_Editer: false
+    }
+  },
   computed: {
     ...mapGetters([
       'sidebarrightopenclose',
@@ -84,6 +90,14 @@ export default {
       this.closerappcollection()
       this.closecomtrast()
     }
+  },
+  mounted () {
+    this.$nextTick(() => {
+      Cke.getCookie('is_editer') === '0' ? this.is_Editer = false : this.is_Editer = true
+    })
+  },
+  created () {
+    Cke.getCookie('is_editer') === '0' ? this.is_Editer = false : this.is_Editer = true
   }
 }
 </script>

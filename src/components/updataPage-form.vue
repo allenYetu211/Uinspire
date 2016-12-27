@@ -36,7 +36,8 @@
                           class="app_name"
                           type="text" 
                           v-model="ic.name" 
-                          @focus="_historyFocus" 
+                          @focus="_historyFocus"
+                          @keyup.enter="_AppStore" 
                           name="" 
                           placeholder="Input APP Name Search"
                           >
@@ -191,23 +192,24 @@
                                 {{tag}}
                                 <i :data-tag="tagindex" @click="_deleteTag"></i>
                               </span>
-                              <button 
+                         <!--      <button 
                               @click="_popupShow" 
                               class="updata-Tag" 
                               type="button">
                               <i class="sprite_addTag"></i>
-                              </button>
-                              <div 
+                              </button> -->
+                              <input ref="disableds" @keyup.space="_spaceAddPushTag" v-model="inputTag" type="text" name="" maxlength="8">
+                         <!--      <div 
                               class="popup-tag" 
                               v-if="updataTag.length < 5 && popup">
                               <div class="popup-input">
-                                  <input v-model="inputTag" maxlength="8" type="text" name="" placeholder="Tag..">
-                                  <button @click="_addPushTag" class="popup-addTag">Add</button>
+                                  <input v-model="inputTag" @keyup.space="_spaceAddPushTag" maxlength="8" type="text" name="" placeholder="Tag..">
+                                  <button @click="_CloserTagInput" class="popup-addTag">Close</button>
                               </div>
                                   <ul>
                                     <li v-for="tag in tagList" @click="_addhistory">{{tag}}</li>
                                   </ul>
-                              </div>
+                              </div> -->
                           </div>
                       </div>
                   </div>
@@ -294,11 +296,11 @@ export default {
           device: this.ic.Platform
         }
       }).then((response) => {
-        console.log('response2:', response.data.data)
+        console.log('response2:', response.data)
         let _results = response.data.data
         this.history(this.ic.name)
         // if (this.ic.Platform === 'iPhone' || this.ic.Platform === 'iPad') {
-        if (_results.resultCount === 0) {
+        if (response.data.code === '10051') {
           this.searchNull = false
         } else {
           // console.log('response2:', _results.replace('<em>', '').replace('</em>', ''))
@@ -334,12 +336,10 @@ export default {
         }
       }
     },
-    _popupShow () {
-      if (this.updataTag.length >= 5) {
-        return
-      }
-      this.popup = true
-    },
+    // _popupShow () {
+    //   this.updataTag.length >= 5 ? false : this.popup = true
+    //   console.log(this.updataTag.length >= 5)
+    // },
     _historyFocus () {
       this.userhistorystate = true
     },
@@ -354,16 +354,32 @@ export default {
       this.ic['tag'] = this.updataTag
       this.popup = false
     },
+    // _CloserTagInput () {
+    //   console.log(111)
+    //   this.popup = false
+    // },
     _addPushTag () {
-      this.updataTag.push(this.inputTag)
-      this.ic['tag'] = this.updataTag
-      this.popup = false
-      this.tagList.push(this.inputTag)
-      if (this.tagList.length > 3) {
-        this.tagList.shift()
+      if (this.updataTag.length >= 5) {
+        return
       }
+      this.updataTag.push(this.inputTag)
+      console.log('this.updataTag', this.updataTag)
+      this.ic['tag'] = this.updataTag
+      // this.tagList.push(this.inputTag)
+      // if (this.tagList.length > 3) {
+      //   this.tagList.shift()
+      // }
+      if (this.updataTag.length >= 5) {
+        this.$refs.disableds.disabled = true
+      }
+      // this.updataTag.length >= 5 ? this.popup = false : ''
+    },
+    _spaceAddPushTag () {
+      this._addPushTag()
+      this.inputTag = ''
     },
     _deleteTag (el) {
+      this.$refs.disableds.disabled = false
       this.updataTag.splice(el.target.dataset.tag, 1)
       this.ic['tag'] = this.updataTag
     },
@@ -571,6 +587,11 @@ form{
       font-size:14px;
       padding:10px 25px 10px 15px;
       position:relative;
+      display: flex;
+      input {
+        margin: -10px;
+        flex: 1;
+      }
       span.tag-laber{
         background: #D8D8D8;
         padding: 4px 10px;
