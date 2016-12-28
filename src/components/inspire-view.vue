@@ -20,8 +20,9 @@
           <!-- <transition> -->
             <transition-group
             @before-enter="beforeEnter"
-            name="card-animations">
-              <inspire-view-list  v-for="(itms, index) in uinspireioDate" :key="index" :itmes="itms" :index="index"></inspire-view-list>
+             enter-active-class="animated cardAnimations cardAnimationsIn"
+             leave-active-class="animated cardAnimations cardAnimationsOut">
+              <inspire-view-list  v-for="(itms, index) in uinspireioDate" :data-index="index" :key="index" :itmes="itms" :index="index"></inspire-view-list>
             </transition-group>
           <!-- </transition> -->
           {{$router.name}}
@@ -56,7 +57,8 @@ export default {
         width: '',
         left: ''
       },
-      showlist: false
+      showlist: false,
+      cardCount: 0
     }
   },
   created () {
@@ -108,8 +110,8 @@ export default {
       'uinspireio'
     ]),
     beforeEnter (el) {
-      console.log('02103210321')
-      let delay = el.dataset.index * 60
+      console.log(typeof el.dataset.index)
+      let delay = el.dataset.index * 50
       el.style.animationDelay = delay + 'ms'
     },
     _change (_showcount = 6, scale = 0.28) {

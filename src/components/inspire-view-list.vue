@@ -1,5 +1,5 @@
 <template>
-  <li  :class="{lists: listArrangestate ,active : hover, animated: like}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
+  <li  :class="{lists: listArrangestate ,active : hover, pickup: like}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
     <div class="imagesShow-box-shadow"
      :style="{ background: 'hsl(' + itmes.hsl.h + ',' + itmes.hsl.s * 100 + '%' + ',' + itmes.hsl.l * 100 + '%)' }"
      :class="{active : hover}">
@@ -95,6 +95,7 @@ export default{
 </script>
 
 <style lang="scss" scoped>
+
 .sprite_inspire-view {
   display:inline-block;
   background:url('../assets/svg_sprite.svg') no-repeat;
@@ -124,10 +125,11 @@ li {
   transition: transform .25s, box-shadow .25s;
   overflow: hidden;
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
+
   &.active{
     box-shadow: 0px 4px 9px 0px rgba(0,0,0,0.12);
   }
-  &.animated{
+  &.pickup{
     // animation: animateds_start 0.3s forwards;
     transform: translateY(-12px);
     box-shadow: 0px 12px 20px 0px rgba(0,0,0,0.2);

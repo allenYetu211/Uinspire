@@ -1,12 +1,17 @@
 <template>
   <div class="app-wall">
     <ul>
-      <li class="app-logo" v-for="app in applogodata">
-        <router-link :to="{ name: 'IndexApp'}">
-          <img :src="app.icon_link" alt="">
-        </router-link>
-        <p>{{app.name}}</p>
-      </li>
+    <transition-group
+            @before-enter="beforeEnter"
+             enter-active-class="animated cardAnimations cardAnimationsIn"
+             leave-active-class="animated cardAnimations cardAnimationsOut">
+              <li class="app-logo" v-for="(app, index) in applogodata" :data-index="index" :key="index">
+                <router-link :to="{ name: 'IndexApp'}">
+                  <img :src="app.icon_link" alt="">
+                </router-link>
+                <p>{{app.name}}</p>
+              </li>
+      </transition-group>
     </ul>  
   </div>
 </template>
@@ -22,7 +27,11 @@ export default {
   methods: {
     ...mapActions([
       'addappwalldata'
-    ])
+    ]),
+    beforeEnter (el) {
+      let delay = el.dataset.index * 30
+      el.style.animationDelay = delay + 'ms'
+    }
   },
   mounted () {
     this.$nextTick(() => {

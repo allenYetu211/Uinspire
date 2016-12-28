@@ -207,14 +207,116 @@
  */
 
  
+
+
+/*
  .card-animations-item{
-  transition: opacity 10s;
+  transition: opacity 0.5s;
+  opacity: 0;
 }
 .card-animations-leave, .card-animations-enter-active  {
-  transition: opacity 10s;
+  transition: opacity 0.5s;
   opacity: 1;
 }
 .card-animations-leave-active, .card-animations-enter {
-  transition: opacity 10s;
+  transition: opacity 0.5s;
   opacity: 0;
+}
+ */
+
+/*
+.card-animations-enter-active{
+  animation:cardAnimationsIn 1s forwards;
+}
+.card-animations-leave-active{
+ animation:cardAnimationsOut 1s forwards;
+}
+@keyframes cardAnimationsIn {
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+}
+@keyframes cardAnimationsOut {
+  from {
+    opacity:1;
+  }
+  to {
+    opacity:0;
+  }
+}
+*/
+.animated.cardAnimations {
+  -webkit-animation-duration: 0.35s;
+  animation-duration: 0.35s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes cardAnimationsIn {
+  from {
+    -webkit-transform: scale(0.75) translateY(50px);
+    transform: scale(0.75) translateY(50px);
+    opacity:0;
+  }
+
+  to {
+    -webkit-transform: scale(1) translateY(0px);
+    transform: scale(1) translateY(0px);
+    opacity:1;
+  }
+}
+
+@keyframes cardAnimationsIn {
+  from {
+    -webkit-transform: scale(0.75) translateY(50px);
+    transform: scale(0.75) translateY(50px);
+    opacity:0;
+  }
+
+  to {
+    -webkit-transform: scale(1) translateY(0px);
+    transform: scale(1) translateY(0px);
+    opacity:1;
+  }
+}
+
+.cardAnimationsIn {
+  -webkit-animation-name: cardAnimationsIn ;
+  animation-name: cardAnimationsIn;
+}
+
+@-webkit-keyframes cardAnimationsOut {
+  from {
+    -webkit-transform: scale(1) translateY(0px);
+    transform: scale(1) translateY(0px);
+    opacity:1;
+  }
+
+  to {
+    -webkit-transform: scale(0.75) translateY(50px);
+    transform: scale(0.75) translateY(50px);
+    opacity:0;
+  }
+}
+
+@keyframes cardAnimationsOut {
+  from {
+    -webkit-transform: scale(1) translateY(0px);
+    transform: scale(1) translateY(0px);
+    opacity:1;
+  }
+
+  to {
+    -webkit-transform: scale(0.75) translateY(50px);
+    transform: scale(0.75) translateY(50px);
+    opacity:0;
+  }
+}
+
+.cardAnimationsOut {
+  -webkit-animation-name: cardAnimationsOut;
+  animation-name: cardAnimationsOut;
 }
