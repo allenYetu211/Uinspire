@@ -15,12 +15,14 @@
 </style>
 <template>
   <div class="router">
-<!--   <button @click="_changeshowlist"> 6 -> 9</button>
-  <button @click="_changeshowlist2"> 9 -> 6</button> -->
     <div class="imagesShow">
       <ul id='inspire-view-list' class=" clearfix" ref='parentScrollTop'>
           <!-- <transition> -->
-            <inspire-view-list  v-for="(itms, index) in uinspireioDate" :key="index" :itmes="itms" :index="index"></inspire-view-list>
+            <transition-group
+            @before-enter="beforeEnter"
+            name="card-animations">
+              <inspire-view-list  v-for="(itms, index) in uinspireioDate" :key="index" :itmes="itms" :index="index"></inspire-view-list>
+            </transition-group>
           <!-- </transition> -->
           {{$router.name}}
           {{uinspireioDate.length}}
@@ -105,6 +107,11 @@ export default {
       'sidebarright',
       'uinspireio'
     ]),
+    beforeEnter (el) {
+      console.log('02103210321')
+      let delay = el.dataset.index * 60
+      el.style.animationDelay = delay + 'ms'
+    },
     _change (_showcount = 6, scale = 0.28) {
       let listParents = document.querySelector('#inspire-view-list')
       let listchilren = listParents.getElementsByTagName('li')

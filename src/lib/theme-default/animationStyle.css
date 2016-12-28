@@ -197,3 +197,24 @@
     opacity: 0;
   }
  }
+
+ /*
+  *
+  *  Use place :
+  *  -->
+  *     inspire-view
+  *     
+ */
+
+ 
+ .card-animations-item{
+  transition: opacity 10s;
+}
+.card-animations-leave, .card-animations-enter-active  {
+  transition: opacity 10s;
+  opacity: 1;
+}
+.card-animations-leave-active, .card-animations-enter {
+  transition: opacity 10s;
+  opacity: 0;
+}

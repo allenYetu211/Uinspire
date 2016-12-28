@@ -13,11 +13,12 @@
                         <button class="delete">
                             <i class="sprite_delete"></i>
                         </button>
-                        <transition 
+                        <transition
+                        @before-enter="beforeEnter"
                         name="custom-classes-transition" 
                         enter-active-class="animated slideInDown" 
                         leave-active-class="animated slideOutUp" 
-                        @before-enter="beforeEnter">
+                        >
                             <img v-show="comtrastpopup" :data-index="index" :src="itms" alt="">
                         </transition>
                     </li>
