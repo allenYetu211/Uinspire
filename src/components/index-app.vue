@@ -1,7 +1,7 @@
 <template>
 <div>
 <div class="indexApp">
-    <div class="app-border-line">
+    <div class="app-border-line app-header">
         <div class="app-container clearfix">
             <div class="app-informations">
                 <div class="app-infor-left">
@@ -111,7 +111,7 @@ export default {
       position: relative;
       .app-Images{
         .app-ImagesRouter{
-          border-radius: 4px;
+          border-radius: 2px;
           overflow: hidden;
           transition: transform .25s, box-shadow .25s;
           box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
@@ -124,7 +124,9 @@ export default {
       }
     }
   .indexApp{
-
+    .app-header{
+      background: #fafafa;
+    }
     .app-border-line{
       border-bottom: 1px solid #eee;
     }
@@ -142,7 +144,8 @@ export default {
           float: left;
           flex: 3;
           .app-logo img{
-            border-radius:20px;
+            border-radius:22%;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
           }
           .app-about{
             padding: 0 20px;
@@ -157,10 +160,11 @@ export default {
             }
             p{
               font-size: 20px;
-              line-height: 24px;
+              line-height: 26px;
+              height:50px;
             }
             div{
-              margin-top: 13px;
+              margin-top: 10px;
 
             }
           }
@@ -174,7 +178,8 @@ export default {
         float: right;
         font-size: 14px;
         p{
-          margin-bottom: 12px;
+          margin-bottom: 2px;
+          line-height: 1.8;
         }
       }
     }
@@ -183,10 +188,10 @@ export default {
       li{
         width: calc(100% / 4 - 20px);
         display:inline-block;
-        margin: 0px 10px 15px;
+        margin: 0px 10px 20px;
         p{
           text-align: center;
-          padding: 10px 0;
+          padding: 12px 0;
           font-size: 12px;
         }
         img{
