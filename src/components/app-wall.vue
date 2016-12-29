@@ -19,6 +19,11 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  data () {
+    return {
+      count: 0
+    }
+  },
   computed: {
     ...mapGetters([
       'applogodata'
@@ -28,8 +33,15 @@ export default {
     ...mapActions([
       'addappwalldata'
     ]),
+    addCount () {
+      if (this.count > 71) {
+        this.count = 0
+      }
+      this.count++
+    },
     beforeEnter (el) {
-      let delay = el.dataset.index * 30
+      this.addCount()
+      let delay = this.count * 30
       el.style.animationDelay = delay + 'ms'
     }
   },
