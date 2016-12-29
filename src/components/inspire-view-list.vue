@@ -130,7 +130,6 @@ li {
     box-shadow: 0px 4px 9px 0px rgba(0,0,0,0.12);
   }
   &.pickup{
-    // animation: animateds_start 0.3s forwards;
     transform: translateY(-12px);
     box-shadow: 0px 12px 20px 0px rgba(0,0,0,0.2);
   }
