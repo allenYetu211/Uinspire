@@ -11,12 +11,14 @@
                     <div class="app-about">
                         <p class="gl-fb">{{indexAppdata.lastest_app_info.name}}</p>
                         <div>
-                            <button class="gl-ftcolor-gray">
+                            <a type="button" class="gl-ftcolor-gray" :href="indexAppdata.lastest_app_info.link">
                               <i class="sprite_Appstore"></i>View in Appstore
-                            </button>
-                            <button class="gl-ftcolor-gray">
+                            </a>
+                            <a type="button" class="gl-ftcolor-gray" :href="indexAppdata.lastest_app_info.link">
                               <i class="sprite_Download"></i>Download
-                            </button>
+                              <!-- <img src="http://bshare.optimix.asia/barCode?site=weixin&amp;url={{indexAppdata.lastest_app_info.link}}" alt=""> -->
+                            </a>
+                            
                         </div>
                     </div>
                 </div>
@@ -150,8 +152,9 @@ export default {
           .app-about{
             padding: 0 20px;
             width: 75%;
-            button{
+            a{
               background-color: transparent;
+              text-decoration: none;
               border: none;
               font-size: 14px;
               cursor:pointer;
@@ -162,6 +165,7 @@ export default {
               font-size: 20px;
               line-height: 26px;
               height:50px;
+              overflow: hidden;
             }
             div{
               margin-top: 10px;
