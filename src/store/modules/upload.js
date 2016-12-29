@@ -27,7 +27,8 @@ import {
   CUINFORMATION,
   PERMISSIONS,
   USERINFORMATIONS,
-  AGAINUSERINFORMATIONS
+  AGAINUSERINFORMATIONS,
+  GETAPPPAGEDATA
 } from '../actions'
 
 const state = {
@@ -65,7 +66,8 @@ const state = {
   appLoadingAnimation: false, // 滚动加载动画状态标识
   appLoadingSate: false,    // 滚动加载 服务器图片读取完
   appIdCount: 0,            // 加载验证是否传递重复ID
-  changeUserState: false   // 修改用户信息显示状态
+  changeUserState: false,  // 修改用户信息显示状态
+  indexAppdata: ''         // indexApp数据
 }
 
 const mutations = {
@@ -312,6 +314,7 @@ const mutations = {
   // 存储applogodata
   [ADDAPPWALLDATA] (state) {
     API.getAppLogodata((callback) => {
+      console.log(callback)
       state.applogodata = callback.data.data
     })
   },
@@ -347,6 +350,13 @@ const mutations = {
   },
   [AGAINUSERINFORMATIONS] (state) {
     state.changeUserState = false
+  },
+  // requst indexappdata
+  [GETAPPPAGEDATA] (state, _id) {
+    API.getIndexAppData(_id, (callback) => {
+      state.indexAppdata = callback.data.data
+      console.log('state.indexAppdata:', state.indexAppdata)
+    })
   }
 }
 

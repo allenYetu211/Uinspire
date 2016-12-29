@@ -5,9 +5,12 @@
             @before-enter="beforeEnter"
              enter-active-class="animated cardAnimations cardAnimationsIn"
              leave-active-class="animated cardAnimations cardAnimationsOut">
+             {{applogodata}}
               <li class="app-logo" v-for="(app, index) in applogodata" :data-index="index" :key="index">
                 <router-link :to="{ name: 'IndexApp'}">
-                  <img :src="app.icon_link" alt="">
+                  <span @click="_routerGetIntroduce" :data-appid="app.app_id">
+                    <img :src="app.icon_link" alt="">
+                  </span>
                 </router-link>
                 <p>{{app.name}}</p>
               </li>
@@ -26,11 +29,15 @@ export default {
   },
   methods: {
     ...mapActions([
-      'addappwalldata'
+      'addappwalldata',
+      'getapppagedata'
     ]),
     beforeEnter (el) {
       let delay = el.dataset.index * 30
       el.style.animationDelay = delay + 'ms'
+    },
+    _routerGetIntroduce (el) {
+      this.getapppagedata(el.target.dataset.appid)
     }
   },
   mounted () {
@@ -89,10 +96,14 @@ export default {
           height: 40%;
           transition: transform 0.25s;
         }
+        span {
+          display: block;
+        }
         img{
           width: 100%;
           border-radius: 22%;
           box-shadow: 0px 1px 2px 0px rgba(0,0,0,.1);
+          pointer-events: none;
           // border: 0.5px solid #f3f3f3;
         }
       }

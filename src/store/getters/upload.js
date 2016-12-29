@@ -83,3 +83,6 @@ export const userPermissions = state => state.upload.userPermissions
 // applist changeUserState sate
 export const changeUserState = state => state.upload.changeUserState
 
+// appindex Data
+export const indexAppdata = state => state.upload.indexAppdata
+

@@ -103,3 +103,7 @@ export const userinformations = ({commit}, _data) => { commit(USERINFORMATIONS, 
 // again userInformationse
 export const AGAINUSERINFORMATIONS = 'agianuserinformations'
 export const agianuserinformations = ({commit}, _data) => { commit(AGAINUSERINFORMATIONS, _data) }
+
+// requst IndexAppPage information
+export const GETAPPPAGEDATA = 'getapppagedata'
+export const getapppagedata = ({commit}, _id) => { commit(GETAPPPAGEDATA, _id) }

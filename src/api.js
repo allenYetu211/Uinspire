@@ -273,5 +273,19 @@ export default {
         callback(response)
       }
     })
+  },
+  // get IndexApp Page Data
+  getIndexAppData (_data, callback) {
+    axios.get('http://inspire.stoyard.com/api/inspire/uniqueappinfo', {
+      params: {
+        app_id: _data
+      }
+    }).then((response) => {
+      if (typeof callback === 'function') {
+        callback(response)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 }

@@ -1,15 +1,15 @@
 <template>
-
+<div>
 <div class="indexApp">
     <div class="app-border-line">
         <div class="app-container clearfix">
             <div class="app-informations">
                 <div class="app-infor-left">
                     <div class="app-logo">
-                        <img :src="appinformations.url">
+                        <img :src="indexAppdata.lastest_app_info.icon_link">
                     </div>
                     <div class="app-about">
-                        <p class="gl-fb">{{appinformations.name}}</p>
+                        <p class="gl-fb">{{indexAppdata.lastest_app_info.name}}</p>
                         <div>
                             <button class="gl-ftcolor-gray">
                               <i class="sprite_Appstore"></i>View in Appstore
@@ -21,61 +21,55 @@
                     </div>
                 </div>
                 <div class="app-infor-right">
-                    <p><span class="gl-fb">Developer : </span>{{appinformations.Developer}}</p>
-                    <p><span class="gl-fb">Category : </span>{{appinformations.Category}}</p>
-                    <p><span class="gl-fb">Lastest Version : </span>{{appinformations.LastestVersion}}</p>
+                    <p><span class="gl-fb">Developer : </span>{{indexAppdata.lastest_app_info.developer}}</p>
+                    <p><span class="gl-fb">Category : </span>{{indexAppdata.lastest_app_info.app_category}}</p>
+                    <p><span class="gl-fb">Lastest Version : </span>{{indexAppdata.lastest_app_info.version}}</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="app-version">
-        <div class="app-version-introduce app-border-line">
-            <div class="app-version-information gl-ftcolor-black">Version {{appinformations.LastestVersion}}</div>
+        <div class="app-version-introduce app-border-line" v-for="iap in indexAppdata.app_list_info">
+            <div class="app-version-information gl-ftcolor-black">Version {{iap.version}}</div>
             <div class="app-container clearfix">
                 <ul>
-                    <li v-for="introduce in infordata">
-                        <div>
-                            <img :src="introduce.url">
-                        </div>
-                        <p>{{introduce. appname}}</p>
+                   <transition-group
+                    @before-enter="beforeEnter"
+                     enter-active-class="animated cardAnimations cardAnimationsIn"
+                     leave-active-class="animated cardAnimations cardAnimationsOut">
+                    <li class="app-Images" :key="index" v-for="(introduce, index) in iap.data">
+                            <img :src="introduce.img">
+                        <p >{{introduce.category.name_en[0]}}</p>
                     </li>
+                    </transition-group>
                 </ul>
             </div>
 
-            <div class="app-version-count gl-ftcolor-gray">{{infordata.length}} screenshot</div>
+            <!-- <div class="app-version-count gl-ftcolor-gray">{{introduce.length}} screenshot</div> -->
         </div>
 
     </div>
 </div>
 
-
+</div>
 </template>
-
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
-      appinformations: {
-        url: 'static/img1.jpg',
-        name: 'PayPal – Send money and manage your payments',
-        Developer: 'PayPal, Inc',
-        Category: 'Finance',
-        LastestVersion: '6.7.0'
-      },
-      infordata: [
-      {url: 'static/img1.jpg', appname: 'Walkthrough'},
-      {url: 'static/img1.jpg', appname: 'Walkthrough'},
-      {url: 'static/img2.jpg', appname: 'Walkthrough'},
-      {url: 'static/img3.jpg', appname: 'Walkthrough'},
-      {url: 'static/img4.jpg', appname: 'Walkthrough'},
-      {url: 'static/img5.jpg', appname: 'Walkthrough'},
-      {url: 'static/img6.jpg', appname: 'Walkthrough'},
-      {url: 'static/img7.jpg', appname: 'Walkthrough'},
-      {url: 'static/img8.jpg', appname: 'Walkthrough'},
-      {url: 'static/img9.jpg', appname: 'Walkthrough'},
-      {url: 'static/img10.jpg', appname: 'Walkthrough'},
-      {url: 'static/img11.jpg', appname: 'Walkthrough'}
-      ]
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'indexAppdata'
+    ])
+  },
+  methods: {
+    beforeEnter (el) {
+      let delay = el.dataset.index * 50
+      el.style.animationDelay = delay + 'ms'
     }
   }
 }
@@ -103,6 +97,17 @@ export default {
       margin: 0 auto;
       padding: 25px 0 20px;
       position: relative;
+      .app-Images{
+        img{
+          border-radius: 2px;
+          transition: transform .25s, box-shadow .25s;
+          box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+          &:hover{
+            transform: translateY(-12px);
+            box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
     }
   .indexApp{
 
