@@ -30,7 +30,7 @@
       </ul>
        <p class="gl-fb gl-ftcolor-gray" v-if="appLoadingSate">End</p>
        <div class="loadingAnimation" v-if='appLoadingAnimation'>
-         加载动画。。。。。。。。。。。
+          loading...
        </div>
     </div>
       <transition
