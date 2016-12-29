@@ -38,14 +38,18 @@
                      enter-active-class="animated cardAnimations cardAnimationsIn"
                      leave-active-class="animated cardAnimations cardAnimationsOut">
                     <li class="app-Images" :key="index" v-for="(introduce, index) in iap.data">
-                            <img :src="introduce.img">
-                        <p >{{introduce.category.name_en[0]}}</p>
+                        <div class="app-ImagesRouter" 
+                        :style="{ background: 'hsl(' + introduce.hsl.h + ',' + introduce.hsl.s * 100 + '%' + ',' + introduce.hsl.l * 100 + '%)' }">
+                          <img :src="introduce.img">
+                        </div>
+                        <p >{{introduce.category[0]}}</p>
+                        
                     </li>
                     </transition-group>
                 </ul>
             </div>
 
-            <!-- <div class="app-version-count gl-ftcolor-gray">{{introduce.length}} screenshot</div> -->
+            <div class="app-version-count gl-ftcolor-gray">{{iap.data.length}} screenshot</div>
         </div>
 
     </div>
@@ -106,10 +110,13 @@ export default {
       padding: 25px 0 20px;
       position: relative;
       .app-Images{
-        img{
-          border-radius: 2px;
+        .app-ImagesRouter{
+          border-radius: 4px;
+          overflow: hidden;
           transition: transform .25s, box-shadow .25s;
           box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+          height: 0;
+          padding-bottom: 177.7%;
           &:hover{
             box-shadow: 0px 4px 9px 0px rgba(0,0,0,0.12);
           }

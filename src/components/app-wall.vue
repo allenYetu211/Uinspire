@@ -5,7 +5,6 @@
             @before-enter="beforeEnter"
              enter-active-class="animated cardAnimations cardAnimationsIn"
              leave-active-class="animated cardAnimations cardAnimationsOut">
-             {{applogodata}}
               <li class="app-logo" v-for="(app, index) in applogodata" :data-index="index" :key="index">
                 <router-link :to="{ name: 'IndexApp'}">
                   <span @click="_routerGetIntroduce" :data-appid="app.app_id">

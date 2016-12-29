@@ -62,33 +62,29 @@ export default {
     }
   },
   created () {
-    // let self = this
-    // window.addEventListener('scroll', () => {
-    //   console.log(this.scrollTop)
-    // })
     let self = this
     let scrollDown = 0
     let verlibar = false
     window.onscroll = function () {
       if (!self.$route.name === 'inspire') {
         return
-      }
-      if (!verlibar) {
-        verlibar = true
-        return
-      }
-      let scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-      if (scrolltop > scrollDown) {
-        if (self.$refs.parentScrollTop.offsetHeight < scrolltop + document.documentElement.clientHeight) {
-          self.uinspireio(self.uinspireioDate[self.uinspireioDate.length - 1].id)
+      } else {
+        if (!verlibar) {
+          verlibar = true
+          return
         }
+        let scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        if (scrolltop > scrollDown) {
+          if (self.$refs.parentScrollTop.offsetHeight < scrolltop + document.documentElement.clientHeight) {
+            self.uinspireio(self.uinspireioDate[self.uinspireioDate.length - 1].id)
+          }
+        }
+        scrollDown = scrolltop
       }
-      scrollDown = scrolltop
     }
   },
   mounted () {
     this.$nextTick(() => {
-      // this._change()
       this.uinspireio()
     })
   },
