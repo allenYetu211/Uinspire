@@ -59,6 +59,7 @@ import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
+      cardCount: 0
     }
   },
   computed: {
@@ -67,8 +68,15 @@ export default {
     ])
   },
   methods: {
+    addCount () {
+      if (this.cardCount > 71) {
+        this.cardCount = 0
+      }
+      this.cardCount++
+    },
     beforeEnter (el) {
-      let delay = el.dataset.index * 50
+      this.addCount()
+      let delay = this.cardCount * 200
       el.style.animationDelay = delay + 'ms'
     }
   }
@@ -103,8 +111,7 @@ export default {
           transition: transform .25s, box-shadow .25s;
           box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
           &:hover{
-            transform: translateY(-12px);
-            box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 4px 9px 0px rgba(0,0,0,0.12);
           }
         }
       }

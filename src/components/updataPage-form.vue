@@ -32,6 +32,11 @@
                       </h5>
 
                       <div v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
+                        <div class="app-area" @click="_changearesStore">
+                          <i class="sprite_area-1" v-if="StoreAres === 0"></i>
+                          <i class="sprite_area-2" v-if="StoreAres === 1"></i>
+                          <i class="sprite_area-3" v-if="StoreAres === 2"></i>
+                        </div>
                           <input 
                           class="app_name"
                           type="text" 
@@ -259,7 +264,8 @@ export default {
       device: '',
       userhistorystate: false,
       inputfocus: false,
-      sprite_correct: false
+      sprite_correct: false,
+      StoreAres: 0
     }
   },
   computed: {
@@ -413,6 +419,12 @@ export default {
       this.getAppStore = []
       this.getAppStore.push(filter)
     },
+    _changearesStore () {
+      this.StoreAres++
+      if (this.StoreAres > 2) {
+        this.StoreAres = 0
+      }
+    },
     _beforeEnter (el) {
       let delay = el.dataset.index * 40
       el.style.animationDelay = delay + 'ms'
@@ -427,6 +439,24 @@ export default {
     height: 16px;
     background:url('../assets/svg_sprite.svg')no-repeat;
 }
+.sprite_area-1{
+  @extend .sprite;
+  width: 20px;
+  height: 14px;
+  background-position: 0 -186px;
+}
+.sprite_area-2{
+  @extend .sprite;
+  width: 20px;
+  height: 14px;
+  background-position: -30px -186px;
+}
+.sprite_area-3{
+  @extend .sprite;
+  width: 20px;
+  height: 14px;
+  background-position: -60px -186px;
+}
  .informations-uploade{
     border-bottom:1px solid #EFEFEF;
     padding: 50px 0;
@@ -439,6 +469,16 @@ export default {
       padding: 50px 0;
     }
   }
+.app-area{
+  position: absolute;
+  top: 42px;
+  left: 10px;
+  i{
+    display: inline-block;
+    width: 20px;
+    height: 14px;
+  }
+}
 form{
   flex: row;
   display: flex;
@@ -573,6 +613,9 @@ form{
       height:40px;
       font-size:14px;
       padding:10px 25px 10px 15px;
+      &.app_name{
+        padding-left: 40px;
+      }
     }
     input::placeholder{
       color:#D7D7D7;
