@@ -33,9 +33,9 @@
 
                       <div v-if="ic.Platform === 'iPhone' || ic.Platform === 'iPad'">
                         <div class="app-area" @click="_changearesStore">
-                          <i class="sprite_area-1" v-if="StoreAres === 0"></i>
-                          <i class="sprite_area-2" v-if="StoreAres === 1"></i>
-                          <i class="sprite_area-3" v-if="StoreAres === 2"></i>
+                          <i class="sprite_area-1" v-if="StoreAresCount === 3"></i>
+                          <i class="sprite_area-2" v-if="StoreAresCount === 2"></i>
+                          <i class="sprite_area-3" v-if="StoreAresCount === 1"></i>
                         </div>
                           <input 
                           class="app_name"
@@ -265,7 +265,8 @@ export default {
       userhistorystate: false,
       inputfocus: false,
       sprite_correct: false,
-      StoreAres: 0
+      StoreAresCount: 3,
+      StoreAres: 'CN'
     }
   },
   computed: {
@@ -296,30 +297,24 @@ export default {
       this.userhistorystate = false
       this.sprite_correct = false
       this._searchShow = !this._searchShow
+      console.log(this.StoreAres)
       axios.get('http://inspire.stoyard.com/api/inspire/appInfo', {
         params: {
           name: this.ic.name,
-          device: this.ic.Platform
+          device: this.ic.Platform,
+          country: this.StoreAres
         }
       }).then((response) => {
         console.log('response2:', response.data)
         let _results = response.data.data
         this.history(this.ic.name)
-        // if (this.ic.Platform === 'iPhone' || this.ic.Platform === 'iPad') {
         if (response.data.code === '10051') {
           this.searchNull = false
         } else {
-          // console.log('response2:', _results.replace('<em>', '').replace('</em>', ''))
           this.getAppStore = _results
         }
-        // } else {
-          // if (_results.total === 0) {
-          //   this.searchNull = false
-          // } else {
-          //   this.getAppStore = _results
-          // }
-        // }
-      }).catch((response) => {
+      }).catch((error) => {
+        console.log(error)
       })
     },
     _upcancel (el) {
@@ -420,10 +415,11 @@ export default {
       this.getAppStore.push(filter)
     },
     _changearesStore () {
-      this.StoreAres++
-      if (this.StoreAres > 2) {
-        this.StoreAres = 0
+      this.StoreAresCount--
+      if (this.StoreAresCount === 0) {
+        this.StoreAresCount = 3
       }
+      this.StoreAresCount === 3 ? this.StoreAres = 'CN' : this.StoreAresCount === 2 ? this.StoreAres = 'US' : this.StoreAres = 'JP'
     },
     _beforeEnter (el) {
       let delay = el.dataset.index * 40
