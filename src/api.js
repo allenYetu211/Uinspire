@@ -244,6 +244,7 @@ export default {
         permissions.append('phone', _data.phone)
         permissions.append('wechat', _data.wechat)
         permissions.append('login_uid', _data.login_uid)
+        permissions.append('description', _data.About)
         return permissions
       }],
       data: _data

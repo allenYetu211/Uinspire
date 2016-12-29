@@ -109,9 +109,15 @@ export default {
       'sidebarright',
       'uinspireio'
     ]),
+    addCount () {
+      if (this.cardCount > 71) {
+        this.cardCount = 0
+      }
+      this.cardCount++
+    },
     beforeEnter (el) {
-      console.log(typeof el.dataset.index)
-      let delay = el.dataset.index * 50
+      this.addCount()
+      let delay = this.cardCount * 25
       el.style.animationDelay = delay + 'ms'
     },
     _change (_showcount = 6, scale = 0.28) {
