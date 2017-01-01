@@ -52,7 +52,7 @@
           Copyright © <span class="gl-ftcolor-theme gl-fb">G_Lab Stoyard</span>
         </p>
         <p class="gl-ftcolor-gray-99">
-          UInspire.io  2016 | Version 1.2.2 β
+          UInspire.io  2016 | Version 1.3
         </p>
       </div>
     </div>
