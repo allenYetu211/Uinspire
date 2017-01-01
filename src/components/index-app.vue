@@ -11,12 +11,12 @@
                     <div class="app-about">
                         <p class="gl-fb">{{indexData.lastest_app_info.name}}</p>
                         <div>
-                            <a type="button" class="gl-ftcolor-gray" :href="indexAppdata.lastest_app_info.link">
+                            <a type="button" class="gl-ftcolor-gray" :href="indexData.lastest_app_info.link">
                               <i class="sprite_Appstore"></i>View in Appstore
                             </a>
-                            <a type="button" class="gl-ftcolor-gray" :href="indexAppdata.lastest_app_info.link">
+                            <a type="button" class="gl-ftcolor-gray" :href="indexData.lastest_app_info.link">
                               <i class="sprite_Download"></i>Download
-                              <!-- <img src="http://bshare.optimix.asia/barCode?site=weixin&amp;url={{indexAppdata.lastest_app_info.link}}" alt=""> -->
+                              <!-- <img src="http://bshare.optimix.asia/barCode?site=weixin&amp;url={{indexData.lastest_app_info.link}}" alt=""> -->
                             </a>
                             
                         </div>
