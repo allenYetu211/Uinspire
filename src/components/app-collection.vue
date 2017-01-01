@@ -19,7 +19,7 @@
             <h2 class="gl-fb"><span>{{list.name}}</span><span class="gl-nr">{{list.user_name}}</span></h2>
             <p class="gl-fb">category <span class="gl-nr" v-for="categoryEn in list.category.name_en"> {{categoryEn}}</span></p>
             <p class="gl-fb">Tags 
-            <span v-if="list.tag" class="gl-nr">{{list.tag}}</span>
+            <span v-if="list.tag[0] !== ''" v-for="infors in list.tag" class="gl-nr">{{infors}}</span>
             <span v-else class="gl-nr">No Tag</span>
             </p>
 

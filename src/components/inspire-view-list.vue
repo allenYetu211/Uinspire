@@ -6,7 +6,7 @@
       <img :src="itmes.img + '?x-oss-process=image/resize,w_600'">
         <div class="imagesShow-paypal"  @click.stop="" :class="{active : hover}">
           <div class="imagesShow-paypal-py">
-              <router-link :to="{ name: 'IndexApp'}" class="gl-ftcolor-black">
+              <router-link :to="{ name: 'IndexApp', params: { 'appid': itmes.id }}" class="gl-ftcolor-black">
                 {{itmes.name}}
               </router-link>
           </div>

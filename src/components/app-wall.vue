@@ -6,10 +6,10 @@
              enter-active-class="animated cardAnimations cardAnimationsIn"
              leave-active-class="animated cardAnimations cardAnimationsOut">
               <li class="app-logo" v-for="(app, index) in applogodata" :data-index="index" :key="index">
-                <router-link :to="{ name: 'IndexApp'}">
-                  <span @click="_routerGetIntroduce" :data-appid="app.app_id">
+                <router-link :to="{ name: 'IndexApp', params: { 'appid': app.app_id }}">
+                  <!-- <span @click="_routerGetIntroduce" :data-appid="app.app_id"> -->
                     <img :src="app.icon_link" alt="">
-                  </span>
+                  <!-- </span> -->
                 </router-link>
                 <p>{{app.name}}</p>
               </li>

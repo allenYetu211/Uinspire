@@ -66,6 +66,7 @@ export default {
     let scrollDown = 0
     let verlibar = false
     window.onscroll = function () {
+      console.log(self.$route.name === 'inspire')
       if (!self.$route.name === 'inspire') {
         return
       } else {

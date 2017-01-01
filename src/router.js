@@ -22,7 +22,7 @@ export default [
     name: 'updatePage',
     component: UpdatePage
   }, {
-    path: '/IndexApp',
+    path: '/IndexApp/:appid',
     name: 'IndexApp',
     component: IndexApp
   }, {
