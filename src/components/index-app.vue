@@ -79,6 +79,7 @@ export default {
       // this.indexData = response.data.data
       // console.log(this.indexData)
       next(vm => {
+        console.log(response.data.data)
         vm.indexData = response.data.data
       })
     })
