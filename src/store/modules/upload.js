@@ -117,6 +117,7 @@ const mutations = {
     API.initCategory((categorydata) => {
       console.log('categorydata:', categorydata)
       state.categoryDate = categorydata
+      console.log('state.categoryDate:', state.categoryDate)
     })
   },
   [ADDFILTERCATEGORY] (state, categoryIndex) {

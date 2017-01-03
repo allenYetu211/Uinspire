@@ -9,7 +9,7 @@
                 <h2 class="gl-size-20 gl-fb">Category</h2>
                 <div 
                 class="gl-col-12 category-list" 
-                v-for="(item, index) in categoryDate">
+                v-for="(item, index) in categoryDate.data">
                     <input 
                     @click="_sendfiltercategory" 
                     :data-filterindex='index' 

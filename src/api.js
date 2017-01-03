@@ -75,13 +75,6 @@ export default {
   },
   initCategory (callback) {
     axios.get('http://inspire.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
-      // console.log('response.data.data:', response.data.data)
-      // let categorydata = response.data.data
-      // let category = []
-      // for (let i = 0; i < categorydata.length; i++) {
-      //   // category.push(categorydata[i].name_zh)
-      //   category.push(categorydata[i].name_en)
-      // }
       if (typeof callback === 'function') {
         callback(response.data.data)
       }

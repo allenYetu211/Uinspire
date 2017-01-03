@@ -176,7 +176,7 @@
                       <div class="clearfix">
                           <div 
                           class="category-checkbox" 
-                          v-for="(ck, ins) in categoryDate">
+                          v-for="(ck, ins) in categoryDate.data">
                               <input
                               v-model="ic.Category" 
                               :value="ck.id" 
@@ -188,7 +188,6 @@
                               <label :for="'ckcategory_' + index + ins ">{{ck.name_en}}
                                 <div>{{ck.name_zh}}</div>
                               </label>
-                              
                           </div>
                       </div>
                   </div>
@@ -394,6 +393,7 @@ export default {
       this.sprite_correct = true
       let filter = {}
       let target = this.getAppStore[event.target.dataset.gnd]
+      console.log('target.app_category:', target.app_category)
       // if (event.target.dataset.platform === 'ios') {
       this.ic.link = filter['link'] = target.link
       this.ic.icon_link = filter['icon_link'] = target.icon_link
