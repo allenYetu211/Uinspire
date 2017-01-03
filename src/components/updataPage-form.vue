@@ -173,7 +173,7 @@
                       <span 
                       v-show="appcategory && ic.Category.length === 0" 
                       class="gl-fn">Please Select Category</span></h5>
-                      <div class="clearfix">
+                      <div class="clearfix" id="cateGory">
                           <div 
                           class="category-checkbox" 
                           v-for="(ck, ins) in categoryDate">
@@ -182,10 +182,12 @@
                               :value="ck.id" 
                               :id="'ckcategory_' + index + ins " 
                               type="checkbox" 
-                              name="" 
-                              style="display:none">
+                              name=""
+                              @click="_detection"
+                              style="display: none"
+                              >
                               <i class="sprite_checkbox"></i>
-                              <label @click="_detection" :for="'ckcategory_' + index + ins ">{{ck.name_en}}
+                              <label  :for="'ckcategory_' + index + ins ">{{ck.name_en}}
                                 <div>{{ck.name_zh}}</div>
                               </label>
                           </div>
@@ -268,7 +270,8 @@ export default {
       inputfocus: false,
       sprite_correct: false,
       StoreAresCount: 3,
-      StoreAres: 'CN'
+      StoreAres: 'CN',
+      checkedCount: []
     }
   },
   computed: {
@@ -430,6 +433,23 @@ export default {
     },
     _detection (el) {
       console.log(el)
+      let checkedCount = 0
+      let check = document.querySelector('#cateGory')
+      let checkInput = check.querySelectorAll('input')
+      if (checkInput.checkbox) {
+      }
+      checkInput.forEach((els) => {
+        if (els.checked) {
+          checkedCount++
+        } else {
+          if (checkedCount >= 2) {
+            els.disabled = true
+          } else {
+            els.disabled = false
+          }
+        }
+        console.log(checkedCount)
+      })
     }
   }
 }
