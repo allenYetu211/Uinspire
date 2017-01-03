@@ -176,7 +176,7 @@
                       <div class="clearfix">
                           <div 
                           class="category-checkbox" 
-                          v-for="(ck, ins) in categoryDate.data">
+                          v-for="(ck, ins) in categoryDate">
                               <input
                               v-model="ic.Category" 
                               :value="ck.id" 
@@ -860,6 +860,36 @@ form{
           label{
             line-height:20px;
             padding-left:25px;
+            display: inline-block;
+            position: relative;
+            div {
+                opacity: 0;
+                position: absolute;
+                padding: 2px 3px;
+                border-radius: 5px;
+                min-width: 35px;
+                left: 25px;
+                top: 0px;
+                text-align: center;
+                background-color:#000;
+                color: #fff;
+                transition: opacity 0.2s, transform 0.2s;
+                &:after{
+                  content: '';
+                  position: absolute;
+                  left: 50%;
+                  bottom: 1px;
+                  transform: translate(-50%,5px) skewX(30deg) rotate(45deg);
+                  display: block;
+                  width: 8px;
+                  height: 8px;
+                  background-color: #000;
+                }
+            }
+            &:hover div{
+              opacity: 1;
+              transform: translateY(-100%);
+            }
           }
           i{  
             position: absolute;
