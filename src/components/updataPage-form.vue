@@ -179,13 +179,16 @@
                           v-for="(ck, ins) in categoryDate">
                               <input
                               v-model="ic.Category" 
-                              :value="ins" 
+                              :value="ck.id" 
                               :id="'ckcategory_' + index + ins " 
                               type="checkbox" 
                               name="" 
                               style="display:none">
                               <i class="sprite_checkbox"></i>
-                              <label :for="'ckcategory_' + index + ins ">{{ck}}</label>
+                              <label :for="'ckcategory_' + index + ins ">{{ck.name_en}}
+                                <div>{{ck.name_zh}}</div>
+                              </label>
+                              
                           </div>
                       </div>
                   </div>

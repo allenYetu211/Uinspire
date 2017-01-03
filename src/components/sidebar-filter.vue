@@ -16,7 +16,7 @@
                     type="checkbox" 
                     :id="'sidebar-' + index">
                     <i class="sprite_checkbox"></i>
-                    <label class="gl-size-14" :for="'sidebar-' + index">{{item}}</label>
+                    <label class="gl-size-14" :for="'sidebar-' + index">{{item.name_en}}</label>
                 </div>
             </div>
             <div class="tags">
