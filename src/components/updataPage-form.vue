@@ -185,7 +185,7 @@
                               name="" 
                               style="display:none">
                               <i class="sprite_checkbox"></i>
-                              <label :for="'ckcategory_' + index + ins ">{{ck.name_en}}
+                              <label @click="_detection" :for="'ckcategory_' + index + ins ">{{ck.name_en}}
                                 <div>{{ck.name_zh}}</div>
                               </label>
                           </div>
@@ -427,6 +427,9 @@ export default {
     _beforeEnter (el) {
       let delay = el.dataset.index * 40
       el.style.animationDelay = delay + 'ms'
+    },
+    _detection (el) {
+      console.log(el)
     }
   }
 }
