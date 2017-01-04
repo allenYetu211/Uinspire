@@ -271,7 +271,7 @@ export default {
       sprite_correct: false,
       StoreAresCount: 3,
       StoreAres: 'CN',
-      checkedCount: []
+      checkedCount: 0
     }
   },
   computed: {
@@ -432,24 +432,11 @@ export default {
       el.style.animationDelay = delay + 'ms'
     },
     _detection (el) {
-      console.log(el)
-      let checkedCount = 0
-      let check = document.querySelector('#cateGory')
-      let checkInput = check.querySelectorAll('input')
-      if (checkInput.checkbox) {
+      el.target.checked ? this.checkedCount++ : this.checkedCount--
+      if (this.checkedCount > 2) {
+        el.target.checked = false
+        this.checkedCount--
       }
-      checkInput.forEach((els) => {
-        if (els.checked) {
-          checkedCount++
-        } else {
-          if (checkedCount >= 2) {
-            els.disabled = true
-          } else {
-            els.disabled = false
-          }
-        }
-        console.log(checkedCount)
-      })
     }
   }
 }
