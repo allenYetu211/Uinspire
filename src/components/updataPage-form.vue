@@ -872,33 +872,25 @@ form{
             padding-left:25px;
             display: inline-block;
             position: relative;
+            z-index:9;
             div {
                 opacity: 0;
                 position: absolute;
-                padding: 2px 3px;
-                border-radius: 5px;
-                min-width: 35px;
+                padding: 0px;
+                border-radius: 3px;
+                width: 80%;
                 left: 25px;
                 top: 0px;
-                text-align: center;
-                background-color:#000;
-                color: #fff;
+                text-align: left;
+                background-color:#fff;
+                color: #000;
                 transition: opacity 0.2s, transform 0.2s;
-                &:after{
-                  content: '';
-                  position: absolute;
-                  left: 50%;
-                  bottom: 1px;
-                  transform: translate(-50%,5px) skewX(30deg) rotate(45deg);
-                  display: block;
-                  width: 8px;
-                  height: 8px;
-                  background-color: #000;
-                }
+                transform: translateX(2%);
+                z-index:5;
             }
             &:hover div{
               opacity: 1;
-              transform: translateY(-100%);
+              transform: translateX(0%);
             }
           }
           i{  
