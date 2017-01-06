@@ -18,3 +18,6 @@ export const sidebarright = ({commit}, slide) => { commit(SIDEBARRIGHT) }
 
 export const SIDEBARLEFT = 'sidebarleft'
 export const sidebarleft = ({commit}, slide) => { commit(SIDEBARLEFT) }
+
+export const CLOSERFILTER = 'closerfilter'
+export const closerfilter = ({commit}) => { commit(CLOSERFILTER) }

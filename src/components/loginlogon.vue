@@ -1,9 +1,12 @@
 <template>
-    <div class="startlogin">
+    <div class="startlogin" @click="closestartlogin">
       <transition
       name="loginlogonAnimated" tag="em">
-      <div class="import-email gl-bgcolor-white" v-if='loginSidebar' :class="{'logon': getreturncode, 'login': loginPopup}">
-        <transition name="loginlogon" tag="div">
+      <div @click.stop="" 
+      class="import-email gl-bgcolor-white" 
+      v-if='loginSidebar' 
+      :class="{'logon': getreturncode, 'login': loginPopup}">
+        <transition name="loginlogon" tag="div" @after-enter="loginEnter">
           <div v-if='!returnimportemail'>
             <h2 class="gl-fb">Join <span class="gl-ftcolor-theme">UI</span>nspire.io</h2>
             <p class="gl-ftcolor-gray gl-fn">Input your E-mail, It’s will auto validation your account.</p>
@@ -11,7 +14,8 @@
               <input 
               class="gl-bgcolor-gray-ed gl-ftcolor-black gl-fn" 
               placeholder="E-mail" 
-              type="email" 
+              type="email"
+              ref="loginlogons" 
               v-model="loginlogonEmail"
               autofocus="autofocus"
               @keyup="errorEmail = false"
@@ -195,7 +199,8 @@ export default {
       'userlogin',
       'userlogonsuccess',
       'changestate',
-      'verifycodes'
+      'verifycodes',
+      'closestartlogin'
     ]),
     _deleteLogin () {
       this.changestate()

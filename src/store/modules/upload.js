@@ -28,7 +28,9 @@ import {
   PERMISSIONS,
   USERINFORMATIONS,
   AGAINUSERINFORMATIONS,
-  GETAPPPAGEDATA
+  GETAPPPAGEDATA,
+  CLOSERSTARLOGIN,
+  CLOSERSIDEBARINFORMATION
 } from '../actions'
 
 const state = {
@@ -84,12 +86,6 @@ const mutations = {
       _data.isuploading = false
       _data.isuploadsuccess = true
       state.returnData.push(response.data.thumb_img_url)
-      // if (response.data.code === 0) {
-      //   _data.isuploadsuccess = true
-      //   state.returnData.push(response.data.thumb_img_url)
-      // } else {
-      //   _data.iserror = true
-      // }
     })
     /*
      * 返还状态
@@ -115,18 +111,18 @@ const mutations = {
   },
   [CATEGORY] (state) {
     API.initCategory((categorydata) => {
-      console.log('categorydata:', categorydata)
       state.categoryDate = categorydata
-      console.log('state.categoryDate:', state.categoryDate)
     })
   },
   [ADDFILTERCATEGORY] (state, categoryIndex) {
     state.filtercategory.push(categoryIndex)
+    getfilterList()
   },
   [LESSFILTERCATEGORY] (state, categoryIndex) {
     for (let i = 0; i < state.filtercategory.length; i++) {
       if (state.filtercategory[i] === categoryIndex) {
         state.filtercategory.splice(i, 1)
+        getfilterList()
       }
     }
   },
@@ -160,10 +156,6 @@ const mutations = {
           state.theSidebar = false
         }, 1000)
       }
-      // state.setreturncode = !state.setreturncode
-      // state.logonuser = false
-      // state.theSidebar = false
-      // state.whetherthelogin = false
     })
   },
   [USERLOGONSUCCESS] (state) {
@@ -227,16 +219,6 @@ const mutations = {
         state.theSidebar = true
       }
     })
-    // 让用户处于登录状态的时候 右侧边栏展开收起
-    // if (!state.whetherthelogin) {
-    //   console.log(3)
-    //   state.theSidebar = true
-    //   // state.sidebarright = false
-    // } else {
-    //   console.log(4)
-    //   state.theSidebar = false
-    //   // state.sidebarright = true
-    // }
   },
   // 验证成功 下一步
   [VERIFYNEXT] (state, _verify) {
@@ -316,7 +298,6 @@ const mutations = {
   // 存储applogodata
   [ADDAPPWALLDATA] (state) {
     API.getAppLogodata((callback) => {
-      console.log(callback)
       state.applogodata = callback.data.data
     })
   },
@@ -357,8 +338,18 @@ const mutations = {
   [GETAPPPAGEDATA] (state, _id) {
     API.getIndexAppData(_id, (callback) => {
       state.indexAppdata = callback.data.data
-      console.log('state.indexAppdata:', state.indexAppdata)
     })
+  },
+  [CLOSERSTARLOGIN] (state) {
+    state.theSidebar = false
+    state.importemail = false
+    state.setreturncode = false
+    state.loginPopup = false
+    state.logonuser = false
+    state.verifynext = false
+  },
+  [CLOSERSIDEBARINFORMATION] (state) {
+    state.sidebarright = false
   }
 }
 
@@ -367,6 +358,14 @@ function addLoginUid (data) {
     login_uid: Cke.getCookie('login_uid')
   }
   return Object.assign(data, cookieUid)
+}
+
+function getfilterList () {
+  let filter = state.filtercategory.join(',')
+  console.log('filter', filter)
+  // API.getfilterList(filter, (callback) => {
+  //   console.log(callback)
+  // })
 }
 
 export default {

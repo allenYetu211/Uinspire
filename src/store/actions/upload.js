@@ -52,6 +52,13 @@ export const uinspireio = ({commit}, _id) => { commit(UINSPIREIO, _id) }
 export const WHETHERTHELOGIN = 'whetherthelogin'
 export const whetherthelogin = ({commit}) => { commit(WHETHERTHELOGIN) }
 
+// closeStartLogin page
+export const CLOSERSTARLOGIN = 'closestartlogin'
+export const closestartlogin = ({commit}) => { commit(CLOSERSTARLOGIN) }
+
+// closersidebarInformation
+export const CLOSERSIDEBARINFORMATION = 'closesidebarinformation'
+export const closesidebarinformation = ({commit}) => { commit(CLOSERSIDEBARINFORMATION) }
 // 验证码验证成功下一步
 export const VERIFYNEXT = 'verifynext'
 export const verifynext = ({commit}, _verify) => { commit(VERIFYNEXT, _verify) }

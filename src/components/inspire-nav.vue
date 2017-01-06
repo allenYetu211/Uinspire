@@ -3,7 +3,7 @@
     <div class="inspirt-nav gl-bgcolor-white">
         <div class="inspirt-nav-l">
             <div class="inspirt-nav-sidebar inspirt-nav-fliter">
-                <button @click="sidebarleft">
+                <button @click="_inrouters">
                     <span class="sprite_filter"></span>
                 </button>
             </div>
@@ -79,7 +79,12 @@ export default {
       'sidebarright',
       'sidebarleft',
       'whetherthelogin'
-    ])
+    ]),
+    _inrouters () {
+      if (this.$route.name === 'inspire') {
+        this.sidebarleft()
+      }
+    }
   }
 }
 </script>

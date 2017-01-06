@@ -4,7 +4,8 @@ import {
   LISTARRANGETWO,
   NAVIGATIONTITLE,
   SIDEBARRIGHT,
-  SIDEBARLEFT
+  SIDEBARLEFT,
+  CLOSERFILTER
 } from '../actions'
 
 const state = {
@@ -17,7 +18,6 @@ const state = {
   navposIndex: 0,
   sidebarright: false,
   sidebarleft: false
-
 }
 const mutations = {
   [INSPIRTNAVSIDEBAR] (state) {
@@ -39,6 +39,10 @@ const mutations = {
   },
   [SIDEBARLEFT] (state) {
     state.sidebarleft = !state.sidebarleft
+  },
+  [CLOSERFILTER] (state) {
+    state.sidebarleft = false
+    console.log(state.inspirtnavsidebar)
   }
 }
 

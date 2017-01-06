@@ -64,23 +64,17 @@ export default {
   created () {
     let self = this
     let scrollDown = 0
-    let verlibar = false
-    window.onscroll = function () {
-      if (!self.$route.name === 'inspire') {
-        console.log(self.$route.name === 'inspire')
-        return
-      } else {
-        if (!verlibar) {
-          verlibar = true
-          return
-        }
-        let scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-        if (scrolltop > scrollDown) {
-          if (self.$refs.parentScrollTop.offsetHeight < scrolltop + document.documentElement.clientHeight) {
-            self.uinspireio(self.uinspireioDate[self.uinspireioDate.length - 1].id)
+    if (self.$route.name === 'inspire') {
+      window.onscroll = function () {
+        if (self.$route.name === 'inspire') {
+          let scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          if (scrolltop > scrollDown) {
+            if (self.$refs.parentScrollTop.offsetHeight < scrolltop + document.documentElement.clientHeight) {
+              self.uinspireio(self.uinspireioDate[self.uinspireioDate.length - 1].id)
+            }
           }
+          scrollDown = scrolltop
         }
-        scrollDown = scrolltop
       }
     }
   },

@@ -17,7 +17,7 @@
         </div>
 
         <div class="log-func gl-fb">
-         <router-link :to="{ name: 'inspire'}"><span  @click="_closerPopup">Inspire</span></router-link>
+         <router-link :to="{ name: 'inspire'}" :class="{'router-link-active': $route.name === 'IndexApp' }"><span  @click="_closerPopup">Inspire</span></router-link>
          <router-link :to="{ name: 'AppWall'}"><span  @click="_closerPopup">AppWall</span></router-link>
          <router-link :to="{ name: 'MoodBoardDetailProject'}"><span  @click="_closerPopup">Moodboard</span></router-link>
          <router-link :to="{ name: 'UserProfile'}"><span  @click="_closerPopup">Profile</span></router-link>
@@ -84,11 +84,15 @@ export default {
       'logout',
       'closerappcollection',
       'closecomtrast',
-      'addappwalldata'
+      'addappwalldata',
+      'closesidebarinformation',
+      'closerfilter'
     ]),
     _closerPopup () {
       this.closerappcollection()
       this.closecomtrast()
+      this.closesidebarinformation()
+      this.closerfilter()
     }
   },
   mounted () {
@@ -188,7 +192,11 @@ export default {
       &.router-link-active{
         color: #222;
       }
+      span{
+        display: block;
+      }
     }
+
   }
 
   .log-search-moodboard{

@@ -7,9 +7,9 @@
              leave-active-class="animated cardAnimations cardAnimationsOut">
               <li class="app-logo" v-for="(app, index) in applogodata" :data-index="index" :key="index">
                 <router-link :to="{ name: 'IndexApp', params: { 'appid': app.app_id }}">
-                  <!-- <span @click="_routerGetIntroduce" :data-appid="app.app_id"> -->
+                  <span @click="_routerGetIntroduce" >
                     <img :src="app.icon_link" alt="">
-                  <!-- </span> -->
+                  </span>
                 </router-link>
                 <p>{{app.name}}</p>
               </li>
@@ -34,7 +34,9 @@ export default {
   methods: {
     ...mapActions([
       'addappwalldata',
-      'getapppagedata'
+      'getapppagedata',
+      'closesidebarinformation',
+      'closerfilter'
     ]),
     addCount () {
       if (this.count > 71) {
@@ -47,8 +49,9 @@ export default {
       let delay = this.count * 30
       el.style.animationDelay = delay + 'ms'
     },
-    _routerGetIntroduce (el) {
-      this.getapppagedata(el.target.dataset.appid)
+    _routerGetIntroduce () {
+      this.closesidebarinformation()
+      this.closerfilter()
     }
   },
   mounted () {

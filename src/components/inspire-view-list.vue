@@ -6,8 +6,10 @@
       <img :src="itmes.img + '?x-oss-process=image/resize,w_600'">
         <div class="imagesShow-paypal"  @click.stop="" :class="{active : hover}">
           <div class="imagesShow-paypal-py">
-              <router-link :to="{ name: 'IndexApp', params: { 'appid': itmes.id }}" class="gl-ftcolor-black">
-                {{itmes.name}}
+              <router-link :to="{ name: 'IndexApp', params: { 'appid': itmes.app_id }}" class="gl-ftcolor-black">
+                <span @click="_closerSidebar">
+                  {{itmes.name}}
+                </span>
               </router-link>
           </div>
           <div class="imagesShow-paypal-fn">
@@ -37,15 +39,6 @@ export default{
   },
   mounted () {
     this.$nextTick(() => {
-      // let maxWidth = window.innerWidth / 6 - 20
-      // maxWidth = parseInt(maxWidth)
-      // this.$el.style.left = maxWidth * (this.index + 1)
-      // if (this.index % 6 < 6) {
-      //   this.list.push(this.index % 6)
-      //   // console.log(this.list)
-      // }
-      // this.styleObject.width = maxWidth + 'px'
-      // this.styleObject.left = maxWidth * (this.index) + 10 + 'px'
     })
   },
   computed: {
@@ -62,8 +55,14 @@ export default{
       'contrasts',
       'lesscontrasts',
       'filmslide',
-      'getappcollection'
+      'getappcollection',
+      'closesidebarinformation',
+      'closerfilter'
     ]),
+    _closerSidebar () {
+      this.closerfilter()
+      this.closesidebarinformation()
+    },
     _like (e) {
       if (this.like === true) {
         this.lesslike()
@@ -87,8 +86,8 @@ export default{
     _postData () {
       this.getappcollection(this.itmes.id)
       this.$emit('_postData')
-      // this.filmslide(this.index)
-      // console.log(this.itmes)
+      this.closesidebarinformation()
+      this.closerfilter()
     }
   }
 }

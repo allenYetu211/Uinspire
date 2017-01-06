@@ -1,4 +1,3 @@
-
 <template>
 <div class="comtrast-poups">
     <div :style="{transitionDelay: upDelay}" class="comtrast gl-bgcolor-white" :class="{open: comtrastpopup}">
@@ -96,10 +95,14 @@ export default {
       'comtrast',
       'comtrastopen',
       'addfilmsilde',
-      'lessfilmsilde'
+      'lessfilmsilde',
+      'closesidebarinformation',
+      'closerfilter'
     ]),
     comtrastOpenCount () {
       this.comtrast()
+      this.closesidebarinformation()
+      this.closerfilter()
       let parseUl = document.querySelector('.comtrast-popup-ul')
       if (this.likecount <= 3) {
         parseUl.style.cssText = 'justify-content: center;'

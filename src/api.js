@@ -283,4 +283,18 @@ export default {
       console.log(error)
     })
   }
+  // get IndexList Page filterData
+  // getfilterList (_data, callback) {
+  //   axios.get(, {
+  //     params: {
+
+  //     }
+  //   }).then((respons) => {
+  //     if (typeof callback === 'function') {
+  //       callback(respons)
+  //     }
+  //   }).catch((error) => {
+  //     console.log(error)
+  //   })
+  // }
 }

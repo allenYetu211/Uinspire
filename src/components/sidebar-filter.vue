@@ -12,16 +12,18 @@
                 v-for="(item, index) in categoryDate">
                     <input 
                     @click="_sendfiltercategory" 
-                    :data-filterindex='index' 
+                    :data-filterindex='index'
+                    :value="item.id" 
                     type="checkbox" 
-                    :id="'sidebar-' + index">
+                    :id="'sidebar-' + index"
+                    >
                     <i class="sprite_checkbox"></i>
                     <label class="gl-size-14" :for="'sidebar-' + index">{{item.name_en}}</label>
                 </div>
             </div>
-            <div class="tags">
+           <!--  <div class="tags">
                 <h2 class="gl-size-20 gl-fb">Tags</h2>
-            </div>
+            </div> -->
             <div class="color">
                 <h2 class="gl-size-20 gl-fb">Color</h2>
             </div>
@@ -34,6 +36,10 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  data () {
+    return {
+    }
+  },
   computed: {
     ...mapGetters([
       'categoryDate',
@@ -48,9 +54,9 @@ export default {
     ]),
     _sendfiltercategory (el) {
       if (el.target.checked) {
-        this.addfiltercategory(el.target.dataset.filterindex)
+        this.addfiltercategory(el.target.value)
       } else {
-        this.lessfiltercategory(el.target.dataset.filterindex)
+        this.lessfiltercategory(el.target.value)
       }
     }
   }
