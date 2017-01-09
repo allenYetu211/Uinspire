@@ -11,7 +11,6 @@ import {
   IMPORTEMAIL,
   SETRETURNCODE,
   LOGONUSER,
-  UINSPIREIO,
   WHETHERTHELOGIN,
   VERIFYNEXT,
   USERLOGIN,
@@ -30,7 +29,9 @@ import {
   AGAINUSERINFORMATIONS,
   GETAPPPAGEDATA,
   CLOSERSTARLOGIN,
-  CLOSERSIDEBARINFORMATION
+  CLOSERSIDEBARINFORMATION,
+  SCROLLUPDATA
+  // UINSPIREIO
 } from '../actions'
 
 const state = {
@@ -40,7 +41,7 @@ const state = {
   progress: '',
   categoryDate: '',
   filtercategory: [],
-  uinspireioDate: '',
+  uinspireioDate: '',       // 初始化数据
   loginuserdata: '',
   importemail: false,       // 验证邮箱
   emailError: false,        // 邮箱错误
@@ -116,13 +117,33 @@ const mutations = {
   },
   [ADDFILTERCATEGORY] (state, categoryIndex) {
     state.filtercategory.push(categoryIndex)
-    getfilterList()
+    getfilterList((callback) => {
+      console.log(callback)
+      if (callback.code === '100451') {
+        state.uinspireioDate = ''
+      } else {
+        state.uinspireioDate = ''
+        setTimeout(() => {
+          state.uinspireioDate = callback.data
+        }, 200)
+      }
+    })
+    // console.log(newData)
   },
   [LESSFILTERCATEGORY] (state, categoryIndex) {
     for (let i = 0; i < state.filtercategory.length; i++) {
       if (state.filtercategory[i] === categoryIndex) {
         state.filtercategory.splice(i, 1)
-        getfilterList()
+        getfilterList((callback) => {
+          if (callback.code === '100451') {
+            state.uinspireioDate = ''
+          } else {
+            state.uinspireioDate = ''
+            setTimeout(() => {
+              state.uinspireioDate = callback.data
+            }, 200)
+          }
+        })
       }
     }
   },
@@ -169,8 +190,31 @@ const mutations = {
   [LOGONUSER] (state) {
     state.logonuser = !state.logonuser
   },
-  [UINSPIREIO] (state, _id = '') {
-    if (state.appIdCount === _id) {
+  // [UINSPIREIO] (state, _id = '') {
+    // API.uinspireio(_id, (callback) => {
+    //   state.appLoadingAnimation = false
+    //   if (callback.code === '100451') {
+    //     state.appIdentification = false
+    //     state.appLoadingSate = true
+    //     return
+    //   }
+    //   if (state.uinspireioDate === '') {
+    //     state.uinspireioDate = callback.data
+    //   } else {
+    //     state.uinspireioDate = state.uinspireioDate.concat(callback.data)
+    //   }
+    // })
+  // },
+  // scroll UpData
+  [SCROLLUPDATA] (state, _id = '') {
+    let _ChangeId = _id
+    let infoNew = state.filtercategory.join(',')
+    let _ds = {
+      end: _ChangeId,
+      color: '',
+      category: infoNew
+    }
+    if (state.appIdCount === _ds.end) {
       return
     }
     if (state.appIdentification) {
@@ -179,20 +223,11 @@ const mutations = {
       setTimeout(() => {
         state.appIdentification = true
       }, 500)
-      API.uinspireio(_id, (callback) => {
-        state.appIdCount = _id
-        state.appLoadingAnimation = false
-        if (callback.code === '100451') {
-          state.appIdentification = false
-          state.appLoadingSate = true
-          return
-        }
-        if (state.uinspireioDate === '') {
-          state.uinspireioDate = callback.data
-        } else {
-          state.uinspireioDate = state.uinspireioDate.concat(callback.data)
-        }
-      })
+      if (_ds.category === '') {
+        API.uinspireio(_id, filterAddData)
+      } else {
+        API.scrollUpdata(_ds, filterAddData)
+      }
     }
   },
   // 判断用户是否登录
@@ -359,13 +394,26 @@ function addLoginUid (data) {
   }
   return Object.assign(data, cookieUid)
 }
-
-function getfilterList () {
+// 筛选数据
+function getfilterList (pcal) {
   let filter = state.filtercategory.join(',')
-  console.log('filter', filter)
-  // API.getfilterList(filter, (callback) => {
-  //   console.log(callback)
-  // })
+  API.getfilterList(filter, (callback) => {
+    pcal(callback.data)
+  })
+}
+
+function filterAddData (callback) {
+  state.appLoadingAnimation = false
+  if (callback.code === '100451') {
+    state.appIdentification = false
+    state.appLoadingSate = true
+    return
+  }
+  if (state.uinspireioDate === '') {
+    state.uinspireioDate = callback.data
+  } else {
+    state.uinspireioDate = state.uinspireioDate.concat(callback.data)
+  }
 }
 
 export default {

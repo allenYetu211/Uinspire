@@ -70,7 +70,7 @@ export default {
           let scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
           if (scrolltop > scrollDown) {
             if (self.$refs.parentScrollTop.offsetHeight < scrolltop + document.documentElement.clientHeight) {
-              self.uinspireio(self.uinspireioDate[self.uinspireioDate.length - 1].id)
+              self.scrollupdata(self.uinspireioDate[self.uinspireioDate.length - 1].id)
             }
           }
           scrollDown = scrolltop
@@ -80,7 +80,7 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      this.uinspireio()
+      this.scrollupdata()
     })
   },
   computed: {
@@ -98,7 +98,8 @@ export default {
       'listArrange',
       'listArrangetwo',
       'sidebarright',
-      'uinspireio'
+      'uinspireio',
+      'scrollupdata'
     ]),
     addCount () {
       if (this.cardCount > 71) {
@@ -110,6 +111,9 @@ export default {
       this.addCount()
       let delay = this.cardCount * 25
       el.style.animationDelay = delay + 'ms'
+      setTimeout(() => {
+        el.removeAttribute('style')
+      }, 800)
     },
     _change (_showcount = 6, scale = 0.28) {
       let listParents = document.querySelector('#inspire-view-list')
