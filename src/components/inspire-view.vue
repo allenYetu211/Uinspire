@@ -18,12 +18,11 @@
     <div class="imagesShow">
       <ul id='inspire-view-list' class=" clearfix" ref='parentScrollTop'>
           <!-- <transition> -->
-            <transition-group
+           <!--  <transition-group
             @before-enter="beforeEnter"
-             enter-active-class="animated cardAnimations cardAnimationsIn"
-             leave-active-class="animated cardAnimations cardAnimationsOut">
-              <inspire-view-list  v-for="(itms, index) in uinspireioDate" :data-index="index" :key="index" :itmes="itms" :index="index"></inspire-view-list>
-            </transition-group>
+             leave-active-class="animated cardAnimations cardAnimationsOut"> -->
+              <inspire-view-list class="py-jy"  v-for="(itms, index) in uinspireioDate" :data-index="index" :key="index" :itmes="itms" :index="index" @vmounted="childMounted(index, uinspireioDate.length)"></inspire-view-list>
+            <!-- </transition-group> -->
           <!-- </transition> -->
           {{$router.name}}
           {{uinspireioDate.length}}
@@ -66,6 +65,7 @@ export default {
     let scrollDown = 0
     if (self.$route.name === 'inspire') {
       window.onscroll = function () {
+        // let wt = window.scrollTop
         if (self.$route.name === 'inspire') {
           let scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
           if (scrolltop > scrollDown) {
@@ -74,7 +74,10 @@ export default {
             }
           }
           scrollDown = scrolltop
+          // console.log(_pyJy[0].offsetTop)
         }
+        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+        self.pyjy(scrollTop)
       }
     }
   },
@@ -101,6 +104,29 @@ export default {
       'uinspireio',
       'scrollupdata'
     ]),
+    childMounted (idx, count) {
+      if (idx + 1 === count) {
+        this.pyjy(window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop)
+      }
+    },
+    pyjy (sy) {
+      // let wh = window.clientHeight
+      let _pyJy = document.querySelectorAll('.py-jy')
+      _pyJy.forEach(function (el) {
+        let et = el.offsetTop
+        let eh = el.clientHeight
+        if (sy > et + eh) {
+          el.classList.remove('openActions')
+          el.classList.add('befor_itms')
+        } else if (et >= sy + eh * 2) {
+          el.classList.remove('openActions')
+          el.classList.add('after_itms')
+        } else {
+          el.classList.remove('befor_itms', 'after_itms')
+          el.classList.add('openActions')
+        }
+      })
+    },
     addCount () {
       if (this.cardCount > 71) {
         this.cardCount = 0
