@@ -118,3 +118,11 @@ export const getapppagedata = ({commit}, _id) => { commit(GETAPPPAGEDATA, _id) }
 // scroll Updata && init indexHtml images data
 export const SCROLLUPDATA = 'scrollupdata'
 export const scrollupdata = ({commit}, _id) => { commit(SCROLLUPDATA, _id) }
+
+// search Information
+export const SEARCHINFORMATION = 'searchinformation'
+export const searchinformation = ({commit}, _data) => { commit(SEARCHINFORMATION, _data) }
+
+// roll updata
+export const ROLLUPDATA = 'rollupdata'
+export const rollupdata = ({commit}) => { commit(ROLLUPDATA) }

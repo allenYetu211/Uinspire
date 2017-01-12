@@ -17,11 +17,20 @@
   <div class="router">
     <div class="imagesShow">
       <ul id='inspire-view-list' class=" clearfix" ref='parentScrollTop'>
+      {{rollUpdata}}
           <!-- <transition> -->
            <!--  <transition-group
             @before-enter="beforeEnter"
              leave-active-class="animated cardAnimations cardAnimationsOut"> -->
-              <inspire-view-list class="py-jy"  v-for="(itms, index) in uinspireioDate" :data-index="index" :key="index" :itmes="itms" :index="index" @vmounted="childMounted(index, uinspireioDate.length)"></inspire-view-list>
+              <inspire-view-list 
+              class="py-jy"  
+              v-for="(itms, index) in uinspireioDate" 
+              :data-index="index" 
+              :key="index" 
+              :itmes="itms" 
+              :index="index" 
+              @vmounted="childMounted(index, uinspireioDate.length)">
+              </inspire-view-list>
             <!-- </transition-group> -->
           <!-- </transition> -->
           {{$router.name}}
@@ -66,7 +75,7 @@ export default {
     if (self.$route.name === 'inspire') {
       window.onscroll = function () {
         // let wt = window.scrollTop
-        if (self.$route.name === 'inspire') {
+        if (self.$route.name === 'inspire' && self.rollUpdata) {
           let scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
           if (scrolltop > scrollDown) {
             if (self.$refs.parentScrollTop.offsetHeight < scrolltop + document.documentElement.clientHeight) {
@@ -92,7 +101,8 @@ export default {
       'uinspireioDate',
       'collectionPopup',
       'appLoadingSate',
-      'appLoadingAnimation'
+      'appLoadingAnimation',
+      'rollUpdata'
     ])
   },
   methods: {

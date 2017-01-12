@@ -129,9 +129,7 @@ li {
   overflow: hidden;
   opacity: 0;
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
-  &.openActions{
-    animation: cardAnimationsIn 0.6s forwards;
-  }
+  animation: cardAnimationsIn 0.6s forwards;
   &:nth-child(6n + 6) {
       animation-delay: 0.25s;
   }
@@ -152,9 +150,11 @@ li {
   }
   &.befor_itms {
     opacity: 0;
+    animation:  0.6s forwards;
   }
   &.after_itms {
   opacity: 0;
+   animation:  0.6s forwards;
   }
   &.active{
     box-shadow: 0px 4px 9px 0px rgba(0,0,0,0.12);

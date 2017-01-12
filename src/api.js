@@ -321,5 +321,29 @@ export default {
     }).catch((error) => {
       console.log(error)
     })
+  },
+  // search Informations
+  getSearchList (_data, callback) {
+    axios.get('http://inspire.stoyard.com/api/inspire/search', {
+      params: {
+        title: _data.title,
+        wd: _data.wd
+      }
+    })
+    // axios({
+    //   url: 'http://inspire.stoyard.com/api/inspire/search',
+    //   method: 'get',
+    //   params: {
+    //     title: window.encodedURIString(_data.title),
+    //     wd: _data.wd
+    //   }
+    // })
+    .then((respons) => {
+      if (typeof callback === 'function') {
+        callback(respons)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
   }
 }
