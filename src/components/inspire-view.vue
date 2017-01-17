@@ -11,13 +11,13 @@
           text-align: center;
         }
       }
+      
 }
 </style>
 <template>
   <div class="router">
     <div class="imagesShow">
       <ul id='inspire-view-list' class=" clearfix" ref='parentScrollTop'>
-      {{rollUpdata}}
           <!-- <transition> -->
            <!--  <transition-group
             @before-enter="beforeEnter"
@@ -33,12 +33,20 @@
               </inspire-view-list>
             <!-- </transition-group> -->
           <!-- </transition> -->
-          {{$router.name}}
-          {{uinspireioDate.length}}
       </ul>
        <p class="gl-fb gl-ftcolor-gray" v-if="appLoadingSate">End</p>
        <div class="loadingAnimation" v-if='appLoadingAnimation'>
-          loading...
+          <div class="sk-cube-grid">
+            <div class="sk-cube sk-cube1"></div>
+            <div class="sk-cube sk-cube2"></div>
+            <div class="sk-cube sk-cube3"></div>
+            <div class="sk-cube sk-cube4"></div>
+            <div class="sk-cube sk-cube5"></div>
+            <div class="sk-cube sk-cube6"></div>
+            <div class="sk-cube sk-cube7"></div>
+            <div class="sk-cube sk-cube8"></div>
+            <div class="sk-cube sk-cube9"></div>
+          </div>
        </div>
     </div>
       <transition
@@ -72,6 +80,7 @@ export default {
   created () {
     let self = this
     let scrollDown = 0
+    let beforScollTop = 0
     if (self.$route.name === 'inspire') {
       window.onscroll = function () {
         // let wt = window.scrollTop
@@ -85,8 +94,12 @@ export default {
           scrollDown = scrolltop
           // console.log(_pyJy[0].offsetTop)
         }
-        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-        self.pyjy(scrollTop)
+        let afterScollTop = document.body.scrollTop
+        if (afterScollTop - beforScollTop > 0) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          self.pyjy(scrollTop)
+        }
+        beforScollTop = afterScollTop
       }
     }
   },
@@ -120,22 +133,23 @@ export default {
       }
     },
     pyjy (sy) {
+      // if (sy > et + eh) {
+      //     el.classList.remove('openActions')
+      //     el.classList.add('befor_itms')
+      //   } else
       // let wh = window.clientHeight
       let _pyJy = document.querySelectorAll('.py-jy')
-      _pyJy.forEach(function (el) {
-        let et = el.offsetTop
-        let eh = el.clientHeight
-        if (sy > et + eh) {
-          el.classList.remove('openActions')
-          el.classList.add('befor_itms')
-        } else if (et >= sy + eh * 2) {
-          el.classList.remove('openActions')
-          el.classList.add('after_itms')
+      for (let i = 0; i < _pyJy.length; i++) {
+        let et = _pyJy[i].offsetTop
+        let eh = _pyJy[i].clientHeight
+        if (et >= sy + eh * 2) {
+          _pyJy[i].classList.remove('openActions')
+          _pyJy[i].classList.add('after_itms')
         } else {
-          el.classList.remove('befor_itms', 'after_itms')
-          el.classList.add('openActions')
+          _pyJy[i].classList.remove('befor_itms', 'after_itms')
+          _pyJy[i].classList.add('openActions')
         }
-      })
+      }
     },
     addCount () {
       if (this.cardCount > 71) {
