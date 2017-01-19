@@ -11,6 +11,7 @@
           text-align: center;
         }
       }
+      
 }
 </style>
 <template>
@@ -18,19 +19,34 @@
     <div class="imagesShow">
       <ul id='inspire-view-list' class=" clearfix" ref='parentScrollTop'>
           <!-- <transition> -->
-            <transition-group
+           <!--  <transition-group
             @before-enter="beforeEnter"
-             enter-active-class="animated cardAnimations cardAnimationsIn"
-             leave-active-class="animated cardAnimations cardAnimationsOut">
-              <inspire-view-list  v-for="(itms, index) in uinspireioDate" :data-index="index" :key="index" :itmes="itms" :index="index"></inspire-view-list>
-            </transition-group>
+             leave-active-class="animated cardAnimations cardAnimationsOut"> -->
+              <inspire-view-list 
+              class="py-jy"  
+              v-for="(itms, index) in uinspireioDate" 
+              :data-index="index" 
+              :key="index" 
+              :itmes="itms" 
+              :index="index" 
+              @vmounted="childMounted(index, uinspireioDate.length)">
+              </inspire-view-list>
+            <!-- </transition-group> -->
           <!-- </transition> -->
-          {{$router.name}}
-          {{uinspireioDate.length}}
       </ul>
        <p class="gl-fb gl-ftcolor-gray" v-if="appLoadingSate">End</p>
        <div class="loadingAnimation" v-if='appLoadingAnimation'>
-          loading...
+          <div class="sk-cube-grid">
+            <div class="sk-cube sk-cube1"></div>
+            <div class="sk-cube sk-cube2"></div>
+            <div class="sk-cube sk-cube3"></div>
+            <div class="sk-cube sk-cube4"></div>
+            <div class="sk-cube sk-cube5"></div>
+            <div class="sk-cube sk-cube6"></div>
+            <div class="sk-cube sk-cube7"></div>
+            <div class="sk-cube sk-cube8"></div>
+            <div class="sk-cube sk-cube9"></div>
+          </div>
        </div>
     </div>
       <transition
@@ -64,23 +80,32 @@ export default {
   created () {
     let self = this
     let scrollDown = 0
+    let beforScollTop = 0
     if (self.$route.name === 'inspire') {
       window.onscroll = function () {
-        if (self.$route.name === 'inspire') {
+        // let wt = window.scrollTop
+        if (self.$route.name === 'inspire' && self.rollUpdata) {
           let scrolltop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
           if (scrolltop > scrollDown) {
             if (self.$refs.parentScrollTop.offsetHeight < scrolltop + document.documentElement.clientHeight) {
-              self.uinspireio(self.uinspireioDate[self.uinspireioDate.length - 1].id)
+              self.scrollupdata(self.uinspireioDate[self.uinspireioDate.length - 1].id)
             }
           }
           scrollDown = scrolltop
+          // console.log(_pyJy[0].offsetTop)
         }
+        let afterScollTop = document.body.scrollTop
+        if (afterScollTop - beforScollTop > 0) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          self.pyjy(scrollTop)
+        }
+        beforScollTop = afterScollTop
       }
     }
   },
   mounted () {
     this.$nextTick(() => {
-      this.uinspireio()
+      this.scrollupdata()
     })
   },
   computed: {
@@ -89,7 +114,8 @@ export default {
       'uinspireioDate',
       'collectionPopup',
       'appLoadingSate',
-      'appLoadingAnimation'
+      'appLoadingAnimation',
+      'rollUpdata'
     ])
   },
   methods: {
@@ -98,8 +124,33 @@ export default {
       'listArrange',
       'listArrangetwo',
       'sidebarright',
-      'uinspireio'
+      'uinspireio',
+      'scrollupdata'
     ]),
+    childMounted (idx, count) {
+      if (idx + 1 === count) {
+        this.pyjy(window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop)
+      }
+    },
+    pyjy (sy) {
+      // if (sy > et + eh) {
+      //     el.classList.remove('openActions')
+      //     el.classList.add('befor_itms')
+      //   } else
+      // let wh = window.clientHeight
+      let _pyJy = document.querySelectorAll('.py-jy')
+      for (let i = 0; i < _pyJy.length; i++) {
+        let et = _pyJy[i].offsetTop
+        let eh = _pyJy[i].clientHeight
+        if (et >= sy + eh * 2) {
+          _pyJy[i].classList.remove('openActions')
+          _pyJy[i].classList.add('after_itms')
+        } else {
+          _pyJy[i].classList.remove('befor_itms', 'after_itms')
+          _pyJy[i].classList.add('openActions')
+        }
+      }
+    },
     addCount () {
       if (this.cardCount > 71) {
         this.cardCount = 0
@@ -110,6 +161,9 @@ export default {
       this.addCount()
       let delay = this.cardCount * 25
       el.style.animationDelay = delay + 'ms'
+      setTimeout(() => {
+        el.removeAttribute('style')
+      }, 800)
     },
     _change (_showcount = 6, scale = 0.28) {
       let listParents = document.querySelector('#inspire-view-list')

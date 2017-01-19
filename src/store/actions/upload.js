@@ -45,8 +45,8 @@ export const USERLOGIN = 'userlogin'
 export const userlogin = ({commit}, _userinformations) => { commit(USERLOGIN, _userinformations) }
 
 // 获取首页展示图片
-export const UINSPIREIO = 'uinspireio'
-export const uinspireio = ({commit}, _id) => { commit(UINSPIREIO, _id) }
+// export const UINSPIREIO = 'uinspireio'
+// export const uinspireio = ({commit}, _id) => { commit(UINSPIREIO, _id) }
 
 // 判断登录注册或展开收起侧边栏
 export const WHETHERTHELOGIN = 'whetherthelogin'
@@ -114,3 +114,15 @@ export const agianuserinformations = ({commit}, _data) => { commit(AGAINUSERINFO
 // requst IndexAppPage information
 export const GETAPPPAGEDATA = 'getapppagedata'
 export const getapppagedata = ({commit}, _id) => { commit(GETAPPPAGEDATA, _id) }
+
+// scroll Updata && init indexHtml images data
+export const SCROLLUPDATA = 'scrollupdata'
+export const scrollupdata = ({commit}, _id) => { commit(SCROLLUPDATA, _id) }
+
+// search Information
+export const SEARCHINFORMATION = 'searchinformation'
+export const searchinformation = ({commit}, _data) => { commit(SEARCHINFORMATION, _data) }
+
+// roll updata
+export const ROLLUPDATA = 'rollupdata'
+export const rollupdata = ({commit}) => { commit(ROLLUPDATA) }

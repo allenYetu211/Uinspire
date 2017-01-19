@@ -24,9 +24,11 @@
            <!--  <div class="tags">
                 <h2 class="gl-size-20 gl-fb">Tags</h2>
             </div> -->
-            <div class="color">
+            <!-- <div class="color">
                 <h2 class="gl-size-20 gl-fb">Color</h2>
-            </div>
+                <input type="color" v-model="color" :value="color">
+                <button @click="_changeColor">changeColor</button>
+            </div> -->
         </div>
       </transition>
   </div>
@@ -38,6 +40,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
+      color: '',
+      colors: ''
     }
   },
   computed: {
@@ -58,6 +62,8 @@ export default {
       } else {
         this.lessfiltercategory(el.target.value)
       }
+    },
+    _changeColor () {
     }
   }
 }

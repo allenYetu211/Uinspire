@@ -86,3 +86,11 @@ export const changeUserState = state => state.upload.changeUserState
 // appindex Data
 export const indexAppdata = state => state.upload.indexAppdata
 
+// searchList information Data
+export const searchList = state => state.upload.searchList
+
+// search Null
+export const searchNull = state => state.upload.serchNull
+
+// roll updata
+export const rollUpdata = state => state.upload.rollupdata

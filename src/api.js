@@ -84,11 +84,31 @@ export default {
   },
   // 获取首页展示图片信息
   uinspireio (_data, callback) {
-    console.log('首页：', _data)
     axios.get('http://inspire.stoyard.com/api/inspire/viewdata', {
       params: {
         id: _data
       }
+    }).then((response) => {
+      if (typeof callback === 'function') {
+        callback(response.data)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+  // 筛选滚动数据
+  scrollUpdata (_data, callback) {
+    axios({
+      url: 'http://inspire.stoyard.com/api/inspire/tabsearch',
+      method: 'post',
+      transformRequest: [(_data) => {
+        let fData = new window.FormData()
+        fData.append('category', _data.category)
+        fData.append('color', _data.color)
+        fData.append('end', _data.end)
+        return fData
+      }],
+      data: _data
     }).then((response) => {
       if (typeof callback === 'function') {
         callback(response.data)
@@ -282,19 +302,48 @@ export default {
     }).catch((error) => {
       console.log(error)
     })
-  }
+  },
   // get IndexList Page filterData
-  // getfilterList (_data, callback) {
-  //   axios.get(, {
-  //     params: {
-
-  //     }
-  //   }).then((respons) => {
-  //     if (typeof callback === 'function') {
-  //       callback(respons)
-  //     }
-  //   }).catch((error) => {
-  //     console.log(error)
-  //   })
-  // }
+  getfilterList (_data, callback) {
+    axios({
+      url: 'http://inspire.stoyard.com/api/inspire/tabsearch',
+      method: 'post',
+      transformRequest: [(_data) => {
+        const fData = new window.FormData()
+        fData.append('category', _data)
+        return fData
+      }],
+      data: _data
+    }).then((respons) => {
+      if (typeof callback === 'function') {
+        callback(respons)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  },
+  // search Informations
+  getSearchList (_data, callback) {
+    axios.get('http://inspire.stoyard.com/api/inspire/search', {
+      params: {
+        title: _data.title,
+        wd: _data.wd
+      }
+    })
+    // axios({
+    //   url: 'http://inspire.stoyard.com/api/inspire/search',
+    //   method: 'get',
+    //   params: {
+    //     title: window.encodedURIString(_data.title),
+    //     wd: _data.wd
+    //   }
+    // })
+    .then((respons) => {
+      if (typeof callback === 'function') {
+        callback(respons)
+      }
+    }).catch((error) => {
+      console.log(error)
+    })
+  }
 }

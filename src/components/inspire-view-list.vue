@@ -1,5 +1,5 @@
 <template>
-  <li  :class="{lists: listArrangestate ,active : hover, pickup: like}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
+  <li  :class="{lists: listArrangestate , pickup: like}" @click="_postData" @mouseover="_mouseover"  @mouseout="_mouseout">
     <div class="imagesShow-box-shadow"
      :style="{ background: 'hsl(' + itmes.hsl.h + ',' + itmes.hsl.s * 100 + '%' + ',' + itmes.hsl.l * 100 + '%)' }"
      :class="{active : hover}">
@@ -38,7 +38,9 @@ export default{
     }
   },
   mounted () {
+    this.$emit('vmounted')
     this.$nextTick(() => {
+
     })
   },
   computed: {
@@ -63,7 +65,7 @@ export default{
       this.closerfilter()
       this.closesidebarinformation()
     },
-    _like (e) {
+    _like (el) {
       if (this.like === true) {
         this.lesslike()
         this.lesscontrasts(this.itmes.img)
@@ -73,9 +75,11 @@ export default{
         this.contrasts(this.itmes.img)
       }
       this.like = !this.like
+      console.log(el.path[5].classList.add('openActions', 'pickup'))
     },
-    _mouseover () {
+    _mouseover (el) {
       this.hover = true
+      // console.log(el.path[2].classList.add('openActions', 'active'))
     },
     _mouseout () {
       if (this.like === true) {
@@ -123,8 +127,35 @@ li {
   border-radius: 2px;
   transition: transform .25s, box-shadow .25s;
   overflow: hidden;
+  opacity: 0;
   box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.1);
-
+  animation: cardAnimationsIn 0.6s forwards;
+  &:nth-child(6n + 6) {
+      animation-delay: 0.25s;
+  }
+  &:nth-child(6n + 5) {
+      animation-delay: 0.2s;
+  }
+  &:nth-child(6n + 4) {
+      animation-delay: 0.15s;
+  }
+  &:nth-child(6n + 3) {
+      animation-delay: 0.1s;
+  }
+  &:nth-child(6n + 2) {
+      animation-delay: 0.05s;
+  }
+  &:nth-child(6n + 1) {
+      animation-delay: 0s;
+  }
+  &.befor_itms {
+    opacity: 0;
+    animation:  0.6s forwards;
+  }
+  &.after_itms {
+  opacity: 0;
+   animation:  0.6s forwards;
+  }
   &.active{
     box-shadow: 0px 4px 9px 0px rgba(0,0,0,0.12);
   }
