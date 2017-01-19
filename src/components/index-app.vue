@@ -82,7 +82,7 @@ export default {
     }
   },
   // beforeRouteEnter (to, from, next) {
-  //   axios.get('http://inspire.stoyard.com/api/inspire/uniqueappinfo', {
+  //   axios.get('http://uinspire.io/api/inspire/uniqueappinfo', {
   //     params: {
   //       app_id: to.params.appid
   //     }
@@ -98,7 +98,7 @@ export default {
   watch: {
     // $router () {
     //   this.indexData = null
-    //   axios.get('http://inspire.stoyard.com/api/inspire/uniqueappinfo', {
+    //   axios.get('http://uinspire.io/api/inspire/uniqueappinfo', {
     //     params: {
     //       app_id: this.$route.params.appid
     //     }
@@ -120,7 +120,7 @@ export default {
       'getapppagedata'
     ]),
     fetchData () {
-      axios.get('http://inspire.stoyard.com/api/inspire/uniqueappinfo', {
+      axios.get('http://uinspire.io/api/inspire/uniqueappinfo', {
         params: {
           app_id: this.$route.params.appid
         }

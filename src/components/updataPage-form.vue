@@ -303,7 +303,7 @@ export default {
       this.sprite_correct = false
       this._searchShow = !this._searchShow
       console.log(this.StoreAres)
-      axios.get('http://inspire.stoyard.com/api/inspire/appInfo', {
+      axios.get('http://uinspire.io/api/inspire/appInfo', {
         params: {
           name: this.ic.name,
           device: this.ic.Platform,

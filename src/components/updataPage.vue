@@ -81,7 +81,7 @@
     },
     mounted () {
       // this.$nextTick(() => {
-      //   this.$http.get('http://inspire.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
+      //   this.$http.get('http://uinspire.io/index.php/api/inspire/getCategoryList').then((response) => {
       //     this.categ = JSON.parse(response.data)
       //     for (let i = 0; i < this.categ.data.length; i++) {
       //       this.category.push(this.categ.data[i].name_en)

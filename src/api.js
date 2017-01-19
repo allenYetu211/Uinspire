@@ -15,7 +15,7 @@ export default {
     var color = '\'#343434\''
     console.log(singsz)
     color = encodeURI(color)
-    Vue.http.get(encodeURI('http://inspire.stoyard.com/index.php/api/inspire/adddata?platform=1&category=2&name=allen&color=' + color)).then((response) => {
+    Vue.http.get(encodeURI('http://uinspire.io/index.php/api/inspire/adddata?platform=1&category=2&name=allen&color=' + color)).then((response) => {
       console.log(json.parse(response.data))
       if (response.data.code === 0) {
       } else {
@@ -38,7 +38,7 @@ export default {
     let tag = _data.tag ? _data.tag.join(',') : ''
     let category = _data.Category.join(',')
     axios({
-      url: 'http://inspire.stoyard.com/api/inspire/adddata',
+      url: 'http://uinspire.io/api/inspire/adddata',
       method: 'post',
       transformRequest: [(_data) => {
         // 对 data 进行任意转换处理
@@ -74,7 +74,7 @@ export default {
     })
   },
   initCategory (callback) {
-    axios.get('http://inspire.stoyard.com/index.php/api/inspire/getCategoryList').then((response) => {
+    axios.get('http://uinspire.io/index.php/api/inspire/getCategoryList').then((response) => {
       if (typeof callback === 'function') {
         callback(response.data.data)
       }
@@ -84,7 +84,7 @@ export default {
   },
   // 获取首页展示图片信息
   uinspireio (_data, callback) {
-    axios.get('http://inspire.stoyard.com/api/inspire/viewdata', {
+    axios.get('http://uinspire.io/api/inspire/viewdata', {
       params: {
         id: _data
       }
@@ -99,7 +99,7 @@ export default {
   // 筛选滚动数据
   scrollUpdata (_data, callback) {
     axios({
-      url: 'http://inspire.stoyard.com/api/inspire/tabsearch',
+      url: 'http://uinspire.io/api/inspire/tabsearch',
       method: 'post',
       transformRequest: [(_data) => {
         let fData = new window.FormData()
@@ -119,13 +119,13 @@ export default {
   },
   // 验证用户邮箱
   validationEmail (_data, callback) {
-    axios.get('http://inspire.stoyard.com/api/user/login', {
+    axios.get('http://uinspire.io/api/user/login', {
       params: {
         email: _data
       }
     }).then((response) => {
       if (response.data.code === '10048') {
-        axios.get('http://inspire.stoyard.com/api/user/sendemailcode', {
+        axios.get('http://uinspire.io/api/user/sendemailcode', {
           params: {
             email: _data
           }
@@ -142,7 +142,7 @@ export default {
   },
   // 验证邮箱 验证码
   verifyCode (_data, callback) {
-    axios.get('http://inspire.stoyard.com/api/user/checkemailcode', {
+    axios.get('http://uinspire.io/api/user/checkemailcode', {
       params: {
         email: _data[0].email,
         code: _data[0].code
@@ -157,7 +157,7 @@ export default {
   // 注册用户
   logonUser (_data, callback) {
     axios({
-      url: 'http://inspire.stoyard.com/api/user/register',
+      url: 'http://uinspire.io/api/user/register',
       method: 'Post',
       transformRequest: [(_data) => {
         const userdata = new window.FormData()
@@ -181,7 +181,7 @@ export default {
   // 用户登录
   userLogin (_data, callback) {
     axios({
-      url: 'http://inspire.stoyard.com/api/user/login',
+      url: 'http://uinspire.io/api/user/login',
       method: 'Post',
       transformRequest: [(_data) => {
         const userdata = new window.FormData()
@@ -201,7 +201,7 @@ export default {
   },
   // 判断用户是否登录
   whetherthelogin (uinspire, callback) {
-    axios.get('http://inspire.stoyard.com/api/inspire/islogin', {
+    axios.get('http://uinspire.io/api/inspire/islogin', {
       params: {
         login_uid: uinspire
       }
@@ -216,7 +216,7 @@ export default {
   },
   // get --> AppCollection
   getAppCollection (_data, callback) {
-    axios.get('http://inspire.stoyard.com/api/inspire/getRelAppList', {
+    axios.get('http://uinspire.io/api/inspire/getRelAppList', {
       params: {
         id: _data
       }
@@ -231,7 +231,7 @@ export default {
   },
   // logout
   logout (callback) {
-    axios.get('http://inspire.stoyard.com/api/user/logout').then((response) => {
+    axios.get('http://uinspire.io/api/user/logout').then((response) => {
       if (typeof callback === 'function') {
         callback(response)
       }
@@ -239,7 +239,7 @@ export default {
   },
   // get appwall data
   getAppLogodata (callback) {
-    axios.get('http://inspire.stoyard.com/api/inspire/APPList').then((response) => {
+    axios.get('http://uinspire.io/api/inspire/APPList').then((response) => {
       if (typeof callback === 'function') {
         callback(response)
       }
@@ -248,7 +248,7 @@ export default {
   // user permissions
   permissions (_data, callback) {
     axios({
-      url: 'http://inspire.stoyard.com/api/user/applyedit',
+      url: 'http://uinspire.io/api/user/applyedit',
       method: 'post',
       transformRequest: [(_data) => {
         const permissions = new window.FormData()
@@ -271,7 +271,7 @@ export default {
   // change userinformations
   changeuserinformations (_data, callback) {
     axios({
-      url: 'http://inspire.stoyard.com/api/user/editprofile',
+      url: 'http://uinspire.io/api/user/editprofile',
       method: 'post',
       transformRequest: [(_data) => {
         const permissions = new window.FormData()
@@ -291,7 +291,7 @@ export default {
   },
   // get IndexApp Page Data
   getIndexAppData (_data, callback) {
-    axios.get('http://inspire.stoyard.com/api/inspire/uniqueappinfo', {
+    axios.get('http://uinspire.io/api/inspire/uniqueappinfo', {
       params: {
         app_id: _data
       }
@@ -306,7 +306,7 @@ export default {
   // get IndexList Page filterData
   getfilterList (_data, callback) {
     axios({
-      url: 'http://inspire.stoyard.com/api/inspire/tabsearch',
+      url: 'http://uinspire.io/api/inspire/tabsearch',
       method: 'post',
       transformRequest: [(_data) => {
         const fData = new window.FormData()
@@ -324,14 +324,14 @@ export default {
   },
   // search Informations
   getSearchList (_data, callback) {
-    axios.get('http://inspire.stoyard.com/api/inspire/search', {
+    axios.get('http://uinspire.io/api/inspire/search', {
       params: {
         title: _data.title,
         wd: _data.wd
       }
     })
     // axios({
-    //   url: 'http://inspire.stoyard.com/api/inspire/search',
+    //   url: 'http://uinspire.io/api/inspire/search',
     //   method: 'get',
     //   params: {
     //     title: window.encodedURIString(_data.title),
